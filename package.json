@@ -1,0 +1,13 @@
+{
+  "name": "freshgamesspot",
+  "version": "1.0.0",
+  "private": true,
+  "description": "FreshGamesSpot - free HTML5 games portal",
+  "main": "serve.js",
+  "scripts": {
+    "start": "node serve.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
