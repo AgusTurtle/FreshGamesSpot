@@ -173,6 +173,7 @@
 
     const img = document.createElement("img");
     img.loading = "lazy";
+    img.decoding = "async";
     img.src = game.thumb;
     img.alt = game.title;
     img.onerror = () => {
@@ -291,7 +292,11 @@
     el.continueRow.appendChild(frag);
   }
 
-  function makeRail(label, catName, games){
+  // Rendering all ~19 rails' cards (260+ DOM nodes with images) up front
+  // is what made the home page feel laggy while scrolling. Only the first
+  // couple of rails render immediately; the rest populate lazily right
+  // before they scroll into view, same idea as how Poki's rows stream in.
+  function makeRail(label, catName, games, eager){
     const section = document.createElement("section");
     section.className = "rail";
 
@@ -313,9 +318,28 @@
 
     const row = document.createElement("div");
     row.className = "rail-row";
-    games.slice(0, RAIL_SIZE).forEach(g => row.appendChild(makeCard(g)));
-    section.appendChild(row);
 
+    function populate(){
+      if (row.dataset.populated) return;
+      row.dataset.populated = "1";
+      const frag = document.createDocumentFragment();
+      games.slice(0, RAIL_SIZE).forEach(g => frag.appendChild(makeCard(g)));
+      row.appendChild(frag);
+    }
+
+    if (eager || !("IntersectionObserver" in window)){
+      populate();
+    } else {
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting){
+          populate();
+          observer.disconnect();
+        }
+      }, { rootMargin: "800px 0px" });
+      observer.observe(section);
+    }
+
+    section.appendChild(row);
     return section;
   }
 
@@ -325,14 +349,14 @@
 
     const popular = GAMES.filter(g => g.popularity > 0);
     if (popular.length){
-      frag.appendChild(makeRail("🔥 Populares", POPULAR_CAT, popular));
+      frag.appendChild(makeRail("🔥 Populares", POPULAR_CAT, popular, true));
     }
 
     const counts = {};
     GAMES.forEach(g => { counts[g.category] = (counts[g.category]||0) + 1; });
     const cats = Object.keys(counts).sort((a,b) => counts[b]-counts[a]);
-    cats.forEach(cat => {
-      frag.appendChild(makeRail(cat, cat, GAMES.filter(g => g.category === cat)));
+    cats.forEach((cat, i) => {
+      frag.appendChild(makeRail(cat, cat, GAMES.filter(g => g.category === cat), i === 0));
     });
 
     el.homeSections.appendChild(frag);

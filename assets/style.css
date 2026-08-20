@@ -1,17 +1,17 @@
 :root{
-  --bg: #f4f5fa;
-  --bg-elev: #ffffff;
-  --bg-card: #ffffff;
-  --border: #e7e8f2;
-  --text: #22223a;
-  --text-dim: #767a94;
+  --bg: #14141f;
+  --bg-elev: #1c1c2c;
+  --bg-card: #1e1e30;
+  --border: #2c2c40;
+  --text: #f2f2f8;
+  --text-dim: #9797ad;
   --accent: #ff5566;
   --accent-2: #ffb020;
   --accent-grad: linear-gradient(135deg, #ff5566, #ff8a4c);
   --radius: 16px;
   --header-h: 64px;
-  --card-shadow: 0 1px 2px rgba(30,32,60,0.06);
-  --card-shadow-hover: 0 14px 28px rgba(255,85,102,0.22);
+  --card-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  --card-shadow-hover: 0 14px 28px rgba(255,85,102,0.35);
 }
 
 *{ box-sizing: border-box; }
@@ -32,7 +32,7 @@ img{ max-width:100%; display:block; }
   position: sticky;
   top:0;
   z-index: 50;
-  background: rgba(255,255,255,0.92);
+  background: rgba(20,20,31,0.85);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
 }
@@ -70,7 +70,7 @@ img{ max-width:100%; display:block; }
 }
 #searchInput{
   width:100%;
-  background: var(--bg);
+  background: var(--bg-elev);
   border: 2px solid var(--border);
   color: var(--text);
   padding: 9px 36px 9px 14px;
@@ -98,7 +98,7 @@ img{ max-width:100%; display:block; }
   display:flex;
   align-items:center;
   gap:6px;
-  background: var(--bg);
+  background: var(--bg-elev);
   border: 2px solid var(--border);
   color: var(--text);
   padding: 8px 14px;
@@ -125,7 +125,7 @@ img{ max-width:100%; display:block; }
 .cat-nav::-webkit-scrollbar-thumb{ background: var(--border); border-radius:4px; }
 .cat-pill{
   flex-shrink:0;
-  background: #fff;
+  background: var(--bg-elev);
   border: 2px solid var(--border);
   color: var(--text-dim);
   padding: 7px 16px;
@@ -172,7 +172,10 @@ img{ max-width:100%; display:block; }
   display:flex;
   gap:14px;
   overflow-x:auto;
+  overflow-y:hidden;
   padding-bottom: 6px;
+  min-height: 232px;
+  scroll-behavior: smooth;
 }
 .rail-row .game-card{ width: 150px; flex-shrink:0; }
 
@@ -215,6 +218,8 @@ img{ max-width:100%; display:block; }
   box-shadow: var(--card-shadow);
   transition: transform .15s, box-shadow .15s;
   position: relative;
+  content-visibility: auto;
+  contain-intrinsic-size: 150px 232px;
 }
 .game-card:hover{
   transform: translateY(-5px) scale(1.02);
@@ -222,7 +227,7 @@ img{ max-width:100%; display:block; }
 }
 .game-thumb-wrap{
   position:relative;
-  aspect-ratio: 4/3;
+  aspect-ratio: 1/1;
   background: var(--bg);
   overflow:hidden;
 }
@@ -275,10 +280,10 @@ img{ max-width:100%; display:block; }
   top:8px; right:8px;
   width:28px; height:28px;
   border-radius:50%;
-  background: rgba(255,255,255,0.9);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  background: rgba(20,20,31,0.75);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
   border:none;
-  color: #b8bacb;
+  color: #c6c6d6;
   display:flex; align-items:center; justify-content:center;
   font-size:0.95rem;
   z-index:2;
@@ -336,7 +341,7 @@ img{ max-width:100%; display:block; }
 .load-more-btn{
   display:block;
   margin: 32px auto 0;
-  background: #fff;
+  background: var(--bg-elev);
   border: 2px solid var(--border);
   color: var(--text);
   padding: 12px 28px;
