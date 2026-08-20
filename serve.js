@@ -227,7 +227,14 @@ http.createServer((req, res) => {
       return;
     }
     const ext = path.extname(full);
-    res.writeHead(200, { "Content-Type": mime[ext] || "application/octet-stream" });
+    // index.html has no version query string of its own, so it must
+    // always be revalidated -- otherwise Cloudflare/browsers can keep
+    // serving an old page that still points at old, now-purged asset
+    // URLs. CSS/JS are safe to cache hard since bumping "?v=" busts them.
+    const cacheControl = filePath === "/index.html"
+      ? "no-cache"
+      : (ext === ".css" || ext === ".js") ? "public, max-age=31536000, immutable" : "public, max-age=3600";
+    res.writeHead(200, { "Content-Type": mime[ext] || "application/octet-stream", "Cache-Control": cacheControl });
     res.end(data);
   });
 }).listen(port, () => console.log("Serving on http://localhost:" + port));
