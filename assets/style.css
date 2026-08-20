@@ -40,7 +40,7 @@ html{
 }
 body{
   margin:0;
-  font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  font-family: "Chakra Petch", "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
   background:
     radial-gradient(circle at 10% 0%, rgba(47,125,255,0.10), transparent 40%),
     radial-gradient(circle at 90% 20%, rgba(56,217,255,0.06), transparent 35%),
@@ -115,8 +115,9 @@ img{ max-width:100%; display:block; }
   align-items:center;
   gap:8px;
   padding: 18px 16px;
-  font-size: 1.1rem;
-  font-weight:800;
+  font-family: "Russo One", "Segoe UI", system-ui, sans-serif;
+  font-size: 1.05rem;
+  font-weight:400;
   color:#fff;
   white-space:nowrap;
   overflow:hidden;
@@ -428,9 +429,11 @@ img{ max-width:100%; display:block; }
   flex-wrap:wrap;
 }
 .grid-header h2{
-  font-size: 1.4rem;
+  font-family: "Russo One", "Segoe UI", system-ui, sans-serif;
+  font-size: 1.3rem;
   margin:0;
-  font-weight:800;
+  font-weight:400;
+  letter-spacing: 0.01em;
 }
 .result-count{
   color: var(--text-dim);
@@ -438,7 +441,13 @@ img{ max-width:100%; display:block; }
 }
 
 .rail{ margin-bottom: 28px; }
-.rail-title{ font-size: 1.05rem; margin: 0 0 12px; font-weight:800; }
+.rail-title{
+  font-family: "Russo One", "Segoe UI", system-ui, sans-serif;
+  font-size: 1rem;
+  margin: 0 0 12px;
+  font-weight:400;
+  letter-spacing: 0.01em;
+}
 .rail-row{
   display:flex;
   gap:14px;
@@ -709,7 +718,9 @@ img{ max-width:100%; display:block; }
 }
 .player-title{
   flex:1;
-  font-size: 1rem;
+  font-family: "Russo One", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  font-weight:400;
   margin:0;
   color:#fff;
   white-space:nowrap;
