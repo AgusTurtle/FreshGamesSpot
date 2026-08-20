@@ -39,45 +39,6 @@
     "popularity": 6
   },
   {
-    "id": "gm-smash-karts",
-    "title": "Smash Karts",
-    "description": "Smash Karts is a multiplayer io kart battle arena game. Drive around and blast your opponents with an array of weapons and power-ups.",
-    "instructions": "WASD or arrow keys to drive, click/space to shoot.",
-    "url": "https://html5.gamemonetize.co/m9hk7u5022f5fr244uruwde5t26msqxk/",
-    "category": "Multiplayer",
-    "tags": "Kart, Racing, Battle, io, Multiplayer, Hot, Popular",
-    "thumb": "https://img.gamemonetize.com/m9hk7u5022f5fr244uruwde5t26msqxk/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 6
-  },
-  {
-    "id": "gm-subway-surfers",
-    "title": "Subway Surfers",
-    "description": "Endless runner game: dodge trains and obstacles while running down the subway tracks, collecting coins along the way.",
-    "instructions": "Arrow keys or swipe to move left/right/jump/roll.",
-    "url": "https://html5.gamemonetize.co/12b8whsjuoo362g7nvr31fxzbs19jnrl/",
-    "category": "Arcade",
-    "tags": "Runner, Endless, Subway, Hot, Popular",
-    "thumb": "https://img.gamemonetize.com/12b8whsjuoo362g7nvr31fxzbs19jnrl/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 6
-  },
-  {
-    "id": "gm-retro-bowl",
-    "title": "Retro Bowl",
-    "description": "Retro Bowl is a retro-style American football management and gameplay game. Build your team, call the plays, and lead your franchise to victory.",
-    "instructions": "Use the mouse/touch to pass and run.",
-    "url": "https://html5.gamemonetize.co/gdvxvu1v8399wbab4w7sqlgo6yjls825/",
-    "category": "Sports",
-    "tags": "Football, American Football, Retro, Sports, Hot, Popular",
-    "thumb": "https://img.gamemonetize.com/gdvxvu1v8399wbab4w7sqlgo6yjls825/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 6
-  },
-  {
     "id": "37670",
     "title": "Obby Tsunami Runner",
     "description": "Run from the tsunami in Obby Tsunami Runner &amp;mdash; a multiplayer browser game where every wave brings new danger. Dodge, survive, and earn wins to unlock characters and trails. Play as the legendary Tung-Tung-Tung Sahur! Compete with friends, push your limits, and see how far you can go. No downloads, just survival. Run. Unlock. Survive.",
@@ -12519,19 +12480,6 @@
     "popularity": 0
   },
   {
-    "id": "21056",
-    "title": "Kingdom of Pixels",
-    "description": "Kingdom of Pixels is a 2D MOBA, Platformer game similar to the style of other MOBAs like League of Legends and DOTA 2. The game's theme is pixel-like, bringing a nostalgic and simplistic feel to it. Choose among a diverse roster of heroes to play as, and win the match by destroying the enemy's crystal! By killing enemy minions and heroes, you gain Gold to build and upgrade items and Experience to level up and become stronger. You can utilize map elements such as Runes and Brushes to your advantage and control the match in your favor! With a wide variety of heroes and items to choose from, you'll experience unique and distinct games. Choose between a melee or ranged hero that specializes in either Normal or Magic type damage, customize your item build to fit your playstyle, and conquer your enemies with plans and strategies! The game is still in its Pre-Alpha stage, and there are many things that the developer plans on improving and implementing into the game. Average match length: ~15 minutes Current playable game modes: 1 v 1 Ranked Match (Go head-to-head with your opponent!) 2 v 2 Ranked Match (Match up with someone and win through cooperation and teamwork!) Practice Match (Play solo and try out different item combinations with your preferred hero!) How to play: You can only buy items in your spawn, so think carefully on what items you'll get before heading out to the lane! Win a match by destroying the enemy crystal with your minions. You cannot damage the crystal yourself, so your minions are your win condition. Open up the path to the enemy crystal by destroying their tower. This will boost the stats of your minions, giving you a big advantage! Strategies: Before the match actually starts, there is a 45-second preparation period that counts down to 00:00. At 00:00, the first minion wave spawns, and the Gold Rune spawns at the upper area. Use the time to position yourself near the Gold Rune so you can get the extra gold! Whenever you buy items, try and save some gold for at least one Health Potion! A Health Potion helps keep you in lane as long as possible because it can keep you at high health to respond to enemy movement. Remember to avoid damage while using one, or else it will interrupt the healing! Buff Runes spawn every minute starting at 01:00 in the bottom area. Take advantage of these runes as the buffs you get from one can turn the tide against the enemy, especially in 2v2!",
-    "instructions": " There is an option to enable disable mouse support at the right side of the screen W - Jump A - Move left S - Move right D - Drop down J Left-click - Basic attack K Ctrl - 1st Ability L Alt - 2nd Ability ",
-    "url": "https://html5.gamemonetize.co/syq5qlxeap223gs0xwq8wm3qunllm1n1/",
-    "category": "Multiplayer",
-    "tags": ".io Games, 2 Player Games, 2D, Action, Arena, Battlegrounds, HTML5, PvP, Skills",
-    "thumb": "https://img.gamemonetize.com/syq5qlxeap223gs0xwq8wm3qunllm1n1/512x384.jpg",
-    "width": "1024",
-    "height": "768",
-    "popularity": 0
-  },
-  {
     "id": "20977",
     "title": "Yatzy Yams",
     "description": "Hardcore fans of game of dices from all age and all corner of the earth, approach! May it be to occupy yourself during a trip or to share a moment with a friend, Yahtzy Yam’s is the perfect game for you. This adaptation of a classic game of dice has a strategic aspect and an aleatory one that are going to make you completely addicted! Download it absolutely.",
@@ -15028,19 +14976,6 @@
     "popularity": 0
   },
   {
-    "id": "33703",
-    "title": "Velocity Puck",
-    "description": "Get ready for fast-paced, physics-driven air hockey action in Velocity Puck! Designed with Three.js for smooth 3D gameplay, this game brings intense one-on-one air hockey battles to life with dynamic puck physics, AI opponents, and character customization. Key Features: Realistic Physics &amp;ndash; Experience high-speed gameplay with fluid puck movement and skill-based rebounds. Single &amp;amp; Multiplayer (Coming Soon) &amp;ndash; Challenge AI opponents or test your reflexes against real players. Customization &amp;ndash; Choose from different characters and paddle colors to make your mark. Immersive Audio &amp;amp; Visuals &amp;ndash; Enjoy neon-lit arenas and satisfying sound",
-    "instructions": " Basic Controls Move Paddle Mouse Touch Mouse Move your cursor to control the paddle Touchscreen Drag your finger to move the paddle Hit the Puck Simply move your paddle into the puck to strike it The force and angle determine the puck rsquo s m",
-    "url": "https://html5.gamemonetize.co/jll9bmbb1qxr1uux1t1khn56z4xpvibs/",
-    "category": "Sports",
-    "tags": "1 Player",
-    "thumb": "https://img.gamemonetize.com/jll9bmbb1qxr1uux1t1khn56z4xpvibs/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 0
-  },
-  {
     "id": "33685",
     "title": "Power Puncher",
     "description": "Power Puncher is a thrilling arcade game that puts your punching power to the test. As a skilled boxer, your mission is to survive a barrage of wooden boxes by expertly smashing them to pieces. How to Play: Time Your Punches: Carefully watch as wooden boxes of varying sizes and shapes approach you. Aim for the Center: Target the center of each box to deliver the most powerful blow. Avoid Sharp Edges: Dodge the sharp edges of the boxes to prevent injury. Chain Combos: Land consecutive punches to increase your score and unlock special power-ups.",
@@ -16520,19 +16455,6 @@
     "thumb": "https://img.gamemonetize.com/8w7r1zgqznxfvcp3jdw1p3h2xuh8w8s0/512x384.jpg",
     "width": "750",
     "height": "1334",
-    "popularity": 0
-  },
-  {
-    "id": "22763",
-    "title": "Papas Burgeria",
-    "description": "Welcome to Papa's Burgeria, a cooking game. Grab your spatula and get ready for a burger-flipping adventure! Take orders, grill patties, add toppings, and serve the burgers to all of your wacky customers. Have fun. You can play this game on your web browser for free on Superkidgames.com. Control at each step of the burger-building process and juggle between each area of the restaurant. Keep an eye out for customers waiting in the lobby, drag and flip burger patties on the grill to cook them just right, and add toppings and sauces to the sandwiches before serving them to your customers! Use your hard-earned tips to buy restaurant upgrades and hats to wear, and you can also decorate your lobby with furniture and posters from the Furniture Shop. Can you turn your burgeria into the most famous fast food chain in the world? - Flip the burgers with passion Papa's Burgeria guides you through the basics of flipping burgers and making a buck. Take your first order and follow the instructions on-screen. You'll start by taking the order and frying up the patty, before finalizing the burger with tomatoes, onions, sauces, seeded buns, and other cherished burger ingredients. - Manage your time As the levels progress, you'll be introduced to new customers with more complex orders. And, the number of customers will increase. That means you'll need to balance your responsibilities and learn the timings to get the best scores and tips from your customers. - Buy upgrades Papa demands that you use the tips to buy upgrades for the restaurant rather than on your own leisurely activities. You have the option to buy upgrades after each level is completed. The shop features items that will help improve customer waiting times (like a television), lamps that keep burgers warm, and many other items to spend your hard-earned cash on. - Snoop on your clientele Papa keeps a profile on all of his most prized customers. You can look in the customer book to see the detailed preferences of your returning customers.",
-    "instructions": "Select drag and move ingredients - Left mouse button",
-    "url": "https://html5.gamemonetize.co/uw4s71zy0s3jxo6hckel04mw9rbopba8/",
-    "category": "Cooking",
-    "tags": "Cooking, Funny, Management",
-    "thumb": "https://img.gamemonetize.com/uw4s71zy0s3jxo6hckel04mw9rbopba8/512x384.jpg",
-    "width": "800",
-    "height": "600",
     "popularity": 0
   },
   {
@@ -18668,19 +18590,6 @@
     "popularity": 0
   },
   {
-    "id": "15138",
-    "title": "Subway Surfers SpaceStation",
-    "description": "The Subway Surfers SpaceStation! - Experience unique architecture and dazzling beaches - Team up with Sofia and unlock her brand new Tango outfit - Take a trip through the colorful streets on the cool Roto board - Search for shiny horse shoes to win the Weekly Hunt prizes",
-    "instructions": "DASH as fast as you can ",
-    "url": "https://html5.gamemonetize.co/c5p4bszdjsvoz0ta2joxl020ou6qytv5/",
-    "category": "Soccer",
-    "tags": "Race, Racing, run, running, subway, Subway Surfers",
-    "thumb": "https://img.gamemonetize.com/c5p4bszdjsvoz0ta2joxl020ou6qytv5/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 0
-  },
-  {
     "id": "14888",
     "title": "ARIEL MISSING ERIC",
     "description": "Eric and Ariel is a lovely couple Eric is going to another country for stydy and Ariel will miss him so much Rapunzel and Cinderella try their best to make her feel a little bit happier They have a great plan called Mermaid cheer up All of them are going to go shopping dressing up and dancing all night Fun isnt it",
@@ -20033,19 +19942,6 @@
     "popularity": 0
   },
   {
-    "id": "26597",
-    "title": "HexTank.io",
-    "description": "HexTank.io is a play-to-earn Web3 instant game built on the Nimiq blockchain. The action takes place in a PVP sci-fi battle arena. You are in charge of a HexTank. Your job is to eliminate all other players and climb to the top of the score leaderboard. HexTank.io is available on all major browsers, including desktop and mobile versions.",
-    "instructions": "DESKTOP KEYBOARD WASD or ARROW KEYS for movement SPACE for shooting GAMEPAD JOYSTICK THUMB STICKS for movement L1 L2 R1 R2 for shooting MOBILE TOUCH CONTROLS ARROWS for movement RED CIRCLE for sh",
-    "url": "https://html5.gamemonetize.co/8ugcliynfk8xz49yci7jotwysw24r8ik/",
-    "category": "3D",
-    "tags": ".io, .io Games, 3D, 3D Games, Multiplayer, PvP, Tank, Tanks, WebGL",
-    "thumb": "https://img.gamemonetize.com/8ugcliynfk8xz49yci7jotwysw24r8ik/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 0
-  },
-  {
     "id": "26596",
     "title": "Sausage-Flip-Game",
     "description": "Sausage Flip is an arcade game where you get to experience the unique challenge of flinging around a sausage with googly eyes. You play by draggnig your finger or mouse backwards to aim, and releasing to shoot the sausage. But be warned - the game is not as simple as it sounds. You need to reach the finish line without falling off the platform that is full of surprising but often treacherous objects such as rocket cars, soft blocks, spinning contraptions, and much more! As you keep playing, you will unlock many cool skins and costumes to style your sausage however you like. Don't forget to share the game with your friends and show everyone who's the top (hot)dog!",
@@ -20082,19 +19978,6 @@
     "thumb": "https://img.gamemonetize.com/mhqraxaktvylzx6ab0tyi5oacjancul9/512x384.jpg",
     "width": "600",
     "height": "960",
-    "popularity": 0
-  },
-  {
-    "id": "26326",
-    "title": "World Tour Paris",
-    "description": "Subway Surfers Subway Surfers World Tour: Paris! - Experience unique architecture and dazzling beaches - Team up with Sofia and unlock her brand new Tango outfit - Take a trip through the colorful streets on the cool Roto board - Search for shiny horse shoes to win the Weekly Hunt prizes",
-    "instructions": "DASH as fast as you can ",
-    "url": "https://html5.gamemonetize.co/3uvme5iyfay31dzp2wsv42jxrkrfrxyh/",
-    "category": "3D",
-    "tags": "Subway Surfers",
-    "thumb": "https://img.gamemonetize.com/3uvme5iyfay31dzp2wsv42jxrkrfrxyh/512x384.jpg",
-    "width": "800",
-    "height": "600",
     "popularity": 0
   },
   {
@@ -22282,19 +22165,6 @@
     "popularity": 0
   },
   {
-    "id": "4112",
-    "title": "Fireboy and Watergirls.IO",
-    "description": "Fireboy and Watergirl, made by Oslo Albet, are exploring the Forest Temple in search of diamonds. Switch between Fireboy",
-    "instructions": "AWSD",
-    "url": "https://html5.gamemonetize.co/sre01gq07iyixyhnl51ohykrk3rzx77p/",
-    "category": "2 Player",
-    "tags": "2D, Action, Adventure",
-    "thumb": "https://img.gamemonetize.com/sre01gq07iyixyhnl51ohykrk3rzx77p/512x384.jpg",
-    "width": "640",
-    "height": "480",
-    "popularity": 0
-  },
-  {
     "id": "1541",
     "title": "Backgammonia - online backgammon game",
     "description": "Backgammonia is a online backgammon game where you can play classic backgammon against computer or against a friend in 2 players mode. The old set is no longer needed, now you can play backgammon live at the internet. So lets roll the dice",
@@ -22750,32 +22620,6 @@
     "popularity": 0
   },
   {
-    "id": "31648",
-    "title": "Real Flight Simulator",
-    "description": "Real Flight Simulator plays like an airplane driving simulation game with 3D models. In 6 levels, you can learn how to drive an airplane including starting, steering, and landing. All of the complicated instrument panels are simplified for players to learn. The more expensive the airplane you drive, the better acceleration of it you can enjoy including the Power, Speed, Solution, and Brake. Good luck in the sky!",
-    "instructions": "Mouse click or tap to play",
-    "url": "https://html5.gamemonetize.co/qomp8q8bgmkbkwitrb5mc6ba7k3shj1m/",
-    "category": "Boys",
-    "tags": "airplane, Simulation",
-    "thumb": "https://img.gamemonetize.com/qomp8q8bgmkbkwitrb5mc6ba7k3shj1m/512x384.jpg",
-    "width": "1334",
-    "height": "750",
-    "popularity": 0
-  },
-  {
-    "id": "31632",
-    "title": "Plug Man Race",
-    "description": "Plug Head Race plays like a collecting arcade game with battery items. To win the level, you need to overpass the finish line in first place. Each platform requires a lot of red battery items, collect them, and use them to pass the current switch. When you are weaker than others, keep away from them and collect red battery items only. Remember to buy your favorite skins when you have enough gold coins.",
-    "instructions": "Mouse click or tap to play",
-    "url": "https://html5.gamemonetize.co/kqanb5x38iamu5oqbd1mhkdk7yaoon0f/",
-    "category": "Boys",
-    "tags": "1 Player, Collection",
-    "thumb": "https://img.gamemonetize.com/kqanb5x38iamu5oqbd1mhkdk7yaoon0f/512x384.jpg",
-    "width": "720",
-    "height": "1280",
-    "popularity": 0
-  },
-  {
     "id": "31631",
     "title": "misland online",
     "description": "Misland is a placement/management game that allows you to turn a deserted island into a prosperous paradise! Starting from picking apples from trees with bear hands, your skills and tools can be upgraded one by one! This island is filled with resources waiting to be discovered. By trading resources with ships, your wealth will increase. Once you have enough resources, you will have a team of assistants to complete tasks such as apple harvesting, tree felling, and quarrying! Be careful of invading monsters attempting to steal your resources; You need to wave your sword to protect your island. Are you ready to oversee the transformation of the",
@@ -23023,19 +22867,6 @@
     "popularity": 0
   },
   {
-    "id": "30117",
-    "title": "Excavator Simulator 3D",
-    "description": "Drive and operate realistic 3D construction vehicles in Excavator Simulator 3D, the best engineer vehicle JCB simulation game. You can choose from different trucks, excavators, and Pincer Jaws to complete various missions and tasks. Whether you need to dig, clamp, lift, hammer, or forklift, you can switch the attachments easily and quickly. Learn how to control these powerful machines and enjoy the realistic physics and graphics. Complete the levels faster and earn more money to buy more vehicles and unlock new challenges. Have fun!",
-    "instructions": "On PC W - Gas S - Brake or Backward A - Turn left D - Turn right Left wheel - rotate mechanic arm Right wheel - accelerate mechanic arm On Mobile Hold Arrows - steering Hold pedals - drive forward or back Swipe wheels - accelerate ",
-    "url": "https://html5.gamemonetize.co/7wov98mycit3fq1iqlxn1dxs020z4qnz/",
-    "category": "Boys",
-    "tags": "Boys, Car, Driving, Kids, Simulator",
-    "thumb": "https://img.gamemonetize.com/7wov98mycit3fq1iqlxn1dxs020z4qnz/512x384.jpg",
-    "width": "1334",
-    "height": "750",
-    "popularity": 0
-  },
-  {
     "id": "30109",
     "title": "Real JCB Excavator Simulator",
     "description": "Excavator Crane Driving Sim is a realistic and fun 3D cartoon construction vehicle driving simulation game. You can drive and operate Excavators, Rollers, Shovels, Forklifts, and Trucks in 4 stages of levels. You can earn coins and buy more skins or customize your vehicles in DIY mode. You can also watch ads to get more coins easily. You don&amp;rsquo;t have to worry about time or scores, just follow the green arrows and complete all construction levels!",
@@ -23257,19 +23088,6 @@
     "popularity": 0
   },
   {
-    "id": "28830",
-    "title": "Ice Scream: Horror Escape",
-    "description": "Ice Scream: Horror Escape is an exciting and scary adventure puzzle game. One day morning, you saw your best friend being kidnapped by a strange man into the ice cream truck. You need to rescue children in danger and escape from the evil ice cream truck driver. Do you have the courage to take on the challenge?",
-    "instructions": "1 Use WASD or the joystick to move 2 Press the button to interact with the scene 3 Escape from the Ice Cream Trucker and save your friend ",
-    "url": "https://html5.gamemonetize.co/7jz6aysjuk90clvhm2us38y3mkdr3e8w/",
-    "category": "Boys",
-    "tags": "3D, Adventure, Boy, Brain, Escape, HTML5, Puzzle, Strategy",
-    "thumb": "https://img.gamemonetize.com/7jz6aysjuk90clvhm2us38y3mkdr3e8w/512x384.jpg",
-    "width": "1920",
-    "height": "1080",
-    "popularity": 0
-  },
-  {
     "id": "28800",
     "title": "Merge Bubble Number",
     "description": "Merge Bubble Number is a simple and addictive number merge puzzle game. You will control a board of checkers, each with a bubble with a number in it. You need to connect as many bubbles as possible so that bubbles of the same number merge together. The goal of the game is to merge as many bubbles as possible before there are no bubbles that can be synthesized, and finally reach a high score.",
@@ -23361,19 +23179,6 @@
     "popularity": 0
   },
   {
-    "id": "28528",
-    "title": "Pixel Block 3D",
-    "description": "Pixel Block 3D is a relaxing online game, and it is suitable for people of all ages. In this game, you only need to control the direction of the block with the mouse to touch all the pixels. Pay attention to the gaps in the pattern, or your block will fall down and end the game. There are many different levels to be challenged. Come on and enjoy the game!",
-    "instructions": "If you play on a PC Click the mouse to move the blocks If you play on a mobile phone Click the buttons to move ",
-    "url": "https://html5.gamemonetize.co/7tje6qsj53ygd3v8507hsyfbljiuezc1/",
-    "category": "Boys",
-    "tags": "3D, Android, Block, Boys, Bricks, Fun, HTML5, Kids, Online, Pixel, Puzzle, Relaxation",
-    "thumb": "https://img.gamemonetize.com/7tje6qsj53ygd3v8507hsyfbljiuezc1/512x384.jpg",
-    "width": "750",
-    "height": "1334",
-    "popularity": 0
-  },
-  {
     "id": "28512",
     "title": "Club Penguin Coloring Book",
     "description": "Club Penguin Coloring Book is a delightful and engaging game that allows players to unleash their creativity and artistic skills in the vibrant world of Club Penguin. Drawing inspiration from the popular virtual world, this game offers a wide variety of coloring pages featuring beloved Club Penguin characters, settings, and activities. With its user-friendly interface and intuitive controls, the game makes coloring a breeze for players of all ages. A palette of vibrant colors and a range of drawing tools enable players to bring their imagination to life and add their personal touch to each coloring page.",
@@ -23413,19 +23218,6 @@
     "popularity": 0
   },
   {
-    "id": "28352",
-    "title": "Idle Ants Simulator",
-    "description": "Idle Ants Simulator is a casual online game for kids. In this game, hardworking ants are constantly moving food, such as donuts and cheese. ..Increase the number of ants, upgrade the level of ants, unlock new skins for ants, and decorate your own hut. There are more ways to play waiting for you to unlock! Come and play Idle Ants Simulator!",
-    "instructions": "Use the mouse to control",
-    "url": "https://html5.gamemonetize.co/1bv30jc4h4xc2qt3w1viukkv72sjjdcs/",
-    "category": "Boys",
-    "tags": "Android, Animal, Boy, Food, Fun, HTML5, Kids, Online, Simulation, Skill",
-    "thumb": "https://img.gamemonetize.com/1bv30jc4h4xc2qt3w1viukkv72sjjdcs/512x384.jpg",
-    "width": "720",
-    "height": "1280",
-    "popularity": 0
-  },
-  {
     "id": "28325",
     "title": "Monster Hero Rescue City",
     "description": "Are you ready for something new like the incredible monster hero rescue city? Try using a monster superhero to save your city from the villains in the Monster Hero Rescue City game. Monster Hero Rescue Cityare is thrilling impossible adventures. Come on and use your monsters ability and game skills to fight all the gangsters in a limited time!",
@@ -23436,32 +23228,6 @@
     "thumb": "https://img.gamemonetize.com/2fnknrl57ibu1i69deo4rkfdwsy1pxjc/512x384.jpg",
     "width": "1334",
     "height": "750",
-    "popularity": 0
-  },
-  {
-    "id": "28160",
-    "title": "Prankster 3D",
-    "description": "Prankster 3D is an original free online puzzle game for kids. In this game, you need to find the textbook according to the hints, answer the questions correctly, and escape the room with the key without being discovered by the prankster. Reasonable use of the small map in the upper right corner makes it easier to judge the opponents location. Watch out for him suddenly appearing behind you!",
-    "instructions": "If you play on a PC WASD or click the mouse to move If you play on a mobile phone Click buttons to move",
-    "url": "https://html5.gamemonetize.co/4yaw9ys0bmonsznh1a93vb8pysbk38ct/",
-    "category": "Boys",
-    "tags": "3D, Android, Avoid, Boy, Escape, Fun, HTML5, Kids, Online, Puzzle, running",
-    "thumb": "https://img.gamemonetize.com/4yaw9ys0bmonsznh1a93vb8pysbk38ct/512x384.jpg",
-    "width": "750",
-    "height": "1334",
-    "popularity": 0
-  },
-  {
-    "id": "28149",
-    "title": "Hungry Fish Evolution",
-    "description": "Hungry Fish Evolution is a free online game for kids. In the beginning, you are an ordinary fish who needs to eat small fish to evolve into a big one. At the same time, you need to show superb dodging skills, avoid dangerous giant fish, and avoid your own death. Keep winning in the game, devour all kinds of opponents in front of you, and become the ultimate winner!",
-    "instructions": "Mouse click or tap to play",
-    "url": "https://html5.gamemonetize.co/a45hihs4nijhl1p5c97sw0uuh2dwx5sm/",
-    "category": "Boys",
-    "tags": "3D, Android, Animal, Avoid, Boy, Escape, Fun, HTML5, Kid, Online, Relaxation, Skill",
-    "thumb": "https://img.gamemonetize.com/a45hihs4nijhl1p5c97sw0uuh2dwx5sm/512x384.jpg",
-    "width": "750",
-    "height": "1334",
     "popularity": 0
   },
   {
@@ -23488,19 +23254,6 @@
     "thumb": "https://img.gamemonetize.com/tgvcsev4518p24zsgmi242gwnfhojb8o/512x384.jpg",
     "width": "720",
     "height": "1280",
-    "popularity": 0
-  },
-  {
-    "id": "27965",
-    "title": "Epic Car: Transform Race",
-    "description": "In this fast and epic race, you need to switch cars on the track according to the obstacles. Epic Car Transform Race requires focus and quick driving decision skills. So its time to relax and enjoy an epic car adventure race. There are endless levels and extreme obstacles to make it more interesting and you will never get bored.",
-    "instructions": "If you play on a PC click the mouse to move If you play on a mobile phone Click buttons to move",
-    "url": "https://html5.gamemonetize.co/jevpm5eihd6mk0j5420vvqdsny1cj0yf/",
-    "category": "Boys",
-    "tags": "Android, Boy, Car, Driving, Fun, HTML5, Kids, Online, Racing",
-    "thumb": "https://img.gamemonetize.com/jevpm5eihd6mk0j5420vvqdsny1cj0yf/512x384.jpg",
-    "width": "750",
-    "height": "1334",
     "popularity": 0
   },
   {
@@ -23582,32 +23335,6 @@
     "popularity": 0
   },
   {
-    "id": "27575",
-    "title": "Hunt Or Hide",
-    "description": "Hunt Or Hide is a very fun online puzzle game for boys for free. In this game, you can choose to be a hunter or a hider. Enjoy the intensity of chasing the hiders or hiding from the hunter! For both the hunter and the hiders, the duration of each level is the 60s. If you win as a hider, you will get new skins for props. If you win as a hunter, you will get coins for you to unlock skins! Enjoy!",
-    "instructions": "If you play on a PC click the mouse to move If you play on a mobile phone Click buttons to move",
-    "url": "https://html5.gamemonetize.co/28bajqyjkey8jbliv3bclnh08a6vh7h2/",
-    "category": "Boys",
-    "tags": "3D, Android, Avoid, Boy, Brain, Escape, Fun, HTML5, Kids, Online, Puzzle",
-    "thumb": "https://img.gamemonetize.com/28bajqyjkey8jbliv3bclnh08a6vh7h2/512x384.jpg",
-    "width": "750",
-    "height": "1334",
-    "popularity": 0
-  },
-  {
-    "id": "27574",
-    "title": "Smash The Office",
-    "description": "Smash The Office is a free online casual game for boys played on PuzzleGame. In the game, you need to control an office worker, use all kinds of props to destroy the office, smash everything to pieces, and vent your dissatisfaction and pressure in your life. Meanwhile, you should be careful not to be found, or the security guard will come to you for trouble. Play on Mobile, Tablet, or Desktop!",
-    "instructions": "If you play on PC WASD click the mouse to move If you play on a mobile phone Click buttons to move",
-    "url": "https://html5.gamemonetize.co/clda2n8vxrvjicvksf74kddhalohbwsw/",
-    "category": "Boys",
-    "tags": "3D, Android, Boys, Brain, Drawing, Escape, Fun, HTML5, Kids, Obstacle, Online, Puzzle",
-    "thumb": "https://img.gamemonetize.com/clda2n8vxrvjicvksf74kddhalohbwsw/512x384.jpg",
-    "width": "750",
-    "height": "1334",
-    "popularity": 0
-  },
-  {
     "id": "27470",
     "title": "Balloon Slicer Game",
     "description": "Balloon Slicer is a very addictive online puzzle game for free. It is designed for boys. There are lots of ballons surrounded by obstacles. Click the blade and drag. Release the mouse and the blade would fly along the opposite direction. Make sure the blade fly into the suitable area. And it will bounce while touching obstacles to slice all the ballons and you will pass the level. Enjoy!",
@@ -23657,19 +23384,6 @@
     "thumb": "https://img.gamemonetize.com/f566bafjq740n1c5sgkrw9lyb0tlc5qz/512x384.jpg",
     "width": "800",
     "height": "600",
-    "popularity": 0
-  },
-  {
-    "id": "27431",
-    "title": "Dance Master Mat",
-    "description": "Dance Master Mat is a wonderful idol draft live dance free online game. Dance moves need to be trained before the live broadcast. The more wonderful dance moves in the live broadcast room, the more attractive the audience will be. Come and join us, reward your favorite idol, and help him become Top 1.",
-    "instructions": "Mouse or tap to play",
-    "url": "https://html5.gamemonetize.co/2w1s2aagytrk4elb7sk6ug5aocb5pnor/",
-    "category": "Boys",
-    "tags": "3D, Android, Bounce, Boy, Brain, Fun, HTML5, Kids, Matching, Online, Puzzle",
-    "thumb": "https://img.gamemonetize.com/2w1s2aagytrk4elb7sk6ug5aocb5pnor/512x384.jpg",
-    "width": "750",
-    "height": "1334",
     "popularity": 0
   },
   {
@@ -23725,19 +23439,6 @@
     "popularity": 0
   },
   {
-    "id": "27300",
-    "title": "Shooting Cannon: Merge Defense",
-    "description": "Shooting Cannon Merge Defense is an interesting free online game designed for boys. Players need to collect various types of battery deployments, and the same battery can be synthesized. Three identical ones are synthesized into a more advanced one, and various enemies will appear constantly in the checkpoint, and players need to use the battery to shoot and destroy them. Have fun!",
-    "instructions": "Mouse or tap to play",
-    "url": "https://html5.gamemonetize.co/mk4iqyllutxc5y1va4tiwehv4nv34it9/",
-    "category": "Boys",
-    "tags": "Android, Boy, Brain, Fun, HTML5, Kids, Number, Online, Puzzle, Shooting, Skill",
-    "thumb": "https://img.gamemonetize.com/mk4iqyllutxc5y1va4tiwehv4nv34it9/512x384.jpg",
-    "width": "750",
-    "height": "1334",
-    "popularity": 0
-  },
-  {
     "id": "27298",
     "title": "Human Gun! Game",
     "description": "Human Gun! is a puzzle merge god parkour running game, in which we need to control guns to get enough villains, constantly increase our own strength and shoot through everything in front of us. Come and give it a try!",
@@ -23774,19 +23475,6 @@
     "thumb": "https://img.gamemonetize.com/hockj9avx4zyekon0s140acksxfcrk7f/512x384.jpg",
     "width": "720",
     "height": "1280",
-    "popularity": 0
-  },
-  {
-    "id": "27197",
-    "title": "Super Archer: Catkeeper",
-    "description": "Super Archer: Catkeeper is a lovely online game of leisure and puzzle archery, which is developed for children free of charge. You will play a lazy cat to challenge, aim at delicious fish and shoot! And the difficulty of the level will gradually increase. Join us to exercise your shooting ability and your brain!",
-    "instructions": "Mouse or tap to play",
-    "url": "https://html5.gamemonetize.co/97xjkiukedu42nozszart8ep7ruf1blm/",
-    "category": "Boys",
-    "tags": "3D, Android, Avoid, Boy, Brain, Cartoon, Fun, HTML5, Kids, Obstacle, Online, Puzzle",
-    "thumb": "https://img.gamemonetize.com/97xjkiukedu42nozszart8ep7ruf1blm/512x384.jpg",
-    "width": "810",
-    "height": "1440",
     "popularity": 0
   },
   {
@@ -23946,19 +23634,6 @@
     "popularity": 0
   },
   {
-    "id": "26799",
-    "title": "Cannon Ball Shoot",
-    "description": "Cannon Ball Shoot is a free online number and puzzle game for boys played on Puzzlegame. You need to aim and shoot your balls and choose the right door to multiply the number of balls. Successfully push down the obstacles in front of you and complete the pinball task to pass the level! Mobile, Tablet, and Desktop are playable. So, why not try it now? Enjoy yourself!",
-    "instructions": "Mouse or tap to play",
-    "url": "https://html5.gamemonetize.co/4ca18xqypa2c1undkn8po91f2e2ridek/",
-    "category": "Boys",
-    "tags": "Android, Arcade, Avoid, Boy, Brain, Fun, Highscore, HTML5, Kids, Math, Number, Obstacle, Online, Platform, Puzzle, Shooting",
-    "thumb": "https://img.gamemonetize.com/4ca18xqypa2c1undkn8po91f2e2ridek/512x384.jpg",
-    "width": "750",
-    "height": "1334",
-    "popularity": 0
-  },
-  {
     "id": "26712",
     "title": "Freaky Monster Rush - Running Game",
     "description": "Freaky Monster Rush Haunt the nightmares of your enemies with Freaky Monster Rush! Get into a new skin, shift shapes, and chase the humans on your way! Take walls down with a single hit, throw people into a pool of poison, complete your transformation, and become the embodiment of fear! Break your chains, escape from the hands of the evil scientists, and seek revenge! You are finally free to walk the path to your freedom and put an end to all your miseries, but before that, you need closure. A violent one, of course. Step on the platform and follow the path to your revenge. You can move left and right to collect the elixirs and keep your health points high. Hitting obstacles, barrels, and walls can damage you a little, but it’s nothing a little elixir cannot fix. Punch the guards to get them out of your way and walk through the same-colored doors. With these doors, you can modify your limbs and look like a real monster. Collect all pieces, avoid lava and deadly traps, and reach the final stage to get voted by doctors. But watch out! A surprise boss might be waiting at the end. Size up, face the enemy, and throw them into the depths of the universe!",
@@ -23998,19 +23673,6 @@
     "popularity": 0
   },
   {
-    "id": "26692",
-    "title": "Fit The Fat",
-    "description": "Fit The Fat is a free online puzzle and funny game for boys played on PuzzleGame. In this game, you need to control your character to run and enjoy the delicious food you meet along the way. Only by constantly gaining weight for yourself can you push the obstacles in front of you. Can you reach the finish line successfully? Play on Mobile, Tablet, or Desktop.",
-    "instructions": "Mouse or tap to play",
-    "url": "https://html5.gamemonetize.co/349zya0fti53lhg147zlp9oz9z8dz9yh/",
-    "category": "Boys",
-    "tags": "3D, Android, Arcade, Block, Boy, Brain, Fun, HTML5, Kids, Number, Online, Platform, Puzzle, running",
-    "thumb": "https://img.gamemonetize.com/349zya0fti53lhg147zlp9oz9z8dz9yh/512x384.jpg",
-    "width": "750",
-    "height": "1334",
-    "popularity": 0
-  },
-  {
     "id": "26635",
     "title": "Among Us Dungeon",
     "description": "Among Dungeon is an interesting puzzle game. You need to guide the robot to quickly clear the traps in the maze to help us escape from the labyrinth, stop explosives and other obstacles, be careful to dodge and run and pay attention to the spikes that unexpectedly land when you notice that there is no path ahead, you can opt to jump up to another platform, are you ready? Have fun at Among Dungeon!",
@@ -24032,19 +23694,6 @@
     "category": "Boys",
     "tags": "Adventure, Boy, Boys, Escape, Fun, H5, HTML5, Kid, Kids",
     "thumb": "https://img.gamemonetize.com/jo8g2jlnkj0prq5upba4zvfl4nix7cll/512x384.jpg",
-    "width": "720",
-    "height": "1280",
-    "popularity": 0
-  },
-  {
-    "id": "26618",
-    "title": "Ink Inc Tattoo",
-    "description": "Ink Inc Tattoo is a free online simulation game for boys played on PuzzleGame. In the game, you can experience the satisfaction of a tattoo artist drawing various artistic tattoos for clients. You need to draw the correct lines and colors to complete the image given by the customer. Mobile, Tablet, and Desktop are playable. Come and get a new entertainment experience.",
-    "instructions": "Mouse or tap to play ",
-    "url": "https://html5.gamemonetize.co/1x4xoqguy3pbm3ah19631sr28nb0cbyf/",
-    "category": "Boys",
-    "tags": "3D, Android, Boy, Brain, Coloring, Drawing, Fun, Kids, Online, Puzzle, Skill",
-    "thumb": "https://img.gamemonetize.com/1x4xoqguy3pbm3ah19631sr28nb0cbyf/512x384.jpg",
     "width": "720",
     "height": "1280",
     "popularity": 0
@@ -24206,19 +23855,6 @@
     "popularity": 0
   },
   {
-    "id": "26410",
-    "title": "Cat Condo",
-    "description": "Cat Condo is a free online puzzle and merging game for boys played on Puzzlegame. This game uses the cartoon cat and takes unique merging as the main gameplay. Through merging, you can get a lot of cute cats. It is also a kind of relaxation to look at them. The game is easy to play. Come and interact with all kinds of cats, and merge them into higher levels. Play on Mobile, Tablet, or Desktop!",
-    "instructions": "Mouse or tap to play",
-    "url": "https://html5.gamemonetize.co/ma5qumqgv721ldtkjs9cp6zejfj8c7tv/",
-    "category": "Boys",
-    "tags": "3D, Android, Animal, Boy, Brain, Cartoon, Fun, HTML5, Kids, Matching, Online, Puzzle",
-    "thumb": "https://img.gamemonetize.com/ma5qumqgv721ldtkjs9cp6zejfj8c7tv/512x384.jpg",
-    "width": "640",
-    "height": "1136",
-    "popularity": 0
-  },
-  {
     "id": "26377",
     "title": "Super Sugar Hallucination",
     "description": "Super Sugar Hallucination is a free innovative online game for boys that mixes bubble shoot and Ping-Pong. Excellent graphics and animation make you relax. There are many challenging levels waiting for you to unlock. All the levels will challenge your attention and reflex. I guess it's easy for you. Are you ready to try it now?",
@@ -24346,19 +23982,6 @@
     "thumb": "https://img.gamemonetize.com/m90m4vns4ozskzr9l6ri02cp2rry72dz/512x384.jpg",
     "width": "640",
     "height": "360",
-    "popularity": 0
-  },
-  {
-    "id": "25985",
-    "title": "Merge Battle 3D",
-    "description": "Merge Battle 3D is a free and very interesting merge online game for boys played on PuzzleGame. In this game, you will constantly merge characters to strengthen yourself and challenge more powerful enemies. In the competition, get the power-up props first, and let yourself beat the opponents easily. Mobile, Tablet, and Desktop are playable!",
-    "instructions": "Mouse or tap to play ",
-    "url": "https://html5.gamemonetize.co/mrlmdnwffws2kunkminuh1gfp1x0103j/",
-    "category": "Boys",
-    "tags": "3D, Android, Boy, Brain, Cartoon, Fun, HTML5, Kids, Online, Puzzle, Skill",
-    "thumb": "https://img.gamemonetize.com/mrlmdnwffws2kunkminuh1gfp1x0103j/512x384.jpg",
-    "width": "750",
-    "height": "1334",
     "popularity": 0
   },
   {
@@ -24593,19 +24216,6 @@
     "thumb": "https://img.gamemonetize.com/r06mqqman6pt01xk6nctcw105y5fkyrb/512x384.jpg",
     "width": "1080",
     "height": "1920",
-    "popularity": 0
-  },
-  {
-    "id": "25581",
-    "title": "Stealth Master 3D Game",
-    "description": "Stealth Master 3D is a free online action and leisure game for boys played on PuzzleGame. In the game, you play the role of an agent, and your task is to sneak into the enemy building. Kill all your opponents and BOSS before your HP disappears. But in the process of avoiding monitoring, you should also be careful of the guards. Play on Mobile, Tablet, or Desktop!",
-    "instructions": "Mouse or tap to play ",
-    "url": "https://html5.gamemonetize.co/53nbhdb67pp8bsd0w3z2sohuy0bi9khl/",
-    "category": "Boys",
-    "tags": "3D, Android, Avoid, Boy, Brain, Escape, Fun, HTML5, Kids, Obstacle, Online, Puzzle, Stealth",
-    "thumb": "https://img.gamemonetize.com/53nbhdb67pp8bsd0w3z2sohuy0bi9khl/512x384.jpg",
-    "width": "640",
-    "height": "1138",
     "popularity": 0
   },
   {
@@ -25490,19 +25100,6 @@
     "thumb": "https://img.gamemonetize.com/03tc5rchi1y4b1t9ieviywsstoimwohn/512x384.jpg",
     "width": "750",
     "height": "1334",
-    "popularity": 0
-  },
-  {
-    "id": "34924",
-    "title": "The Rise Of Zombies",
-    "description": "This is a thrilling real-time survival strategy game where you control a growing horde of zombies against humans. The world is alive with day-night cycles: during the day, humans shoot with higher accuracy, while at night they are weaker and less aggressive. Your goal is to infect humans, expand your army, and destroy survivors before they wipe you out. Meteors occasionally fall&amp;mdash;collect them to unlock mutations that boost zombie speed and strength. Every match is dynamic: humans roam, panic, and fight back intelligently. Zombies infect survivors on close contact, instantly turning them into allies.",
-    "instructions": "Click on the map or meteors to set your horde rsquo s waypoint Move the camera by moving the mouse to screen edges Press P or use the buttons to pause or resume Press M or use the button to mute unmute sound ",
-    "url": "https://html5.gamemonetize.co/x6ba1la3lfjilaond7eeic2te3p329a7/",
-    "category": "Clicker",
-    "tags": "Action, Horror, Knight, Shooter, Shooting, Zombie",
-    "thumb": "https://img.gamemonetize.com/x6ba1la3lfjilaond7eeic2te3p329a7/512x384.jpg",
-    "width": "800",
-    "height": "600",
     "popularity": 0
   },
   {
@@ -31626,19 +31223,6 @@
     "thumb": "https://img.gamemonetize.com/2703opaxlocb1zdy8juyd9t2yeuddpda/512x384.jpg",
     "width": "900",
     "height": "550",
-    "popularity": 0
-  },
-  {
-    "id": "31520",
-    "title": "King of Crabs",
-    "description": "Easy to operate the krab,The Shell Gallery will show each roles armor, speed, skill, and pelt,The Equipment shop sells 5 Claws, 5 Bodies, and 5 Legs, Claim extra claw coins in the Sign and Spin,The Quick Match will make a fight with 24 players.The Ultimate Guide to Winning Tactics and Tips,Find a shell first. Collect and eat fish on the ground to grow up, Attack the weaker opponents.",
-    "instructions": "Mouse click or tap to play",
-    "url": "https://html5.gamemonetize.co/7qd3n9dqksf5kv9melr3cx96oo8rmjws/",
-    "category": "Action",
-    "tags": "Battle, Fight",
-    "thumb": "https://img.gamemonetize.com/7qd3n9dqksf5kv9melr3cx96oo8rmjws/512x384.jpg",
-    "width": "1334",
-    "height": "750",
     "popularity": 0
   },
   {
@@ -39504,19 +39088,6 @@
     "thumb": "https://img.gamemonetize.com/1n2sqpxhwi08qaxtp8fu8tcpagguqu3y/512x384.jpg",
     "width": "1080",
     "height": "1920",
-    "popularity": 0
-  },
-  {
-    "id": "31421",
-    "title": "Hex Planet Idle",
-    "description": "Hex Planet Idle is both an RPG adventure game and a survival idle game with 3D models. You can control a stickman warrior to discover the whole universe by collecting resources and unlocking new areas. When you step on the white lighting areas, you will know the resource request of the next area. Get close to any items to collect them automatically. If I were you, I would unlock all areas because of the plentiful resources.",
-    "instructions": "Mouse click or tap to play ",
-    "url": "https://html5.gamemonetize.co/ov7ym4r295rq63tgqhkchxj6mh13832b/",
-    "category": "Fighting",
-    "tags": "1 Player, Stickman, Strategy",
-    "thumb": "https://img.gamemonetize.com/ov7ym4r295rq63tgqhkchxj6mh13832b/512x384.jpg",
-    "width": "720",
-    "height": "1280",
     "popularity": 0
   },
   {

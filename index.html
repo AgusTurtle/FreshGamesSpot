@@ -7,60 +7,64 @@
 <meta name="description" content="Cientos de juegos gratis online. Sin descargas, jugá directo en el navegador.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.85em' font-size='90'%3E%F0%9F%8E%AE%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://img.gamemonetize.com">
-<link rel="stylesheet" href="assets/style.css?v=7">
+<link rel="stylesheet" href="assets/style.css?v=8">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3231209923135744"
      crossorigin="anonymous"></script>
 </head>
 <body>
 
-<header class="site-header">
-  <div class="header-inner">
+<div class="app-shell">
+
+  <aside class="sidebar" id="sidebar">
     <a href="#/" class="logo" data-nav="home">
       <span class="logo-bolt">🎮</span>
       <span class="logo-text">Fresh<strong>GamesSpot</strong></span>
     </a>
+    <button id="sidebarToggle" class="sidebar-toggle" title="Contraer menú">☰</button>
+    <nav class="side-nav" id="catNav" aria-label="Categorías">
+      <!-- filled by JS -->
+    </nav>
+  </aside>
+  <div id="sidebarScrim" class="sidebar-scrim" hidden></div>
 
-    <div class="search-wrap">
-      <input id="searchInput" type="search" placeholder="Buscar un juego…" autocomplete="off">
-      <button id="clearSearch" class="clear-search" title="Borrar búsqueda" hidden>✕</button>
-    </div>
+  <div class="main-col">
+    <header class="topbar">
+      <button id="mobileMenuBtn" class="mobile-menu-btn" title="Menú">☰</button>
+      <div class="search-wrap">
+        <input id="searchInput" type="search" placeholder="Buscar un juego…" autocomplete="off">
+        <button id="clearSearch" class="clear-search" title="Borrar búsqueda" hidden>✕</button>
+      </div>
+      <button id="favToggleNav" class="nav-fav-btn" title="Mis favoritos">
+        <span class="star">★</span><span class="fav-label">Favoritos</span>
+      </button>
+    </header>
 
-    <button id="favToggleNav" class="nav-fav-btn" title="Mis favoritos">
-      <span class="star">★</span><span class="fav-label">Favoritos</span>
-    </button>
+    <main id="mainContent">
+
+      <section id="continueSection" class="rail" hidden>
+        <h2 class="rail-title">Seguir jugando</h2>
+        <div id="continueRow" class="rail-row"></div>
+      </section>
+
+      <section id="gridSection" class="grid-section">
+        <div class="grid-header">
+          <h1 id="sectionTitle">Todos los juegos</h1>
+          <span id="resultCount" class="result-count"></span>
+        </div>
+        <div id="gameGrid" class="game-grid"></div>
+        <div id="emptyState" class="empty-state" hidden>
+          <p>No encontramos juegos con ese nombre.</p>
+        </div>
+        <button id="loadMoreBtn" class="load-more-btn">Cargar más juegos</button>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <p>FreshGamesSpot — juegos HTML5 gratuitos para jugar directo desde el navegador, sin instalar nada.</p>
+    </footer>
   </div>
-
-  <nav class="cat-nav" id="catNav" aria-label="Categorías">
-    <!-- filled by JS -->
-  </nav>
-</header>
-
-<main id="mainContent">
-
-  <section id="continueSection" class="rail" hidden>
-    <h2 class="rail-title">Seguir jugando</h2>
-    <div id="continueRow" class="rail-row"></div>
-  </section>
-
-  <section id="homeSections"></section>
-
-  <section id="gridSection" class="grid-section" hidden>
-    <div class="grid-header">
-      <h1 id="sectionTitle">Todos los juegos</h1>
-      <span id="resultCount" class="result-count"></span>
-    </div>
-    <div id="gameGrid" class="game-grid"></div>
-    <div id="emptyState" class="empty-state" hidden>
-      <p>No encontramos juegos con ese nombre.</p>
-    </div>
-    <button id="loadMoreBtn" class="load-more-btn">Cargar más juegos</button>
-  </section>
-
-</main>
-
-<footer class="site-footer">
-  <p>FreshGamesSpot — juegos HTML5 gratuitos para jugar directo desde el navegador, sin instalar nada.</p>
-</footer>
+</div>
 
 <!-- Player overlay -->
 <div id="playerOverlay" class="player-overlay" hidden>
@@ -84,6 +88,6 @@
   </div>
 </div>
 
-<script src="assets/app.js?v=7"></script>
+<script src="assets/app.js?v=8"></script>
 </body>
 </html>

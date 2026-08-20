@@ -71,8 +71,11 @@
   const el = {
     grid: document.getElementById("gameGrid"),
     gridSection: document.getElementById("gridSection"),
-    homeSections: document.getElementById("homeSections"),
     catNav: document.getElementById("catNav"),
+    sidebar: document.getElementById("sidebar"),
+    sidebarToggle: document.getElementById("sidebarToggle"),
+    sidebarScrim: document.getElementById("sidebarScrim"),
+    mobileMenuBtn: document.getElementById("mobileMenuBtn"),
     searchInput: document.getElementById("searchInput"),
     clearSearch: document.getElementById("clearSearch"),
     sectionTitle: document.getElementById("sectionTitle"),
@@ -141,29 +144,41 @@
     return GAMES.find(g => g.id === id);
   }
 
+  const CATEGORY_ICONS = {
+    "Puzzles": "🧩", "Racing": "🏎️", "Arcade": "🕹️", "Multiplayer": "👥",
+    "Sports": "🏆", "Cooking": "🍳", "Soccer": "⚽", "3D": "🧊",
+    "2 Player": "🎮", "Boys": "👦", "Clicker": "🖱️", "Girls": "💄",
+    "Action": "💥", "Shooting": "🔫", "Adventure": "🗺️", "Hypercasual": "⚡",
+    "Fighting": "🥊", ".IO": "🌀",
+  };
+
   function buildCategories(){
     const counts = {};
     GAMES.forEach(g => { counts[g.category] = (counts[g.category]||0) + 1; });
     const cats = Object.keys(counts).sort((a,b) => counts[b]-counts[a]);
     const frag = document.createDocumentFragment();
 
+    frag.appendChild(makePill("Todos", GAMES.length, true, "Inicio", "🏠"));
+
     const popularCount = GAMES.filter(g => g.popularity > 0).length;
     if (popularCount > 0){
-      frag.appendChild(makePill(POPULAR_CAT, popularCount, false, "🔥 Populares"));
+      frag.appendChild(makePill(POPULAR_CAT, popularCount, false, "Populares", "🔥"));
     }
 
-    const allPill = makePill("Todos", GAMES.length, true);
-    frag.appendChild(allPill);
+    const label = document.createElement("div");
+    label.className = "side-nav-group-label";
+    label.textContent = "Categorías";
+    frag.appendChild(label);
 
-    cats.forEach(c => frag.appendChild(makePill(c, counts[c], false)));
+    cats.forEach(c => frag.appendChild(makePill(c, counts[c], false, c, CATEGORY_ICONS[c] || "🎲")));
     el.catNav.appendChild(frag);
   }
 
-  function makePill(name, count, active, label){
+  function makePill(name, count, active, label, icon){
     const btn = document.createElement("button");
     btn.className = "cat-pill" + (active ? " active" : "");
-    btn.textContent = `${label || name} (${count})`;
     btn.dataset.cat = name;
+    btn.innerHTML = `<span class="cat-pill-icon">${icon || "🎲"}</span><span class="cat-pill-label">${label || name}</span><span class="cat-pill-count">${count}</span>`;
     btn.addEventListener("click", () => selectCategory(name));
     return btn;
   }
@@ -176,24 +191,13 @@
     el.sectionTitle.textContent = name === "Todos" ? "Todos los juegos"
       : name === POPULAR_CAT ? "🔥 Populares"
       : name;
+    closeSidebarMobile();
     updateView();
     window.scrollTo({top:0, behavior:"smooth"});
   }
 
-  function isHomeView(){
-    return activeCategory === "Todos" && !searchTerm;
-  }
-
   function updateView(){
-    if (isHomeView()){
-      el.gridSection.hidden = true;
-      el.homeSections.hidden = false;
-      renderHomeSections();
-    } else {
-      el.homeSections.hidden = true;
-      el.gridSection.hidden = false;
-      applyFilters();
-    }
+    applyFilters();
     renderContinue();
   }
 
@@ -346,45 +350,6 @@
     el.continueRow.appendChild(frag);
   }
 
-  const CATEGORY_ICONS = {
-    "Puzzles": "🧩", "Racing": "🏎️", "Arcade": "🕹️", "Multiplayer": "👥",
-    "Sports": "🏆", "Cooking": "🍳", "Soccer": "⚽", "3D": "🧊",
-    "2 Player": "🎮", "Boys": "👦", "Clicker": "🖱️", "Girls": "💄",
-    "Action": "💥", "Shooting": "🔫", "Adventure": "🗺️", "Hypercasual": "⚡",
-    "Fighting": "🥊", ".IO": "🌀",
-  };
-
-  function makeCategoryTile(label, catName, count, icon){
-    const tile = document.createElement("button");
-    tile.className = "cat-tile";
-    tile.innerHTML = `<span class="cat-tile-icon">${icon}</span><span class="cat-tile-label">${label}</span>`;
-    tile.title = `${count} juegos`;
-    tile.addEventListener("click", () => selectCategory(catName));
-    return tile;
-  }
-
-  function renderHomeSections(){
-    el.homeSections.innerHTML = "";
-
-    const grid = document.createElement("div");
-    grid.className = "cat-tile-grid";
-
-    const popularCount = GAMES.filter(g => g.popularity > 0).length;
-    if (popularCount){
-      grid.appendChild(makeCategoryTile("JUEGOS POPULARES", POPULAR_CAT, popularCount, "🔥"));
-    }
-
-    const counts = {};
-    GAMES.forEach(g => { counts[g.category] = (counts[g.category]||0) + 1; });
-    const cats = Object.keys(counts).sort((a,b) => counts[b]-counts[a]);
-    cats.forEach(cat => {
-      const icon = CATEGORY_ICONS[cat] || "🎲";
-      grid.appendChild(makeCategoryTile(`JUEGOS DE ${cat.toUpperCase()}`, cat, counts[cat], icon));
-    });
-
-    el.homeSections.appendChild(grid);
-  }
-
   function renderFavoritesView(){
     activeCategory = "Todos";
     searchTerm = "";
@@ -395,8 +360,6 @@
     visibleCount = PAGE_SIZE;
     const favIds = getFavorites();
     filtered = favIds.map(findGame).filter(Boolean).reverse();
-    el.homeSections.hidden = true;
-    el.gridSection.hidden = false;
     render();
     el.continueSection.hidden = true;
   }
@@ -482,6 +445,20 @@
     el.clearSearch.hidden = true;
     selectCategory("Todos");
   });
+
+  /* ---------- sidebar ---------- */
+  function closeSidebarMobile(){
+    el.sidebar.classList.remove("open");
+    el.sidebarScrim.hidden = true;
+  }
+  el.sidebarToggle.addEventListener("click", () => {
+    el.sidebar.classList.toggle("collapsed");
+  });
+  el.mobileMenuBtn.addEventListener("click", () => {
+    el.sidebar.classList.add("open");
+    el.sidebarScrim.hidden = false;
+  });
+  el.sidebarScrim.addEventListener("click", closeSidebarMobile);
 
   /* ---------- init ---------- */
   fetch("assets/games.json")
