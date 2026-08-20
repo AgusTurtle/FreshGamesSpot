@@ -149,6 +149,21 @@ img{ max-width:100%; display:block; }
   margin: 0 auto;
   padding: 24px 20px 60px;
 }
+.back-to-cats{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background: var(--bg-elev);
+  border: 2px solid var(--border);
+  color: var(--text-dim);
+  padding: 7px 16px;
+  border-radius: 999px;
+  font-size: 0.87rem;
+  font-weight:700;
+  margin-bottom: 16px;
+}
+.back-to-cats:hover{ color: var(--accent); border-color: var(--accent); }
+
 .grid-header{
   display:flex;
   align-items: baseline;
@@ -181,7 +196,8 @@ img{ max-width:100%; display:block; }
 
 /* ---------- Category tile grid (home) ---------- */
 #homeSections{
-  background: linear-gradient(135deg, #6fe0cd 0%, #4fd3c4 55%, #3ec9bd 100%);
+  background: linear-gradient(135deg, #1b3d3a 0%, #163634 55%, #122e2c 100%);
+  border: 1px solid #1f4744;
   padding: 28px 20px;
   border-radius: 24px;
   margin-bottom: 20px;
