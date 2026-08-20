@@ -8,6 +8,52 @@
   const VOTES_KEY = "omg_votes";
   const POPULAR_CAT = "Populares";
 
+  // Game titles/tags/categories all come from the source catalog in
+  // English, but people search in Spanish -- "futbol" should find
+  // "Soccer" games. Maps a normalized (lowercase, accent-stripped)
+  // Spanish term to the English keywords worth searching for too.
+  const SEARCH_SYNONYMS = {
+    futbol: ["soccer","football"], balompie: ["soccer","football"],
+    basket: ["basketball"], basquet: ["basketball"], baloncesto: ["basketball"],
+    carros: ["car","racing","driving"], autos: ["car","racing","driving"], coches: ["car","racing","driving"],
+    carreras: ["racing","race"], correr: ["run","racing"],
+    disparos: ["shooting","shoot","gun"], tiros: ["shooting","shoot"], disparar: ["shoot","shooting"],
+    pelea: ["fighting","fight"], peleas: ["fighting","fight"], lucha: ["fighting","fight","wrestling"], luchas: ["fighting","fight"],
+    cocina: ["cooking","cook"], cocinar: ["cooking","cook"], cocinera: ["cooking"],
+    vestir: ["dress up","dress"], moda: ["dress up","fashion"], disfraces: ["dress up"], maquillaje: ["makeup"],
+    rompecabezas: ["puzzle"], puzles: ["puzzle"],
+    aventura: ["adventure"], aventuras: ["adventure"],
+    deportes: ["sports","sport"], deporte: ["sports","sport"],
+    multijugador: ["multiplayer"], multijugadores: ["multiplayer"],
+    ninos: ["boys"], chicos: ["boys"], nenes: ["boys"],
+    chicas: ["girls"], ninas: ["girls"], nenas: ["girls"],
+    accion: ["action"],
+    bicicleta: ["bike","bicycle"], bicicletas: ["bike","bicycle"],
+    moto: ["moto","motorcycle","bike"], motos: ["moto","motorcycle","bike"],
+    zombi: ["zombie"], zombis: ["zombie"],
+    guerra: ["war"], boxeo: ["boxing"], tenis: ["tennis"],
+    voleibol: ["volleyball"], volei: ["volleyball"],
+    billar: ["billiard","pool"], ajedrez: ["chess"], damas: ["checkers"],
+    construir: ["build","construction"], granja: ["farm"], simulador: ["simulator"],
+    laberinto: ["maze"], escape: ["escape"], terror: ["horror"], futbolin: ["foosball"],
+    pesca: ["fishing"], bebe: ["baby"], bebes: ["baby"], mascotas: ["pet"], animales: ["animal"],
+  };
+
+  function stripAccents(s){
+    return s.normalize("NFD").replace(new RegExp("[\\u0300-\\u036f]", "g"), "");
+  }
+
+  function expandSearchTerms(raw){
+    const q = stripAccents(raw.toLowerCase().trim());
+    const terms = new Set([q]);
+    const addSynonyms = (word) => {
+      if (SEARCH_SYNONYMS[word]) SEARCH_SYNONYMS[word].forEach(t => terms.add(stripAccents(t)));
+    };
+    addSynonyms(q);
+    q.split(/\s+/).forEach(addSynonyms);
+    return [...terms].filter(Boolean);
+  }
+
   let GAMES = [];
   let filtered = [];
   let visibleCount = PAGE_SIZE;
@@ -152,11 +198,11 @@
       list = list.filter(g => g.category === activeCategory);
     }
     if (searchTerm){
-      const q = searchTerm.toLowerCase();
-      list = list.filter(g =>
-        g.title.toLowerCase().includes(q) ||
-        (g.tags && g.tags.toLowerCase().includes(q))
-      );
+      const terms = expandSearchTerms(searchTerm);
+      list = list.filter(g => {
+        const haystack = stripAccents(`${g.title} ${g.tags||""} ${g.category}`.toLowerCase());
+        return terms.some(t => haystack.includes(t));
+      });
     }
     filtered = list;
     render();
