@@ -38,6 +38,12 @@ const GAME_ALLOWED_HOSTS = [
   "https://*.yyggames.com",
   "https://*.babygames.com",
   "https://*.unity3d.com",
+  // GameDistribution: the wrapper page at html5.gamedistribution.com/<id>/
+  // only loads the real game after their ad SDK (html5.api.gamedistribution.com)
+  // fires a "game start" event, so games sourced here are stored in
+  // games.json pointing straight at the actual asset path (see resolveGameDistributionUrl)
+  // instead of the wrapper -- same host, no ad SDK ever gets a chance to load.
+  "https://html5.gamedistribution.com",
 ].join(" ");
 
 const CDN_HOSTS = [
@@ -147,6 +153,11 @@ function fetchAndPipe(url, res, redirectCount){
     const headers = {};
     if (upstream.headers["content-type"]) headers["Content-Type"] = upstream.headers["content-type"];
     if (upstream.headers["content-length"]) headers["Content-Length"] = upstream.headers["content-length"];
+    // Unity WebGL builds (seen in GameDistribution-sourced games) serve
+    // their data/wasm files gzip-encoded and rely on the browser to
+    // decompress via this header -- without forwarding it the piped bytes
+    // decode as garbage.
+    if (upstream.headers["content-encoding"]) headers["Content-Encoding"] = upstream.headers["content-encoding"];
     res.writeHead(upstream.statusCode || 200, headers);
     upstream.pipe(res);
   }).on("error", () => {
