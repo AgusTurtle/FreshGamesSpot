@@ -72,7 +72,7 @@
     grid: document.getElementById("gameGrid"),
     gridSection: document.getElementById("gridSection"),
     homeSections: document.getElementById("homeSections"),
-    backToCategories: document.getElementById("backToCategories"),
+    catNav: document.getElementById("catNav"),
     searchInput: document.getElementById("searchInput"),
     clearSearch: document.getElementById("clearSearch"),
     sectionTitle: document.getElementById("sectionTitle"),
@@ -141,8 +141,38 @@
     return GAMES.find(g => g.id === id);
   }
 
+  function buildCategories(){
+    const counts = {};
+    GAMES.forEach(g => { counts[g.category] = (counts[g.category]||0) + 1; });
+    const cats = Object.keys(counts).sort((a,b) => counts[b]-counts[a]);
+    const frag = document.createDocumentFragment();
+
+    const popularCount = GAMES.filter(g => g.popularity > 0).length;
+    if (popularCount > 0){
+      frag.appendChild(makePill(POPULAR_CAT, popularCount, false, "🔥 Populares"));
+    }
+
+    const allPill = makePill("Todos", GAMES.length, true);
+    frag.appendChild(allPill);
+
+    cats.forEach(c => frag.appendChild(makePill(c, counts[c], false)));
+    el.catNav.appendChild(frag);
+  }
+
+  function makePill(name, count, active, label){
+    const btn = document.createElement("button");
+    btn.className = "cat-pill" + (active ? " active" : "");
+    btn.textContent = `${label || name} (${count})`;
+    btn.dataset.cat = name;
+    btn.addEventListener("click", () => selectCategory(name));
+    return btn;
+  }
+
   function selectCategory(name){
     activeCategory = name;
+    document.querySelectorAll(".cat-pill").forEach(p => {
+      p.classList.toggle("active", p.dataset.cat === name);
+    });
     el.sectionTitle.textContent = name === "Todos" ? "Todos los juegos"
       : name === POPULAR_CAT ? "🔥 Populares"
       : name;
@@ -360,6 +390,7 @@
     searchTerm = "";
     el.searchInput.value = "";
     el.clearSearch.hidden = true;
+    document.querySelectorAll(".cat-pill").forEach(p => p.classList.remove("active"));
     el.sectionTitle.textContent = "Mis favoritos";
     visibleCount = PAGE_SIZE;
     const favIds = getFavorites();
@@ -425,7 +456,6 @@
   });
 
   el.favToggleNav.addEventListener("click", renderFavoritesView);
-  el.backToCategories.addEventListener("click", () => selectCategory("Todos"));
 
   el.playerBack.addEventListener("click", closeGame);
   el.playerClose.addEventListener("click", closeGame);
@@ -459,6 +489,7 @@
     .then(data => {
       GAMES = data;
       filtered = GAMES;
+      buildCategories();
       updateView();
     })
     .catch(err => {
