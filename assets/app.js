@@ -2,7 +2,6 @@
   "use strict";
 
   const PAGE_SIZE = 24;
-  const RAIL_SIZE = 14;
   const FAV_KEY = "omg_favorites";
   const RECENT_KEY = "omg_recent";
   const VOTES_KEY = "omg_votes";
@@ -347,74 +346,43 @@
     el.continueRow.appendChild(frag);
   }
 
-  // Rendering all ~19 rails' cards (260+ DOM nodes with images) up front
-  // is what made the home page feel laggy while scrolling. Only the first
-  // couple of rails render immediately; the rest populate lazily right
-  // before they scroll into view, same idea as how Poki's rows stream in.
-  function makeRail(label, catName, games, eager){
-    const section = document.createElement("section");
-    section.className = "rail";
+  const CATEGORY_ICONS = {
+    "Puzzles": "🧩", "Racing": "🏎️", "Arcade": "🕹️", "Multiplayer": "👥",
+    "Sports": "🏆", "Cooking": "🍳", "Soccer": "⚽", "3D": "🧊",
+    "2 Player": "🎮", "Boys": "👦", "Clicker": "🖱️", "Girls": "💄",
+    "Action": "💥", "Shooting": "🔫", "Adventure": "🗺️", "Hypercasual": "⚡",
+    "Fighting": "🥊", ".IO": "🌀",
+  };
 
-    const header = document.createElement("div");
-    header.className = "rail-header";
-
-    const h2 = document.createElement("h2");
-    h2.className = "rail-title";
-    h2.textContent = `${label} (${games.length})`;
-    header.appendChild(h2);
-
-    const more = document.createElement("button");
-    more.className = "rail-more";
-    more.textContent = "Ver todos →";
-    more.addEventListener("click", () => selectCategory(catName));
-    header.appendChild(more);
-
-    section.appendChild(header);
-
-    const row = document.createElement("div");
-    row.className = "rail-row";
-
-    function populate(){
-      if (row.dataset.populated) return;
-      row.dataset.populated = "1";
-      const frag = document.createDocumentFragment();
-      games.slice(0, RAIL_SIZE).forEach(g => frag.appendChild(makeCard(g)));
-      row.appendChild(frag);
-    }
-
-    if (eager || !("IntersectionObserver" in window)){
-      populate();
-    } else {
-      const observer = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting){
-          populate();
-          observer.disconnect();
-        }
-      }, { rootMargin: "800px 0px" });
-      observer.observe(section);
-    }
-
-    section.appendChild(row);
-    return section;
+  function makeCategoryTile(label, catName, count, icon){
+    const tile = document.createElement("button");
+    tile.className = "cat-tile";
+    tile.innerHTML = `<span class="cat-tile-icon">${icon}</span><span class="cat-tile-label">${label}</span>`;
+    tile.title = `${count} juegos`;
+    tile.addEventListener("click", () => selectCategory(catName));
+    return tile;
   }
 
   function renderHomeSections(){
     el.homeSections.innerHTML = "";
-    const frag = document.createDocumentFragment();
 
-    const popular = GAMES.filter(g => g.popularity > 0);
-    if (popular.length){
-      frag.appendChild(makeRail("🔥 Populares", POPULAR_CAT, popular, true));
+    const grid = document.createElement("div");
+    grid.className = "cat-tile-grid";
+
+    const popularCount = GAMES.filter(g => g.popularity > 0).length;
+    if (popularCount){
+      grid.appendChild(makeCategoryTile("JUEGOS POPULARES", POPULAR_CAT, popularCount, "🔥"));
     }
 
     const counts = {};
     GAMES.forEach(g => { counts[g.category] = (counts[g.category]||0) + 1; });
     const cats = Object.keys(counts).sort((a,b) => counts[b]-counts[a]);
-    cats.forEach((cat, i) => {
-      frag.appendChild(makeRail(cat, cat, GAMES.filter(g => g.category === cat), i === 0));
+    cats.forEach(cat => {
+      const icon = CATEGORY_ICONS[cat] || "🎲";
+      grid.appendChild(makeCategoryTile(`JUEGOS DE ${cat.toUpperCase()}`, cat, counts[cat], icon));
     });
 
-    el.homeSections.appendChild(frag);
+    el.homeSections.appendChild(grid);
   }
 
   function renderFavoritesView(){
