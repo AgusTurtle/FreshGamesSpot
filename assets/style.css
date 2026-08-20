@@ -69,7 +69,7 @@ img{ max-width:100%; display:block; }
 }
 .logo-bolt{ font-size: 1.4rem; flex-shrink:0; }
 .logo-text strong{
-  background: linear-gradient(135deg, #00e08a, #00c26e);
+  background: linear-gradient(135deg, #4fa4ff, #1c7dff);
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
