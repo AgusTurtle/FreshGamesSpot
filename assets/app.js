@@ -250,6 +250,13 @@
     playBadge.innerHTML = "<span>▶</span>";
     thumbWrap.appendChild(playBadge);
 
+    if (game.popularity > 0){
+      const ribbon = document.createElement("span");
+      ribbon.className = "ribbon-badge";
+      ribbon.textContent = "🔥 POPULAR";
+      thumbWrap.appendChild(ribbon);
+    }
+
     const favBtn = document.createElement("button");
     favBtn.className = "fav-star" + (isFavorite(game.id) ? " active" : "");
     favBtn.textContent = "★";
