@@ -1,5 +1,96 @@
 [
   {
+    "id": "gm-fireboy-watergirl-forest",
+    "title": "Fireboy and Watergirl: Forest Temple",
+    "description": "Cooperative puzzle adventure with the classic Fireboy and Watergirl duo in a mysterious forest temple. Each collects gems of their own color, pushes boxes and presses switches to cooperate and pass the level.",
+    "instructions": "Player 1 (Fireboy): arrow keys to move/jump. Player 2 (Watergirl): W A D to move/jump.",
+    "url": "https://html5.gamemonetize.co/1xvemgqh10s5oag3rrvukaeny2fd7ekk/",
+    "category": "Multiplayer",
+    "tags": "Fireboy, Watergirl, 2 Player, Puzzle, Adventure, Forest Temple, Hot, Popular",
+    "thumb": "https://img.gamemonetize.com/1xvemgqh10s5oag3rrvukaeny2fd7ekk/512x384.jpg",
+    "width": "800",
+    "height": "600",
+    "popularity": 0
+  },
+  {
+    "id": "gm-fireboy-watergirl-fishing",
+    "title": "Fireboy and Watergirl Go Fishing",
+    "description": "Fireboy and Watergirl take a break from temple adventures to fish together at the riverside, catching fish while avoiding trash.",
+    "instructions": "Two-player controls: WASD and arrow keys to move and hook fish.",
+    "url": "https://html5.gamemonetize.co/55e47szwn7pjvdhtkobf2xd8y13jj4hp/",
+    "category": "Multiplayer",
+    "tags": "Fireboy, Watergirl, 2 Player, Fishing, Casual",
+    "thumb": "https://img.gamemonetize.com/55e47szwn7pjvdhtkobf2xd8y13jj4hp/512x384.jpg",
+    "width": "800",
+    "height": "600",
+    "popularity": 0
+  },
+  {
+    "id": "gm-fireboy-watergirl-6",
+    "title": "Fireboy and Watergirl 6",
+    "description": "Cooperative puzzle-platformer where Fireboy and Watergirl must collect all diamonds and find the exit to pass each maze-based level.",
+    "instructions": "Fireboy: arrow keys. Watergirl: WASD.",
+    "url": "https://html5.gamemonetize.co/cym6sfm8kebf73562van2bwa2tdz4prh/",
+    "category": "Multiplayer",
+    "tags": "Fireboy, Watergirl, 2 Player, Puzzle, Adventure",
+    "thumb": "https://img.gamemonetize.com/cym6sfm8kebf73562van2bwa2tdz4prh/512x384.jpg",
+    "width": "800",
+    "height": "600",
+    "popularity": 0
+  },
+  {
+    "id": "gm-redboy-bluegirl-forest",
+    "title": "Red Boy and Blue Girl: Forest Adventure",
+    "description": "A Fireboy and Watergirl style two-player platformer adventure through forest-themed levels, cooperating to overcome obstacles.",
+    "instructions": "Player 1: WASD. Player 2: arrow keys.",
+    "url": "https://html5.gamemonetize.co/pfnrrfe5b44ofhlekvyev94gwv78ged5/",
+    "category": "Multiplayer",
+    "tags": "Fireboy, Watergirl, 2 Player, Puzzle, Adventure, Forest",
+    "thumb": "https://img.gamemonetize.com/pfnrrfe5b44ofhlekvyev94gwv78ged5/512x384.jpg",
+    "width": "800",
+    "height": "600",
+    "popularity": 0
+  },
+  {
+    "id": "gm-firegirl-waterboy-candy",
+    "title": "Fire Girl and Water Boy: Candy Forest",
+    "description": "A Fireboy and Watergirl style cooperative platformer where Fire Girl and Water Boy collect candies together to reach the highest score.",
+    "instructions": "Player 1: WASD. Player 2: arrow keys. Playable solo or with a second player.",
+    "url": "https://html5.gamemonetize.co/tr4ks76pwkor67ibi6ibl3fw7jekkixd/",
+    "category": "Multiplayer",
+    "tags": "Fireboy, Watergirl, 2 Player, Puzzle, Adventure, Candy",
+    "thumb": "https://img.gamemonetize.com/tr4ks76pwkor67ibi6ibl3fw7jekkixd/512x384.jpg",
+    "width": "800",
+    "height": "600",
+    "popularity": 0
+  },
+  {
+    "id": "gd-rooftop-snipers",
+    "title": "Rooftop Snipers",
+    "description": "Rooftop Snipers is a chaotic two button local multiplayer game. Challenge your friends side by side or play the computer. Shoot your opponent off the map to win.",
+    "instructions": "Player 1: W to shoot/jump. Player 2: up arrow to shoot/jump. Knock your opponent off the rooftop.",
+    "url": "https://html5.gamedistribution.com/rvvASMiM/c3a70ae98547407a92ebedca8b79fdfa/index.html",
+    "category": "Shooting",
+    "tags": "Rooftop Snipers, 2 Player, Sniper, Shooting, Hot, Popular",
+    "thumb": "https://img.gamedistribution.com/c3a70ae98547407a92ebedca8b79fdfa-512x512.jpg",
+    "width": "960",
+    "height": "600",
+    "popularity": 0
+  },
+  {
+    "id": "gd-penalty-shooters-3",
+    "title": "Penalty Shooters 3",
+    "description": "Penalty Shooters 3, the newest addition to the fan-favorite series. Two thrilling modes: Tier Mode offers 6 challenging tiers, while the World Cup takes you to prestigious arenas. Customize your players jerseys and compete against adapting AI opponents.",
+    "instructions": "Click and hold to aim your shot, release to shoot. Click to dive as goalkeeper.",
+    "url": "https://html5.gamedistribution.com/rvvASMiM/ac793d41fb5845e59afaad6292e141e1/index.html",
+    "category": "Soccer",
+    "tags": "Penalty Shooters, Soccer, Football, Sports, Hot, Popular",
+    "thumb": "https://img.gamedistribution.com/ac793d41fb5845e59afaad6292e141e1-512x512.jpg",
+    "width": "960",
+    "height": "600",
+    "popularity": 0
+  },
+  {
     "id": "gm-bubble-shooter",
     "title": "Bubble Shooter",
     "description": "Bubble Shooter is a classic puzzle HTML5 game. The goal is to clear all bubbles from the level, avoiding any bubble crossing the bottom line.",
@@ -8,19 +99,6 @@
     "category": "Puzzles",
     "tags": "Bubble Shooter, Puzzle, Match 3, Hot, Popular",
     "thumb": "https://img.gamemonetize.com/wt1tfo8ol71fabn4cvsojilamtozjfqg/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 0
-  },
-  {
-    "id": "gm-moto-x3m",
-    "title": "Moto X3M",
-    "description": "Moto X3M is an awesome bike racing game with 25 challenging levels. Grab your motorbike, strap your helmet and get airtime over obstacles to beat the clock on amazing off-road circuits.",
-    "instructions": "Up arrow to accelerate, down arrow to brake, left/right arrows to tilt in the air.",
-    "url": "https://html5.gamemonetize.co/dpjd4cafq7knxvebtsvl23isv9o0d3vq/",
-    "category": "Racing",
-    "tags": "Moto, Bike, Racing, Motorcycle, Hot, Popular",
-    "thumb": "https://img.gamemonetize.com/dpjd4cafq7knxvebtsvl23isv9o0d3vq/512x384.jpg",
     "width": "800",
     "height": "600",
     "popularity": 0
@@ -47,19 +125,6 @@
     "category": "Multiplayer",
     "tags": "Arcade, Best, Best Games, Brainrot, Games, Hot, Multiplayer, Obstacle, Online, Platform, roblox, run, Sahur, Tung",
     "thumb": "https://img.gamemonetize.com/fvy4egxh3t3yfkzbb6dueku1mef5e8rh/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 0
-  },
-  {
-    "id": "27764",
-    "title": "Command Strike FPS 2",
-    "description": "Welcome to a new shooter game! Take part in a real commando mission! Here you’ll find classic and favorite features of shooting games. About Command Strike FPS: - various maps for battles - offline games modes: Deathmatch, Flag capture, Missions - weaponry: powerful guns &amp; pistols - simple shooting controls - action-packed gameplay Use your skills to become a super soldier - get a gun and join battles! It’s time to complete special commando missions!",
-    "instructions": "Keyboard WASD G for grenade H for use first aid kit C for squat M1 for aim M2 for shooting SPACE for jump ESC for menu SCROLL WHEEL for change weapon",
-    "url": "https://html5.gamemonetize.co/fiogowuzog6jowbgvabdxrcqaub4cubc/",
-    "category": "Multiplayer",
-    "tags": "3D Games, Action, Adventure, Best, H5, Hot, Multiplayer, New",
-    "thumb": "https://img.gamemonetize.com/fiogowuzog6jowbgvabdxrcqaub4cubc/512x384.jpg",
     "width": "800",
     "height": "600",
     "popularity": 0
@@ -3445,19 +3510,6 @@
     "popularity": 0
   },
   {
-    "id": "25112",
-    "title": "Triset.io",
-    "description": "Triset.io is a fast paced multiplayer puzzle game where your objective is to capture as many square areas as possible while controling growth of your oponents.",
-    "instructions": "Left Click to place Right click to rotate Space to skip ",
-    "url": "https://html5.gamemonetize.co/rgsr15kydsb0b6izyxzvz6gwxyjuy2se/",
-    "category": "Multiplayer",
-    "tags": ".io Games, Best, Bomb, Casual, Clicker, Fun, HTML5, Hypercasual, Multiplayer, Puzzle, Tetris",
-    "thumb": "https://img.gamemonetize.com/rgsr15kydsb0b6izyxzvz6gwxyjuy2se/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 0
-  },
-  {
     "id": "19781",
     "title": "Pixel Runner Fall Boys Multiplayer",
     "description": "Autumn kids on the internet 3D allow you to complete each multiplayer obstacle with your individuals. Crazy utmost Race knockdown challenge programs with the single objective to delight in and be enjoyable in these free online multiplayer video games. Loss Kids and People Royale multiplayer push you run versus dozens of boys via challenge training courses that get even more difficult. People, women, tall kids, brief guys, fun young boys, weird teenagers, everyone is welcome to eliminate, run, and have a silly good time throughout this ko race. Features of loss young boys and also drop guys video game: There are greater than 51 shoppable, unlockable, or buyable characters! On the internet, multiplayer video games with good friends Approximately 30 gamers per game As much as 12 fun as well as supreme game-modes in which individuals fall from the map Have a good time trying not to drop in this multiplayer experience while competing with other loss guys multiplayer in this Competing ultimate knockdown",
@@ -4092,19 +4144,6 @@
     "thumb": "https://img.gamemonetize.com/ddkkbn4xx6qohy8jemwxw59w19m7rce6/512x384.jpg",
     "width": "1920",
     "height": "1080",
-    "popularity": 0
-  },
-  {
-    "id": "22445",
-    "title": "Stickman Fight",
-    "description": "Do you like fighter games? Do you enjoy stickman games? Are you ready for the stick fight extreme Stickman Fight?? The hero of the casual stickman Stick Fight games is returning. The fight game with endless waves of ninja enemies hordes will test your brawl and survival skills. Become the ultimate stickman warrior boss in this free funny and hypercasual battle royale game. Have fun. Play stickman games on iyigames.com. Stick fight the endless horde of stickmen to break your own records or until your perish in the survival arena. Hit with your fist but also",
-    "instructions": "Keyboard",
-    "url": "https://html5.gamemonetize.co/vqlbeetbbf92vkvo9lho6g7mc5dnn6oi/",
-    "category": "Fighting",
-    "tags": "Action, Adventure, Best, Fight, Fighting, Fun, HTML5, Mobile, Stickman, WebGL",
-    "thumb": "https://img.gamemonetize.com/vqlbeetbbf92vkvo9lho6g7mc5dnn6oi/512x384.jpg",
-    "width": "800",
-    "height": "600",
     "popularity": 0
   },
   {
@@ -11180,19 +11219,6 @@
     "popularity": 0
   },
   {
-    "id": "37416",
-    "title": "Speen",
-    "description": "Swing one circle around the other, plant a leg to switch which ones spinning, and use momentum as your only weapon. Collect glowing pickups to fill your meters, smash through spike balls and rival spinners with a charged leg, and take down a boss bumper to unlock home decoration. Then head into the shared multiplayer world &amp;mdash; paint your territory, duel other players, and chase a set of achievements as you go. Simple to pick up, with a genuinely different feel than anything else in the genre.",
-    "instructions": "- Tap click to swap which circle is planted pivot and which one swings around it Thats the whole control scheme - Swing over green pickups with your orbiting circle plant a leg on pink pickups with your standing one fill both meters then head h",
-    "url": "https://html5.gamemonetize.co/fwiozook1vr9lw7duxy81zup5676u7bj/",
-    "category": "Multiplayer",
-    "tags": ".io, .io Games, 2026 games, Casual, Multiplayer",
-    "thumb": "https://img.gamemonetize.com/fwiozook1vr9lw7duxy81zup5676u7bj/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 0
-  },
-  {
     "id": "37332",
     "title": "Music Night Battle: Rhythm Game",
     "description": "Music Night Battle is a fast rhythm battle game where you tap arrows in time with the beat and fight in music duels. Play solo or compete in online multiplayer matches, improve your timing skills, build combos, and climb the leaderboard. Enjoy neon arcade visuals, fast reaction gameplay, and addictive rhythm challenges with arrow-based music mechanics. Defeat opponents, unlock new challenges, and test your reflexes in competitive rhythm battles designed for casual and hardcore players.",
@@ -11214,19 +11240,6 @@
     "category": "Multiplayer",
     "tags": ".io Games, 2026 games, Arcade, Brain, Fall Guys, Fun, html games for your website, Multiplayer, Obstacle, Quiz, Skill, Stickman",
     "thumb": "https://img.gamemonetize.com/cybh6ym22ww2ehlpu23d6azrudls31ar/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 0
-  },
-  {
-    "id": "36850",
-    "title": "Castle Wars: Legacy",
-    "description": "Castle Wars: Legacy is a tactical multiplayer card game where you build your deck, defend your castle, and break through enemy walls. Stack resources, summon armies, cast spells, and outsmart your opponent in fast-paced strategic duels. Battle friends online, climb daily tournaments, conquer the campaign, or fight AI in quick matches. Collect dozens of unique cards, build custom decks, and unlock new castle skins. Easy to learn, deep to master.",
-    "instructions": "Click or tap",
-    "url": "https://html5.gamemonetize.co/f6ung9e7lfninu1957spejeihzprdusb/",
-    "category": "Multiplayer",
-    "tags": ".io, Castle, Defense, Strategy, two player games",
-    "thumb": "https://img.gamemonetize.com/f6ung9e7lfninu1957spejeihzprdusb/512x384.jpg",
     "width": "800",
     "height": "600",
     "popularity": 0
@@ -12038,19 +12051,6 @@
     "popularity": 0
   },
   {
-    "id": "25156",
-    "title": "Koxo.io",
-    "description": "Enter the koxo arena and attack your opponents with your ball and chain. Make big movements with your mouse to attack a large area and learn to control their mass.",
-    "instructions": "Arrow keys WASD to move Mouse to move your ball and chain",
-    "url": "https://html5.gamemonetize.co/z2036jlcl3zscpelya5m6huqhrxz5clq/",
-    "category": "Multiplayer",
-    "tags": ".io Games, Arena, Avoid, Ball, Battle, Boxing, Multiplayer",
-    "thumb": "https://img.gamemonetize.com/z2036jlcl3zscpelya5m6huqhrxz5clq/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 0
-  },
-  {
     "id": "25076",
     "title": "Among Us Online Play",
     "description": "Space navigation is always accompanied by many dangers. Due to the interference of cosmic radiation on machines, all Among Us have become enemies, and their internal programs have been destroyed. Your task is to find all mutants of the same kind and kill them. In this very large spaceship, find a way to ensure survival and kill the enemy! You can click the button at the bottom right of the screen to view the spaceship map! Always pay attention to behind you, because the enemy may appear from behind at any time!",
@@ -12178,32 +12178,6 @@
     "thumb": "https://img.gamemonetize.com/k1zikoxvev6dii2eu4kjrdd8n0wyn1lx/512x384.jpg",
     "width": "600",
     "height": "800",
-    "popularity": 0
-  },
-  {
-    "id": "24363",
-    "title": "CrazySteve.io",
-    "description": "The game Crazy Steve io was created for fun and fast fighting. The main task in Crazy Steve is to score as many points as possible and be the coolest. To do this, you need to collect diamonds and apples that appear on the map. For diamonds, you charge more experience than apples, but thanks to apples you can recovery your health. A lot of diamonds fall out of the killed rival. Do you understand what we are inclined to? Yes! You need to scatter around the dynamic checkers, shoot from the bow, attack with the sword, shoot from the fireball and use other weapon in every way to kill the rivals, and then take their diamonds to yourself. By the way, be careful, you can undermine yourself, will be more blood! On the map running animals that you can kill and recovery health. With each new level you increase slightly. Together with the volume increases the ability of your character to collect apples and diamonds. But at the same time you gradually slow down and become more vulnerable to attacks by fast, small and agile rivals. Therefore, the Top player quickly opens the hunting season. Players scour the field in search of a 'fat boy'. So the more diamonds you recruit, the sharper the battle becomes! Another feature of Crazy Steve is that you can undermine your own sword. You can throw 4 dynamite at a time. Only after the explosion of one of them you can throw a new one. On the map are scattered different helmets: wooden, iron, gold, diamond and cart, wear them or sit in the cart to be more protected! Apples and diamonds appear on the map constantly. Players usually fight in the center and therefore one should periodically look at the edges of the map to collect diamonds.",
-    "instructions": "Mouse move - Move Left mouse button - Attack Right mouse button - Speed up Enter - Chat",
-    "url": "https://html5.gamemonetize.co/uqzbzhkjckdjj96mn9sm0mcyoz68tagn/",
-    "category": "Multiplayer",
-    "tags": "Action, Animal, Block, Bow, Fun, Funny, Minecraft, Shooter, Sword",
-    "thumb": "https://img.gamemonetize.com/uqzbzhkjckdjj96mn9sm0mcyoz68tagn/512x384.jpg",
-    "width": "1000",
-    "height": "800",
-    "popularity": 0
-  },
-  {
-    "id": "24362",
-    "title": "EvoWarriors.fun",
-    "description": "EvoWarriors.fun is a free fantasy style game. Eat steaks, eggs, milk and everything you find to grow in size while you are small, most importantly do not eat amanita, because it reduces your experience and you become smaller! Attack smaller enemies, so you have a better chance of staying alive. You can insurance yourself just run away from large enemies so that they do not kill you with one fell swoop of their powerful weapon or you can donate your experience to the enemy. But you won’t be able to run for a long time, because when you run, your experience decreases. The game has only 15 levels: Knight lvl 1 Knight lvl 2 Knight lvl 3 Assassin lvl 1 Assassin lvl 2 Dwarf lvl 1 Dwarf lvl 2 Dwarf lvl 3 Skeleton lvl 1 Skeleton lvl 2 Skeleton lvl 3 Golem lvl 1 Golem lvl 2 Orc lvl 1 Orc lvl 2 Orc lvl 3 Can you get to level 16 and become the biggest and strongest in the game? Hint: for players who disable the ad blocker, an additional 20% of experience is awarded! One of the effective attack tactics: approach the enemy on the left side so that it is to your right and from your sword, then - immediately attack first!",
-    "instructions": "Attack - left mouse button Speed Up - right mouse button",
-    "url": "https://html5.gamemonetize.co/gf8ve9ub8patlfqyyeplw3e40kjriymz/",
-    "category": "Multiplayer",
-    "tags": "Battle, Fantasy, Knight, War",
-    "thumb": "https://img.gamemonetize.com/gf8ve9ub8patlfqyyeplw3e40kjriymz/512x384.jpg",
-    "width": "800",
-    "height": "600",
     "popularity": 0
   },
   {
@@ -12701,19 +12675,6 @@
     "popularity": 0
   },
   {
-    "id": "18810",
-    "title": "Birds to phoenix IO",
-    "description": "Tap the screen to string beads, and two beads of the same level will synthesize more advanced beads.",
-    "instructions": "",
-    "url": "https://html5.gamemonetize.co/23t9y96ikbbm42x5p3dvqr7458dwt9zn/",
-    "category": "Multiplayer",
-    "tags": ".io, .io Games, Multiplayer",
-    "thumb": "https://img.gamemonetize.com/23t9y96ikbbm42x5p3dvqr7458dwt9zn/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 0
-  },
-  {
     "id": "18809",
     "title": "Kubbo City",
     "description": "Kubbo.City es un juego en linea con cientos de personas chateando y haciendo amistades. Chatea en con jovenes de todo el mundo y a tiempo real. Construye la casa mas decorada del juego y mu&amp;eacute;strala a tus amig@s!",
@@ -12761,19 +12722,6 @@
     "category": "Multiplayer",
     "tags": "Action, Arena, Battlegrounds, Gun, Shooter",
     "thumb": "https://img.gamemonetize.com/unk4qtu9yx3lwmabw4dcizq4mi8o3hpp/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 0
-  },
-  {
-    "id": "18651",
-    "title": "Nend.io",
-    "description": "Get a job or feed in the garbage. Buy a house or sleep in a squatting area. Have fun, but don't forget to buy a worthy successor in the nursery because time goes by and you get old! HOW TO PLAY TO GET MONEY: • Work on computers, laboratory, or CEO office • Clean the floor of detritus and feces from the ground • Find money on the ground • Buy buildings to receive commissions. The more a building is used by other players, the more money you will earn. • Kill rich people TO UPGRADE YOUR CHARACTER: • Computer skill: Earn more money if you decide to work on computers • Broom skill: Clean faster and earn more money if you decide to clean the ground • Negotiation skill: Pay less and receive more commissions • Strength: Be stronger • Speed: Be faster • Bag: Increase your inventory • Research skill: Earn more money if you decide to work on a laboratory and you have a better chance of finding food in the garbage cans. • Mood/Food/Sleep/Toilet: Slow down your gauges TO EAT: • Buy food on a supermarket or a machine vending • Go through the garbage. TO SLEEP: • Sleep on a bed in a squatting area or a house TO HAVE FUN: • Dance in the nightclub • Buy clothes • Go to the hairdresser • Eat candies and chocolate • Clean the ground when you have 3 - 5 points on Broom skill TO GO TO THE TOILET: Go on nightclub, CEO office, a house or a squatting area Once you're old, buy a baby (more than 1000$). To get your gauges full when you come back to life, buy a baby bottle, toys and make him sleep in a cradle.",
-    "instructions": "Movement W A S D Z Q S D or Arrow keys Hit Left click Interact E Throw an item away Right click Map M",
-    "url": "https://html5.gamemonetize.co/p60oprp4p2u6se6q76i1n1220f7zse38/",
-    "category": "Multiplayer",
-    "tags": "city, Pixel, Simulation",
-    "thumb": "https://img.gamemonetize.com/p60oprp4p2u6se6q76i1n1220f7zse38/512x384.jpg",
     "width": "800",
     "height": "600",
     "popularity": 0
@@ -12841,19 +12789,6 @@
     "thumb": "https://img.gamemonetize.com/rvn2mmmm4rq7j8rrhevwxes5z91ss05t/512x384.jpg",
     "width": "1920",
     "height": "1080",
-    "popularity": 0
-  },
-  {
-    "id": "18458",
-    "title": "Oib.io",
-    "description": "Oib.io is a micro gestion and strategy io game. Spawn, regroup and split your army to destroy the enemy army, do the best defense or the most strategic attack. Protect your queen and be the leader. Rally to the strongest, feed your units and those of your allies or decide to rule alone on the entire map.",
-    "instructions": "Left click to select an unit Left click and drag to select multiple units Left click and ctrl to select or deselect unit Space bar to select all units Right click to move WASD or arrow keys to move the camera 1 to spawn oibs 2 to combine selected o",
-    "url": "https://html5.gamemonetize.co/r6s3gw7i0gf9nkdv35gwtx7c3qroulcb/",
-    "category": "Multiplayer",
-    "tags": ".io Games, Cute, Jelly, Pixel, PvP, Strategy",
-    "thumb": "https://img.gamemonetize.com/r6s3gw7i0gf9nkdv35gwtx7c3qroulcb/512x384.jpg",
-    "width": "800",
-    "height": "600",
     "popularity": 0
   },
   {
@@ -13203,19 +13138,6 @@
     "category": "Multiplayer",
     "tags": "Battle, PvP",
     "thumb": "https://img.gamemonetize.com/9kpfzrjzor72spl8ns75nnh9huanw1xj/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 0
-  },
-  {
-    "id": "14880",
-    "title": "Hızlan.io",
-    "description": "Be smaller and faster.",
-    "instructions": "Use mouse for movement Right click is grow for a while Left click is invisibling ",
-    "url": "https://html5.gamemonetize.co/om5s9zmbtmxkjfikbvj88yxr3h2mx6ul/",
-    "category": "Multiplayer",
-    "tags": ".io, Arcade, Battle, Casual, HTML5, Online",
-    "thumb": "https://img.gamemonetize.com/om5s9zmbtmxkjfikbvj88yxr3h2mx6ul/512x384.jpg",
     "width": "800",
     "height": "600",
     "popularity": 0
@@ -16107,19 +16029,6 @@
     "popularity": 0
   },
   {
-    "id": "27440",
-    "title": "Cake Maker :Carrot Cake",
-    "description": "Hungry? Get baking! Become the best cake baker in town and create the yummiest cakes, in this delicious cooking game! This cooking game’s beautiful 3D art will make you feel like you’re baking a real cake! Yummy! What are you waiting for? Get your mixer out and start cracking those eggs! Be the best cake baker the world has ever seen! What’s your favorite type of cake? Sweet birthday cakes? Fancy wedding cakes? Whatever it is, you can make it! Decorate your cakes to make them extra beautiful, and take photos so you can show your friends your yummy creations! You can even enter your cakes in a contest and serve them to your friends at the cake party! Features: &gt; Learn how to bake the most delicious cakes EVER in this fun cooking game! &gt; Tons of mouth-watering cake recipes to make for you and your friends! &gt; Use professional baker tools to bake, design &amp; decorate the most delicious cakes! &gt; From rainbow-sprinkled birthday cakes to strawberry cupcakes, the choices are infinite! &gt; Decorate your cakes with yummy frosting, delicious decorations &amp; adorable toppers! &gt; Are those wedding bells? Design and bake a beautiful cake for the bride. &gt; Put the prettiest picture of yourself on your very own cake! &gt; Have a cake party with your fuzzy bunny, kitty and puppy friends, cute babies, and more! &gt; Make the party extra festive with your very own party decorations! &gt; Enter the cake bake competition, vote for your favorite cake, and win first prize! &gt; To-die-for dark chocolate, cherry-banana cake or cheesecake? You choose - You’re the baker! &gt; It’s princess party time! Put your favorite princess on a cake! &gt; Take pictures of your masterpiece to show off your gorgeous cake designs! &gt; Make a cake album so you’ll always remember your incredibly delicious creations! &gt; Tons of adorable and fun coloring pages for you to draw in, in this awesome cooking game!",
-    "instructions": "Get baking ",
-    "url": "https://html5.gamemonetize.co/ihopepb3fmu9r38lu31wkvssw6qkd1ol/",
-    "category": "Cooking",
-    "tags": "Cook, Cooking",
-    "thumb": "https://img.gamemonetize.com/ihopepb3fmu9r38lu31wkvssw6qkd1ol/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 0
-  },
-  {
     "id": "27411",
     "title": "Circus Restaurant",
     "description": "Are you a food lover? Become a Masterchef of your restaurant, build a restaurant empire in different countries, make money from your foods, and accelerate your development by investing in your business. In this idle tycoon simulator game, unlock your products, upgrade your recipes, decorate your restaurant, and recruit new chefs and waiters to run your profitable restaurant. ★Manage your restaurant Join the adventure of running a restaurant from scratch. ★Meet the masters Collaborate with various famous characters who quickly take your restaurant to world level. ★Get to know world cuisines Serve food to your customers from all around to world. ★Decorate your restaurant Renovate and customize! Make your own style in all restaurants. ★Finish the missions Do not miss the special surprise at the end of the world with specially crafted missions. ★Keep earning offline As you grow your restaurant, your income will increase when you are offline. ★Join the competition Compare yourself to chefs from all around the world on the leaderboard. ★Welcome special guests Provide good service to Gourmet and VIP customers to make more money from your restaurant empire. Restaurant Tycoon - Idle Game is an exciting game that includes strategy, fun, and delicious foods from different countries. Become a billionaire by developing new strategies for new products, ingredients, chefs, cutters, waiters and tables.",
@@ -16128,32 +16037,6 @@
     "category": "Cooking",
     "tags": "Cook, Cooking, Restaurant",
     "thumb": "https://img.gamemonetize.com/531f01wlxovdz5ukpjhf17nv70qp3x8b/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 0
-  },
-  {
-    "id": "27408",
-    "title": "Baking with Santa",
-    "description": "Try the world's finest cookies recipes for you in this kitchen cooking game. Hey Little young chefs it’s time to surprise your family with perfect Christmas cookies. Make your Christmas holidays special playing all new special holiday season game from junior games studio Christmas Cookies Recipes - Sweet Holidays Cooking. Select the best cookie recipe what you want to bake from multiple flavors such as - Classic Plain Cookies - Chocolate chip Cookies - Strawberry Flavored cookies Choose to cut cookies using various cookie cutter shapes such as star heart round etc. bake in kitchen oven to perfection an serve to family an friends. Decorate home-made cookies with color candies jellies, icings creams and many more. Change backgrounds to live up to the Christmas holiday spirit.",
-    "instructions": "Tap To Play",
-    "url": "https://html5.gamemonetize.co/mehazxjfszsf9rdan7z0gf2niqsv9gw5/",
-    "category": "Cooking",
-    "tags": "Cook, Cooking, Sandbox",
-    "thumb": "https://img.gamemonetize.com/mehazxjfszsf9rdan7z0gf2niqsv9gw5/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 0
-  },
-  {
-    "id": "27256",
-    "title": "Lunch Box ",
-    "description": "Ready to become the best organizer that ever existed. Fill the fridge, pack a tasty breakfast, and even make a happy meal with this satisfying, simulator game. Lunch Box Ready is a ASMR packing game that allows you to design your sandwich, arrange snacks, and even slice food. If you like fridge organizing and to fill the fridge, this is taking your packing skills to the next level. Get ready for school with this tasty simulator game. Lunch Box Ready is a real life sorting game and a puzzle game that is extremely fun to play!",
-    "instructions": "Tap To Play",
-    "url": "https://html5.gamemonetize.co/e78eiyuve1l8mwcxs26o7wg7bekwtx28/",
-    "category": "Cooking",
-    "tags": "Cook, Cooking",
-    "thumb": "https://img.gamemonetize.com/e78eiyuve1l8mwcxs26o7wg7bekwtx28/512x384.jpg",
     "width": "800",
     "height": "600",
     "popularity": 0
@@ -17966,19 +17849,6 @@
     "popularity": 0
   },
   {
-    "id": "27407",
-    "title": "Balles",
-    "description": "Bubble Shooter is a bubble ball game with exquisite graphics, rich bubble game elements, and interesting origin levels, bringing you a wonderful balloon pop experience. The operation of the bubble ball games is very smooth, and there is no difficulty for you to get started and no time pressure!",
-    "instructions": "Tap To Play",
-    "url": "https://html5.gamemonetize.co/8axqwjb6mbhogm93f0ohglkebf6xhbp2/",
-    "category": "Soccer",
-    "tags": "Ball, Ballon, Soccer",
-    "thumb": "https://img.gamemonetize.com/8axqwjb6mbhogm93f0ohglkebf6xhbp2/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 0
-  },
-  {
     "id": "27247",
     "title": "Tap Goal",
     "description": "Use your skills and tap perfectly at the perfect time to dribble and score a goal to pass all the crazy challenging challenges that await you.",
@@ -18265,32 +18135,6 @@
     "popularity": 0
   },
   {
-    "id": "20594",
-    "title": "Footix.io",
-    "description": "Footix.io is a fast-paced multiplayer soccer game in which the only rule is to win with the help of your teammates. To learn how to play click on &quot;Tutorial&quot;, Chat with the world by clicking on &quot;Global Chat&quot;. Don't forget to create an account to keep your statistics.",
-    "instructions": "Move WASD Run Mouse Right Kick Mouse Left Slide Space Hey E",
-    "url": "https://html5.gamemonetize.co/an0i1pdpqua7zz66xt16y9g0uba5hhmy/",
-    "category": "Soccer",
-    "tags": ".io Games, Ball, Football, Multiplayer, Pixel, Soccer",
-    "thumb": "https://img.gamemonetize.com/an0i1pdpqua7zz66xt16y9g0uba5hhmy/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 0
-  },
-  {
-    "id": "20350",
-    "title": "Fun football",
-    "description": "Welcome to Fun Football with physics, various locations. Virtuoso combinations of blows, spectacular feeds, all this awaits you in the game.",
-    "instructions": "A D",
-    "url": "https://html5.gamemonetize.co/jig3ioym71l5yy27fbaiziwzn0jvxrpr/",
-    "category": "Soccer",
-    "tags": "Boys, Football, Fun, Girls, HTML5, Soccer, Sport",
-    "thumb": "https://img.gamemonetize.com/jig3ioym71l5yy27fbaiziwzn0jvxrpr/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 0
-  },
-  {
     "id": "20341",
     "title": "Soccer Rush",
     "description": "Avoid soccer hooligans and defenders and make it to the box to shoot on goal",
@@ -18379,19 +18223,6 @@
     "thumb": "https://img.gamemonetize.com/bywzebj93d9w2c7r70pfya0n5c92d353/512x384.jpg",
     "width": "800",
     "height": "600",
-    "popularity": 0
-  },
-  {
-    "id": "18739",
-    "title": "Driving To Travel",
-    "description": "Hold on to the vehicle and speed up. Take care to avoid the traffic.",
-    "instructions": "",
-    "url": "https://html5.gamemonetize.co/xmee5fxs8ltmctwiaias6x94at3ngm8j/",
-    "category": "Soccer",
-    "tags": "Car, Race, Racing",
-    "thumb": "https://img.gamemonetize.com/xmee5fxs8ltmctwiaias6x94at3ngm8j/512x384.jpg",
-    "width": "455",
-    "height": "930",
     "popularity": 0
   },
   {
@@ -18611,19 +18442,6 @@
     "category": "Soccer",
     "tags": "Cartoon, Cartoon Network, Games, HTML5, Online",
     "thumb": "https://img.gamemonetize.com/wu3h7zycjvrvkduxsu5z57kengfm9mr5/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 0
-  },
-  {
-    "id": "13768",
-    "title": "BrawlBall.io",
-    "description": "BrawlBall.io is a fast-paced multiplayer football (soccer) game where you must be a team player and have the skill to climb the trophy leaderboards! You must log in with Discord to save your weekly trophies. Join a random team based on your trophies, or CREATE A TEAM and invite your friends to play against others!",
-    "instructions": "WASD to MOVE Mouse to AIM direction Click to SHOOT or TACKLE",
-    "url": "https://html5.gamemonetize.co/et2nkq3z0j1ynuoj1h7ws22a746yp6g4/",
-    "category": "Soccer",
-    "tags": ".io, .io Games, Action, Football, Multiplayer, Soccer",
-    "thumb": "https://img.gamemonetize.com/et2nkq3z0j1ynuoj1h7ws22a746yp6g4/512x384.jpg",
     "width": "800",
     "height": "600",
     "popularity": 0
@@ -19744,19 +19562,6 @@
     "thumb": "https://img.gamemonetize.com/g4hip3g2wpq97e2dob6hi8ungo5hqdte/512x384.jpg",
     "width": "480",
     "height": "800",
-    "popularity": 0
-  },
-  {
-    "id": "28295",
-    "title": "Rollem.io",
-    "description": "Rollem.io is a free IOGame. If you love animals, and especially these tiny ones that are like little loving balls of fur, called Hamsters, you're going to love the protagonists of this online multiplayer io game. Cute hamsters, unique environment, and skill-based controls mix together to bring you the cutest of the io games out there. Prepare to embark in an adventure never seen before as you level up your hamster and unlock new stuff to make it unique and your very own! Rollem.io is the worldwide online multiplayer fast-paced hamster racing game, takes on races against people all over the world and try to beat the quickest records on each track! Noticed the golden coins over the level? Be sure to collect as much as you can, because in the game shop, you can unlock skins and trails which will make your hamster look unique, some skins &amp; trails are also limited and exclusive, so be sure to keep an eye watching! Watch out for swinging hammers, as they will bump you out of your path so you fall and have to restart from the spawn area, and use fans and springs to get to higher places on the level, where there may be more golden coins to collect, or even the goal of the level. The levels for this online game are very tricky, so you have to always keep an eye where you're moving, as there can be holes and other kind of obstacles to prevent you from completing the level, jump, dodge and go very fast as you make your way through while seeing other players falling from the sky, what a fun experience! You can also notice that each time a game ends you get your Worldwide Position, this means the game can also be competitive, and you can show up in the largest of the leaderboards found in the menu, if you're good enough you could make your name last forever in this space, not only that; If you beat a time record on *any* level, you will get your name and time featured in the Leaderboards Panel in the spawn area, how cool is that? But keep on it, as other people will take it on and try to beat your times to kick you out of the board, how long will you last? It also comes with a level editor, so feel free to come up with your own tracks, and they will get added to the game automatically so other people will be able to race them. Rollem.io is playable on the browser, in a computer or in a mobile device, don't forget to try it out or you might miss out on an awesome game experience! I won't be keeping your attention for more, get in with your new cute hamster, race with him and other players online, and most importantly; Enjoy!",
-    "instructions": "Controls - W A S D to move - Mouse to look around and Jump The game supports gamepads So if you got an xbox360 PS4 or PS5 controller you can connect it to your device and start playing as if it was a console game",
-    "url": "https://html5.gamemonetize.co/8oqao5vefo041ymfs8wz9mqs3gudrj1k/",
-    "category": "3D",
-    "tags": "Animal, Jumping, Multiplayer, Online, Race, Racing, Skill",
-    "thumb": "https://img.gamemonetize.com/8oqao5vefo041ymfs8wz9mqs3gudrj1k/512x384.jpg",
-    "width": "800",
-    "height": "600",
     "popularity": 0
   },
   {
@@ -23452,19 +23257,6 @@
     "popularity": 0
   },
   {
-    "id": "27269",
-    "title": "Fancy Pants Adventure",
-    "description": "Fancy Pants Adventure is the original title of this awesome 2D platform series. It's one of the many Flash games you can now play in your web browser without the need for Flash.",
-    "instructions": "Left and right arrow to move Up arrow to open doors Down arrow to duck S to jump Space bar to pause the game",
-    "url": "https://html5.gamemonetize.co/q41s7o0dxctskgtc3l7ju13idlov3gu7/",
-    "category": "Boys",
-    "tags": "1 Player, Adventure",
-    "thumb": "https://img.gamemonetize.com/q41s7o0dxctskgtc3l7ju13idlov3gu7/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 0
-  },
-  {
     "id": "27203",
     "title": "Deliver All Puzzle",
     "description": "Deliver All Puzzle is a very addicted online puzzle game made for boys for free. Collect all the packages on the blocks and deliver them to the receivers. Sounds easy but in fact, it is a tricky game. The packages are placed at many places on the blocks, and you are only allowed to turn your direction in case of you hit the wall. There are many levels in this game. Good luck!",
@@ -23829,19 +23621,6 @@
     "popularity": 0
   },
   {
-    "id": "26479",
-    "title": " Push Noob",
-    "description": "Push Noob - is an amazing simulator game about a dancing Noob and his fall. Join the earning of diamonds for pumping Noob and opening new locations. Throw snowballs at Noob and get diamonds for his collisions! Unlock new levels and skins! Compete in the amount of diamonds earned! - Cool 3D physics - Incendiary dances from Noob - 12 levels - 12 skins for Noob",
-    "instructions": "Control for PC Shooting snowballs click the left mouse button Moving the camera hold down the right mouse button and rotate Moving away and approaching the camera rotate the mouse wheel Management for the phone Shooting snowballs click on the",
-    "url": "https://html5.gamemonetize.co/fhlcf538szfxuibgiux43y9qqhkga9ya/",
-    "category": "Boys",
-    "tags": "3D Games, Boys, Mine, Minecraft, Miner",
-    "thumb": "https://img.gamemonetize.com/fhlcf538szfxuibgiux43y9qqhkga9ya/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 0
-  },
-  {
     "id": "26448",
     "title": "Pizza Delivery Run",
     "description": "Pizza Delivery Run is a fun and free online running game for boys played on Puzzlegame. You need to keep collecting pizzas and delivering them to your destination. Too many obstacles will cause you to fail, so you must be careful and deliver pizzas safely. When you get to the finish line, the more pizzas, the higher the score. Play on Mobile, Tablet, or Desktop.",
@@ -23943,19 +23722,6 @@
     "thumb": "https://img.gamemonetize.com/k8vrdwhwmb5qs8lojlpet5i9vub3bjov/512x384.jpg",
     "width": "750",
     "height": "1334",
-    "popularity": 0
-  },
-  {
-    "id": "26013",
-    "title": "Fairy Tail Vs One Piece",
-    "description": "Fairy Tail Vs One Piece is an anime fighting game with 28 anime characters. Each character has its own unique features, so you can choose any experience. Cool skill combo or normal attack. The classic fighting scenes of One Piece and the demon tail are randomly switched, and the special effects and sound effects are combined to let you feel the real blood fighting.",
-    "instructions": "J or 1 confirmation br Player 1 AD move S defense J attack K jump L sprint U long attack I special attack br Player 2 arrow keys move down arrow key defense 1 attack 2 jump 3 sprint 4 long attack 5 special att",
-    "url": "https://html5.gamemonetize.co/ocmey2etj17fkwz1c1fveb53ajcz40ev/",
-    "category": "Boys",
-    "tags": "Action, Anime, Arcade, Battle, Fight, Fighting, Shooting",
-    "thumb": "https://img.gamemonetize.com/ocmey2etj17fkwz1c1fveb53ajcz40ev/512x384.jpg",
-    "width": "800",
-    "height": "600",
     "popularity": 0
   },
   {
@@ -29195,19 +28961,6 @@
     "thumb": "https://img.gamemonetize.com/bga2r1ixygcya20puwdl0ffcvlrscz30/512x384.jpg",
     "width": "720",
     "height": "1280",
-    "popularity": 0
-  },
-  {
-    "id": "37178",
-    "title": "ASTRO CHICKENS",
-    "description": "Pilot a spaceship across 10 unique environments and blast through endless waves of alien chickens before they reach you. Destroy enemies to earn coins, collect power-ups mid-wave, and unleash your ship&amp;rsquo;s special ability to survive. Every fifth wave brings a boss fight. There is no finish line &amp;mdash; only a higher score. Ship Abilities Each ship is assigned a unique special ability, triggered by pressing Space (desktop) or the right-mouse button. Abilities are cooldown-based and recharge over time.",
-    "instructions": "How to Play Open the lobby Select an environment and a ship from their respective grids Choose a difficulty setting in Settings Normal Hard or Insane Press Launch Mission On the Get Ready screen press Space or tap the canvas to begin Move the shi",
-    "url": "https://html5.gamemonetize.co/6jwaemwcybdksn8n7yuqfs416vcevd9u/",
-    "category": "Action",
-    "tags": "Action",
-    "thumb": "https://img.gamemonetize.com/6jwaemwcybdksn8n7yuqfs416vcevd9u/512x384.jpg",
-    "width": "800",
-    "height": "600",
     "popularity": 0
   },
   {
@@ -39416,19 +39169,6 @@
     "popularity": 0
   },
   {
-    "id": "27720",
-    "title": "Electric Man",
-    "description": "Electric Man is an awesome stickman fighter Flash game in which you must fight against a range of opponents using a variety of different punch and kick combos. Before you enter the game, you can choose the name and color of your stickman, and also the difficulty level (easy, normal or pro). Once you have chosen your character you can then complete a tutorial that shows you the basic game mechanics and move sets.",
-    "instructions": "Arrow keys to move your character Quick moves A S D Slow Motion moves Q W E",
-    "url": "https://html5.gamemonetize.co/6j4l38n2p7dvoa2e7vpnaq18bd5l2dn9/",
-    "category": "Fighting",
-    "tags": "Fighting",
-    "thumb": "https://img.gamemonetize.com/6j4l38n2p7dvoa2e7vpnaq18bd5l2dn9/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 0
-  },
-  {
     "id": "27501",
     "title": "Stick Hero Mighty Tower Wars",
     "description": "Prepare yourself to fight top battles, defeat monsters and enemies. Calculate and defeat enemies with less power, power-up and eliminating them all. Build tower as high as you can. A princess needs your help, a treasure awaits... Calculate your move to wipe out the enemies in the war of heroes, level up to unlock variable new characters.",
@@ -39983,19 +39723,6 @@
     "category": "Fighting",
     "tags": "Boxing, Fight, Fighting, Sport, Stickman",
     "thumb": "https://img.gamemonetize.com/6tmp9phczxm9yfyona4ntvjrnvd70huc/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 0
-  },
-  {
-    "id": "20786",
-    "title": "Stickman Boxing KO",
-    "description": "Welcome to the online game Stickman Boxing KO Champion. This is a free Sport Game. You're not a boxing expert? Don't worry, the boxing game is easy enough to learn. Just press the Space button repeatedly to perform punches and block attacks, and then hit the other boxer with an uppercut, lowercut, or body shot. Once you've completed your round, you can move on to the next round. Stickman Boxing KO Championship unblocked game is an online game that features 4 stickman fighters in intense combat. You'll be able to punch opponents with a variety of devastating punches and combos. Using your mouse or keyboard, you'll be able to navigate the game and perform all of your attacks. The HTML5-based game is also compatible with PCs and mobiles. The game includes many features to make it more enjoyable. It allows you to throw various punches and combs. Depending on your skill level, you can hit your opponents with an uppercut, cross, jab, or even dodge. You'll be able to knock out all of your opponents, which is the goal of the game. As long as all of your opponents are knocked out, you can win.",
-    "instructions": "Fight and win",
-    "url": "https://html5.gamemonetize.co/dmzl9eimmp3oubqzq2ses7kh0rda9sbp/",
-    "category": "Fighting",
-    "tags": "Boxing, Boys, Fight, Fighting, Girls, Highscore, HTML5, Stickman, Street Fighting",
-    "thumb": "https://img.gamemonetize.com/dmzl9eimmp3oubqzq2ses7kh0rda9sbp/512x384.jpg",
     "width": "800",
     "height": "600",
     "popularity": 0
@@ -40729,19 +40456,6 @@
     "popularity": 0
   },
   {
-    "id": "12825",
-    "title": "Dogod.io",
-    "description": "Dogod is a multiplayer action game based on the concept of weapon evolution. Become the god of the dogs in this massive deathmatch arena. A PVP multiplayer game where you can unlock dozens of weapons, kill opponents, collect food to win scores and collect chests that will give you money. Unlock more than 50 cosmetics, skins, hats and pets. HOW TO PLAY MOUSE - Move your character LEFT CLICK - Boost STRATEGY Kill your opponents in this dog fight arena. Level up to improve your weapons and reach new best scores. Collect food, gain coins and unlock skins, accessories and pets with your money to become the God of the Dogs",
-    "instructions": "MOUSE - Move your character LEFT CLICK - Boost",
-    "url": "https://html5.gamemonetize.co/c0j7e7kzlqzc5jiw4gb9wqeskjj61m3e/",
-    "category": ".IO",
-    "tags": ".io Games, Animal, Arena, Battle, Fight, Fun, Multiplayer, weapons",
-    "thumb": "https://img.gamemonetize.com/c0j7e7kzlqzc5jiw4gb9wqeskjj61m3e/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 0
-  },
-  {
     "id": "11346",
     "title": "Drop Balls",
     "description": "Drop Balls - Discover a way for your shading balls by burrowing your way with a finger. Get the same number of balls to the end goal as you can.",
@@ -40960,97 +40674,6 @@
     "thumb": "https://img.gamemonetize.com/1i9ar314046uj5v6p91kcl8em378zm60/512x384.jpg",
     "width": "854",
     "height": "480",
-    "popularity": 0
-  },
-  {
-    "id": "gm-fireboy-watergirl-forest",
-    "title": "Fireboy and Watergirl: Forest Temple",
-    "description": "Cooperative puzzle adventure with the classic Fireboy and Watergirl duo in a mysterious forest temple. Each collects gems of their own color, pushes boxes and presses switches to cooperate and pass the level.",
-    "instructions": "Player 1 (Fireboy): arrow keys to move/jump. Player 2 (Watergirl): W A D to move/jump.",
-    "url": "https://html5.gamemonetize.co/1xvemgqh10s5oag3rrvukaeny2fd7ekk/",
-    "category": "Multiplayer",
-    "tags": "Fireboy, Watergirl, 2 Player, Puzzle, Adventure, Forest Temple, Hot, Popular",
-    "thumb": "https://img.gamemonetize.com/1xvemgqh10s5oag3rrvukaeny2fd7ekk/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 0
-  },
-  {
-    "id": "gm-fireboy-watergirl-fishing",
-    "title": "Fireboy and Watergirl Go Fishing",
-    "description": "Fireboy and Watergirl take a break from temple adventures to fish together at the riverside, catching fish while avoiding trash.",
-    "instructions": "Two-player controls: WASD and arrow keys to move and hook fish.",
-    "url": "https://html5.gamemonetize.co/55e47szwn7pjvdhtkobf2xd8y13jj4hp/",
-    "category": "Multiplayer",
-    "tags": "Fireboy, Watergirl, 2 Player, Fishing, Casual",
-    "thumb": "https://img.gamemonetize.com/55e47szwn7pjvdhtkobf2xd8y13jj4hp/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 0
-  },
-  {
-    "id": "gm-fireboy-watergirl-6",
-    "title": "Fireboy and Watergirl 6",
-    "description": "Cooperative puzzle-platformer where Fireboy and Watergirl must collect all diamonds and find the exit to pass each maze-based level.",
-    "instructions": "Fireboy: arrow keys. Watergirl: WASD.",
-    "url": "https://html5.gamemonetize.co/cym6sfm8kebf73562van2bwa2tdz4prh/",
-    "category": "Multiplayer",
-    "tags": "Fireboy, Watergirl, 2 Player, Puzzle, Adventure",
-    "thumb": "https://img.gamemonetize.com/cym6sfm8kebf73562van2bwa2tdz4prh/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 0
-  },
-  {
-    "id": "gm-redboy-bluegirl-forest",
-    "title": "Red Boy and Blue Girl: Forest Adventure",
-    "description": "A Fireboy and Watergirl style two-player platformer adventure through forest-themed levels, cooperating to overcome obstacles.",
-    "instructions": "Player 1: WASD. Player 2: arrow keys.",
-    "url": "https://html5.gamemonetize.co/pfnrrfe5b44ofhlekvyev94gwv78ged5/",
-    "category": "Multiplayer",
-    "tags": "Fireboy, Watergirl, 2 Player, Puzzle, Adventure, Forest",
-    "thumb": "https://img.gamemonetize.com/pfnrrfe5b44ofhlekvyev94gwv78ged5/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 0
-  },
-  {
-    "id": "gm-firegirl-waterboy-candy",
-    "title": "Fire Girl and Water Boy: Candy Forest",
-    "description": "A Fireboy and Watergirl style cooperative platformer where Fire Girl and Water Boy collect candies together to reach the highest score.",
-    "instructions": "Player 1: WASD. Player 2: arrow keys. Playable solo or with a second player.",
-    "url": "https://html5.gamemonetize.co/tr4ks76pwkor67ibi6ibl3fw7jekkixd/",
-    "category": "Multiplayer",
-    "tags": "Fireboy, Watergirl, 2 Player, Puzzle, Adventure, Candy",
-    "thumb": "https://img.gamemonetize.com/tr4ks76pwkor67ibi6ibl3fw7jekkixd/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 0
-  },
-  {
-    "id": "gd-rooftop-snipers",
-    "title": "Rooftop Snipers",
-    "description": "Rooftop Snipers is a chaotic two button local multiplayer game. Challenge your friends side by side or play the computer. Shoot your opponent off the map to win.",
-    "instructions": "Player 1: W to shoot/jump. Player 2: up arrow to shoot/jump. Knock your opponent off the rooftop.",
-    "url": "https://html5.gamedistribution.com/rvvASMiM/c3a70ae98547407a92ebedca8b79fdfa/index.html",
-    "category": "Shooting",
-    "tags": "Rooftop Snipers, 2 Player, Sniper, Shooting, Hot, Popular",
-    "thumb": "https://img.gamedistribution.com/c3a70ae98547407a92ebedca8b79fdfa-512x512.jpg",
-    "width": "960",
-    "height": "600",
-    "popularity": 0
-  },
-  {
-    "id": "gd-penalty-shooters-3",
-    "title": "Penalty Shooters 3",
-    "description": "Penalty Shooters 3, the newest addition to the fan-favorite series. Two thrilling modes: Tier Mode offers 6 challenging tiers, while the World Cup takes you to prestigious arenas. Customize your players jerseys and compete against adapting AI opponents.",
-    "instructions": "Click and hold to aim your shot, release to shoot. Click to dive as goalkeeper.",
-    "url": "https://html5.gamedistribution.com/rvvASMiM/ac793d41fb5845e59afaad6292e141e1/index.html",
-    "category": "Soccer",
-    "tags": "Penalty Shooters, Soccer, Football, Sports, Hot, Popular",
-    "thumb": "https://img.gamedistribution.com/ac793d41fb5845e59afaad6292e141e1-512x512.jpg",
-    "width": "960",
-    "height": "600",
     "popularity": 0
   }
 ]
