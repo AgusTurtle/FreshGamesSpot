@@ -144,13 +144,18 @@
     return GAMES.find(g => g.id === id);
   }
 
+  // Ids of <symbol> elements in the Lucide sprite at the top of index.html.
   const CATEGORY_ICONS = {
-    "Puzzles": "🧩", "Racing": "🏎️", "Arcade": "🕹️", "Multiplayer": "👥",
-    "Sports": "🏆", "Cooking": "🍳", "Soccer": "⚽", "3D": "🧊",
-    "2 Player": "🎮", "Boys": "👦", "Clicker": "🖱️", "Girls": "💄",
-    "Action": "💥", "Shooting": "🔫", "Adventure": "🗺️", "Hypercasual": "⚡",
-    "Fighting": "🥊", ".IO": "🌀",
+    "Puzzles": "puzzle", "Racing": "car", "Arcade": "joystick", "Multiplayer": "users",
+    "Sports": "trophy", "Cooking": "chef", "Soccer": "goal", "3D": "box",
+    "2 Player": "gamepad", "Boys": "user", "Clicker": "click", "Girls": "sparkles",
+    "Action": "zap", "Shooting": "crosshair", "Adventure": "map", "Hypercasual": "rocket",
+    "Fighting": "swords", ".IO": "globe",
   };
+
+  function iconSvg(id, className){
+    return `<svg class="icon${className ? " " + className : ""}" width="24" height="24" aria-hidden="true"><use href="#i-${id}"/></svg>`;
+  }
 
   function buildCategories(){
     const counts = {};
@@ -158,11 +163,11 @@
     const cats = Object.keys(counts).sort((a,b) => counts[b]-counts[a]);
     const frag = document.createDocumentFragment();
 
-    frag.appendChild(makePill("Todos", GAMES.length, true, "Inicio", "🏠"));
+    frag.appendChild(makePill("Todos", GAMES.length, true, "Inicio", "home"));
 
     const popularCount = GAMES.filter(g => g.popularity > 0).length;
     if (popularCount > 0){
-      frag.appendChild(makePill(POPULAR_CAT, popularCount, false, "Populares", "🔥"));
+      frag.appendChild(makePill(POPULAR_CAT, popularCount, false, "Populares", "flame"));
     }
 
     const label = document.createElement("div");
@@ -170,7 +175,7 @@
     label.textContent = "Categorías";
     frag.appendChild(label);
 
-    cats.forEach(c => frag.appendChild(makePill(c, counts[c], false, c, CATEGORY_ICONS[c] || "🎲")));
+    cats.forEach(c => frag.appendChild(makePill(c, counts[c], false, c, CATEGORY_ICONS[c] || "dice")));
     el.catNav.appendChild(frag);
   }
 
@@ -178,7 +183,7 @@
     const btn = document.createElement("button");
     btn.className = "cat-pill" + (active ? " active" : "");
     btn.dataset.cat = name;
-    btn.innerHTML = `<span class="cat-pill-icon">${icon || "🎲"}</span><span class="cat-pill-label">${label || name}</span><span class="cat-pill-count">${count}</span>`;
+    btn.innerHTML = `${iconSvg(icon || "dice", "cat-pill-icon")}<span class="cat-pill-label">${label || name}</span><span class="cat-pill-count">${count}</span>`;
     btn.addEventListener("click", () => selectCategory(name));
     return btn;
   }
@@ -188,9 +193,7 @@
     document.querySelectorAll(".cat-pill").forEach(p => {
       p.classList.toggle("active", p.dataset.cat === name);
     });
-    el.sectionTitle.textContent = name === "Todos" ? "Todos los juegos"
-      : name === POPULAR_CAT ? "🔥 Populares"
-      : name;
+    el.sectionTitle.textContent = name === "Todos" ? "Todos los juegos" : name;
     closeSidebarMobile();
     updateView();
     window.scrollTo({top:0, behavior:"smooth"});
@@ -225,6 +228,9 @@
     const card = document.createElement("div");
     card.className = "game-card";
     card.dataset.id = game.id;
+    card.setAttribute("role", "button");
+    card.tabIndex = 0;
+    card.setAttribute("aria-label", `Jugar ${game.title}`);
 
     const thumbWrap = document.createElement("div");
     thumbWrap.className = "game-thumb-wrap";
@@ -247,24 +253,31 @@
 
     const playBadge = document.createElement("div");
     playBadge.className = "play-badge";
-    playBadge.innerHTML = "<span>▶</span>";
+    playBadge.innerHTML = `<span>${iconSvg("play")}</span>`;
     thumbWrap.appendChild(playBadge);
 
     if (game.popularity > 0){
       const ribbon = document.createElement("span");
       ribbon.className = "ribbon-badge";
-      ribbon.textContent = "🔥 POPULAR";
+      ribbon.innerHTML = `${iconSvg("flame")}POPULAR`;
       thumbWrap.appendChild(ribbon);
     }
 
     const favBtn = document.createElement("button");
     favBtn.className = "fav-star" + (isFavorite(game.id) ? " active" : "");
-    favBtn.textContent = "★";
-    favBtn.title = "Favorito";
+    favBtn.innerHTML = iconSvg("star");
+    const syncFavBtn = (active) => {
+      favBtn.setAttribute("aria-pressed", String(active));
+      favBtn.setAttribute("aria-label", active
+        ? `Quitar ${game.title} de favoritos`
+        : `Agregar ${game.title} a favoritos`);
+    };
+    syncFavBtn(isFavorite(game.id));
     favBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       const active = toggleFavorite(game.id);
       favBtn.classList.toggle("active", active);
+      syncFavBtn(active);
     });
     thumbWrap.appendChild(favBtn);
 
@@ -285,6 +298,12 @@
     card.appendChild(makeVoteRow(game.id));
 
     card.addEventListener("click", () => openGame(game.id));
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " "){
+        e.preventDefault();
+        openGame(game.id);
+      }
+    });
     return card;
   }
 
@@ -294,17 +313,21 @@
 
     const upBtn = document.createElement("button");
     upBtn.className = "vote-btn up";
-    upBtn.innerHTML = '<span class="vote-icon">👍</span><span class="vote-count"></span>';
+    upBtn.setAttribute("aria-label", "Me gusta");
+    upBtn.innerHTML = `${iconSvg("thumb-up", "vote-icon")}<span class="vote-count"></span>`;
 
     const downBtn = document.createElement("button");
     downBtn.className = "vote-btn down";
-    downBtn.innerHTML = '<span class="vote-icon">👎</span><span class="vote-count"></span>';
+    downBtn.setAttribute("aria-label", "No me gusta");
+    downBtn.innerHTML = `${iconSvg("thumb-down", "vote-icon")}<span class="vote-count"></span>`;
 
     function refresh(){
       const v = getVote(gameId);
       upBtn.classList.toggle("active", v === "up");
+      upBtn.setAttribute("aria-pressed", String(v === "up"));
       upBtn.querySelector(".vote-count").textContent = v === "up" ? "1" : "0";
       downBtn.classList.toggle("active", v === "down");
+      downBtn.setAttribute("aria-pressed", String(v === "down"));
       downBtn.querySelector(".vote-count").textContent = v === "down" ? "1" : "0";
     }
 
@@ -315,6 +338,29 @@
     row.appendChild(upBtn);
     row.appendChild(downBtn);
     return row;
+  }
+
+  // Placeholder cards shown while games.json (~2.9MB) is in flight. They
+  // mirror the real card's box so swapping in real content causes no shift.
+  function renderSkeleton(count){
+    el.grid.innerHTML = "";
+    el.emptyState.hidden = true;
+    el.loadMoreBtn.hidden = true;
+    el.resultCount.textContent = "Cargando juegos…";
+    const frag = document.createDocumentFragment();
+    for (let i = 0; i < count; i++){
+      const sk = document.createElement("div");
+      sk.className = "game-card skeleton-card";
+      sk.setAttribute("aria-hidden", "true");
+      sk.innerHTML =
+        '<div class="skeleton-thumb"></div>' +
+        '<div class="game-info">' +
+          '<div class="skeleton-line skeleton-line-title"></div>' +
+          '<div class="skeleton-line skeleton-line-sub"></div>' +
+        '</div>';
+      frag.appendChild(sk);
+    }
+    el.grid.appendChild(frag);
   }
 
   function render(){
@@ -372,6 +418,30 @@
   }
 
   /* ---------- player ---------- */
+  // Element that had focus before the overlay opened, so closing can put the
+  // keyboard user back where they were instead of at the top of the document.
+  let lastFocusedEl = null;
+
+  const FOCUSABLE_SEL = 'button:not([disabled]), a[href], iframe, [tabindex]:not([tabindex="-1"])';
+
+  function overlayFocusables(){
+    return [...el.overlay.querySelectorAll(FOCUSABLE_SEL)];
+  }
+
+  function trapOverlayTab(e){
+    const items = overlayFocusables();
+    if (items.length === 0) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first){
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last){
+      e.preventDefault();
+      first.focus();
+    }
+  }
+
   function openGame(id){
     const game = findGame(id);
     if (!game) return;
@@ -386,24 +456,39 @@
       el.playerTags.appendChild(span);
     });
 
-    el.playerFav.classList.toggle("active", isFavorite(id));
+    syncPlayerFav(isFavorite(id));
     el.playerFav.dataset.id = id;
 
     el.playerLoading.style.display = "flex";
     el.playerFrame.src = "/play/" + encodeURIComponent(game.id);
     el.playerFrame.onload = () => { el.playerLoading.style.display = "none"; };
 
+    lastFocusedEl = document.activeElement;
     el.overlay.hidden = false;
     document.body.style.overflow = "hidden";
     location.hash = "juego/" + id;
+    el.playerBack.focus();
+  }
+
+  function syncPlayerFav(active){
+    el.playerFav.classList.toggle("active", active);
+    el.playerFav.setAttribute("aria-pressed", String(active));
+    el.playerFav.setAttribute("aria-label", active ? "Quitar de favoritos" : "Agregar a favoritos");
   }
 
   function closeGame(){
+    const wasOpen = !el.overlay.hidden;
     el.overlay.hidden = true;
     el.playerFrame.src = "about:blank";
     document.body.style.overflow = "";
     if (location.hash.startsWith("#juego/")) history.replaceState(null, "", "#/");
     renderContinue();
+    // renderContinue() can replace the card that was focused, so only restore
+    // focus to it if it is still in the document.
+    if (wasOpen && lastFocusedEl && document.contains(lastFocusedEl)){
+      lastFocusedEl.focus();
+    }
+    lastFocusedEl = null;
   }
 
   /* ---------- events ---------- */
@@ -435,13 +520,22 @@
   el.playerFav.addEventListener("click", () => {
     const id = el.playerFav.dataset.id;
     const active = toggleFavorite(id);
-    el.playerFav.classList.toggle("active", active);
-    const card = document.querySelector(`.game-card[data-id="${id}"] .fav-star`);
-    if (card) card.classList.toggle("active", active);
+    syncPlayerFav(active);
+    const star = document.querySelector(`.game-card[data-id="${id}"] .fav-star`);
+    if (star){
+      const title = (findGame(id) || {}).title || "";
+      star.classList.toggle("active", active);
+      star.setAttribute("aria-pressed", String(active));
+      star.setAttribute("aria-label", active
+        ? `Quitar ${title} de favoritos`
+        : `Agregar ${title} a favoritos`);
+    }
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && !el.overlay.hidden) closeGame();
+    if (el.overlay.hidden) return;
+    if (e.key === "Escape") closeGame();
+    else if (e.key === "Tab") trapOverlayTab(e);
   });
 
   document.querySelector(".logo").addEventListener("click", (e) => {
@@ -468,6 +562,8 @@
   el.sidebarScrim.addEventListener("click", closeSidebarMobile);
 
   /* ---------- init ---------- */
+  renderSkeleton(PAGE_SIZE);
+
   fetch("assets/games.json")
     .then(r => r.json())
     .then(data => {
@@ -475,9 +571,14 @@
       filtered = GAMES;
       buildCategories();
       updateView();
+      document.getElementById("heroGameCount").textContent = `${GAMES.length}`;
     })
     .catch(err => {
-      el.grid.innerHTML = "<p style='color:#9aa0c0'>No se pudieron cargar los juegos. Revisá tu conexión e intentá de nuevo.</p>";
+      el.grid.innerHTML = "";
+      el.resultCount.textContent = "";
+      el.emptyState.hidden = false;
+      el.emptyState.querySelector("p").textContent =
+        "No se pudieron cargar los juegos. Revisá tu conexión e intentá de nuevo.";
       console.error(err);
     });
 
