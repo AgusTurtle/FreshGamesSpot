@@ -43,14 +43,23 @@
     return s.normalize("NFD").replace(new RegExp("[\\u0300-\\u036f]", "g"), "");
   }
 
+  const SYNONYM_KEYS = Object.keys(SEARCH_SYNONYMS);
+
   function expandSearchTerms(raw){
     const q = stripAccents(raw.toLowerCase().trim());
     const terms = new Set([q]);
-    const addSynonyms = (word) => {
-      if (SEARCH_SYNONYMS[word]) SEARCH_SYNONYMS[word].forEach(t => terms.add(stripAccents(t)));
+    // Prefix match against the synonym dictionary so results build up
+    // progressively while typing toward a theme word ("f" -> "fu" -> "fut"
+    // -> "futbol" all pull in soccer/football games, not just the exact
+    // full word).
+    const addPrefixSynonyms = (word) => {
+      if (!word) return;
+      SYNONYM_KEYS.forEach(key => {
+        if (key.startsWith(word)) SEARCH_SYNONYMS[key].forEach(t => terms.add(stripAccents(t)));
+      });
     };
-    addSynonyms(q);
-    q.split(/\s+/).forEach(addSynonyms);
+    addPrefixSynonyms(q);
+    q.split(/\s+/).forEach(addPrefixSynonyms);
     return [...terms].filter(Boolean);
   }
 

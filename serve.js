@@ -231,9 +231,14 @@ http.createServer((req, res) => {
     // always be revalidated -- otherwise Cloudflare/browsers can keep
     // serving an old page that still points at old, now-purged asset
     // URLs. CSS/JS are safe to cache hard since bumping "?v=" busts them.
+    // games.json changes independently of any deploy (games get added or
+    // removed), so it gets a short cache instead of the old 1-hour one
+    // that made removals take up to an hour to show up for visitors.
     const cacheControl = filePath === "/index.html"
       ? "no-cache"
-      : (ext === ".css" || ext === ".js") ? "public, max-age=31536000, immutable" : "public, max-age=3600";
+      : (ext === ".css" || ext === ".js") ? "public, max-age=31536000, immutable"
+      : filePath === "/assets/games.json" ? "public, max-age=60"
+      : "public, max-age=3600";
     res.writeHead(200, { "Content-Type": mime[ext] || "application/octet-stream", "Cache-Control": cacheControl });
     res.end(data);
   });
