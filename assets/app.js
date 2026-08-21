@@ -717,7 +717,9 @@
     fetch("/api/votes").then(r => r.ok ? r.json() : {}).catch(() => ({})),
   ])
     .then(([data, votes]) => {
-      GAMES = data;
+      // Stable sort so the most popular games lead every list -- home,
+      // categories, and search results alike -- instead of catalog order.
+      GAMES = data.slice().sort((a, b) => (b.popularity || 0) - (a.popularity || 0));
       filtered = GAMES;
       SERVER_VOTES = votes || {};
       buildCategories();
