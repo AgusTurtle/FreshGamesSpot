@@ -1,5 +1,18 @@
 [
   {
+    "id": "gd-crossy-chicken",
+    "title": "Crossy Chicken",
+    "description": "Crossy Chicken is an arcade game with gameplay similar to the classic Frogger game. Dodge traffic, hop across logs, evade trains and collect coins. Unlock exciting new characters with your coins.",
+    "instructions": "Use the arrow keys to move sideways or forward. Avoid cars, trains and other obstacles. Gamepad supported.",
+    "url": "https://html5.gamedistribution.com/rvvASMiM/8dea2793cf6447f5bd03ba8bdbb6047d/index.html",
+    "category": "Arcade",
+    "tags": "Crossy, Frogger, Arcade, Hypercasual, Hot, Popular",
+    "thumb": "https://img.gamedistribution.com/8dea2793cf6447f5bd03ba8bdbb6047d-512x512.jpeg",
+    "width": "960",
+    "height": "600",
+    "popularity": 0
+  },
+  {
     "id": "gm-fireboy-watergirl-forest",
     "title": "Fireboy and Watergirl: Forest Temple",
     "description": "Cooperative puzzle adventure with the classic Fireboy and Watergirl duo in a mysterious forest temple. Each collects gems of their own color, pushes boxes and presses switches to cooperate and pass the level.",
