@@ -58,6 +58,12 @@ function touchPresence(gameId, sessionId){
   if (!m){ m = new Map(); presence.set(gameId, m); }
   m.set(sessionId, Date.now());
 }
+// Called when a player explicitly closes the game (or the tab/page unloads),
+// so the count drops right away instead of waiting out the full TTL.
+function removePresence(gameId, sessionId){
+  const m = presence.get(gameId);
+  if (m) m.delete(sessionId);
+}
 function purgePresence(m){
   const cutoff = Date.now() - PRESENCE_TTL_MS;
   for (const [sid, ts] of m) if (ts < cutoff) m.delete(sid);
@@ -334,6 +340,23 @@ http.createServer((req, res) => {
         res.writeHead(400); res.end(); return;
       }
       touchPresence(gameId, sessionId);
+      res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
+      res.end(JSON.stringify({ count: liveCountFor(gameId) }));
+    });
+    return;
+  }
+
+  if (urlPath === "/api/leave" && req.method === "POST"){
+    // sendBeacon (used on tab close) posts a Blob with no guarantee the
+    // browser sets a JSON content-type, but the body itself is still the
+    // same JSON string, so parsing doesn't need to branch on it.
+    readJsonBody(req, 512, (err, body) => {
+      if (err){ res.writeHead(400); res.end(); return; }
+      const { gameId, sessionId } = body || {};
+      if (typeof gameId !== "string" || typeof sessionId !== "string"){
+        res.writeHead(400); res.end(); return;
+      }
+      removePresence(gameId, sessionId);
       res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
       res.end(JSON.stringify({ count: liveCountFor(gameId) }));
     });

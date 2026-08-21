@@ -444,10 +444,28 @@
     heartbeatTimer = setInterval(() => sendHeartbeat(gameId), HEARTBEAT_MS);
   }
 
+  // Drops this session from the live count immediately instead of waiting
+  // for the server's TTL to expire it. sendBeacon is used because this also
+  // runs from pagehide, where a regular fetch can get cancelled mid-flight
+  // as the tab closes.
+  function sendLeaveBeacon(gameId){
+    const payload = JSON.stringify({ gameId, sessionId: SESSION_ID });
+    if (navigator.sendBeacon){
+      navigator.sendBeacon("/api/leave", new Blob([payload], { type: "application/json" }));
+    } else {
+      fetch("/api/leave", { method: "POST", headers: { "Content-Type": "application/json" }, body: payload, keepalive: true }).catch(() => {});
+    }
+  }
+
   function stopHeartbeat(){
     if (heartbeatTimer){ clearInterval(heartbeatTimer); heartbeatTimer = null; }
+    if (currentOpenGameId) sendLeaveBeacon(currentOpenGameId);
     el.playerLiveCount.hidden = true;
   }
+
+  window.addEventListener("pagehide", () => {
+    if (currentOpenGameId) sendLeaveBeacon(currentOpenGameId);
+  });
 
   // Placeholder cards shown while games.json (~2.9MB) is in flight. They
   // mirror the real card's box so swapping in real content causes no shift.
@@ -593,8 +611,8 @@
     el.overlay.hidden = true;
     el.playerFrame.src = "about:blank";
     document.body.style.overflow = "";
-    currentOpenGameId = null;
     stopHeartbeat();
+    currentOpenGameId = null;
     if (location.hash.startsWith("#juego/")) history.replaceState(null, "", "#/");
     renderContinue();
     // renderContinue() can replace the card that was focused, so only restore
