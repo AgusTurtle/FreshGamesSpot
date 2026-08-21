@@ -86,6 +86,7 @@
   let visibleCount = PAGE_SIZE;
   let activeCategory = "Todos";
   let searchTerm = "";
+  let showingFavorites = false;
   let SERVER_VOTES = {}; // { [gameId]: { up, down } } -- shared counts from the server
   let heartbeatTimer = null;
   let liveCountsTimer = null;
@@ -217,6 +218,7 @@
 
   function selectCategory(name){
     activeCategory = name;
+    showingFavorites = false;
     document.querySelectorAll(".cat-pill").forEach(p => {
       p.classList.toggle("active", p.dataset.cat === name);
     });
@@ -251,9 +253,27 @@
   }
 
   /* ---------- rendering ---------- */
-  function makeCard(game, small){
+  function isHomeView(){
+    return activeCategory === "Todos" && !searchTerm && !showingFavorites;
+  }
+
+  // Deterministic per-game tile size for the dense home "collage" grid
+  // (poki.com/es-style mosaic of mixed tile sizes) -- same id always gets
+  // the same size, so the layout doesn't jump around between renders.
+  function tileSizeClass(game){
+    if (game.popularity > 0) return "tile-big";
+    let h = 0;
+    for (let i = 0; i < game.id.length; i++) h = (h * 31 + game.id.charCodeAt(i)) | 0;
+    const r = Math.abs(h) % 100;
+    if (r < 8) return "tile-big";
+    if (r < 30) return "tile-wide";
+    return "";
+  }
+
+  function makeCard(game, opts){
+    const collage = !!(opts && opts.collage);
     const card = document.createElement("div");
-    card.className = "game-card";
+    card.className = "game-card" + (collage ? " " + [tileSizeClass(game)].filter(Boolean).join(" ") : "");
     card.dataset.id = game.id;
     card.setAttribute("role", "button");
     card.tabIndex = 0;
@@ -311,19 +331,24 @@
 
     card.appendChild(thumbWrap);
 
-    const info = document.createElement("div");
-    info.className = "game-info";
-    const title = document.createElement("p");
-    title.className = "game-title";
-    title.textContent = game.title;
-    const cat = document.createElement("p");
-    cat.className = "game-cat";
-    cat.textContent = game.category;
-    info.appendChild(title);
-    info.appendChild(cat);
-    card.appendChild(info);
+    // The dense home collage (poki.com/es style) shows thumbnails only --
+    // title/category/votes only make sense once you're browsing a specific
+    // category or search results, where there's room and a reason to compare.
+    if (!collage){
+      const info = document.createElement("div");
+      info.className = "game-info";
+      const title = document.createElement("p");
+      title.className = "game-title";
+      title.textContent = game.title;
+      const cat = document.createElement("p");
+      cat.className = "game-cat";
+      cat.textContent = game.category;
+      info.appendChild(title);
+      info.appendChild(cat);
+      card.appendChild(info);
 
-    card.appendChild(makeVoteRow(game.id));
+      card.appendChild(makeVoteRow(game.id));
+    }
 
     card.addEventListener("click", () => openGame(game.id));
     card.addEventListener("keydown", (e) => {
@@ -474,17 +499,17 @@
     el.emptyState.hidden = true;
     el.loadMoreBtn.hidden = true;
     el.resultCount.textContent = "Cargando juegos…";
+    // Matches the collage layout since the app always boots into home view
+    // -- a uniform-card skeleton would otherwise visibly jump into the
+    // mixed-size mosaic the instant games.json resolves.
+    el.grid.classList.add("collage");
+    const tileCycle = ["", "", "", "tile-wide", "", "", "tile-big", "", "", "tile-wide"];
     const frag = document.createDocumentFragment();
     for (let i = 0; i < count; i++){
       const sk = document.createElement("div");
-      sk.className = "game-card skeleton-card";
+      sk.className = ("game-card skeleton-card " + tileCycle[i % tileCycle.length]).trim();
       sk.setAttribute("aria-hidden", "true");
-      sk.innerHTML =
-        '<div class="skeleton-thumb"></div>' +
-        '<div class="game-info">' +
-          '<div class="skeleton-line skeleton-line-title"></div>' +
-          '<div class="skeleton-line skeleton-line-sub"></div>' +
-        '</div>';
+      sk.innerHTML = '<div class="skeleton-thumb"></div>';
       frag.appendChild(sk);
     }
     el.grid.appendChild(frag);
@@ -502,8 +527,10 @@
     }
     el.emptyState.hidden = true;
 
+    const collage = isHomeView();
+    el.grid.classList.toggle("collage", collage);
     const frag = document.createDocumentFragment();
-    slice.forEach(g => frag.appendChild(makeCard(g)));
+    slice.forEach(g => frag.appendChild(makeCard(g, { collage })));
     el.grid.appendChild(frag);
 
     el.resultCount.textContent = `${filtered.length} juego${filtered.length===1?"":"s"}`;
@@ -533,6 +560,7 @@
   function renderFavoritesView(){
     activeCategory = "Todos";
     searchTerm = "";
+    showingFavorites = true;
     el.searchInput.value = "";
     el.clearSearch.hidden = true;
     document.querySelectorAll(".cat-pill").forEach(p => p.classList.remove("active"));
@@ -626,12 +654,14 @@
   /* ---------- events ---------- */
   el.searchInput.addEventListener("input", (e) => {
     searchTerm = e.target.value.trim();
+    showingFavorites = false;
     el.clearSearch.hidden = searchTerm.length === 0;
     updateView();
   });
   el.clearSearch.addEventListener("click", () => {
     el.searchInput.value = "";
     searchTerm = "";
+    showingFavorites = false;
     el.clearSearch.hidden = true;
     updateView();
     el.searchInput.focus();
