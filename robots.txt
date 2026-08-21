@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /play/
+Disallow: /api/
+
+Sitemap: https://freshgamespot.net/sitemap.xml
