@@ -290,7 +290,6 @@
       thumbWrap.appendChild(ribbon);
     }
 
-    thumbWrap.appendChild(makeLiveBadge(game.id));
 
     const favBtn = document.createElement("button");
     favBtn.className = "fav-star" + (isFavorite(game.id) ? " active" : "");
@@ -382,6 +381,7 @@
     refresh();
     row.appendChild(upBtn);
     row.appendChild(downBtn);
+    row.appendChild(makeLiveBadge(gameId));
     return row;
   }
 
@@ -403,19 +403,23 @@
       .then(counts => {
         document.querySelectorAll("[data-live-id]").forEach(el => {
           const n = counts[el.dataset.liveId] || 0;
-          el.hidden = n <= 0;
-          if (n > 0) el.querySelector(".live-count-text").textContent = n === 1 ? "1 jugando" : `${n} jugando`;
+          el.classList.toggle("has-players", n > 0);
+          el.setAttribute("aria-label", n === 1 ? "1 persona jugando ahora" : `${n} personas jugando ahora`);
+          el.querySelector(".card-live-count").textContent = String(n);
         });
       })
       .catch(() => {});
   }
 
+  // A little person icon + live count, sitting in the same row as the
+  // like/dislike buttons -- shows "0" until the first live-counts poll
+  // resolves rather than popping in, since PAGE_SIZE cards render at once.
   function makeLiveBadge(gameId){
     const badge = document.createElement("span");
-    badge.className = "live-badge live-badge-card";
+    badge.className = "card-live";
     badge.dataset.liveId = gameId;
-    badge.hidden = true;
-    badge.innerHTML = '<span class="live-dot" aria-hidden="true"></span><span class="live-count-text"></span>';
+    badge.setAttribute("aria-label", "0 personas jugando ahora");
+    badge.innerHTML = `${iconSvg("user", "card-live-icon")}<span class="card-live-count">0</span>`;
     return badge;
   }
 

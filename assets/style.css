@@ -647,6 +647,18 @@ img{ max-width:100%; display:block; }
   border-top: 1px solid var(--border);
   margin-top: 4px;
 }
+.card-live{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  margin-left:auto;
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  font-weight:700;
+  transition: color .15s;
+}
+.card-live.has-players{ color: #4ade80; }
+.card-live-icon{ width: var(--icon-sm); height: var(--icon-sm); }
 .vote-btn{
   display:flex;
   align-items:center;
@@ -749,15 +761,6 @@ img{ max-width:100%; display:block; }
   0%{ box-shadow: 0 0 0 0 rgba(74,222,128,0.55); }
   70%{ box-shadow: 0 0 0 6px rgba(74,222,128,0); }
   100%{ box-shadow: 0 0 0 0 rgba(74,222,128,0); }
-}
-.live-badge-card{
-  position:absolute;
-  bottom:8px; left:8px;
-  z-index:2;
-  background: rgba(6,10,20,0.78);
-  padding: 3px 8px;
-  border-radius: 999px;
-  font-size: 0.68rem;
 }
 .player-actions{ display:flex; gap:8px; }
 .player-btn{
