@@ -94,6 +94,7 @@
   const el = {
     grid: document.getElementById("gameGrid"),
     gridSection: document.getElementById("gridSection"),
+    homeRows: document.getElementById("homeRows"),
     catNav: document.getElementById("catNav"),
     searchInput: document.getElementById("searchInput"),
     clearSearch: document.getElementById("clearSearch"),
@@ -206,7 +207,15 @@
   }
 
   function updateView(){
-    applyFilters();
+    if (isHomeView()){
+      el.gridSection.hidden = true;
+      el.homeRows.hidden = false;
+      renderHomeRows();
+    } else {
+      el.homeRows.hidden = true;
+      el.gridSection.hidden = false;
+      applyFilters();
+    }
   }
 
   function applyFilters(){
@@ -233,23 +242,46 @@
     return activeCategory === "Todos" && !searchTerm && !showingFavorites;
   }
 
-  // Deterministic per-game tile size for the dense home "collage" grid
-  // (poki.com/es-style mosaic of mixed tile sizes) -- same id always gets
-  // the same size, so the layout doesn't jump around between renders.
-  function tileSizeClass(game){
-    if (game.popularity > 0) return "tile-big";
-    let h = 0;
-    for (let i = 0; i < game.id.length; i++) h = (h * 31 + game.id.charCodeAt(i)) | 0;
-    const r = Math.abs(h) % 100;
-    if (r < 8) return "tile-big";
-    if (r < 30) return "tile-wide";
-    return "";
+  // Netflix-style home: one horizontally-scrolling row per category
+  // (Populares first, when there is one) instead of a single flat grid.
+  const HOME_ROW_SIZE = 20;
+  function renderHomeRows(){
+    el.homeRows.innerHTML = "";
+    const frag = document.createDocumentFragment();
+
+    const popularGames = GAMES.filter(g => g.popularity > 0);
+    if (popularGames.length > 0){
+      frag.appendChild(makeHomeRow("Popular", popularGames));
+    }
+
+    const counts = {};
+    GAMES.forEach(g => { counts[g.category] = (counts[g.category] || 0) + 1; });
+    const cats = Object.keys(counts).sort((a, b) => counts[b] - counts[a]);
+    cats.forEach(cat => {
+      const games = GAMES.filter(g => g.category === cat).slice(0, HOME_ROW_SIZE);
+      frag.appendChild(makeHomeRow(cat, games));
+    });
+
+    el.homeRows.appendChild(frag);
   }
 
-  function makeCard(game, opts){
-    const collage = !!(opts && opts.collage);
+  function makeHomeRow(title, games){
+    const section = document.createElement("section");
+    section.className = "home-row";
+    const heading = document.createElement("h2");
+    heading.className = "home-row-title";
+    heading.textContent = title;
+    const track = document.createElement("div");
+    track.className = "home-row-track";
+    games.slice(0, HOME_ROW_SIZE).forEach(g => track.appendChild(makeCard(g)));
+    section.appendChild(heading);
+    section.appendChild(track);
+    return section;
+  }
+
+  function makeCard(game){
     const card = document.createElement("div");
-    card.className = "game-card" + (collage ? " " + [tileSizeClass(game)].filter(Boolean).join(" ") : "");
+    card.className = "game-card";
     card.dataset.id = game.id;
     card.setAttribute("role", "button");
     card.tabIndex = 0;
@@ -279,18 +311,12 @@
     playBadge.innerHTML = `<span>${iconSvg("play")}</span>`;
     thumbWrap.appendChild(playBadge);
 
-    if (collage){
-      const idBadge = document.createElement("span");
-      idBadge.className = "tile-badge";
-      idBadge.textContent = "FreshGamesPot";
-      thumbWrap.appendChild(idBadge);
-    } else if (game.popularity > 0){
+    if (game.popularity > 0){
       const ribbon = document.createElement("span");
       ribbon.className = "ribbon-badge";
       ribbon.innerHTML = `${iconSvg("flame")}POPULAR`;
       thumbWrap.appendChild(ribbon);
     }
-
 
     const favBtn = document.createElement("button");
     favBtn.className = "fav-star" + (isFavorite(game.id) ? " active" : "");
@@ -312,24 +338,19 @@
 
     card.appendChild(thumbWrap);
 
-    // The dense home collage (poki.com/es style) shows thumbnails only --
-    // title/category/votes only make sense once you're browsing a specific
-    // category or search results, where there's room and a reason to compare.
-    if (!collage){
-      const info = document.createElement("div");
-      info.className = "game-info";
-      const title = document.createElement("p");
-      title.className = "game-title";
-      title.textContent = game.title;
-      const cat = document.createElement("p");
-      cat.className = "game-cat";
-      cat.textContent = game.category;
-      info.appendChild(title);
-      info.appendChild(cat);
-      card.appendChild(info);
+    const info = document.createElement("div");
+    info.className = "game-info";
+    const title = document.createElement("p");
+    title.className = "game-title";
+    title.textContent = game.title;
+    const cat = document.createElement("p");
+    cat.className = "game-cat";
+    cat.textContent = game.category;
+    info.appendChild(title);
+    info.appendChild(cat);
+    card.appendChild(info);
 
-      card.appendChild(makeVoteRow(game.id));
-    }
+    card.appendChild(makeVoteRow(game.id));
 
     card.addEventListener("click", () => openGame(game.id));
     card.addEventListener("keydown", (e) => {
@@ -473,26 +494,27 @@
     if (currentOpenGameId) sendLeaveBeacon(currentOpenGameId);
   });
 
-  // Placeholder cards shown while games.json (~2.9MB) is in flight. They
-  // mirror the real card's box so swapping in real content causes no shift.
+  // Placeholder row shown while games.json (~2.9MB) is in flight. Lives in
+  // #homeRows (visible by default, since the app always boots into home
+  // view) rather than the hidden #gridSection, and mirrors the real card's
+  // box so swapping in real content causes no shift.
   function renderSkeleton(count){
-    el.grid.innerHTML = "";
-    el.emptyState.hidden = true;
-    el.resultCount.textContent = "Cargando juegos…";
-    // Matches the collage layout since the app always boots into home view
-    // -- a uniform-card skeleton would otherwise visibly jump into the
-    // mixed-size mosaic the instant games.json resolves.
-    el.grid.classList.add("collage");
-    const tileCycle = ["", "", "", "tile-wide", "", "", "tile-big", "", "", "tile-wide"];
-    const frag = document.createDocumentFragment();
+    el.homeRows.innerHTML = "";
+    const track = document.createElement("div");
+    track.className = "home-row-track";
     for (let i = 0; i < count; i++){
       const sk = document.createElement("div");
-      sk.className = ("game-card skeleton-card " + tileCycle[i % tileCycle.length]).trim();
+      sk.className = "game-card skeleton-card";
       sk.setAttribute("aria-hidden", "true");
-      sk.innerHTML = '<div class="skeleton-thumb"></div>';
-      frag.appendChild(sk);
+      sk.innerHTML =
+        '<div class="skeleton-thumb"></div>' +
+        '<div class="game-info">' +
+          '<div class="skeleton-line skeleton-line-title"></div>' +
+          '<div class="skeleton-line skeleton-line-sub"></div>' +
+        '</div>';
+      track.appendChild(sk);
     }
-    el.grid.appendChild(frag);
+    el.homeRows.appendChild(track);
   }
 
   function render(){
@@ -505,11 +527,9 @@
     }
     el.emptyState.hidden = true;
 
-    const collage = isHomeView();
-    el.grid.classList.toggle("collage", collage);
     const slice = filtered.slice(0, visibleCount);
     const frag = document.createDocumentFragment();
-    slice.forEach(g => frag.appendChild(makeCard(g, { collage })));
+    slice.forEach(g => frag.appendChild(makeCard(g)));
     el.grid.appendChild(frag);
 
     el.resultCount.textContent = `${filtered.length} juego${filtered.length===1?"":"s"}`;
@@ -519,13 +539,12 @@
   // everything render() already built, so scrolling through a long list
   // doesn't keep recreating cards that are already on screen.
   function appendMoreCards(){
-    if (visibleCount >= filtered.length) return;
-    const collage = isHomeView();
+    if (el.gridSection.hidden || visibleCount >= filtered.length) return;
     const prevCount = visibleCount;
     visibleCount = Math.min(visibleCount + PAGE_SIZE, filtered.length);
     const slice = filtered.slice(prevCount, visibleCount);
     const frag = document.createDocumentFragment();
-    slice.forEach(g => frag.appendChild(makeCard(g, { collage })));
+    slice.forEach(g => frag.appendChild(makeCard(g)));
     el.grid.appendChild(frag);
   }
 
@@ -550,6 +569,8 @@
     el.clearSearch.hidden = true;
     document.querySelectorAll(".cat-pill").forEach(p => p.classList.remove("active"));
     el.sectionTitle.textContent = "Mis favoritos";
+    el.homeRows.hidden = true;
+    el.gridSection.hidden = false;
     visibleCount = PAGE_SIZE;
     const favIds = getFavorites();
     filtered = favIds.map(findGame).filter(Boolean).reverse();
