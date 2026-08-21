@@ -5,7 +5,26 @@
   const FAV_KEY = "omg_favorites";
   const RECENT_KEY = "omg_recent";
   const VOTES_KEY = "omg_votes";
+  const VISITOR_KEY = "omg_visitor_id";
   const POPULAR_CAT = "Populares";
+  const HEARTBEAT_MS = 12000;
+  const LIVE_POLL_MS = 15000;
+
+  // Identifies this browser across visits so the server can let someone
+  // change or remove their own like/dislike instead of just piling up
+  // votes -- not tied to any account, just a random id kept in localStorage.
+  function getVisitorId(){
+    let id = localStorage.getItem(VISITOR_KEY);
+    if (!id){
+      id = (crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(16).slice(2)}`);
+      localStorage.setItem(VISITOR_KEY, id);
+    }
+    return id;
+  }
+  // Identifies this specific open tab for the "currently playing" presence
+  // count -- deliberately NOT persisted, so two tabs of the same visitor
+  // both count as separate live players, matching what a viewer would expect.
+  const SESSION_ID = (crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(16).slice(2)}`);
 
   // Game titles/tags/categories all come from the source catalog in
   // English, but people search in Spanish -- "futbol" should find
@@ -67,6 +86,10 @@
   let visibleCount = PAGE_SIZE;
   let activeCategory = "Todos";
   let searchTerm = "";
+  let SERVER_VOTES = {}; // { [gameId]: { up, down } } -- shared counts from the server
+  let heartbeatTimer = null;
+  let liveCountsTimer = null;
+  let currentOpenGameId = null;
 
   const el = {
     grid: document.getElementById("gameGrid"),
@@ -95,6 +118,8 @@
     playerClose: document.getElementById("playerClose"),
     playerFullscreen: document.getElementById("playerFullscreen"),
     playerFav: document.getElementById("playerFav"),
+    playerLiveCount: document.getElementById("playerLiveCount"),
+    playerLiveCountText: document.getElementById("playerLiveCountText"),
   };
 
   /* ---------- storage helpers ---------- */
@@ -126,11 +151,13 @@
   function getVote(id){
     return getVotes()[id] || null;
   }
-  function toggleVote(id, dir){
+  // Only remembers *this visitor's own* choice locally (for the pressed
+  // button state) -- the actual up/down totals now live server-side in
+  // SERVER_VOTES so everyone's likes accumulate together.
+  function setLocalVote(id, dir){
     const votes = getVotes();
-    votes[id] = votes[id] === dir ? null : dir;
+    if (dir) votes[id] = dir; else delete votes[id];
     localStorage.setItem(VOTES_KEY, JSON.stringify(votes));
-    return votes[id];
   }
   function pushRecent(id){
     let recent = getRecent().filter(r => r !== id);
@@ -263,6 +290,8 @@
       thumbWrap.appendChild(ribbon);
     }
 
+    thumbWrap.appendChild(makeLiveBadge(game.id));
+
     const favBtn = document.createElement("button");
     favBtn.className = "fav-star" + (isFavorite(game.id) ? " active" : "");
     favBtn.innerHTML = iconSvg("star");
@@ -323,21 +352,97 @@
 
     function refresh(){
       const v = getVote(gameId);
+      const counts = SERVER_VOTES[gameId] || { up: 0, down: 0 };
       upBtn.classList.toggle("active", v === "up");
       upBtn.setAttribute("aria-pressed", String(v === "up"));
-      upBtn.querySelector(".vote-count").textContent = v === "up" ? "1" : "0";
+      upBtn.querySelector(".vote-count").textContent = String(counts.up || 0);
       downBtn.classList.toggle("active", v === "down");
       downBtn.setAttribute("aria-pressed", String(v === "down"));
-      downBtn.querySelector(".vote-count").textContent = v === "down" ? "1" : "0";
+      downBtn.querySelector(".vote-count").textContent = String(counts.down || 0);
     }
 
-    upBtn.addEventListener("click", (e) => { e.stopPropagation(); toggleVote(gameId, "up"); refresh(); });
-    downBtn.addEventListener("click", (e) => { e.stopPropagation(); toggleVote(gameId, "down"); refresh(); });
+    function castVote(dir){
+      const prevVote = getVote(gameId);
+      const newVote = prevVote === dir ? null : dir;
+      setLocalVote(gameId, newVote);
+      // Optimistic update so the click feels instant; syncVote() below
+      // reconciles with the server's authoritative counts right after.
+      const counts = SERVER_VOTES[gameId] || (SERVER_VOTES[gameId] = { up: 0, down: 0 });
+      if (prevVote === "up") counts.up = Math.max(0, counts.up - 1);
+      if (prevVote === "down") counts.down = Math.max(0, counts.down - 1);
+      if (newVote === "up") counts.up += 1;
+      if (newVote === "down") counts.down += 1;
+      refresh();
+      syncVote(gameId, prevVote, newVote, refresh);
+    }
+
+    upBtn.addEventListener("click", (e) => { e.stopPropagation(); castVote("up"); });
+    downBtn.addEventListener("click", (e) => { e.stopPropagation(); castVote("down"); });
 
     refresh();
     row.appendChild(upBtn);
     row.appendChild(downBtn);
     return row;
+  }
+
+  function syncVote(gameId, prevVote, newVote, onSynced){
+    fetch("/api/vote", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ gameId, prevVote, newVote }),
+    })
+      .then(r => r.ok ? r.json() : Promise.reject(new Error("vote failed")))
+      .then(counts => { SERVER_VOTES[gameId] = counts; onSynced(); })
+      .catch(err => console.error("Could not save vote:", err));
+  }
+
+  /* ---------- live "playing now" presence ---------- */
+  function refreshLiveBadges(){
+    fetch("/api/live-counts")
+      .then(r => r.ok ? r.json() : Promise.reject(new Error("live-counts failed")))
+      .then(counts => {
+        document.querySelectorAll("[data-live-id]").forEach(el => {
+          const n = counts[el.dataset.liveId] || 0;
+          el.hidden = n <= 0;
+          if (n > 0) el.querySelector(".live-count-text").textContent = n === 1 ? "1 jugando" : `${n} jugando`;
+        });
+      })
+      .catch(() => {});
+  }
+
+  function makeLiveBadge(gameId){
+    const badge = document.createElement("span");
+    badge.className = "live-badge live-badge-card";
+    badge.dataset.liveId = gameId;
+    badge.hidden = true;
+    badge.innerHTML = '<span class="live-dot" aria-hidden="true"></span><span class="live-count-text"></span>';
+    return badge;
+  }
+
+  function sendHeartbeat(gameId){
+    fetch("/api/heartbeat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ gameId, sessionId: SESSION_ID }),
+    })
+      .then(r => r.ok ? r.json() : Promise.reject(new Error("heartbeat failed")))
+      .then(({ count }) => {
+        if (gameId !== currentOpenGameId) return;
+        el.playerLiveCount.hidden = count <= 0;
+        el.playerLiveCountText.textContent = count === 1 ? "1 jugando ahora" : `${count} jugando ahora`;
+      })
+      .catch(() => {});
+  }
+
+  function startHeartbeat(gameId){
+    stopHeartbeat();
+    sendHeartbeat(gameId);
+    heartbeatTimer = setInterval(() => sendHeartbeat(gameId), HEARTBEAT_MS);
+  }
+
+  function stopHeartbeat(){
+    if (heartbeatTimer){ clearInterval(heartbeatTimer); heartbeatTimer = null; }
+    el.playerLiveCount.hidden = true;
   }
 
   // Placeholder cards shown while games.json (~2.9MB) is in flight. They
@@ -468,6 +573,9 @@
     document.body.style.overflow = "hidden";
     location.hash = "juego/" + id;
     el.playerBack.focus();
+
+    currentOpenGameId = id;
+    startHeartbeat(id);
   }
 
   function syncPlayerFav(active){
@@ -481,6 +589,8 @@
     el.overlay.hidden = true;
     el.playerFrame.src = "about:blank";
     document.body.style.overflow = "";
+    currentOpenGameId = null;
+    stopHeartbeat();
     if (location.hash.startsWith("#juego/")) history.replaceState(null, "", "#/");
     renderContinue();
     // renderContinue() can replace the card that was focused, so only restore
@@ -563,15 +673,21 @@
 
   /* ---------- init ---------- */
   renderSkeleton(PAGE_SIZE);
+  getVisitorId();
 
-  fetch("assets/games.json")
-    .then(r => r.json())
-    .then(data => {
+  Promise.all([
+    fetch("assets/games.json").then(r => r.json()),
+    fetch("/api/votes").then(r => r.ok ? r.json() : {}).catch(() => ({})),
+  ])
+    .then(([data, votes]) => {
       GAMES = data;
       filtered = GAMES;
+      SERVER_VOTES = votes || {};
       buildCategories();
       updateView();
       document.getElementById("heroGameCount").textContent = `${GAMES.length}`;
+      refreshLiveBadges();
+      liveCountsTimer = setInterval(refreshLiveBadges, LIVE_POLL_MS);
     })
     .catch(err => {
       el.grid.innerHTML = "";

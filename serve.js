@@ -19,6 +19,82 @@ function loadGames(){
   return JSON.parse(raw);
 }
 
+// ---------- Votes (persisted) ----------
+// Railway injects RAILWAY_VOLUME_MOUNT_PATH when a volume is attached to
+// the service; without one this falls back to a local "data" folder, which
+// works for local dev but gets wiped on every redeploy in production since
+// Railway's default filesystem is ephemeral. A volume is required for the
+// counts to actually survive across deploys.
+const DATA_DIR = process.env.RAILWAY_VOLUME_MOUNT_PATH || path.join(root, "data");
+const VOTES_PATH = path.join(DATA_DIR, "votes.json");
+
+function loadVotes(){
+  try { fs.mkdirSync(DATA_DIR, { recursive: true }); } catch (e){}
+  try { return JSON.parse(fs.readFileSync(VOTES_PATH, "utf8").replace(/^﻿/, "")); }
+  catch (e){ return {}; }
+}
+let votes = loadVotes();
+function saveVotes(){
+  try { fs.writeFileSync(VOTES_PATH, JSON.stringify(votes)); }
+  catch (e){ console.error("Could not persist votes:", e.message); }
+}
+function applyVoteDelta(gameId, prevVote, newVote){
+  if (!votes[gameId]) votes[gameId] = { up: 0, down: 0 };
+  const v = votes[gameId];
+  if (prevVote === "up") v.up = Math.max(0, v.up - 1);
+  if (prevVote === "down") v.down = Math.max(0, v.down - 1);
+  if (newVote === "up") v.up += 1;
+  if (newVote === "down") v.down += 1;
+  return v;
+}
+
+// ---------- Live player presence (in-memory only, resets on restart --
+// this is genuinely live/transient data, so it doesn't need a volume) ----------
+const PRESENCE_TTL_MS = 25000;
+const presence = new Map(); // gameId -> Map(sessionId -> lastSeen ms)
+
+function touchPresence(gameId, sessionId){
+  let m = presence.get(gameId);
+  if (!m){ m = new Map(); presence.set(gameId, m); }
+  m.set(sessionId, Date.now());
+}
+function purgePresence(m){
+  const cutoff = Date.now() - PRESENCE_TTL_MS;
+  for (const [sid, ts] of m) if (ts < cutoff) m.delete(sid);
+}
+function liveCountFor(gameId){
+  const m = presence.get(gameId);
+  if (!m) return 0;
+  purgePresence(m);
+  return m.size;
+}
+function allLiveCounts(){
+  const out = {};
+  for (const [gameId, m] of presence){
+    purgePresence(m);
+    if (m.size > 0) out[gameId] = m.size;
+  }
+  return out;
+}
+
+function readJsonBody(req, maxBytes, cb){
+  let size = 0;
+  const chunks = [];
+  let done = false;
+  req.on("data", (c) => {
+    if (done) return;
+    size += c.length;
+    if (size > maxBytes){ done = true; req.destroy(); cb(new Error("Body too large")); return; }
+    chunks.push(c);
+  });
+  req.on("end", () => {
+    if (done) return;
+    try { cb(null, JSON.parse(Buffer.concat(chunks).toString("utf8") || "{}")); }
+    catch (e){ cb(e); }
+  });
+  req.on("error", (e) => { if (!done){ done = true; cb(e); } });
+}
+
 // Strategy: allow the game's own hosting infra + the loader SDKs some
 // publisher networks legitimately need to boot the game at all, but
 // deliberately never list known ad-exchange/ad-SDK domains anywhere in
@@ -225,6 +301,48 @@ http.createServer((req, res) => {
     const referer = req.headers.referer || "";
     const refMatch = referer.match(/\/play\/([^/]+)\//);
     proxyAsset(decodeURIComponent(playAssetMatch[1]), playAssetMatch[2], search, res, refMatch && decodeURIComponent(refMatch[1]));
+    return;
+  }
+
+  if (urlPath === "/api/votes" && req.method === "GET"){
+    res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
+    res.end(JSON.stringify(votes));
+    return;
+  }
+
+  if (urlPath === "/api/vote" && req.method === "POST"){
+    readJsonBody(req, 2048, (err, body) => {
+      if (err){ res.writeHead(400); res.end(); return; }
+      const { gameId, prevVote, newVote } = body || {};
+      const validVote = (v) => v === null || v === "up" || v === "down";
+      if (typeof gameId !== "string" || !findGame(gameId) || !validVote(prevVote) || !validVote(newVote)){
+        res.writeHead(400); res.end(); return;
+      }
+      const updated = applyVoteDelta(gameId, prevVote, newVote);
+      saveVotes();
+      res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
+      res.end(JSON.stringify(updated));
+    });
+    return;
+  }
+
+  if (urlPath === "/api/heartbeat" && req.method === "POST"){
+    readJsonBody(req, 512, (err, body) => {
+      if (err){ res.writeHead(400); res.end(); return; }
+      const { gameId, sessionId } = body || {};
+      if (typeof gameId !== "string" || typeof sessionId !== "string" || !findGame(gameId)){
+        res.writeHead(400); res.end(); return;
+      }
+      touchPresence(gameId, sessionId);
+      res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
+      res.end(JSON.stringify({ count: liveCountFor(gameId) }));
+    });
+    return;
+  }
+
+  if (urlPath === "/api/live-counts" && req.method === "GET"){
+    res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
+    res.end(JSON.stringify(allLiveCounts()));
     return;
   }
 
