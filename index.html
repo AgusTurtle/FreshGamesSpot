@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&family=Chakra+Petch:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=26">
+<link rel="stylesheet" href="assets/style.css?v=27">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3231209923135744"
      crossorigin="anonymous"></script>
 </head>
@@ -119,11 +119,6 @@
         </div>
       </section>
 
-      <section id="continueSection" class="rail" hidden>
-        <h2 class="rail-title">Seguir jugando</h2>
-        <div id="continueRow" class="rail-row"></div>
-      </section>
-
       <section id="gridSection" class="grid-section" aria-labelledby="sectionTitle">
         <div class="grid-header">
           <h2 id="sectionTitle">Todos los juegos</h2>
@@ -133,7 +128,7 @@
         <div id="emptyState" class="empty-state" hidden>
           <p>No encontramos juegos con ese nombre.</p>
         </div>
-        <button id="loadMoreBtn" class="load-more-btn" hidden>Cargar más juegos</button>
+        <div id="scrollSentinel" aria-hidden="true"></div>
       </section>
 
     </main>
@@ -175,6 +170,6 @@
   </div>
 </div>
 
-<script src="assets/app.js?v=26"></script>
+<script src="assets/app.js?v=27"></script>
 </body>
 </html>

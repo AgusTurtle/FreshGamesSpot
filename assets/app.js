@@ -3,7 +3,6 @@
 
   const PAGE_SIZE = 24;
   const FAV_KEY = "omg_favorites";
-  const RECENT_KEY = "omg_recent";
   const VOTES_KEY = "omg_votes";
   const VISITOR_KEY = "omg_visitor_id";
   const POPULAR_CAT = "Populares";
@@ -105,9 +104,7 @@
     sectionTitle: document.getElementById("sectionTitle"),
     resultCount: document.getElementById("resultCount"),
     emptyState: document.getElementById("emptyState"),
-    loadMoreBtn: document.getElementById("loadMoreBtn"),
-    continueSection: document.getElementById("continueSection"),
-    continueRow: document.getElementById("continueRow"),
+    scrollSentinel: document.getElementById("scrollSentinel"),
     favToggleNav: document.getElementById("favToggleNav"),
     overlay: document.getElementById("playerOverlay"),
     playerFrame: document.getElementById("playerFrame"),
@@ -141,10 +138,6 @@
     setFavorites(favs);
     return favs.includes(id);
   }
-  function getRecent(){
-    try { return JSON.parse(localStorage.getItem(RECENT_KEY)) || []; }
-    catch(e){ return []; }
-  }
   function getVotes(){
     try { return JSON.parse(localStorage.getItem(VOTES_KEY)) || {}; }
     catch(e){ return {}; }
@@ -159,12 +152,6 @@
     const votes = getVotes();
     if (dir) votes[id] = dir; else delete votes[id];
     localStorage.setItem(VOTES_KEY, JSON.stringify(votes));
-  }
-  function pushRecent(id){
-    let recent = getRecent().filter(r => r !== id);
-    recent.unshift(id);
-    recent = recent.slice(0, 10);
-    localStorage.setItem(RECENT_KEY, JSON.stringify(recent));
   }
 
   /* ---------- data ---------- */
@@ -230,7 +217,6 @@
 
   function updateView(){
     applyFilters();
-    renderContinue();
   }
 
   function applyFilters(){
@@ -502,7 +488,6 @@
   function renderSkeleton(count){
     el.grid.innerHTML = "";
     el.emptyState.hidden = true;
-    el.loadMoreBtn.hidden = true;
     el.resultCount.textContent = "Cargando juegos…";
     // Matches the collage layout since the app always boots into home view
     // -- a uniform-card skeleton would otherwise visibly jump into the
@@ -522,11 +507,9 @@
 
   function render(){
     el.grid.innerHTML = "";
-    const slice = filtered.slice(0, visibleCount);
 
     if (filtered.length === 0){
       el.emptyState.hidden = false;
-      el.loadMoreBtn.hidden = true;
       el.resultCount.textContent = "";
       return;
     }
@@ -534,33 +517,40 @@
 
     const collage = isHomeView();
     el.grid.classList.toggle("collage", collage);
+    const slice = filtered.slice(0, visibleCount);
     const frag = document.createDocumentFragment();
     slice.forEach(g => frag.appendChild(makeCard(g, { collage })));
     el.grid.appendChild(frag);
 
     el.resultCount.textContent = `${filtered.length} juego${filtered.length===1?"":"s"}`;
-    el.loadMoreBtn.hidden = visibleCount >= filtered.length;
-
-    renderContinue();
   }
 
-  function renderContinue(){
-    if (searchTerm || activeCategory !== "Todos"){
-      el.continueSection.hidden = true;
-      return;
-    }
-    const recentIds = getRecent();
-    const recentGames = recentIds.map(findGame).filter(Boolean);
-    if (recentGames.length === 0){
-      el.continueSection.hidden = true;
-      return;
-    }
-    el.continueSection.hidden = false;
-    el.continueRow.innerHTML = "";
+  // Infinite scroll: appends just the next page instead of re-rendering
+  // everything render() already built, so scrolling through a long list
+  // doesn't keep recreating cards that are already on screen.
+  function appendMoreCards(){
+    if (visibleCount >= filtered.length) return;
+    const collage = isHomeView();
+    const prevCount = visibleCount;
+    visibleCount = Math.min(visibleCount + PAGE_SIZE, filtered.length);
+    const slice = filtered.slice(prevCount, visibleCount);
     const frag = document.createDocumentFragment();
-    recentGames.forEach(g => frag.appendChild(makeCard(g)));
-    el.continueRow.appendChild(frag);
+    slice.forEach(g => frag.appendChild(makeCard(g, { collage })));
+    el.grid.appendChild(frag);
   }
+
+  // Re-observing after every append forces a fresh intersection check --
+  // without it, IntersectionObserver only fires on true/false transitions,
+  // so if the sentinel is still on-screen after one page loads (short
+  // result lists, tall viewports) it would silently never fire again even
+  // though there's more to load and the user hasn't scrolled away.
+  const scrollObserver = new IntersectionObserver((entries) => {
+    if (!entries[0].isIntersecting) return;
+    appendMoreCards();
+    scrollObserver.unobserve(el.scrollSentinel);
+    scrollObserver.observe(el.scrollSentinel);
+  }, { rootMargin: "800px" });
+  scrollObserver.observe(el.scrollSentinel);
 
   function renderFavoritesView(){
     activeCategory = "Todos";
@@ -574,7 +564,6 @@
     const favIds = getFavorites();
     filtered = favIds.map(findGame).filter(Boolean).reverse();
     render();
-    el.continueSection.hidden = true;
   }
 
   /* ---------- player ---------- */
@@ -605,7 +594,6 @@
   function openGame(id){
     const game = findGame(id);
     if (!game) return;
-    pushRecent(id);
 
     el.playerTitle.textContent = game.title;
     el.playerDescription.textContent = game.description || "";
@@ -647,9 +635,6 @@
     stopHeartbeat();
     currentOpenGameId = null;
     if (location.hash.startsWith("#juego/")) history.replaceState(null, "", "#/");
-    renderContinue();
-    // renderContinue() can replace the card that was focused, so only restore
-    // focus to it if it is still in the document.
     if (wasOpen && lastFocusedEl && document.contains(lastFocusedEl)){
       lastFocusedEl.focus();
     }
@@ -670,11 +655,6 @@
     el.clearSearch.hidden = true;
     updateView();
     el.searchInput.focus();
-  });
-
-  el.loadMoreBtn.addEventListener("click", () => {
-    visibleCount += PAGE_SIZE;
-    render();
   });
 
   el.favToggleNav.addEventListener("click", renderFavoritesView);
