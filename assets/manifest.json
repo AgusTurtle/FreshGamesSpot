@@ -1,6 +1,6 @@
 {
-  "name": "FreshGamesSpot",
-  "short_name": "FreshGamesSpot",
+  "name": "FreshGamesPot",
+  "short_name": "FreshGamesPot",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#05060d",

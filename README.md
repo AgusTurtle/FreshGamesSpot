@@ -1,2 +1,2 @@
-# FreshGamesSpot
-FreshGamesSpot FRESH GAMES
+# FreshGamesPot
+FreshGamesPot FRESH GAMES

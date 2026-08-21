@@ -190,16 +190,16 @@
     const cats = Object.keys(counts).sort((a,b) => counts[b]-counts[a]);
     const frag = document.createDocumentFragment();
 
-    frag.appendChild(makePill("Todos", GAMES.length, true, "Inicio", "home"));
+    frag.appendChild(makePill("Todos", GAMES.length, true, "Home", "home"));
 
     const popularCount = GAMES.filter(g => g.popularity > 0).length;
     if (popularCount > 0){
-      frag.appendChild(makePill(POPULAR_CAT, popularCount, false, "Populares", "flame"));
+      frag.appendChild(makePill(POPULAR_CAT, popularCount, false, "Popular", "flame"));
     }
 
     const label = document.createElement("div");
     label.className = "side-nav-group-label";
-    label.textContent = "Categorías";
+    label.textContent = "Categories";
     frag.appendChild(label);
 
     cats.forEach(c => frag.appendChild(makePill(c, counts[c], false, c, CATEGORY_ICONS[c] || "dice")));
@@ -220,7 +220,7 @@
     document.querySelectorAll(".cat-pill").forEach(p => {
       p.classList.toggle("active", p.dataset.cat === name);
     });
-    el.sectionTitle.textContent = name === "Todos" ? "Todos los juegos" : name;
+    el.sectionTitle.textContent = name === "Todos" ? "Todos los juegos" : name === POPULAR_CAT ? "Popular" : name;
     closeSidebarMobile();
     updateView();
     window.scrollTo({top:0, behavior:"smooth"});
