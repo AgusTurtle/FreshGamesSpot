@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&family=Chakra+Petch:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=28">
+<link rel="stylesheet" href="assets/style.css?v=29">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3231209923135744"
      crossorigin="anonymous"></script>
 </head>
@@ -69,25 +69,12 @@
 
 <div class="app-shell">
 
-  <aside class="sidebar" id="sidebar">
-    <a href="#/" class="logo" data-nav="home">
-      <svg class="icon logo-bolt" width="24" height="24" aria-hidden="true"><use href="#i-logo"/></svg>
-      <span class="logo-text">FreshGames<strong>Pot</strong></span>
-    </a>
-    <button id="sidebarToggle" class="sidebar-toggle" aria-label="Contraer menú">
-      <svg class="icon" width="24" height="24" aria-hidden="true"><use href="#i-menu"/></svg>
-    </button>
-    <nav class="side-nav" id="catNav" aria-label="Categories">
-      <!-- filled by JS -->
-    </nav>
-  </aside>
-  <div id="sidebarScrim" class="sidebar-scrim" hidden></div>
-
-  <div class="main-col">
-    <header class="topbar">
-      <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Abrir menú de categorías">
-        <svg class="icon" width="24" height="24" aria-hidden="true"><use href="#i-menu"/></svg>
-      </button>
+  <header class="topbar">
+    <div class="topbar-row">
+      <a href="#/" class="logo" data-nav="home">
+        <svg class="icon logo-bolt" width="24" height="24" aria-hidden="true"><use href="#i-logo"/></svg>
+        <span class="logo-text">FreshGames<strong>Pot</strong></span>
+      </a>
       <div class="search-wrap">
         <svg class="icon search-icon" width="24" height="24" aria-hidden="true"><use href="#i-search"/></svg>
         <input id="searchInput" type="search" placeholder="Buscar un juego…" aria-label="Buscar un juego" autocomplete="off">
@@ -98,8 +85,13 @@
       <button id="favToggleNav" class="nav-fav-btn">
         <svg class="icon star" width="24" height="24" aria-hidden="true"><use href="#i-star"/></svg><span class="fav-label">Favoritos</span>
       </button>
-    </header>
+    </div>
+    <nav class="cat-nav" id="catNav" aria-label="Categories">
+      <!-- filled by JS -->
+    </nav>
+  </header>
 
+  <div class="main-col">
     <main id="mainContent">
 
       <section class="hero" aria-labelledby="heroTitle">
@@ -170,6 +162,6 @@
   </div>
 </div>
 
-<script src="assets/app.js?v=28"></script>
+<script src="assets/app.js?v=29"></script>
 </body>
 </html>

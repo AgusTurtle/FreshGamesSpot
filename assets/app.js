@@ -95,10 +95,6 @@
     grid: document.getElementById("gameGrid"),
     gridSection: document.getElementById("gridSection"),
     catNav: document.getElementById("catNav"),
-    sidebar: document.getElementById("sidebar"),
-    sidebarToggle: document.getElementById("sidebarToggle"),
-    sidebarScrim: document.getElementById("sidebarScrim"),
-    mobileMenuBtn: document.getElementById("mobileMenuBtn"),
     searchInput: document.getElementById("searchInput"),
     clearSearch: document.getElementById("clearSearch"),
     sectionTitle: document.getElementById("sectionTitle"),
@@ -185,11 +181,6 @@
       frag.appendChild(makePill(POPULAR_CAT, popularCount, false, "Popular", "flame"));
     }
 
-    const label = document.createElement("div");
-    label.className = "side-nav-group-label";
-    label.textContent = "Categories";
-    frag.appendChild(label);
-
     cats.forEach(c => frag.appendChild(makePill(c, counts[c], false, c, CATEGORY_ICONS[c] || "dice")));
     el.catNav.appendChild(frag);
   }
@@ -210,7 +201,6 @@
       p.classList.toggle("active", p.dataset.cat === name);
     });
     el.sectionTitle.textContent = name === "Todos" ? "Todos los juegos" : name === POPULAR_CAT ? "Popular" : name;
-    closeSidebarMobile();
     updateView();
     window.scrollTo({top:0, behavior:"smooth"});
   }
@@ -693,20 +683,6 @@
     el.clearSearch.hidden = true;
     selectCategory("Todos");
   });
-
-  /* ---------- sidebar ---------- */
-  function closeSidebarMobile(){
-    el.sidebar.classList.remove("open");
-    el.sidebarScrim.hidden = true;
-  }
-  el.sidebarToggle.addEventListener("click", () => {
-    el.sidebar.classList.toggle("collapsed");
-  });
-  el.mobileMenuBtn.addEventListener("click", () => {
-    el.sidebar.classList.add("open");
-    el.sidebarScrim.hidden = false;
-  });
-  el.sidebarScrim.addEventListener("click", closeSidebarMobile);
 
   /* ---------- init ---------- */
   renderSkeleton(PAGE_SIZE);
