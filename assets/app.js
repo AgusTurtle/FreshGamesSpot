@@ -163,6 +163,15 @@
     "Action": "zap", "Shooting": "crosshair", "Adventure": "map", "Hypercasual": "rocket",
     "Fighting": "swords", ".IO": "globe",
   };
+  // A splash of color per category instead of one flat tone -- purely
+  // decorative (icon-only), so it doesn't affect the active/selected state.
+  const CATEGORY_COLORS = {
+    "Puzzles": "#38d9ff", "Racing": "#ff8a3d", "Arcade": "#a78bfa", "Multiplayer": "#22c55e",
+    "Sports": "#facc15", "Cooking": "#fb923c", "Soccer": "#4ade80", "3D": "#f472b6",
+    "2 Player": "#38bdf8", "Boys": "#60a5fa", "Clicker": "#fbbf24", "Girls": "#ff3d81",
+    "Action": "#f87171", "Shooting": "#fb7185", "Adventure": "#34d399", "Hypercasual": "#c084fc",
+    "Fighting": "#f97316", ".IO": "#2dd4bf",
+  };
 
   function iconSvg(id, className){
     return `<svg class="icon${className ? " " + className : ""}" width="24" height="24" aria-hidden="true"><use href="#i-${id}"/></svg>`;
@@ -181,15 +190,16 @@
       frag.appendChild(makePill(POPULAR_CAT, popularCount, false, "Popular", "flame"));
     }
 
-    cats.forEach(c => frag.appendChild(makePill(c, counts[c], false, c, CATEGORY_ICONS[c] || "dice")));
+    cats.forEach(c => frag.appendChild(makePill(c, counts[c], false, c, CATEGORY_ICONS[c] || "dice", CATEGORY_COLORS[c])));
     el.catNav.appendChild(frag);
   }
 
-  function makePill(name, count, active, label, icon){
+  function makePill(name, count, active, label, icon, color){
     const btn = document.createElement("button");
     btn.className = "cat-pill" + (active ? " active" : "");
     btn.dataset.cat = name;
     btn.innerHTML = `${iconSvg(icon || "dice", "cat-pill-icon")}<span class="cat-pill-label">${label || name}</span><span class="cat-pill-count">${count}</span>`;
+    if (color) btn.querySelector(".cat-pill-icon").style.color = color;
     btn.addEventListener("click", () => selectCategory(name));
     return btn;
   }
@@ -307,6 +317,11 @@
       const active = toggleFavorite(game.id);
       favBtn.classList.toggle("active", active);
       syncFavBtn(active);
+      if (active){
+        favBtn.classList.remove("pop");
+        void favBtn.offsetWidth; // restart the animation on repeat clicks
+        favBtn.classList.add("pop");
+      }
     });
     thumbWrap.appendChild(favBtn);
 
