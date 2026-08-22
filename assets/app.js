@@ -243,9 +243,16 @@
     return activeCategory === "Todos" && !searchTerm && !showingFavorites;
   }
 
-  // All home tiles render at the same uniform size now -- a symmetric grid,
-  // not a mixed mosaic -- so every thumbnail crops consistently.
-  function tileSizeClass(){
+  // Deterministic per-game tile size for the home mosaic (app-store-style
+  // mix of icon and hero tiles) -- same id always gets the same size, so
+  // the layout doesn't jump around between renders.
+  function tileSizeClass(game){
+    if (game.popularity > 0) return "tile-big";
+    let h = 0;
+    for (let i = 0; i < game.id.length; i++) h = (h * 31 + game.id.charCodeAt(i)) | 0;
+    const r = Math.abs(h) % 100;
+    if (r < 15) return "tile-big";
+    if (r < 40) return "tile-wide";
     return "";
   }
 
