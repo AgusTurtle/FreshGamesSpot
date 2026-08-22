@@ -38,12 +38,15 @@
     const stage = document.getElementById("stage");
     stage.style.width = NATIVE_W + "px";
     stage.style.height = NATIVE_H + "px";
+    stage.style.left = "0";
+    stage.style.top = "0";
+    // Stretch to fill the frame completely (independent X/Y scale) instead
+    // of preserving the native aspect ratio -- no letterbox bars, at the
+    // cost of a slight stretch on aspect ratios far from 624:400.
     function fitStage(){
-      const availW = window.innerWidth, availH = window.innerHeight;
-      const scale = Math.min(availW / NATIVE_W, availH / NATIVE_H);
-      stage.style.transform = "scale(" + scale + ")";
-      stage.style.left = ((availW - NATIVE_W * scale) / 2) + "px";
-      stage.style.top = ((availH - NATIVE_H * scale) / 2) + "px";
+      const scaleX = window.innerWidth / NATIVE_W;
+      const scaleY = window.innerHeight / NATIVE_H;
+      stage.style.transform = "scale(" + scaleX + ", " + scaleY + ")";
     }
     fitStage();
     window.addEventListener("resize", fitStage);
@@ -51,7 +54,15 @@
     const ruffle = window.RufflePlayer.newest();
     const player = ruffle.createPlayer();
     stage.appendChild(player);
-    player.load("https://files.twoplayergames.org/files/games/other/Temple_of_Boom.swf");
+    // Ruffle's default backend pick (wgpu-webgl, a newer hybrid renderer)
+    // hit a "GPU stall due to ReadPixels" performance warning on this SWF,
+    // which is a real frame-pacing killer -- forcing the older, more mature
+    // plain "webgl" backend and dropping quality avoids that path.
+    player.load({
+      url: "https://files.twoplayergames.org/files/games/other/Temple_of_Boom.swf",
+      preferredRenderer: "webgl",
+      quality: "medium",
+    });
   });
 </script>
 </body>
