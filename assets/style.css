@@ -3,12 +3,12 @@
   --sidebar-text: #8b93b8;
   --sidebar-text-active: #ffffff;
   --sidebar-hover: #131a2e;
-  --bg: #eef0f6;
-  --bg-card: #ffffff;
-  --bg-elev: #f1f3fa;
-  --border: #e2e4ee;
-  --text: #1c1c28;
-  --text-dim: #6d6f85;
+  --bg: #0a0d1c;
+  --bg-card: #131832;
+  --bg-elev: #181f3d;
+  --border: #262c52;
+  --text: #f4f6ff;
+  --text-dim: #9aa0c9;
   --accent: #2f7dff;
   --accent-dark: #1c63e0;
   --accent-2: #38d9ff;
@@ -41,15 +41,28 @@ html{
 }
 body{
   margin:0;
+  position: relative;
   font-family: "Chakra Petch", "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
   background:
-    radial-gradient(circle at 8% 0%, rgba(47,125,255,0.10), transparent 38%),
-    radial-gradient(circle at 96% 18%, rgba(168,85,247,0.09), transparent 42%),
-    radial-gradient(circle at 50% 100%, rgba(255,61,129,0.06), transparent 45%),
-    radial-gradient(circle, rgba(28,28,40,0.05) 1px, transparent 1.6px) 0 0/22px 22px,
+    radial-gradient(circle at 8% 0%, rgba(47,125,255,0.16), transparent 38%),
+    radial-gradient(circle at 96% 18%, rgba(168,85,247,0.14), transparent 42%),
+    radial-gradient(circle at 50% 100%, rgba(255,61,129,0.10), transparent 45%),
+    radial-gradient(circle, rgba(255,255,255,0.045) 1px, transparent 1.6px) 0 0/22px 22px,
     var(--bg);
   color: var(--text);
   min-height: 100vh;
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:0;
+  background: repeating-linear-gradient(115deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 26px);
+  animation: heroStripes 70s linear infinite;
+  pointer-events:none;
+}
+@media (prefers-reduced-motion: reduce){
+  body::before{ animation: none; }
 }
 a{ color:inherit; text-decoration:none; }
 button{ font-family: inherit; cursor:pointer; }
@@ -93,6 +106,8 @@ img{ max-width:100%; display:block; }
   display:flex;
   flex-direction:column;
   min-height: 100vh;
+  position: relative;
+  z-index: 1;
 }
 
 /* ---------- Top nav (logo + search row, horizontal category bar) ---------- */
@@ -100,10 +115,20 @@ img{ max-width:100%; display:block; }
   position: sticky;
   top:0;
   z-index: 60;
+  overflow: hidden;
   background: linear-gradient(180deg, #05060d 0%, #070a17 55%, #0a1128 100%);
   border-bottom: 2px solid transparent;
   border-image: var(--accent-grad) 1;
 }
+.topbar::before{
+  content:"";
+  position:absolute;
+  inset: -50% -20%;
+  background: repeating-linear-gradient(115deg, rgba(255,255,255,0.03) 0 2px, transparent 2px 26px);
+  animation: heroStripes 40s linear infinite;
+  pointer-events:none;
+}
+.topbar-row, .cat-nav{ position:relative; z-index:1; }
 .topbar-row{
   display:flex;
   align-items:center;
@@ -426,8 +451,9 @@ img{ max-width:100%; display:block; }
 }
 .game-grid.collage .game-card{
   height:100%;
-  border-radius: 3px;
+  border-radius: 9px;
   border: none;
+  overflow: hidden;
 }
 .game-grid.collage .game-card::before{ display:none; }
 .game-grid.collage .game-card:hover{
