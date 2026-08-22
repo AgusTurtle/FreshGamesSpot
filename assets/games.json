@@ -8,6 +8,7 @@
     "category": "Shooting",
     "tags": "Rooftop Snipers, 2 Player, Sniper, Shooting, Hot, Popular",
     "thumb": "https://img.gamedistribution.com/c3a70ae98547407a92ebedca8b79fdfa-512x512.jpeg",
+    "preview": "assets/previews/gd-rooftop-snipers.webm",
     "width": "960",
     "height": "600",
     "popularity": 6
@@ -21,6 +22,7 @@
     "category": "Arcade",
     "tags": "Stickman, Swing, Hook, Physics, Hot, Popular",
     "thumb": "https://img.gamemonetize.com/s9lk2v2gr5fmjg8wmy913dqx6wswmwwe/512x384.jpg",
+    "preview": "assets/previews/gm-stickman-hook.webm",
     "width": "800",
     "height": "600",
     "popularity": 6
@@ -34,6 +36,7 @@
     "category": "Sports",
     "tags": "Soccer, Football, Sports, 2 Player, Random, Hot, Multiplayer",
     "thumb": "https://img.gamemonetize.com/3n1k20ccttp0hvvr6ox2b41a8ibha9x3/512x384.jpg",
+    "preview": "assets/previews/gm-soccer-random.webm",
     "width": "800",
     "height": "600",
     "popularity": 0
@@ -47,6 +50,7 @@
     "category": "Sports",
     "tags": "Basketball, Sports, 2 Player, Random, Hot, Multiplayer",
     "thumb": "https://img.gamemonetize.com/anaaahgt57d5t2tddrbc1m4qq97vz1jd/512x384.jpg",
+    "preview": "assets/previews/gm-basket-random.webm",
     "width": "800",
     "height": "600",
     "popularity": 0
@@ -60,6 +64,7 @@
     "category": "Sports",
     "tags": "Boxing, Fighting, Sports, 2 Player, Random, Hot, Multiplayer",
     "thumb": "https://img.gamemonetize.com/p4pa453tundv6gm5t1af3633vq0nay9r/512x384.jpg",
+    "preview": "assets/previews/gm-boxing-random.webm",
     "width": "800",
     "height": "600",
     "popularity": 0
@@ -73,6 +78,7 @@
     "category": "Sports",
     "tags": "Volleyball, Sports, 2 Player, Random, Hot, Multiplayer",
     "thumb": "https://img.gamemonetize.com/h70hk41lfd8ytt1c8lem2n4u00m28t8q/512x384.jpg",
+    "preview": "assets/previews/gm-volley-random.webm",
     "width": "800",
     "height": "600",
     "popularity": 0
@@ -86,6 +92,7 @@
     "category": "Multiplayer",
     "tags": "Getaway Shootout, 2 Player, Multiplayer, Physics, Hot, Popular",
     "thumb": "https://image.winudf.com/v2/image1/Y29tLk5ld0VpY2hHYW1lcy5HZXRhd2F5U2hvb3RvdXRfaWNvbl8xNjc1MTI2NDYxXzA0NA/icon.png?w=512&fakeurl=1",
+    "preview": "assets/previews/tpg-getaway-shootout.webm",
     "width": "960",
     "height": "600",
     "popularity": 0
@@ -99,6 +106,7 @@
     "category": "2 Player",
     "tags": "MiniBattles, 2 Player, Multiplayer, Party, Hot, Popular",
     "thumb": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=512,height=512,fit=cover,f=png/ea575cd4-dfc3-4892-9bfd-25a406061b3e/12-minibattles-logo.png",
+    "preview": "assets/previews/gm-12-minibattles.webm",
     "width": "800",
     "height": "600",
     "popularity": 0
@@ -112,6 +120,7 @@
     "category": "Multiplayer",
     "tags": "Temple of Boom, 2 Player, Shooting, Arena, Hot, Popular",
     "thumb": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=512,height=512,fit=cover,f=png/d710fe8830d731072485a582881605ea/temple-of-boom-logo.png",
+    "preview": "assets/previews/tpg-temple-of-boom.webm",
     "width": "960",
     "height": "600",
     "popularity": 0
@@ -125,6 +134,7 @@
     "category": "Arcade",
     "tags": "T-Rex, Runner, Dinosaur, Open Source, Endless",
     "thumb": "https://image.winudf.com/v2/image1/Y29tLmRlZXJzbGFiLmRpbm9UUkVYX2ljb25fMTc4NDMxNDI0MV8wNTc/icon.png?w=512&fakeurl=1",
+    "preview": "assets/previews/os-trex-runner.webm",
     "width": "800",
     "height": "400",
     "popularity": 0

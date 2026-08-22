@@ -277,6 +277,34 @@
     };
     thumbWrap.appendChild(img);
 
+    // Hover preview: swap the static thumbnail for a short looping gameplay
+    // clip while the pointer is over the tile. The <video> stays out of the
+    // DOM's initial network activity (preload="none") until hover actually
+    // requests it, so idle browsing the grid costs nothing extra.
+    if (game.preview){
+      const video = document.createElement("video");
+      video.className = "thumb-preview";
+      video.src = game.preview;
+      video.muted = true;
+      video.loop = true;
+      video.playsInline = true;
+      video.preload = "none";
+      thumbWrap.appendChild(video);
+      let hoverTimer = null;
+      thumbWrap.addEventListener("pointerenter", () => {
+        hoverTimer = setTimeout(() => {
+          video.currentTime = 0;
+          video.play().catch(() => {});
+          thumbWrap.classList.add("show-preview");
+        }, 150);
+      });
+      thumbWrap.addEventListener("pointerleave", () => {
+        clearTimeout(hoverTimer);
+        thumbWrap.classList.remove("show-preview");
+        video.pause();
+      });
+    }
+
     const playBadge = document.createElement("div");
     playBadge.className = "play-badge";
     playBadge.innerHTML = `<span>${iconSvg("play")}</span>`;

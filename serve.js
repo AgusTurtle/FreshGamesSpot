@@ -17,6 +17,7 @@ const mime = {
   ".png": "image/png",
   ".jpg": "image/jpeg",
   ".jpeg": "image/jpeg",
+  ".webm": "video/webm",
 };
 
 function loadGames(){
