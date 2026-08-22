@@ -3,7 +3,7 @@
   --sidebar-text: #8b93b8;
   --sidebar-text-active: #ffffff;
   --sidebar-hover: #131a2e;
-  --bg: #0a0d1c;
+  --bg: #06070f;
   --bg-card: #131832;
   --bg-elev: #181f3d;
   --border: #262c52;
@@ -52,14 +52,23 @@ body{
   color: var(--text);
   min-height: 100vh;
 }
+/* Page background stays plain dots + slow glows -- no diagonal stripes,
+   so it reads as a distinct backdrop behind the striped hero/topbar
+   instead of blending into one flat surface. */
 body::before{
   content:"";
   position:fixed;
   inset:0;
   z-index:0;
-  background: repeating-linear-gradient(115deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 26px);
-  animation: heroStripes 70s linear infinite;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(56,217,255,0.05), transparent 35%),
+    radial-gradient(circle at 80% 70%, rgba(255,61,129,0.05), transparent 35%);
+  animation: bgGlowDrift 26s ease-in-out infinite;
   pointer-events:none;
+}
+@keyframes bgGlowDrift{
+  0%, 100%{ transform: translate(0,0); }
+  50%{ transform: translate(-3%, 3%); }
 }
 @media (prefers-reduced-motion: reduce){
   body::before{ animation: none; }
