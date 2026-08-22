@@ -203,7 +203,7 @@ function proxyGame(id, res){
 // the game never boots (black screen, no console-visible cause beyond a
 // CORS error). Proxying the asset itself makes the request same-origin,
 // which sidesteps CORS entirely.
-function proxyAsset(id, assetPath, search, res, refererId){
+function proxyAsset(id, assetPath, search, res, refererId, range){
   let game;
   try { game = findGame(id); }
   catch (e){
@@ -220,7 +220,7 @@ function proxyAsset(id, assetPath, search, res, refererId){
       : (lastPlayedId && findGame(lastPlayedId)) ? lastPlayedId
       : null;
     if (recoveredId){
-      proxyAsset(recoveredId, id + "/" + assetPath, search, res);
+      proxyAsset(recoveredId, id + "/" + assetPath, search, res, undefined, range);
       return;
     }
     res.writeHead(404); res.end(); return;
@@ -233,26 +233,36 @@ function proxyAsset(id, assetPath, search, res, refererId){
     res.writeHead(400); res.end(); return;
   }
 
-  fetchAndPipe(target, res, 0);
+  fetchAndPipe(target, res, 0, range);
 }
 
-function fetchAndPipe(url, res, redirectCount){
-  https.get(url, (upstream) => {
+// Some engines (seen on Construct3's audio worker) fetch their own asset
+// files with a Range header for streaming/seeking and choke on getting back
+// a full 200 response instead of the 206 Partial Content they asked for --
+// forwarding Range through, and passing the upstream's 206/Content-Range
+// back, keeps that contract intact instead of always serving the whole file.
+function fetchAndPipe(url, res, redirectCount, range){
+  const parsedUrl = new URL(url);
+  const headers = {};
+  if (range) headers.Range = range;
+  https.get(parsedUrl, { headers }, (upstream) => {
     if (upstream.statusCode >= 300 && upstream.statusCode < 400 && upstream.headers.location && redirectCount < 5){
       const next = new URL(upstream.headers.location, url).href;
       upstream.resume();
-      fetchAndPipe(next, res, redirectCount + 1);
+      fetchAndPipe(next, res, redirectCount + 1, range);
       return;
     }
-    const headers = {};
-    if (upstream.headers["content-type"]) headers["Content-Type"] = upstream.headers["content-type"];
-    if (upstream.headers["content-length"]) headers["Content-Length"] = upstream.headers["content-length"];
+    const outHeaders = {};
+    if (upstream.headers["content-type"]) outHeaders["Content-Type"] = upstream.headers["content-type"];
+    if (upstream.headers["content-length"]) outHeaders["Content-Length"] = upstream.headers["content-length"];
+    if (upstream.headers["content-range"]) outHeaders["Content-Range"] = upstream.headers["content-range"];
+    if (upstream.headers["accept-ranges"]) outHeaders["Accept-Ranges"] = upstream.headers["accept-ranges"];
     // Unity WebGL builds (seen in GameDistribution-sourced games) serve
     // their data/wasm files gzip-encoded and rely on the browser to
     // decompress via this header -- without forwarding it the piped bytes
     // decode as garbage.
-    if (upstream.headers["content-encoding"]) headers["Content-Encoding"] = upstream.headers["content-encoding"];
-    res.writeHead(upstream.statusCode || 200, headers);
+    if (upstream.headers["content-encoding"]) outHeaders["Content-Encoding"] = upstream.headers["content-encoding"];
+    res.writeHead(upstream.statusCode || 200, outHeaders);
     upstream.pipe(res);
   }).on("error", () => {
     res.writeHead(502); res.end();
@@ -318,7 +328,7 @@ http.createServer((req, res) => {
     // Referer (the real /play/<id>/... page) when the parsed id is bogus.
     const referer = req.headers.referer || "";
     const refMatch = referer.match(/\/play\/([^/]+)\//);
-    proxyAsset(decodeURIComponent(playAssetMatch[1]), playAssetMatch[2], search, res, refMatch && decodeURIComponent(refMatch[1]));
+    proxyAsset(decodeURIComponent(playAssetMatch[1]), playAssetMatch[2], search, res, refMatch && decodeURIComponent(refMatch[1]), req.headers.range);
     return;
   }
 
