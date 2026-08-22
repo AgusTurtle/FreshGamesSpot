@@ -169,16 +169,29 @@
     "popularity": 5
   },
   {
-    "id": "gm-moto-x3m",
-    "title": "Moto X3M",
-    "description": "Bike stunt racing across explosive obstacle courses. Land your tricks and beat the clock without wiping out.",
-    "instructions": "Arrow keys to drive and lean, tricks happen automatically in the air.",
-    "url": "https://html5.gamemonetize.co/dpjd4cafq7knxvebtsvl23isv9o0d3vq/",
+    "id": "gm-helix-jump",
+    "title": "Helix Jump",
+    "description": "Drop the bouncing ball down the spiral tower, dodging the black platforms as you fall. Fast, addictive, one-touch arcade action.",
+    "instructions": "Click/tap and hold to rotate the tower. Release to let the ball fall.",
+    "url": "https://html5.gamemonetize.games/ghzimuehf6yw4vkdaywk1s9x3mrbgq0w/",
     "category": "Arcade",
-    "tags": "Moto X3M, Racing, Stunts, Bike, Popular",
-    "thumb": "https://img.gamemonetize.com/dpjd4cafq7knxvebtsvl23isv9o0d3vq/512x384.jpg",
+    "tags": "Helix Jump, Arcade, Falling, Popular",
+    "thumb": "https://img.gamemonetize.com/ghzimuehf6yw4vkdaywk1s9x3mrbgq0w/512x384.jpg",
     "width": "800",
     "height": "600",
-    "popularity": 4
+    "popularity": 3
+  },
+  {
+    "id": "gm-crazy-roll-3d",
+    "title": "Crazy Roll 3D",
+    "description": "Roll your ball through twisting neon obstacle courses. Simple controls, satisfying momentum-based physics.",
+    "instructions": "Move left/right to steer the ball as it rolls forward automatically.",
+    "url": "https://html5.gamemonetize.games/lnpa1upaej58vdday8l9v9cekd47e9fz/",
+    "category": "Arcade",
+    "tags": "Crazy Roll, Ball, Arcade, 3D",
+    "thumb": "https://img.gamemonetize.com/lnpa1upaej58vdday8l9v9cekd47e9fz/512x384.jpg",
+    "width": "800",
+    "height": "600",
+    "popularity": 3
   }
 ]
