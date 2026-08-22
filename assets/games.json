@@ -128,44 +128,5 @@
     "width": "800",
     "height": "400",
     "popularity": 0
-  },
-  {
-    "id": "gm-basketball-stars",
-    "title": "Basketball Stars",
-    "description": "1-on-1 basketball action. Shoot, dunk, and steal your way to victory against the computer or a friend.",
-    "instructions": "Move with arrow keys, shoot/steal with the action button shown on screen.",
-    "url": "https://html5.gamemonetize.co/rqh4acdr5ufucw4pfeazjxq0qaftgnv8/",
-    "category": "Sports",
-    "tags": "Basketball, Sports, 2 Player, Popular",
-    "thumb": "https://img.gamemonetize.com/rqh4acdr5ufucw4pfeazjxq0qaftgnv8/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 4
-  },
-  {
-    "id": "gm-geometry-dash-lite",
-    "title": "Geometry Dash Lite",
-    "description": "Jump and fly your way through danger in this rhythm-based platformer. Simple one-touch controls, brutal precision required.",
-    "instructions": "Click, tap, or press Space to jump. Time it to the beat.",
-    "url": "https://html5.gamemonetize.co/8e6oh4iwje2mcozfxc41lxtsbxyqpb43/",
-    "category": "Arcade",
-    "tags": "Geometry Dash, Platformer, Rhythm, Popular",
-    "thumb": "https://img.gamemonetize.com/8e6oh4iwje2mcozfxc41lxtsbxyqpb43/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 5
-  },
-  {
-    "id": "gm-apple-worm",
-    "title": "Apple Worm",
-    "description": "A cute brainteaser with crawling mechanics. Help the apple-loving worm collect every apple and reach the portal without getting stuck.",
-    "instructions": "Arrow keys to move. Plan your path carefully -- the worm's body blocks itself.",
-    "url": "https://html5.gamemonetize.games/sfqpupotxsy5s66o0mklu0umst3a2hpz/",
-    "category": "Puzzle",
-    "tags": "Apple Worm, Puzzle, Brainteaser, Popular",
-    "thumb": "https://img.gamemonetize.com/sfqpupotxsy5s66o0mklu0umst3a2hpz/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 3
   }
 ]
