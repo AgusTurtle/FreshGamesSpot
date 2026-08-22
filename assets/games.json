@@ -115,5 +115,31 @@
     "width": "960",
     "height": "600",
     "popularity": 0
+  },
+  {
+    "id": "os-2048",
+    "title": "2048",
+    "description": "The addictive sliding tile puzzle that started as an open-source project and went viral. Merge matching numbers to reach the 2048 tile.",
+    "instructions": "Use the arrow keys to slide all tiles. Matching tiles merge into one when they touch.",
+    "url": "https://gabrielecirulli.github.io/2048/",
+    "category": "Puzzle",
+    "tags": "2048, Puzzle, Numbers, Open Source, Hot, Popular",
+    "thumb": "https://image.winudf.com/v2/image1/Y29tLmdhYnJpZWxlY2lydWxsaS5hcHAyMDQ4X2ljb25fMTU0NTEzODU4Ml8wODI/icon.png?w=512&fakeurl=1",
+    "width": "800",
+    "height": "600",
+    "popularity": 6
+  },
+  {
+    "id": "os-trex-runner",
+    "title": "T-Rex Runner",
+    "description": "The offline dinosaur runner, open-sourced as its own standalone game. Jump over cacti and duck under birds for as long as you can survive.",
+    "instructions": "Press Space or Up to jump. Press Down to duck.",
+    "url": "https://wayou.github.io/t-rex-runner/",
+    "category": "Arcade",
+    "tags": "T-Rex, Runner, Dinosaur, Open Source, Endless",
+    "thumb": "assets/thumb-trex.png",
+    "width": "800",
+    "height": "400",
+    "popularity": 0
   }
 ]

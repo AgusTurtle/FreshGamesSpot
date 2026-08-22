@@ -138,6 +138,13 @@ const GAME_ALLOWED_HOSTS = [
   // build's compiled assets, not something a proxy can strip) -- no ad
   // SDK in the HTML, verified with no failed/ad-related requests on load.
   "https://mi-go45.github.io",
+  // Open-source games that became famous as GitHub projects themselves,
+  // self-hosted straight from their own GitHub Pages demo (MIT/BSD
+  // licensed) -- the author's own demo page embeds AdSense, but our CSP
+  // never allow-lists googlesyndication/doubleclick, so that script just
+  // fails to load through our proxy instead of showing ads.
+  "https://gabrielecirulli.github.io",
+  "https://wayou.github.io",
 ].join(" ");
 
 const CDN_HOSTS = [
