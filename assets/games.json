@@ -141,5 +141,31 @@
     "width": "800",
     "height": "600",
     "popularity": 3
+  },
+  {
+    "id": "gm-doodle-jump",
+    "title": "Doodle Jump",
+    "description": "The classic hand-drawn platform jumper. Bounce the doodler ever higher, dodging monsters and grabbing power-ups.",
+    "instructions": "Move left/right with arrow keys or mouse. Land on platforms to keep bouncing upward.",
+    "url": "https://html5.gamemonetize.games/olb8b8mrvsa1ln4h0s5i210wnhf3kw38/",
+    "category": "Arcade",
+    "tags": "Doodle Jump, Platformer, Arcade, Popular",
+    "thumb": "https://img.gamemonetize.com/olb8b8mrvsa1ln4h0s5i210wnhf3kw38/512x384.jpg",
+    "width": "800",
+    "height": "600",
+    "popularity": 4
+  },
+  {
+    "id": "gm-head-soccer",
+    "title": "Head Soccer",
+    "description": "Big-head 1-on-1 soccer battles. Pick your character and headbutt or kick the ball past the goalkeeper to score.",
+    "instructions": "Move with arrow keys, jump to head the ball, kick to shoot.",
+    "url": "https://html5.gamemonetize.games/qzpme4zjjid204cb81dfhommj2a8l46c/",
+    "category": "Sports",
+    "tags": "Head Soccer, Sports, Football, 2 Player, Popular",
+    "thumb": "https://img.gamemonetize.com/qzpme4zjjid204cb81dfhommj2a8l46c/512x384.jpg",
+    "width": "800",
+    "height": "600",
+    "popularity": 3
   }
 ]
