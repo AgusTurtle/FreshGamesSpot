@@ -76,5 +76,18 @@
     "width": "800",
     "height": "600",
     "popularity": 0
+  },
+  {
+    "id": "tpg-getaway-shootout",
+    "title": "Getaway Shootout",
+    "description": "Race to the extraction point by jumping! Dodge obstacles, grab weapons, and out-jump the competition in this wild multiplayer game.",
+    "instructions": "Player 1: A/D to lean, W to jump. Player 2: arrow keys to lean, up to jump. Grab weapons along the way.",
+    "url": "https://files.twoplayergames.org/files/games/other/Getaway_Shootout/index.html",
+    "category": "Multiplayer",
+    "tags": "Getaway Shootout, 2 Player, Multiplayer, Physics, Hot, Popular",
+    "thumb": "https://images.crazygames.com/getawayshootoutb.png?auto=format,compress&ch=DPR&q=90&cs=strip&w=360",
+    "width": "960",
+    "height": "600",
+    "popularity": 0
   }
 ]

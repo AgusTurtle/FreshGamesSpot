@@ -131,6 +131,11 @@ const GAME_ALLOWED_HOSTS = [
   // games.json pointing straight at the actual asset path (see resolveGameDistributionUrl)
   // instead of the wrapper -- same host, no ad SDK ever gets a chance to load.
   "https://html5.gamedistribution.com",
+  // Getaway Shootout isn't distributed through GameMonetize or
+  // GameDistribution's open catalogs (it's a Poki/CrazyGames exclusive) --
+  // this host serves the bare Unity WebGL build with no ad SDK in the HTML
+  // at all, unlike the CrazyGames-hosted mirror which bundles their ad SDK.
+  "https://files.twoplayergames.org",
 ].join(" ");
 
 const CDN_HOSTS = [
