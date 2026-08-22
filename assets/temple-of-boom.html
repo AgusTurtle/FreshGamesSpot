@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Temple of Boom</title>
+<style>
+  html, body { margin:0; padding:0; background:#000; width:100%; height:100%; overflow:hidden; }
+  embed { width:100%; height:100%; display:block; }
+</style>
+</head>
+<body>
+<!--
+  Temple of Boom only ever shipped as Flash. Ruffle (an open-source,
+  ad-free Flash emulator, https://ruffle.rs) runs the original .swf
+  natively in-browser via WebAssembly -- no Flash plugin, no ad SDK,
+  nothing but our own markup and Ruffle's own script.
+
+  Built via the JS API (not an <embed>/<object> tag) because our game
+  CSP sets object-src 'none' to keep real Flash/plugin-based ad embeds
+  out -- Ruffle's <ruffle-player> is a plain custom element created in
+  script, so it's governed by script-src instead, which already allows
+  this page's own script.
+-->
+<script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+<script>
+  window.RufflePlayer = window.RufflePlayer || {};
+  window.addEventListener("DOMContentLoaded", () => {
+    const ruffle = window.RufflePlayer.newest();
+    const player = ruffle.createPlayer();
+    player.style.width = "100%";
+    player.style.height = "100%";
+    document.body.appendChild(player);
+    player.load("https://files.twoplayergames.org/files/games/other/Temple_of_Boom.swf");
+  });
+</script>
+</body>
+</html>

@@ -89,5 +89,44 @@
     "width": "960",
     "height": "600",
     "popularity": 0
+  },
+  {
+    "id": "gm-12-minibattles",
+    "title": "12 MiniBattles",
+    "description": "A casual two-player game featuring various minigames with 36 uniquely chaotic mini-battles, each with simple one-button controls. Golf, wrestling, axe battle, football, duels and more.",
+    "instructions": "Player 1: W. Player 2: Up arrow. Each minigame uses just one button per player.",
+    "url": "https://html5.gamemonetize.games/nuiyi3o2g6fktyjda55g42v3qe5a3hbq/",
+    "category": "2 Player",
+    "tags": "MiniBattles, 2 Player, Multiplayer, Party, Hot, Popular",
+    "thumb": "https://img.gamemonetize.com/nuiyi3o2g6fktyjda55g42v3qe5a3hbq/512x384.jpg",
+    "width": "800",
+    "height": "600",
+    "popularity": 0
+  },
+  {
+    "id": "gm-level-devil",
+    "title": "Level Devil",
+    "description": "A tricky platformer full of unexpected traps and troll-style twists. Nothing is what it seems -- watch every step, because the level itself is out to get you.",
+    "instructions": "Arrow keys or WASD to move and jump. Expect the unexpected.",
+    "url": "https://html5.gamemonetize.games/wewd0t0oc9hqqpz7vl33lw4hmfc0r2cp/",
+    "category": "Arcade",
+    "tags": "Level Devil, Platformer, Troll, Puzzle, Hot, Popular",
+    "thumb": "https://img.gamemonetize.com/wewd0t0oc9hqqpz7vl33lw4hmfc0r2cp/512x384.jpg",
+    "width": "800",
+    "height": "600",
+    "popularity": 0
+  },
+  {
+    "id": "tpg-temple-of-boom",
+    "title": "Temple of Boom",
+    "description": "A fast-paced, retro-styled platform arena shooter. Be the last one standing in the Temple of Boom, solo or against a friend.",
+    "instructions": "Player 1: WASD to move, F to shoot. Player 2: arrow keys to move, M to shoot.",
+    "url": "https://freshgamespot.net/assets/temple-of-boom.html",
+    "category": "Multiplayer",
+    "tags": "Temple of Boom, 2 Player, Shooting, Arena, Hot, Popular",
+    "thumb": "https://images.twoplayergames.org/files/games/other/temple-of-boom.jpg?auto=format&w=512",
+    "width": "960",
+    "height": "600",
+    "popularity": 0
   }
 ]
