@@ -154,5 +154,18 @@
     "width": "800",
     "height": "600",
     "popularity": 5
+  },
+  {
+    "id": "gm-apple-worm",
+    "title": "Apple Worm",
+    "description": "A cute brainteaser with crawling mechanics. Help the apple-loving worm collect every apple and reach the portal without getting stuck.",
+    "instructions": "Arrow keys to move. Plan your path carefully -- the worm's body blocks itself.",
+    "url": "https://html5.gamemonetize.games/sfqpupotxsy5s66o0mklu0umst3a2hpz/",
+    "category": "Puzzle",
+    "tags": "Apple Worm, Puzzle, Brainteaser, Popular",
+    "thumb": "https://img.gamemonetize.com/sfqpupotxsy5s66o0mklu0umst3a2hpz/512x384.jpg",
+    "width": "800",
+    "height": "600",
+    "popularity": 3
   }
 ]
