@@ -736,7 +736,6 @@
       SERVER_VOTES = votes || {};
       buildCategories();
       updateView();
-      document.getElementById("heroGameCount").textContent = `${GAMES.length}`;
       refreshLiveBadges();
       liveCountsTimer = setInterval(refreshLiveBadges, LIVE_POLL_MS);
     })

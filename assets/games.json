@@ -92,7 +92,6 @@
     "category": "Multiplayer",
     "tags": "Getaway Shootout, 2 Player, Multiplayer, Physics, Hot, Popular",
     "thumb": "https://image.winudf.com/v2/image1/Y29tLk5ld0VpY2hHYW1lcy5HZXRhd2F5U2hvb3RvdXRfaWNvbl8xNjc1MTI2NDYxXzA0NA/icon.png?w=512&fakeurl=1",
-    "preview": "assets/previews/tpg-getaway-shootout.webm",
     "width": "960",
     "height": "600",
     "popularity": 0
@@ -120,7 +119,6 @@
     "category": "Multiplayer",
     "tags": "Temple of Boom, 2 Player, Shooting, Arena, Hot, Popular",
     "thumb": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=512,height=512,fit=cover,f=png/d710fe8830d731072485a582881605ea/temple-of-boom-logo.png",
-    "preview": "assets/previews/tpg-temple-of-boom.webm",
     "width": "960",
     "height": "600",
     "popularity": 0
@@ -138,5 +136,83 @@
     "width": "800",
     "height": "400",
     "popularity": 0
+  },
+  {
+    "id": "gm-fireboy-watergirl",
+    "title": "Fireboy and Watergirl",
+    "description": "The classic co-op puzzle-platformer. Guide Fireboy through lava and Watergirl through water, and get both of them to their doors together.",
+    "instructions": "Player 1 (Fireboy): arrow keys to move. Player 2 (Watergirl): W/A/D to move.",
+    "url": "https://html5.gamemonetize.co/t51t0kkjmrw77cfb5a8d3fy7dh77l1yt/",
+    "category": "Puzzle",
+    "tags": "Fireboy, Watergirl, Puzzle, Co-op, 2 Player, Hot, Popular",
+    "thumb": "https://img.gamemonetize.com/t51t0kkjmrw77cfb5a8d3fy7dh77l1yt/512x384.jpg",
+    "width": "800",
+    "height": "600",
+    "popularity": 5
+  },
+  {
+    "id": "gm-cut-the-rope",
+    "title": "Cut the Rope",
+    "description": "The famous physics puzzle game. Cut the ropes in the right order to feed candy to Om Nom, the little green monster.",
+    "instructions": "Click/tap a rope to cut it. Collect the stars along the way.",
+    "url": "https://html5.gamemonetize.co/0po1nwk3ebjwjsatsj4bpjzceeh72n83/",
+    "category": "Puzzle",
+    "tags": "Cut the Rope, Puzzle, Physics, Om Nom, Popular",
+    "thumb": "https://img.gamemonetize.com/0po1nwk3ebjwjsatsj4bpjzceeh72n83/512x384.jpg",
+    "width": "800",
+    "height": "600",
+    "popularity": 5
+  },
+  {
+    "id": "gm-subway-surfers",
+    "title": "Subway Surfers",
+    "description": "Dash through the subway, dodge trains, and outrun the grumpy inspector in this endless runner.",
+    "instructions": "Swipe or use arrow keys to move sideways, jump, and roll.",
+    "url": "https://html5.gamemonetize.games/12b8whsjuoo362g7nvr31fxzbs19jnrl/",
+    "category": "Arcade",
+    "tags": "Subway Surfers, Runner, Endless, Hot, Popular",
+    "thumb": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=512,height=512,fit=cover,f=png/1c920b9279c2bedec567c1b58129ae8f/subway-surfers-logo.png",
+    "width": "800",
+    "height": "600",
+    "popularity": 6
+  },
+  {
+    "id": "gm-basketball-stars",
+    "title": "Basketball Stars",
+    "description": "1-on-1 basketball action. Shoot, dunk, and steal your way to victory against the computer or a friend.",
+    "instructions": "Move with arrow keys, shoot/steal with the action button shown on screen.",
+    "url": "https://html5.gamemonetize.co/rqh4acdr5ufucw4pfeazjxq0qaftgnv8/",
+    "category": "Sports",
+    "tags": "Basketball, Sports, 2 Player, Popular",
+    "thumb": "https://img.gamemonetize.com/rqh4acdr5ufucw4pfeazjxq0qaftgnv8/512x384.jpg",
+    "width": "800",
+    "height": "600",
+    "popularity": 4
+  },
+  {
+    "id": "gm-geometry-dash-lite",
+    "title": "Geometry Dash Lite",
+    "description": "Jump and fly your way through danger in this rhythm-based platformer. Simple one-touch controls, brutal precision required.",
+    "instructions": "Click, tap, or press Space to jump. Time it to the beat.",
+    "url": "https://html5.gamemonetize.co/8e6oh4iwje2mcozfxc41lxtsbxyqpb43/",
+    "category": "Arcade",
+    "tags": "Geometry Dash, Platformer, Rhythm, Popular",
+    "thumb": "https://img.gamemonetize.com/8e6oh4iwje2mcozfxc41lxtsbxyqpb43/512x384.jpg",
+    "width": "800",
+    "height": "600",
+    "popularity": 5
+  },
+  {
+    "id": "gm-moto-x3m",
+    "title": "Moto X3M",
+    "description": "Bike stunt racing across explosive obstacle courses. Land your tricks and beat the clock without wiping out.",
+    "instructions": "Arrow keys to drive and lean, tricks happen automatically in the air.",
+    "url": "https://html5.gamemonetize.co/dpjd4cafq7knxvebtsvl23isv9o0d3vq/",
+    "category": "Arcade",
+    "tags": "Moto X3M, Racing, Stunts, Bike, Popular",
+    "thumb": "https://img.gamemonetize.com/dpjd4cafq7knxvebtsvl23isv9o0d3vq/512x384.jpg",
+    "width": "800",
+    "height": "600",
+    "popularity": 4
   }
 ]
