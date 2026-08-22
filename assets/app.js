@@ -243,16 +243,9 @@
     return activeCategory === "Todos" && !searchTerm && !showingFavorites;
   }
 
-  // Deterministic per-game tile size for the dense home "collage" grid
-  // (poki.com/es-style mosaic of mixed tile sizes) -- same id always gets
-  // the same size, so the layout doesn't jump around between renders.
-  function tileSizeClass(game){
-    if (game.popularity > 0) return "tile-big";
-    let h = 0;
-    for (let i = 0; i < game.id.length; i++) h = (h * 31 + game.id.charCodeAt(i)) | 0;
-    const r = Math.abs(h) % 100;
-    if (r < 8) return "tile-big";
-    if (r < 30) return "tile-wide";
+  // All home tiles render at the same uniform size now -- a symmetric grid,
+  // not a mixed mosaic -- so every thumbnail crops consistently.
+  function tileSizeClass(){
     return "";
   }
 

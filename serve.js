@@ -306,6 +306,10 @@ function pipeGameHtml(upstream, game, res){
     res.writeHead(200, {
       "Content-Type": "text/html; charset=utf-8",
       "Content-Security-Policy": GAME_CSP,
+      // Same reasoning as the asset proxy: a broken embed URL fixed at the
+      // origin should never keep getting served stale from an edge/browser
+      // cache -- this exact thing already happened once with Level Devil.
+      "Cache-Control": "no-store",
     });
     res.end(html);
   });
