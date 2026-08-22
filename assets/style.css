@@ -252,10 +252,23 @@ img{ max-width:100%; display:block; }
   border-radius: 20px;
   padding: 40px 32px;
   margin-bottom: 24px;
-  background:
-    repeating-linear-gradient(115deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 26px),
-    linear-gradient(120deg, #090b18 0%, #0f1130 55%, #170f2e 100%);
+  background: linear-gradient(120deg, #090b18 0%, #0f1130 55%, #170f2e 100%);
   border: 1px solid #23264a;
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  inset: -50% -20%;
+  background: repeating-linear-gradient(115deg, rgba(255,255,255,0.03) 0 2px, transparent 2px 26px);
+  animation: heroStripes 40s linear infinite;
+  pointer-events:none;
+}
+@keyframes heroStripes{
+  from{ transform: translate(0, 0); }
+  to{ transform: translate(120px, 60px); }
+}
+@media (prefers-reduced-motion: reduce){
+  .hero::before{ animation: none; }
 }
 .hero-glow{
   position:absolute;
@@ -264,6 +277,7 @@ img{ max-width:100%; display:block; }
   background: radial-gradient(circle, rgba(56,217,255,0.35), transparent 70%);
   filter: blur(10px);
   pointer-events:none;
+  animation: heroDrift1 14s ease-in-out infinite;
 }
 .hero-glow-2{
   position:absolute;
@@ -272,6 +286,18 @@ img{ max-width:100%; display:block; }
   background: radial-gradient(circle, rgba(255,61,129,0.28), transparent 70%);
   filter: blur(10px);
   pointer-events:none;
+  animation: heroDrift2 18s ease-in-out infinite;
+}
+@keyframes heroDrift1{
+  0%, 100%{ transform: translate(0, 0) scale(1); }
+  50%{ transform: translate(-40px, 30px) scale(1.15); }
+}
+@keyframes heroDrift2{
+  0%, 100%{ transform: translate(0, 0) scale(1); }
+  50%{ transform: translate(35px, -25px) scale(1.12); }
+}
+@media (prefers-reduced-motion: reduce){
+  .hero-glow, .hero-glow-2{ animation: none; }
 }
 .hero-content{ position:relative; z-index:1; max-width: 620px; }
 .hero-kicker{
