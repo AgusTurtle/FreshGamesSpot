@@ -130,19 +130,6 @@
     "popularity": 0
   },
   {
-    "id": "gm-cut-the-rope",
-    "title": "Cut the Rope",
-    "description": "The famous physics puzzle game. Cut the ropes in the right order to feed candy to Om Nom, the little green monster.",
-    "instructions": "Click/tap a rope to cut it. Collect the stars along the way.",
-    "url": "https://html5.gamemonetize.co/0po1nwk3ebjwjsatsj4bpjzceeh72n83/",
-    "category": "Puzzle",
-    "tags": "Cut the Rope, Puzzle, Physics, Om Nom, Popular",
-    "thumb": "https://img.gamemonetize.com/0po1nwk3ebjwjsatsj4bpjzceeh72n83/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 5
-  },
-  {
     "id": "gm-basketball-stars",
     "title": "Basketball Stars",
     "description": "1-on-1 basketball action. Shoot, dunk, and steal your way to victory against the computer or a friend.",
@@ -167,31 +154,5 @@
     "width": "800",
     "height": "600",
     "popularity": 5
-  },
-  {
-    "id": "gm-helix-jump",
-    "title": "Helix Jump",
-    "description": "Drop the bouncing ball down the spiral tower, dodging the black platforms as you fall. Fast, addictive, one-touch arcade action.",
-    "instructions": "Click/tap and hold to rotate the tower. Release to let the ball fall.",
-    "url": "https://html5.gamemonetize.games/ghzimuehf6yw4vkdaywk1s9x3mrbgq0w/",
-    "category": "Arcade",
-    "tags": "Helix Jump, Arcade, Falling, Popular",
-    "thumb": "https://img.gamemonetize.com/ghzimuehf6yw4vkdaywk1s9x3mrbgq0w/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 3
-  },
-  {
-    "id": "gm-crazy-roll-3d",
-    "title": "Crazy Roll 3D",
-    "description": "Roll your ball through twisting neon obstacle courses. Simple controls, satisfying momentum-based physics.",
-    "instructions": "Move left/right to steer the ball as it rolls forward automatically.",
-    "url": "https://html5.gamemonetize.games/lnpa1upaej58vdday8l9v9cekd47e9fz/",
-    "category": "Arcade",
-    "tags": "Crazy Roll, Ball, Arcade, 3D",
-    "thumb": "https://img.gamemonetize.com/lnpa1upaej58vdday8l9v9cekd47e9fz/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 3
   }
 ]
