@@ -257,6 +257,11 @@ function fetchAndPipe(url, res, redirectCount, range){
     if (upstream.headers["content-length"]) outHeaders["Content-Length"] = upstream.headers["content-length"];
     if (upstream.headers["content-range"]) outHeaders["Content-Range"] = upstream.headers["content-range"];
     if (upstream.headers["accept-ranges"]) outHeaders["Accept-Ranges"] = upstream.headers["accept-ranges"];
+    // Range responses are per-request slices of the file -- letting
+    // Cloudflare/browsers cache them under the plain asset URL (no Vary on
+    // Range) is exactly how a 200-vs-206 mismatch like this one happens
+    // again later, serving a stale/wrong slice to a different range ask.
+    outHeaders["Cache-Control"] = "no-store";
     // Unity WebGL builds (seen in GameDistribution-sourced games) serve
     // their data/wasm files gzip-encoded and rely on the browser to
     // decompress via this header -- without forwarding it the piped bytes
