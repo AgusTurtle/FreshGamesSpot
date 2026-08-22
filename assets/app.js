@@ -707,6 +707,15 @@
       filtered = GAMES;
       SERVER_VOTES = votes || {};
       buildCategories();
+      // Support a shareable ?q=<term> deep link into search (matches the
+      // SearchAction declared in the page's JSON-LD) -- pre-fill the box
+      // and filter immediately instead of leaving it as a dead promise.
+      const qParam = new URLSearchParams(location.search).get("q");
+      if (qParam){
+        searchTerm = qParam.trim();
+        el.searchInput.value = searchTerm;
+        el.clearSearch.hidden = searchTerm.length === 0;
+      }
       updateView();
       refreshLiveBadges();
       liveCountsTimer = setInterval(refreshLiveBadges, LIVE_POLL_MS);
