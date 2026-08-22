@@ -132,10 +132,12 @@ const GAME_ALLOWED_HOSTS = [
   // instead of the wrapper -- same host, no ad SDK ever gets a chance to load.
   "https://html5.gamedistribution.com",
   // Getaway Shootout isn't distributed through GameMonetize or
-  // GameDistribution's open catalogs (it's a Poki/CrazyGames exclusive) --
-  // this host serves the bare Unity WebGL build with no ad SDK in the HTML
-  // at all, unlike the CrazyGames-hosted mirror which bundles their ad SDK.
-  "https://files.twoplayergames.org",
+  // GameDistribution's open catalogs (it's a Poki/CrazyGames exclusive).
+  // This GitHub Pages mirror serves the bare Unity WebGL build (the
+  // twoplayergames.org mirror worked too but bakes its own logo into the
+  // build's compiled assets, not something a proxy can strip) -- no ad
+  // SDK in the HTML, verified with no failed/ad-related requests on load.
+  "https://mi-go45.github.io",
 ].join(" ");
 
 const CDN_HOSTS = [
