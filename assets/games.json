@@ -8,7 +8,6 @@
     "category": "Shooting",
     "tags": "Rooftop Snipers, 2 Player, Sniper, Shooting, Hot, Popular",
     "thumb": "https://img.gamedistribution.com/c3a70ae98547407a92ebedca8b79fdfa-512x512.jpeg",
-    "preview": "assets/previews/gd-rooftop-snipers.webm",
     "width": "960",
     "height": "600",
     "popularity": 6
@@ -22,7 +21,6 @@
     "category": "Arcade",
     "tags": "Stickman, Swing, Hook, Physics, Hot, Popular",
     "thumb": "https://img.gamemonetize.com/s9lk2v2gr5fmjg8wmy913dqx6wswmwwe/512x384.jpg",
-    "preview": "assets/previews/gm-stickman-hook.webm",
     "width": "800",
     "height": "600",
     "popularity": 6
@@ -36,7 +34,6 @@
     "category": "Sports",
     "tags": "Soccer, Football, Sports, 2 Player, Random, Hot, Multiplayer",
     "thumb": "https://img.gamemonetize.com/3n1k20ccttp0hvvr6ox2b41a8ibha9x3/512x384.jpg",
-    "preview": "assets/previews/gm-soccer-random.webm",
     "width": "800",
     "height": "600",
     "popularity": 0
@@ -50,7 +47,6 @@
     "category": "Sports",
     "tags": "Basketball, Sports, 2 Player, Random, Hot, Multiplayer",
     "thumb": "https://img.gamemonetize.com/anaaahgt57d5t2tddrbc1m4qq97vz1jd/512x384.jpg",
-    "preview": "assets/previews/gm-basket-random.webm",
     "width": "800",
     "height": "600",
     "popularity": 0
@@ -64,7 +60,6 @@
     "category": "Sports",
     "tags": "Boxing, Fighting, Sports, 2 Player, Random, Hot, Multiplayer",
     "thumb": "https://img.gamemonetize.com/p4pa453tundv6gm5t1af3633vq0nay9r/512x384.jpg",
-    "preview": "assets/previews/gm-boxing-random.webm",
     "width": "800",
     "height": "600",
     "popularity": 0
@@ -78,7 +73,6 @@
     "category": "Sports",
     "tags": "Volleyball, Sports, 2 Player, Random, Hot, Multiplayer",
     "thumb": "https://img.gamemonetize.com/h70hk41lfd8ytt1c8lem2n4u00m28t8q/512x384.jpg",
-    "preview": "assets/previews/gm-volley-random.webm",
     "width": "800",
     "height": "600",
     "popularity": 0
@@ -105,7 +99,6 @@
     "category": "2 Player",
     "tags": "MiniBattles, 2 Player, Multiplayer, Party, Hot, Popular",
     "thumb": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=512,height=512,fit=cover,f=png/ea575cd4-dfc3-4892-9bfd-25a406061b3e/12-minibattles-logo.png",
-    "preview": "assets/previews/gm-12-minibattles.webm",
     "width": "800",
     "height": "600",
     "popularity": 0
@@ -132,23 +125,9 @@
     "category": "Arcade",
     "tags": "T-Rex, Runner, Dinosaur, Open Source, Endless",
     "thumb": "https://image.winudf.com/v2/image1/Y29tLmRlZXJzbGFiLmRpbm9UUkVYX2ljb25fMTc4NDMxNDI0MV8wNTc/icon.png?w=512&fakeurl=1",
-    "preview": "assets/previews/os-trex-runner.webm",
     "width": "800",
     "height": "400",
     "popularity": 0
-  },
-  {
-    "id": "gm-fireboy-watergirl",
-    "title": "Fireboy and Watergirl",
-    "description": "The classic co-op puzzle-platformer. Guide Fireboy through lava and Watergirl through water, and get both of them to their doors together.",
-    "instructions": "Player 1 (Fireboy): arrow keys to move. Player 2 (Watergirl): W/A/D to move.",
-    "url": "https://html5.gamemonetize.co/t51t0kkjmrw77cfb5a8d3fy7dh77l1yt/",
-    "category": "Puzzle",
-    "tags": "Fireboy, Watergirl, Puzzle, Co-op, 2 Player, Hot, Popular",
-    "thumb": "https://img.gamemonetize.com/t51t0kkjmrw77cfb5a8d3fy7dh77l1yt/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 5
   },
   {
     "id": "gm-cut-the-rope",
@@ -162,19 +141,6 @@
     "width": "800",
     "height": "600",
     "popularity": 5
-  },
-  {
-    "id": "gm-subway-surfers",
-    "title": "Subway Surfers",
-    "description": "Dash through the subway, dodge trains, and outrun the grumpy inspector in this endless runner.",
-    "instructions": "Swipe or use arrow keys to move sideways, jump, and roll.",
-    "url": "https://html5.gamemonetize.games/12b8whsjuoo362g7nvr31fxzbs19jnrl/",
-    "category": "Arcade",
-    "tags": "Subway Surfers, Runner, Endless, Hot, Popular",
-    "thumb": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=512,height=512,fit=cover,f=png/1c920b9279c2bedec567c1b58129ae8f/subway-surfers-logo.png",
-    "width": "800",
-    "height": "600",
-    "popularity": 6
   },
   {
     "id": "gm-basketball-stars",

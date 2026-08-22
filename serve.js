@@ -17,7 +17,6 @@ const mime = {
   ".png": "image/png",
   ".jpg": "image/jpeg",
   ".jpeg": "image/jpeg",
-  ".webm": "video/webm",
 };
 
 function loadGames(){
@@ -146,6 +145,11 @@ const GAME_ALLOWED_HOSTS = [
   // fails to load through our proxy instead of showing ads.
   "https://gabrielecirulli.github.io",
   "https://wayou.github.io",
+  // Moto X3M's GameMonetize wrapper nests the actual game in an <iframe>
+  // pointing at this Chinese game CDN (their own upstream source for this
+  // title) -- without it allow-listed the nested frame was silently
+  // CSP-blocked, leaving a blank page.
+  "https://*.4399.com",
 ].join(" ");
 
 const CDN_HOSTS = [

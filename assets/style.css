@@ -459,18 +459,6 @@ img{ max-width:100%; display:block; }
   transition: transform .25s;
 }
 .game-card:hover .game-thumb-wrap img{ transform: scale(1.06); }
-.thumb-preview{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit: fill;
-  opacity:0;
-  transition: opacity .2s ease;
-  pointer-events:none;
-}
-.game-thumb-wrap.show-preview .thumb-preview{ opacity:1; }
-.game-thumb-wrap.show-preview img{ opacity:0; }
 .play-badge{
   position:absolute;
   inset:0;
