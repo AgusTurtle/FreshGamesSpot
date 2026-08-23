@@ -130,19 +130,6 @@
     "popularity": 0
   },
   {
-    "id": "gm-bubble-shooter",
-    "title": "Bubble Shooter",
-    "description": "The classic match-3 bubble popping game. Aim, shoot, and clear the board before the bubbles reach the bottom.",
-    "instructions": "Aim with the mouse and click to shoot. Match 3+ same-colored bubbles to pop them.",
-    "url": "https://html5.gamemonetize.games/wt1tfo8ol71fabn4cvsojilamtozjfqg/",
-    "category": "Puzzle",
-    "tags": "Bubble Shooter, Puzzle, Match-3, Popular",
-    "thumb": "https://img.gamemonetize.com/wt1tfo8ol71fabn4cvsojilamtozjfqg/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 3
-  },
-  {
     "id": "gm-doodle-jump",
     "title": "Doodle Jump",
     "description": "The classic hand-drawn platform jumper. Bounce the doodler ever higher, dodging monsters and grabbing power-ups.",
