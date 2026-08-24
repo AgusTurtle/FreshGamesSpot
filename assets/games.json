@@ -130,19 +130,6 @@
     "popularity": 0
   },
   {
-    "id": "gm-connect-4",
-    "title": "Connect 4",
-    "description": "The classic strategy game. Drop discs to connect four in a row before your opponent does.",
-    "instructions": "Click a column to drop your disc. Connect 4 in a row (any direction) to win.",
-    "url": "https://html5.gamemonetize.games/x6wmnv5mm8k93yolsvrpys3dfpnl2e08/",
-    "category": "Puzzle",
-    "tags": "Connect 4, Strategy, Board Game, 2 Player",
-    "thumb": "https://img.gamemonetize.com/x6wmnv5mm8k93yolsvrpys3dfpnl2e08/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 2
-  },
-  {
     "id": "gm-spider-solitaire",
     "title": "Spider Solitaire",
     "description": "The classic 2-suit card game. Build descending sequences to clear the tableau.",
@@ -168,5 +155,19 @@
     "width": "960",
     "height": "600",
     "popularity": 5
+  },
+  {
+    "id": "ext-slither-io",
+    "title": "Slither.io",
+    "description": "The massively multiplayer snake game. Grow as long as possible by eating glowing orbs, and cut off other players to make them explode.",
+    "instructions": "Move the mouse to steer. Click/hold to boost (costs some length).",
+    "url": "https://slither.io",
+    "directEmbed": true,
+    "category": "Multiplayer",
+    "tags": "Slither.io, Snake, io Game, Multiplayer, Popular",
+    "thumb": "assets/thumb-slither.png",
+    "width": "960",
+    "height": "600",
+    "popularity": 4
   }
 ]

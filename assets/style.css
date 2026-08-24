@@ -343,7 +343,30 @@ img{ max-width:100%; display:block; }
   position: relative;
   content-visibility: auto;
   contain-intrinsic-size: 150px 210px;
+  animation: cardIn .5s cubic-bezier(.22,1,.36,1) backwards;
 }
+@keyframes cardIn{
+  from{ opacity:0; transform: translateY(16px) scale(.94); }
+  to{ opacity:1; transform: translateY(0) scale(1); }
+}
+@media (prefers-reduced-motion: reduce){
+  .game-card{ animation: none; }
+}
+/* Stagger the first couple rows so the grid cascades in instead of
+   popping all at once -- rows past this just render immediately. */
+.game-card:nth-child(1){ animation-delay: .00s; }
+.game-card:nth-child(2){ animation-delay: .03s; }
+.game-card:nth-child(3){ animation-delay: .06s; }
+.game-card:nth-child(4){ animation-delay: .09s; }
+.game-card:nth-child(5){ animation-delay: .12s; }
+.game-card:nth-child(6){ animation-delay: .15s; }
+.game-card:nth-child(7){ animation-delay: .18s; }
+.game-card:nth-child(8){ animation-delay: .21s; }
+.game-card:nth-child(9){ animation-delay: .24s; }
+.game-card:nth-child(10){ animation-delay: .27s; }
+.game-card:nth-child(11){ animation-delay: .30s; }
+.game-card:nth-child(12){ animation-delay: .33s; }
+.game-card:nth-child(n+13){ animation-delay: .36s; }
 .game-card::before{
   content:"";
   position:absolute;
@@ -480,7 +503,10 @@ img{ max-width:100%; display:block; }
   display:flex; align-items:center; justify-content:center;
   color:#fff;
   box-shadow: 0 6px 16px rgba(47,125,255,0.55);
+  transform: scale(.6);
+  transition: transform .25s cubic-bezier(.34,1.56,.64,1);
 }
+.game-card:hover .play-badge span{ transform: scale(1); }
 .play-badge .icon{
   width: var(--icon-lg);
   height: var(--icon-lg);
