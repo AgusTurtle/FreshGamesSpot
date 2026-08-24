@@ -606,7 +606,11 @@
     el.playerFav.dataset.id = id;
 
     el.playerLoading.style.display = "flex";
-    el.playerFrame.src = "/play/" + encodeURIComponent(game.id);
+    // Full third-party platforms (their own login, ads, dozens of asset
+    // domains) can't realistically be proxied through our CSP-restricted
+    // /play/<id> pipeline built for single-file game embeds -- load those
+    // straight from their own origin instead, under their own CSP/rules.
+    el.playerFrame.src = game.directEmbed ? game.url : "/play/" + encodeURIComponent(game.id);
     el.playerFrame.onload = () => { el.playerLoading.style.display = "none"; };
 
     lastFocusedEl = document.activeElement;

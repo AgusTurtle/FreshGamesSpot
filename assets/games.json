@@ -130,32 +130,6 @@
     "popularity": 0
   },
   {
-    "id": "gm-solitaire",
-    "title": "Solitaire",
-    "description": "The classic Klondike card game. Sort the deck into ordered suit piles.",
-    "instructions": "Drag cards to build descending, alternating-color sequences. Move aces up to start the suit piles.",
-    "url": "https://html5.gamemonetize.games/yhgdcw5brwugmqftpt96krmliugwgcxe/",
-    "category": "Puzzle",
-    "tags": "Solitaire, Cards, Klondike, Puzzle",
-    "thumb": "https://img.gamemonetize.com/yhgdcw5brwugmqftpt96krmliugwgcxe/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 2
-  },
-  {
-    "id": "gm-rolly-vortex",
-    "title": "Rolly Vortex",
-    "description": "Guide the ball down the spinning tunnel, dodging colored gaps and obstacles as you descend.",
-    "instructions": "Use the arrows or swipe to move the ball left/right around the tunnel.",
-    "url": "https://html5.gamemonetize.games/svj3rt9l6r2djwsigk70rjw1ne1tmgce/",
-    "category": "Arcade",
-    "tags": "Rolly Vortex, Arcade, Ball",
-    "thumb": "https://img.gamemonetize.com/svj3rt9l6r2djwsigk70rjw1ne1tmgce/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 2
-  },
-  {
     "id": "gm-connect-4",
     "title": "Connect 4",
     "description": "The classic strategy game. Drop discs to connect four in a row before your opponent does.",
@@ -180,5 +154,19 @@
     "width": "800",
     "height": "600",
     "popularity": 2
+  },
+  {
+    "id": "ext-bloxd-io",
+    "title": "Bloxd.io",
+    "description": "A whole Minecraft-style multiplayer platform: build, survive, PvP, or jump into dozens of community-made minigames.",
+    "instructions": "Pick a game mode from the lobby. WASD to move, mouse to look/build, Space to jump.",
+    "url": "https://bloxd.io",
+    "directEmbed": true,
+    "category": "Multiplayer",
+    "tags": "Bloxd.io, Minecraft, Sandbox, Multiplayer, Popular",
+    "thumb": "https://bloxd.io/apple-touch-icon.png?v=2",
+    "width": "960",
+    "height": "600",
+    "popularity": 5
   }
 ]
