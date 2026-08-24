@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Getaway Shootout</title>
+<style>
+  html, body { margin:0; padding:0; background:#000; width:100%; height:100%; overflow:hidden; }
+  #stage { position:absolute; top:0; left:0; transform-origin:top left; }
+</style>
+</head>
+<body>
+<!--
+  The Unity WebGL build this mirror serves hardcodes its container at a
+  fixed 960x600px (UnityLoader.instantiate + an inline-styled div, no
+  resize/ResizeObserver logic at all -- this is the old ~2018 UnityLoader
+  API, not the modern responsive template) -- in any viewport wider than
+  960px the game just sits pinned in the corner with the rest of the
+  player frame solid black. Same fix as Temple of Boom: pin the stage at
+  the native size Unity actually renders to and scale the whole thing up
+  with a CSS transform instead of fighting Unity's own fixed-size div.
+-->
+<div id="stage">
+  <div id="gameContainer" style="width: 960px; height: 600px;"></div>
+</div>
+<script src="https://mi-go45.github.io/unblocked/games/html5/getawayshootout/Build/UnityLoader.js"></script>
+<script>
+  const NATIVE_W = 960, NATIVE_H = 600;
+  const stage = document.getElementById("stage");
+  function fitStage(){
+    const scale = Math.min(window.innerWidth / NATIVE_W, window.innerHeight / NATIVE_H);
+    stage.style.transform = "scale(" + scale + ")";
+    stage.style.left = ((window.innerWidth - NATIVE_W * scale) / 2) + "px";
+    stage.style.top = ((window.innerHeight - NATIVE_H * scale) / 2) + "px";
+  }
+  fitStage();
+  window.addEventListener("resize", fitStage);
+
+  var gameInstance = UnityLoader.instantiate(
+    "gameContainer",
+    "https://mi-go45.github.io/unblocked/games/html5/getawayshootout/Build/GetawayShootout.json"
+  );
+</script>
+</body>
+</html>
