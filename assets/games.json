@@ -155,5 +155,19 @@
     "width": "960",
     "height": "600",
     "popularity": 5
+  },
+  {
+    "id": "ext-friday-night-funkin",
+    "title": "Friday Night Funkin",
+    "description": "The viral rhythm game. Win the girl over by out-rapping her overprotective, demon-like ex-boyfriend and a colorful cast of rivals.",
+    "instructions": "Hit the arrow keys in time with the highlighted notes to win the rap battle. Miss too many and you lose.",
+    "url": "https://jasongamesdev.github.io/friday-night-funkin/",
+    "directEmbed": true,
+    "category": "Music",
+    "tags": "Friday Night Funkin, FNF, Rhythm, Music, Popular",
+    "thumb": "https://img.icons8.com/color/512/friday-night-funkin.png",
+    "width": "960",
+    "height": "600",
+    "popularity": 5
   }
 ]
