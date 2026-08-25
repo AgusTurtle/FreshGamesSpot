@@ -130,19 +130,6 @@
     "popularity": 0
   },
   {
-    "id": "gm-spider-solitaire",
-    "title": "Spider Solitaire",
-    "description": "The classic 2-suit card game. Build descending sequences to clear the tableau.",
-    "instructions": "Drag cards to build descending sequences. Clear a full suit run to remove it.",
-    "url": "https://html5.gamemonetize.games/lhkdxz7nzhznxzoll29up5windogyqsk/",
-    "category": "Puzzle",
-    "tags": "Spider Solitaire, Cards, Puzzle",
-    "thumb": "https://img.gamemonetize.com/lhkdxz7nzhznxzoll29up5windogyqsk/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 2
-  },
-  {
     "id": "ext-bloxd-io",
     "title": "Bloxd.io",
     "description": "A whole Minecraft-style multiplayer platform: build, survive, PvP, or jump into dozens of community-made minigames.",
@@ -235,7 +222,7 @@
     "directEmbed": true,
     "category": "Multiplayer",
     "tags": "Paper.io, io Game, Multiplayer, Popular",
-    "thumb": "https://games.lol/wp-content/uploads/2020/12/paper.io-2-download-free-pc.png",
+    "thumb": "https://cdn.aptoide.com/imgs/d/9/a/d9aae8cf2181cea343f2e3128db26008_icon.png",
     "width": "960",
     "height": "600",
     "popularity": 0

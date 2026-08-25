@@ -299,7 +299,7 @@ img{ max-width:100%; display:block; }
 
 .game-grid{
   display:grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 16px;
 }
 
@@ -457,9 +457,10 @@ img{ max-width:100%; display:block; }
 }
 .game-thumb-wrap{
   position:relative;
-  aspect-ratio: 1/1;
+  aspect-ratio: 16/10;
   background: var(--bg);
   overflow:hidden;
+  border: 2px solid var(--border);
 }
 .game-thumb-wrap.thumb-fallback{
   background: var(--accent-grad);
@@ -478,7 +479,7 @@ img{ max-width:100%; display:block; }
 .game-thumb-wrap img{
   width:100%;
   height:100%;
-  object-fit: fill;
+  object-fit: cover;
   transition: transform .25s;
 }
 .game-card:hover .game-thumb-wrap img{ transform: scale(1.06); }
