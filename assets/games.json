@@ -155,19 +155,5 @@
     "width": "960",
     "height": "600",
     "popularity": 5
-  },
-  {
-    "id": "ext-slither-io",
-    "title": "Slither.io",
-    "description": "The massively multiplayer snake game. Grow as long as possible by eating glowing orbs, and cut off other players to make them explode.",
-    "instructions": "Move the mouse to steer. Click/hold to boost (costs some length).",
-    "url": "https://slither.io",
-    "directEmbed": true,
-    "category": "Multiplayer",
-    "tags": "Slither.io, Snake, io Game, Multiplayer, Popular",
-    "thumb": "assets/thumb-slither.png",
-    "width": "960",
-    "height": "600",
-    "popularity": 4
   }
 ]
