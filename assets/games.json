@@ -52,19 +52,6 @@
     "popularity": 0
   },
   {
-    "id": "gm-basketball-stars",
-    "title": "Basketball Stars",
-    "description": "Fast one-on-one basketball. Dribble, shoot and dunk your way past the CPU or a friend across quick arcade matches.",
-    "instructions": "Move with the arrow keys/WASD, aim with the mouse, click to shoot. Steal the ball when your opponent has it.",
-    "url": "https://html5.gamemonetize.co/rqh4acdr5ufucw4pfeazjxq0qaftgnv8/",
-    "category": "Sports",
-    "tags": "Basketball, Sports, Arcade, 2 Player, Popular",
-    "thumb": "https://img.gamemonetize.com/rqh4acdr5ufucw4pfeazjxq0qaftgnv8/512x384.jpg",
-    "width": "800",
-    "height": "600",
-    "popularity": 3
-  },
-  {
     "id": "gm-boxing-random",
     "title": "Boxing Random",
     "description": "Boxing is here with its most funny and random way! Knock out your opponent as rings and boxers randomly change each round. Play vs CPU or a friend, 2 player mode.",
@@ -248,7 +235,7 @@
     "directEmbed": true,
     "category": "Multiplayer",
     "tags": "Paper.io, io Game, Multiplayer, Popular",
-    "thumb": "https://paperio.site/assets/images/icon512.png",
+    "thumb": "https://games.lol/wp-content/uploads/2020/12/paper.io-2-download-free-pc.png",
     "width": "960",
     "height": "600",
     "popularity": 0

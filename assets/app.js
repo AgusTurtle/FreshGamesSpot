@@ -705,9 +705,12 @@
     fetch("/api/votes").then(r => r.ok ? r.json() : {}).catch(() => ({})),
   ])
     .then(([data, votes]) => {
-      // Stable sort so the most popular games lead every list -- home,
-      // categories, and search results alike -- instead of catalog order.
-      GAMES = data.slice().sort((a, b) => (b.popularity || 0) - (a.popularity || 0));
+      // Shuffle on every load so the grid isn't the same order every visit.
+      GAMES = data.slice();
+      for (let i = GAMES.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i + 1));
+        [GAMES[i], GAMES[j]] = [GAMES[j], GAMES[i]];
+      }
       filtered = GAMES;
       SERVER_VOTES = votes || {};
       buildCategories();
