@@ -169,5 +169,19 @@
     "width": "960",
     "height": "600",
     "popularity": 5
+  },
+  {
+    "id": "ext-crossy-road",
+    "title": "Crossy Road",
+    "description": "The endless arcade hopper. Guide your character across roads, rivers and train tracks, dodging traffic for as long as you can survive.",
+    "instructions": "Press an arrow key or tap a direction to hop. Don't get hit by cars or fall in the water.",
+    "url": "https://ozgames.io/game/crossy-road/",
+    "directEmbed": true,
+    "category": "Arcade",
+    "tags": "Crossy Road, Arcade, Endless, Hopper, Popular",
+    "thumb": "https://image.winudf.com/v2/image1/Y29tLnlvZG8xLmNyb3NzeXJvYWRfaWNvbl8xNzgxNzU5MTg2XzAxNA/icon.png?w=512&fakeurl=1",
+    "width": "960",
+    "height": "600",
+    "popularity": 5
   }
 ]
