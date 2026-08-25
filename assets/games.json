@@ -183,5 +183,19 @@
     "width": "960",
     "height": "600",
     "popularity": 5
+  },
+  {
+    "id": "ext-8-ball-pool",
+    "title": "8 Ball Pool",
+    "description": "Classic billiards. Sink your set of balls before your opponent, then pocket the 8-ball to win. Play vs CPU or a friend on the same device.",
+    "instructions": "Aim with the mouse, hold to set power, release to shoot. Sink your balls first, then the 8-ball to win.",
+    "url": "https://23azostore.github.io/s8/8-ball-pool/",
+    "directEmbed": true,
+    "category": "Sports",
+    "tags": "8 Ball Pool, Billiards, Pool, Sports",
+    "thumb": "https://23azostore.github.io/s8/8-ball-pool/8-ball-billiards-classic.png",
+    "width": "960",
+    "height": "600",
+    "popularity": 0
   }
 ]
