@@ -337,19 +337,5 @@
     "width": "960",
     "height": "600",
     "popularity": 3
-  },
-  {
-    "id": "ext-little-big-snake",
-    "title": "Little Big Snake",
-    "description": "A colorful spin on the classic snake formula. Grow your snake, collect boosts, and dodge or eliminate rivals across the map.",
-    "instructions": "Move the mouse to steer. Click/hold to boost (costs some length).",
-    "url": "https://littlebigsnake.com/",
-    "directEmbed": true,
-    "category": "Multiplayer",
-    "tags": "Little Big Snake, Snake, io Game, Multiplayer",
-    "thumb": "https://littlebigsnake.com/img/sharing_img.png",
-    "width": "960",
-    "height": "600",
-    "popularity": 2
   }
 ]
