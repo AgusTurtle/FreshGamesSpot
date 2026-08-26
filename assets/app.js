@@ -246,8 +246,10 @@
   // All home tiles render at the same uniform size -- a dense wall of
   // cover art (Ubisoft-Connect-library style), not a mixed mosaic.
   function tileSizeClass(game){
-    if ((game.popularity || 0) >= 5) return "tile-big";
-    if ((game.popularity || 0) >= 3) return "tile-wide";
+    // tile-wide (2x1) packs perfectly with grid-auto-flow:dense -- no gaps.
+    // tile-big (2x2) can leave unfillable holes depending on placement
+    // order, so it's not used here.
+    if ((game.popularity || 0) >= 4) return "tile-wide";
     return "";
   }
 
