@@ -253,7 +253,7 @@
     "thumb": "assets/thumb-krunker2.png",
     "width": "960",
     "height": "600",
-    "popularity": 4
+    "popularity": 3
   },
   {
     "id": "ext-wormate",
@@ -264,7 +264,7 @@
     "directEmbed": true,
     "category": "Multiplayer",
     "tags": "Wormate, Worm, io Game, Multiplayer",
-    "thumb": "https://wormate.io/images/og-share-img-3.png",
+    "thumb": "assets/thumb-wormate.png",
     "width": "960",
     "height": "600",
     "popularity": 2
