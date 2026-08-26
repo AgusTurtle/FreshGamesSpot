@@ -270,20 +270,6 @@
     "popularity": 2
   },
   {
-    "id": "ext-zombs",
-    "title": "Zombs.io",
-    "description": "Build a base, gather resources and defend against waves of zombies. Team up or go it alone to survive the night.",
-    "instructions": "WASD to move, mouse to aim/attack. Gather wood and stone to build walls and turrets.",
-    "url": "https://zombs.io/",
-    "directEmbed": true,
-    "category": "Multiplayer",
-    "tags": "Zombs.io, Survival, io Game, Multiplayer",
-    "thumb": "https://zombs.io/favicon.ico",
-    "width": "960",
-    "height": "600",
-    "popularity": 2
-  },
-  {
     "id": "ext-starve",
     "title": "Starve.io",
     "description": "A multiplayer survival game. Gather resources, craft tools and weapons, build a base, and survive against other players and the wild.",
@@ -292,7 +278,7 @@
     "directEmbed": true,
     "category": "Multiplayer",
     "tags": "Starve.io, Survival, Crafting, io Game, Multiplayer",
-    "thumb": "http://starve.io/img/share-banner.png",
+    "thumb": "https://play-lh.googleusercontent.com/U-kB1tWL4lm3ia8UYMejSPTc5EsOkhva_5SkK7_LwkwHMY0cRlc8VKwwhmuF7C72y2cF1S4EBluoUmK8yM09c9o",
     "width": "960",
     "height": "600",
     "popularity": 2
