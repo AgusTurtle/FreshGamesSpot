@@ -305,10 +305,10 @@ img{ max-width:100%; display:block; }
 
 /* ---------- Home "collage" grid (dense wall-of-covers, Ubisoft-library style) ---------- */
 .game-grid.collage{
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  grid-auto-rows: 150px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-auto-rows: 140px;
   grid-auto-flow: dense;
-  gap: 3px;
+  gap: 12px;
 }
 .game-grid.collage .game-card{
   height:100%;
@@ -418,21 +418,6 @@ img{ max-width:100%; display:block; }
 @keyframes skeletonShimmer{
   from{ background-position: 200% 0; }
   to{ background-position: -200% 0; }
-}
-.tile-badge{
-  position:absolute;
-  left:0; right:0; bottom:0;
-  z-index:2;
-  background: rgba(5,6,13,0.78);
-  color:#7fc4ff;
-  font-size: 0.5rem;
-  font-weight:800;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  text-align:center;
-  padding: 3px 4px;
-  pointer-events:none;
-  white-space:nowrap;
 }
 .ribbon-badge{
   position:absolute;

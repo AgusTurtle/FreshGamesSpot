@@ -282,12 +282,7 @@
     playBadge.innerHTML = `<span>${iconSvg("play")}</span>`;
     thumbWrap.appendChild(playBadge);
 
-    if (collage){
-      const idBadge = document.createElement("span");
-      idBadge.className = "tile-badge";
-      idBadge.textContent = "FreshGamesPot";
-      thumbWrap.appendChild(idBadge);
-    } else if (game.popularity > 0){
+    if (game.popularity > 0){
       const ribbon = document.createElement("span");
       ribbon.className = "ribbon-badge";
       ribbon.innerHTML = `${iconSvg("flame")}POPULAR`;
