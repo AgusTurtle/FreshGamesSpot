@@ -245,7 +245,9 @@
 
   // All home tiles render at the same uniform size -- a dense wall of
   // cover art (Ubisoft-Connect-library style), not a mixed mosaic.
-  function tileSizeClass(){
+  function tileSizeClass(game){
+    if ((game.popularity || 0) >= 5) return "tile-big";
+    if ((game.popularity || 0) >= 3) return "tile-wide";
     return "";
   }
 
@@ -260,11 +262,6 @@
 
     const thumbWrap = document.createElement("div");
     thumbWrap.className = "game-thumb-wrap";
-    // object-fit:contain never crops a logo, but leaves letterbox bars on
-    // sources that don't match the card ratio -- fill those with a blurred
-    // copy of the same image instead of flat background so it never looks
-    // like empty dead space.
-    thumbWrap.style.setProperty("--thumb-bg", `url("${game.thumb}")`);
 
     const img = document.createElement("img");
     img.loading = "lazy";
