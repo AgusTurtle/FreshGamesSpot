@@ -260,6 +260,11 @@
 
     const thumbWrap = document.createElement("div");
     thumbWrap.className = "game-thumb-wrap";
+    // object-fit:contain never crops a logo, but leaves letterbox bars on
+    // sources that don't match the card ratio -- fill those with a blurred
+    // copy of the same image instead of flat background so it never looks
+    // like empty dead space.
+    thumbWrap.style.setProperty("--thumb-bg", `url("${game.thumb}")`);
 
     const img = document.createElement("img");
     img.loading = "lazy";
