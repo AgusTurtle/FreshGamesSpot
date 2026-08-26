@@ -310,5 +310,19 @@
     "width": "960",
     "height": "600",
     "popularity": 3
+  },
+  {
+    "id": "ext-suika-game",
+    "title": "Suika Game",
+    "description": "The addictive fruit-merging puzzle. Drop fruit into the jar and combine matching ones into bigger fruit without letting the jar overflow.",
+    "instructions": "Move the mouse to aim, click to drop the fruit. Merge two of the same fruit to combine them into the next size up.",
+    "url": "https://suikagame.com/",
+    "directEmbed": true,
+    "category": "Puzzle",
+    "tags": "Suika Game, Watermelon Game, Puzzle, Merge, Popular",
+    "thumb": "https://suikagame.com/images/apple-touch-icon.png",
+    "width": "960",
+    "height": "600",
+    "popularity": 3
   }
 ]
