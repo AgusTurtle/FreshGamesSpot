@@ -324,5 +324,19 @@
     "width": "960",
     "height": "600",
     "popularity": 3
+  },
+  {
+    "id": "ext-space-waves",
+    "title": "Space Waves",
+    "description": "A fast-paced arcade flyer. Steer your ship through tight waves of obstacles without crashing, going as far as you can.",
+    "instructions": "Click and hold (or press and hold a key) to fly up, release to fall. Dodge the obstacles.",
+    "url": "https://spacewaves2.org/space-waves-game.embed",
+    "directEmbed": true,
+    "category": "Arcade",
+    "tags": "Space Waves, Arcade, Flying, Endless",
+    "thumb": "https://spacewaves2.org/cache/data/image/options/space-waves-favicon-m144x144.png",
+    "width": "960",
+    "height": "600",
+    "popularity": 0
   }
 ]
