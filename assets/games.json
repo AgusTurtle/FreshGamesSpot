@@ -338,5 +338,19 @@
     "width": "960",
     "height": "600",
     "popularity": 0
+  },
+  {
+    "id": "ext-table-tennis-world-tour",
+    "title": "Table Tennis World Tour",
+    "description": "Pick your country and compete in table tennis matches on the world stage. Simple controls, real rally physics.",
+    "instructions": "Drag the mouse to move your paddle and control the shot. Win the rally to score.",
+    "url": "https://gnhustgames.org/tabletennis-worldtour-source/",
+    "directEmbed": true,
+    "category": "Sports",
+    "tags": "Table Tennis, Ping Pong, Sports",
+    "thumb": "https://imgs.crazygames.com/table-tennis-world-tour_16x9/20230908041108/table-tennis-world-tour_16x9-cover?metadata=none&quality=100&width=512&height=512&fit=crop",
+    "width": "960",
+    "height": "600",
+    "popularity": 0
   }
 ]
