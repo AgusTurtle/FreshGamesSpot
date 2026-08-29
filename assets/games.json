@@ -484,20 +484,6 @@
     "popularity": 0
   },
   {
-    "id": "ext-onet-connect-classic",
-    "title": "Onet Connect Classic",
-    "description": "The classic tile-matching game. Connect two matching tiles with a path of two turns or less to clear them.",
-    "instructions": "Click two matching tiles to connect them. They must be joinable by a path with at most 2 turns.",
-    "url": "https://play.famobi.com/onet-connect-classic",
-    "directEmbed": true,
-    "category": "Puzzle",
-    "tags": "Onet, Connect, Tile Matching, Puzzle",
-    "thumb": "https://img.cdn.famobi.com/portal/html5games/images/tmp/OnetConnectClassicTeaser.jpg",
-    "width": "960",
-    "height": "600",
-    "popularity": 0
-  },
-  {
     "id": "ext-diamond-rush",
     "title": "Diamond Rush",
     "description": "A gem-matching puzzle. Swap and match gems to clear the board and rack up combos.",
