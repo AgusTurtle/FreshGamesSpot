@@ -204,20 +204,6 @@
     "popularity": 3
   },
   {
-    "id": "ext-wormate",
-    "title": "Wormate.io",
-    "description": "Grow your worm by eating sweets and fruit scattered across the map. Avoid bigger worms and try to become the biggest.",
-    "instructions": "Move the mouse to steer. Click/hold to boost (costs some length).",
-    "url": "https://wormate.io/",
-    "directEmbed": true,
-    "category": "Multiplayer",
-    "tags": "Wormate, Worm, io Game, Multiplayer",
-    "thumb": "assets/thumb-wormate.png",
-    "width": "960",
-    "height": "600",
-    "popularity": 2
-  },
-  {
     "id": "ext-starve",
     "title": "Starve.io",
     "description": "A multiplayer survival game. Gather resources, craft tools and weapons, build a base, and survive against other players and the wild.",
@@ -297,6 +283,20 @@
     "category": "Sports",
     "tags": "Table Tennis, Ping Pong, Sports",
     "thumb": "https://imgs.crazygames.com/table-tennis-world-tour_16x9/20230908041108/table-tennis-world-tour_16x9-cover?metadata=none&quality=100&width=512&height=512&fit=crop",
+    "width": "960",
+    "height": "600",
+    "popularity": 0
+  },
+  {
+    "id": "ext-ping-pong-chaos",
+    "title": "Ping Pong Chaos",
+    "description": "A chaotic take on table tennis. Fast rallies, wild physics, quick matches vs CPU or a friend.",
+    "instructions": "Move the mouse or use the arrow keys to move your paddle. Hit the ball back to score.",
+    "url": "https://www.2player.com/games/ping-pong-chaos/",
+    "directEmbed": true,
+    "category": "Sports",
+    "tags": "Ping Pong, Table Tennis, Sports, 2 Player",
+    "thumb": "https://www.2player.com/cdn/games/ping-pong-chaos-en.jpg",
     "width": "960",
     "height": "600",
     "popularity": 0
