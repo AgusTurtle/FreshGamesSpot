@@ -148,20 +148,6 @@
     "popularity": 0
   },
   {
-    "id": "ext-agar-io",
-    "title": "Agar.io",
-    "description": "The original cell-eating multiplayer game. Absorb smaller cells and mass to grow, and avoid anything bigger than you.",
-    "instructions": "Move the mouse to steer your cell. Press Space to split, W to eject mass.",
-    "url": "https://agar.io/",
-    "directEmbed": true,
-    "category": "Multiplayer",
-    "tags": "Agar.io, io Game, Multiplayer, Popular",
-    "thumb": "https://image.winudf.com/v2/image1/Y29tLm1pbmljbGlwLmFnYXIuaW9faWNvbl8xNzc3MzY5MzE5XzA1MA/icon.png?w=512&fakeurl=1",
-    "width": "960",
-    "height": "600",
-    "popularity": 0
-  },
-  {
     "id": "ext-paperio",
     "title": "Paper.io 2",
     "description": "Claim territory by drawing a trail and closing loops. Cut off rivals' tails before they cut off yours.",
