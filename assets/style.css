@@ -689,6 +689,28 @@ img{ max-width:100%; display:block; }
   border:none;
   display:block;
 }
+.player-watermark{
+  position:absolute;
+  right:14px;
+  bottom:14px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 10px;
+  border-radius:8px;
+  background:rgba(17,19,25,0.35);
+  backdrop-filter:blur(2px);
+  color:#fff;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:0.2px;
+  opacity:0.55;
+  pointer-events:none;
+  user-select:none;
+  z-index:2;
+}
+.player-watermark svg{ opacity:0.9; }
+.player-watermark strong{ color:var(--accent); font-weight:800; }
 .player-loading{
   position:absolute;
   inset:0;
