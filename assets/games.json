@@ -552,5 +552,33 @@
     "width": "960",
     "height": "600",
     "popularity": 0
+  },
+  {
+    "id": "ext-gulper-io",
+    "title": "Gulper.io",
+    "description": "A multiplayer snake-style .io game. Grow by swallowing smaller fish and avoid getting gulped by bigger ones.",
+    "instructions": "Move the mouse to steer. Hold the left mouse button or Space to accelerate.",
+    "url": "https://gulper.io/",
+    "directEmbed": true,
+    "category": "Multiplayer",
+    "tags": "Gulper.io, io Game, Multiplayer, Popular",
+    "thumb": "https://gulper.io/images/icon170.png",
+    "width": "960",
+    "height": "600",
+    "popularity": 3
+  },
+  {
+    "id": "ext-rocketgoal-io",
+    "title": "RocketGoal",
+    "description": "Online multiplayer car soccer. Boost, jump, and ram the ball into the goal before the other team.",
+    "instructions": "WASD/arrows to drive, Space or left click to boost, K or right click to jump.",
+    "url": "https://rocketgoal.io/",
+    "directEmbed": true,
+    "category": "Sports",
+    "tags": "RocketGoal, Car Soccer, io Game, Multiplayer, Sports",
+    "thumb": "https://rocketgoal.io/og-image.png",
+    "width": "960",
+    "height": "600",
+    "popularity": 3
   }
 ]
