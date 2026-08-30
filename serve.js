@@ -150,6 +150,10 @@ const GAME_ALLOWED_HOSTS = [
   // title) -- without it allow-listed the nested frame was silently
   // CSP-blocked, leaving a blank page.
   "https://*.4399.com",
+  // Ping Pong Chaos: same fixed-960x600 old-UnityLoader-API issue as
+  // Getaway Shootout, self-hosted wrapper loads their UnityLoader.js
+  // script directly (see assets/ping-pong-chaos.html).
+  "https://www.2player.com",
 ].join(" ");
 
 const CDN_HOSTS = [
@@ -240,7 +244,13 @@ function proxyAsset(id, assetPath, search, res, refererId, range){
 
   let target;
   try {
-    target = new URL(assetPath + (search || ""), game.url).href;
+    // Custom self-hosted wrapper pages (Getaway Shootout, Ping Pong Chaos)
+    // point game.url at our own /assets/*.html wrapper, not the real
+    // upstream game -- assetBase lets those wrappers reference their
+    // upstream's Build/ assets by relative path (routed same-origin
+    // through this proxy, sidestepping a non-CORS upstream) without
+    // resolving against the wrapper's own freshgamespot.net location.
+    target = new URL(assetPath + (search || ""), game.assetBase || game.url).href;
   } catch (e){
     res.writeHead(400); res.end(); return;
   }

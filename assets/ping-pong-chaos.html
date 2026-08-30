@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Ping Pong Chaos</title>
+<style>
+  html, body { margin:0; padding:0; background:#000; width:100%; height:100%; overflow:hidden; }
+  #stage { position:absolute; top:0; left:0; transform-origin:top left; }
+</style>
+</head>
+<body>
+<!--
+  Same fixed-960x600 old-UnityLoader-API issue as Getaway Shootout and
+  Temple of Boom -- pin the stage at native size and scale with CSS
+  transform instead of fighting Unity's own fixed-size div.
+
+  Unlike Getaway Shootout's source (GitHub Pages, sends permissive CORS),
+  www.2player.com sends no Access-Control-Allow-Origin at all, so
+  UnityLoader's own XHR fetches of the Build/ files get CORS-blocked if
+  hotlinked directly. Build/ paths are relative here instead, resolved
+  through our own /play/<id>/ proxy (see the injected <base> tag and
+  games.json's assetBase field) so every request is same-origin.
+-->
+<div id="stage" style="width: 960px; height: 600px; left: 0; top: 0;">
+  <div id="gameContainer" style="width: 960px; height: 600px;"></div>
+</div>
+<script src="Build/UnityLoader.js"></script>
+<script>
+  const NATIVE_W = 960, NATIVE_H = 600;
+  const stage = document.getElementById("stage");
+  // Stretch to fill the frame completely (independent X/Y scale) instead
+  // of a uniform min-scale -- same fix that worked for Temple of Boom,
+  // avoids leaving black bars/letterboxing when the frame's aspect ratio
+  // doesn't match the game's native 960:600.
+  function fitStage(){
+    const scaleX = window.innerWidth / NATIVE_W;
+    const scaleY = window.innerHeight / NATIVE_H;
+    stage.style.transform = "scale(" + scaleX + ", " + scaleY + ")";
+  }
+  fitStage();
+  window.addEventListener("resize", fitStage);
+
+  var gameInstance = UnityLoader.instantiate(
+    "gameContainer",
+    "Build/Ping Pong Chaos V1.0.json"
+  );
+</script>
+</body>
+</html>
