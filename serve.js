@@ -53,6 +53,30 @@ function applyVoteDelta(gameId, prevVote, newVote){
   return v;
 }
 
+// ---------- Accounts (persisted, same volume/ephemeral caveat as votes above) ----------
+// No real session/cookie layer -- the client re-sends { email, passwordHash }
+// on every account request (passwordHash computed client-side via
+// SubtleCrypto, plaintext password never leaves the browser) and this
+// checks it against the stored hash each time, closer in spirit to HTTP
+// Basic auth than a token session. Good enough for a game portal's
+// favorites list, not a substitute for a real auth provider.
+const ACCOUNTS_PATH = path.join(DATA_DIR, "accounts.json");
+function loadAccounts(){
+  try { fs.mkdirSync(DATA_DIR, { recursive: true }); } catch (e){}
+  try { return JSON.parse(fs.readFileSync(ACCOUNTS_PATH, "utf8").replace(/^﻿/, "")); }
+  catch (e){ return {}; }
+}
+let accounts = loadAccounts();
+function saveAccounts(){
+  try { fs.writeFileSync(ACCOUNTS_PATH, JSON.stringify(accounts)); }
+  catch (e){ console.error("Could not persist accounts:", e.message); }
+}
+function checkAuth(email, passwordHash){
+  const acct = accounts[email];
+  if (!acct) return null;
+  return acct.passwordHash === passwordHash ? acct : false;
+}
+
 // ---------- Live player presence (in-memory only, resets on restart --
 // this is genuinely live/transient data, so it doesn't need a volume) ----------
 const PRESENCE_TTL_MS = 25000;
@@ -381,6 +405,47 @@ http.createServer((req, res) => {
       saveVotes();
       res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
       res.end(JSON.stringify(updated));
+    });
+    return;
+  }
+
+  if (urlPath === "/api/account/auth" && req.method === "POST"){
+    readJsonBody(req, 2048, (err, body) => {
+      if (err){ res.writeHead(400); res.end(); return; }
+      const { email, passwordHash } = body || {};
+      if (typeof email !== "string" || !email.includes("@") || typeof passwordHash !== "string" || passwordHash.length !== 64){
+        res.writeHead(400); res.end(); return;
+      }
+      const existing = checkAuth(email, passwordHash);
+      if (existing === false){
+        res.writeHead(401, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
+        res.end(JSON.stringify({ error: "Contraseña incorrecta." }));
+        return;
+      }
+      if (existing === null){
+        accounts[email] = { passwordHash, favorites: [] };
+        saveAccounts();
+      }
+      res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
+      res.end(JSON.stringify({ favorites: accounts[email].favorites }));
+    });
+    return;
+  }
+
+  if (urlPath === "/api/account/favorites" && req.method === "POST"){
+    readJsonBody(req, 8192, (err, body) => {
+      if (err){ res.writeHead(400); res.end(); return; }
+      const { email, passwordHash, favorites } = body || {};
+      if (typeof email !== "string" || typeof passwordHash !== "string" || !Array.isArray(favorites)){
+        res.writeHead(400); res.end(); return;
+      }
+      if (!checkAuth(email, passwordHash)){
+        res.writeHead(401); res.end(); return;
+      }
+      accounts[email].favorites = favorites.filter(f => typeof f === "string").slice(0, 500);
+      saveAccounts();
+      res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
+      res.end(JSON.stringify({ ok: true }));
     });
     return;
   }

@@ -4,6 +4,7 @@
   const PAGE_SIZE = 24;
   const FAV_KEY = "omg_favorites";
   const VOTES_KEY = "omg_votes";
+  const SESSION_KEY = "omg_session";
   const VISITOR_KEY = "omg_visitor_id";
   const POPULAR_CAT = "Populares";
   const HEARTBEAT_MS = 12000;
@@ -117,9 +118,84 @@
     loginNavBtn: document.getElementById("loginNavBtn"),
     loginOverlay: document.getElementById("loginOverlay"),
     loginClose: document.getElementById("loginClose"),
+    loginForm: document.getElementById("loginForm"),
     loginEmail: document.getElementById("loginEmail"),
+    loginPassword: document.getElementById("loginPassword"),
+    loginError: document.getElementById("loginError"),
     loginContinue: document.getElementById("loginContinue"),
+    userMenu: document.getElementById("userMenu"),
+    userMenuBtn: document.getElementById("userMenuBtn"),
+    userMenuDropdown: document.getElementById("userMenuDropdown"),
+    userAvatar: document.getElementById("userAvatar"),
+    userEmailLabel: document.getElementById("userEmailLabel"),
+    logoutBtn: document.getElementById("logoutBtn"),
   };
+
+  /* ---------- account helpers ----------
+     Real server-side accounts (see /api/account/* in serve.js), persisted
+     to a JSON file the same way vote totals already were. No session/
+     cookie layer -- the client keeps { email, passwordHash } in
+     localStorage as its "session" and resends both on every account
+     request; the server checks the hash against what it stored each
+     time. Plaintext password never leaves the browser (hashed via
+     SubtleCrypto first). Favorites become server-synced once logged in,
+     so they follow the account across devices/browsers instead of
+     staying stuck to one machine. */
+  async function hashPassword(pw){
+    const bytes = new TextEncoder().encode(pw);
+    const digest = await crypto.subtle.digest("SHA-256", bytes);
+    return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, "0")).join("");
+  }
+  function getSession(){
+    try { return JSON.parse(localStorage.getItem(SESSION_KEY)); }
+    catch(e){ return null; }
+  }
+  function setSession(email, passwordHash){
+    localStorage.setItem(SESSION_KEY, JSON.stringify({ email, passwordHash }));
+  }
+  function clearSession(){
+    localStorage.removeItem(SESSION_KEY);
+  }
+  // Same email+password form both registers (first time the server sees
+  // that email) and logs in (email already on file) -- one flow instead
+  // of a separate signup screen, matching what the login modal's single
+  // button implies. Resolves the server's copy of favorites so the
+  // caller can adopt it as the new source of truth.
+  async function loginOrRegister(email, password){
+    const passwordHash = await hashPassword(password);
+    let res;
+    try {
+      res = await fetch("/api/account/auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, passwordHash }),
+      });
+    } catch (e){
+      return { ok:false, error:"No se pudo conectar con el servidor. Probá de nuevo." };
+    }
+    if (res.status === 401){
+      const data = await res.json().catch(() => ({}));
+      return { ok:false, error: data.error || "Contraseña incorrecta." };
+    }
+    if (!res.ok) return { ok:false, error:"Algo salió mal. Probá de nuevo." };
+    const data = await res.json();
+    setSession(email, passwordHash);
+    return { ok:true, favorites: data.favorites || [] };
+  }
+  // Fire-and-forget push of the current favorites list to the account,
+  // called after every toggle while logged in. Best-effort: a failed
+  // sync (offline, server hiccup) just leaves the account's copy stale
+  // until the next successful toggle or login, same tradeoff the vote
+  // counters already accept.
+  function syncFavoritesToServer(){
+    const session = getSession();
+    if (!session) return;
+    fetch("/api/account/favorites", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: session.email, passwordHash: session.passwordHash, favorites: getFavorites() }),
+    }).catch(() => {});
+  }
 
   /* ---------- storage helpers ---------- */
   function getFavorites(){
@@ -137,6 +213,7 @@
     if (favs.includes(id)) favs = favs.filter(f => f !== id);
     else favs.push(id);
     setFavorites(favs);
+    syncFavoritesToServer();
     return favs.includes(id);
   }
   function getVotes(){
@@ -671,17 +748,88 @@
 
   el.favToggleNav.addEventListener("click", renderFavoritesView);
 
-  el.loginNavBtn.addEventListener("click", () => {
+  function syncSessionUI(){
+    const session = getSession();
+    const loggedIn = !!session;
+    el.loginNavBtn.hidden = loggedIn;
+    el.userMenu.hidden = !loggedIn;
+    if (loggedIn){
+      el.userEmailLabel.textContent = session.email;
+      el.userAvatar.textContent = session.email.slice(0, 1);
+    }
+  }
+  syncSessionUI();
+  // A session saved from a previous visit only proves this browser once
+  // knew the right password -- it doesn't carry today's favorites if the
+  // account was used on another device meanwhile. Re-auth silently on
+  // load (same endpoint login uses) to pull the server's current list.
+  (async () => {
+    const session = getSession();
+    if (!session) return;
+    let res;
+    try {
+      res = await fetch("/api/account/auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: session.email, passwordHash: session.passwordHash }),
+      });
+    } catch (e){ return; }
+    if (!res.ok){ clearSession(); syncSessionUI(); return; }
+    const data = await res.json();
+    setFavorites(data.favorites || []);
+    updateView();
+  })();
+
+  function openLoginModal(){
+    el.loginError.hidden = true;
+    el.loginForm.reset();
     el.loginOverlay.hidden = false;
-  });
+    el.loginEmail.focus();
+  }
+  el.loginNavBtn.addEventListener("click", openLoginModal);
   el.loginClose.addEventListener("click", () => {
     el.loginOverlay.hidden = true;
   });
   el.loginOverlay.addEventListener("click", (e) => {
     if (e.target === el.loginOverlay) el.loginOverlay.hidden = true;
   });
-  el.loginEmail.addEventListener("input", () => {
-    el.loginContinue.disabled = el.loginEmail.value.trim().length === 0;
+  el.loginForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = el.loginEmail.value.trim();
+    const password = el.loginPassword.value;
+    if (!email || password.length < 4){
+      el.loginError.textContent = "Ingresá un email y una contraseña de al menos 4 caracteres.";
+      el.loginError.hidden = false;
+      return;
+    }
+    el.loginContinue.disabled = true;
+    const result = await loginOrRegister(email, password);
+    el.loginContinue.disabled = false;
+    if (!result.ok){
+      el.loginError.textContent = result.error;
+      el.loginError.hidden = false;
+      return;
+    }
+    el.loginOverlay.hidden = true;
+    syncSessionUI();
+    // The account's server-side favorites become the new local list --
+    // whatever was starred anonymously in this browser before logging in
+    // is not merged in, to avoid surprising someone who logs into an
+    // existing account with a different favorites history.
+    setFavorites(result.favorites);
+    updateView();
+  });
+
+  el.userMenuBtn.addEventListener("click", () => {
+    el.userMenuDropdown.hidden = !el.userMenuDropdown.hidden;
+  });
+  document.addEventListener("click", (e) => {
+    if (!el.userMenu.contains(e.target)) el.userMenuDropdown.hidden = true;
+  });
+  el.logoutBtn.addEventListener("click", () => {
+    clearSession();
+    el.userMenuDropdown.hidden = true;
+    syncSessionUI();
   });
 
   el.playerBack.addEventListener("click", closeGame);

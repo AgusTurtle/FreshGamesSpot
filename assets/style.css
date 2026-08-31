@@ -251,6 +251,61 @@ img{ max-width:100%; display:block; }
   flex-shrink:0;
 }
 .nav-login-btn:hover{ background: var(--accent-dark); }
+
+.user-menu{ position:relative; flex-shrink:0; }
+.user-menu-btn{
+  display:flex; align-items:center; gap:8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 4px 12px 4px 4px;
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight:600;
+}
+.user-menu-btn:hover{ border-color: var(--accent); }
+.user-avatar{
+  width:26px; height:26px;
+  border-radius:50%;
+  background: var(--accent);
+  color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-size:0.75rem;
+  font-weight:800;
+  text-transform:uppercase;
+  flex-shrink:0;
+}
+.user-email-label{
+  max-width:140px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.user-menu-dropdown{
+  position:absolute;
+  top: calc(100% + 8px);
+  right:0;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  padding:6px;
+  min-width:150px;
+  z-index:50;
+}
+.user-menu-dropdown[hidden]{ display:none; }
+.user-menu-dropdown button{
+  width:100%;
+  text-align:left;
+  padding:9px 12px;
+  border-radius:8px;
+  background:none;
+  border:none;
+  color: var(--text);
+  font-size:0.85rem;
+  font-weight:600;
+}
+.user-menu-dropdown button:hover{ background: var(--bg-elev); }
 .nav-fav-btn .star{ color: var(--star); fill: currentColor; }
 .fav-label{ display:inline; }
 
@@ -736,13 +791,26 @@ img{ max-width:100%; display:block; }
 .login-email::placeholder{ color: var(--text-dim); }
 .login-email:focus{ outline:none; border-color: var(--accent); }
 .login-continue{
-  background: var(--bg-elev);
-  color: var(--text-dim);
+  background: var(--accent);
+  color:#fff;
   margin-top:4px;
 }
-.login-continue:disabled{ cursor:not-allowed; }
-.login-continue:not(:disabled){ background: var(--accent); color:#fff; }
-.login-continue:not(:disabled):hover{ background: var(--accent-dark); }
+.login-continue:hover{ background: var(--accent-dark); }
+#loginProviders{ display:flex; flex-direction:column; gap:12px; }
+#loginForm{ display:flex; flex-direction:column; gap:10px; }
+.login-error{
+  color: #ff6b6b;
+  font-size: 0.82rem;
+  font-weight:600;
+  margin:0;
+}
+.login-error[hidden]{ display:none; }
+.login-note{
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  text-align:center;
+  margin: 4px 0 0;
+}
 .player-bar{
   display:flex;
   align-items:center;
