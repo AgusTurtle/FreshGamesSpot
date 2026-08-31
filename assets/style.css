@@ -752,6 +752,12 @@ img{ max-width:100%; display:block; }
   padding: 0 28px;
   margin-top:-46px;
 }
+.profile-avatar-col{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+}
 .profile-avatar{
   width:92px; height:92px;
   border-radius:18px;
@@ -784,6 +790,13 @@ img{ max-width:100%; display:block; }
   text-decoration: underline;
   padding:0;
 }
+.profile-avatar-col .profile-edit-link{
+  align-self:center;
+  text-align:center;
+  max-width:92px;
+  line-height:1.25;
+}
+.profile-remove-avatar-link{ color: #ff6b6b; }
 .profile-edit-link:hover{ color: var(--accent); }
 
 .profile-username-form{

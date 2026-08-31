@@ -142,6 +142,8 @@
     profileOverlay: document.getElementById("profileOverlay"),
     profileClose: document.getElementById("profileClose"),
     profileAvatarBtn: document.getElementById("profileAvatarBtn"),
+    profileChangeAvatarLink: document.getElementById("profileChangeAvatarLink"),
+    profileRemoveAvatarLink: document.getElementById("profileRemoveAvatarLink"),
     profileUsername: document.getElementById("profileUsername"),
     profileEditUsernameBtn: document.getElementById("profileEditUsernameBtn"),
     profileUsernameForm: document.getElementById("profileUsernameForm"),
@@ -1067,9 +1069,11 @@
   /* ---------- profile page ---------- */
   function renderProfileAvatar(){
     const session = getSession();
-    el.profileAvatarBtn.innerHTML = session && session.avatar
+    const hasAvatar = !!(session && session.avatar);
+    el.profileAvatarBtn.innerHTML = hasAvatar
       ? `<img src="${session.avatar}" alt="">`
       : DEFAULT_AVATAR_HTML.replace('width="16" height="16"', 'width="40" height="40"');
+    el.profileRemoveAvatarLink.hidden = !hasAvatar;
   }
   function daysSince(ts){
     if (!ts) return 0;
@@ -1116,6 +1120,14 @@
     if (e.target === el.profileOverlay) el.profileOverlay.hidden = true;
   });
   el.profileAvatarBtn.addEventListener("click", () => el.avatarFileInput.click());
+  el.profileChangeAvatarLink.addEventListener("click", () => el.avatarFileInput.click());
+  el.profileRemoveAvatarLink.addEventListener("click", async () => {
+    const result = await saveAvatar(null);
+    if (result.ok){
+      syncSessionUI();
+      renderProfileAvatar();
+    }
+  });
 
   function validateProfileUsername(){
     const value = el.profileUsernameInput.value.trim();

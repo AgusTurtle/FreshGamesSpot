@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&family=Chakra+Petch:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=71">
+<link rel="stylesheet" href="assets/style.css?v=73">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3231209923135744"
      crossorigin="anonymous"></script>
 <script type="application/ld+json">
@@ -190,7 +190,11 @@
     </button>
     <div class="profile-banner"></div>
     <div class="profile-header">
-      <button id="profileAvatarBtn" class="profile-avatar" aria-label="Cambiar foto de perfil" type="button"></button>
+      <div class="profile-avatar-col">
+        <button id="profileAvatarBtn" class="profile-avatar" aria-label="Cambiar foto de perfil" type="button"></button>
+        <button id="profileChangeAvatarLink" class="profile-edit-link" type="button">Cambiar foto de perfil</button>
+        <button id="profileRemoveAvatarLink" class="profile-edit-link profile-remove-avatar-link" type="button" hidden>Quitar foto de perfil</button>
+      </div>
       <div class="profile-identity">
         <h2 id="profileUsername" class="profile-username"></h2>
         <button id="profileEditUsernameBtn" class="profile-edit-link" type="button">Editar nombre</button>
@@ -314,6 +318,6 @@
 </div>
 
 <script src="https://accounts.google.com/gsi/client" async defer></script>
-<script src="assets/app.js?v=71"></script>
+<script src="assets/app.js?v=73"></script>
 </body>
 </html>
