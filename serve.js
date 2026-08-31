@@ -54,6 +54,7 @@ function applyVoteDelta(gameId, prevVote, newVote){
 }
 
 // ---------- Accounts (persisted, same volume/ephemeral caveat as votes above) ----------
+// (deploy marker: volume-persistence check)
 // No real session/cookie layer -- the client re-sends { email, passwordHash }
 // on every account request (passwordHash computed client-side via
 // SubtleCrypto, plaintext password never leaves the browser) and this
