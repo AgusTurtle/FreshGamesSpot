@@ -732,14 +732,6 @@ img{ max-width:100%; display:block; }
   box-shadow: 0 24px 60px rgba(0,0,0,0.5);
   padding-bottom: 28px;
 }
-.profile-card::before{
-  content:"";
-  position:absolute;
-  top:0; left:0; right:0;
-  height:3px;
-  background: linear-gradient(90deg, #38d9ff, #a78bfa, #22c55e, #ff8a3d);
-  z-index:1;
-}
 .profile-close{
   position:absolute;
   top:14px; right:14px;
