@@ -119,11 +119,17 @@
     loginGoogleBtn: document.getElementById("loginGoogleBtn"),
     loginOverlay: document.getElementById("loginOverlay"),
     loginClose: document.getElementById("loginClose"),
+    loginProviders: document.getElementById("loginProviders"),
     loginForm: document.getElementById("loginForm"),
     loginEmail: document.getElementById("loginEmail"),
     loginPassword: document.getElementById("loginPassword"),
     loginError: document.getElementById("loginError"),
     loginContinue: document.getElementById("loginContinue"),
+    usernameForm: document.getElementById("usernameForm"),
+    usernameInput: document.getElementById("usernameInput"),
+    usernameShuffle: document.getElementById("usernameShuffle"),
+    usernameError: document.getElementById("usernameError"),
+    usernameContinue: document.getElementById("usernameContinue"),
     userMenu: document.getElementById("userMenu"),
     userMenuBtn: document.getElementById("userMenuBtn"),
     userMenuDropdown: document.getElementById("userMenuDropdown"),
@@ -151,10 +157,18 @@
     try { return JSON.parse(localStorage.getItem(SESSION_KEY)); }
     catch(e){ return null; }
   }
-  // session is { email, passwordHash } for email+password accounts, or
-  // { email, oauthToken } for Google (and later Discord/Steam) accounts.
+  // session is { email, passwordHash, username } for email+password
+  // accounts, or { email, oauthToken, username } for Google (and later
+  // Discord/Steam) accounts -- username is whatever the account chose to
+  // display instead of its email, null until they set one.
   function setSession(session){
     localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+  }
+  function setSessionUsername(username){
+    const session = getSession();
+    if (!session) return;
+    session.username = username;
+    setSession(session);
   }
   function clearSession(){
     localStorage.removeItem(SESSION_KEY);
@@ -182,8 +196,8 @@
     }
     if (!res.ok) return { ok:false, error:"Algo salió mal. Probá de nuevo." };
     const data = await res.json();
-    setSession({ email, passwordHash });
-    return { ok:true, favorites: data.favorites || [] };
+    setSession({ email, passwordHash, username: data.username || null });
+    return { ok:true, favorites: data.favorites || [], username: data.username || null };
   }
   // Google Identity Services hands us a signed ID token ("credential") --
   // the server verifies it against Google directly (see
@@ -207,8 +221,26 @@
       return { ok:false, error: data.error || "No se pudo iniciar sesión con Google." };
     }
     const data = await res.json();
-    setSession({ email: data.email, oauthToken: data.oauthToken });
-    return { ok:true, favorites: data.favorites || [] };
+    setSession({ email: data.email, oauthToken: data.oauthToken, username: data.username || null });
+    return { ok:true, favorites: data.favorites || [], username: data.username || null };
+  }
+  async function saveUsername(username){
+    const session = getSession();
+    if (!session) return { ok:false, error:"Sesión perdida, volvé a iniciar sesión." };
+    let res;
+    try {
+      res = await fetch("/api/account/username", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: session.email, passwordHash: session.passwordHash, oauthToken: session.oauthToken, username }),
+      });
+    } catch (e){
+      return { ok:false, error:"No se pudo conectar con el servidor. Probá de nuevo." };
+    }
+    if (!res.ok) return { ok:false, error:"Ese nombre no es válido (mínimo 2 caracteres)." };
+    const data = await res.json();
+    setSessionUsername(data.username);
+    return { ok:true, username: data.username };
   }
   // Fire-and-forget push of the current favorites list to the account,
   // called after every toggle while logged in. Best-effort: a failed
@@ -782,8 +814,9 @@
     el.loginNavBtn.hidden = loggedIn;
     el.userMenu.hidden = !loggedIn;
     if (loggedIn){
-      el.userEmailLabel.textContent = session.email;
-      el.userAvatar.textContent = session.email.slice(0, 1);
+      const label = session.username || session.email;
+      el.userEmailLabel.textContent = label;
+      el.userAvatar.textContent = label.slice(0, 1);
     }
   }
   syncSessionUI();
@@ -811,10 +844,34 @@
   function openLoginModal(){
     el.loginError.hidden = true;
     el.loginForm.reset();
+    el.loginForm.hidden = false;
+    el.loginProviders.hidden = false;
+    el.usernameForm.hidden = true;
     el.loginOverlay.hidden = false;
     el.loginEmail.focus();
   }
   el.loginNavBtn.addEventListener("click", openLoginModal);
+
+  // Shared tail end of every successful login/register (password or
+  // Google): adopt the account's favorites, and if it has no username
+  // yet, block on setting one before the modal closes -- new accounts
+  // via Google in particular have never had the user type anything.
+  function finishLogin(favorites, username){
+    syncSessionUI();
+    setFavorites(favorites);
+    updateView();
+    if (username){
+      el.loginOverlay.hidden = true;
+    } else {
+      el.loginProviders.hidden = true;
+      el.loginForm.hidden = true;
+      el.usernameForm.hidden = false;
+      el.usernameError.hidden = true;
+      el.usernameInput.value = "";
+      validateUsername();
+      el.usernameInput.focus();
+    }
+  }
 
   // Google Identity Services' real button has to receive the actual click
   // for the sign-in popup to be allowed -- forwarding a synthetic
@@ -830,10 +887,7 @@
       el.loginError.hidden = false;
       return;
     }
-    el.loginOverlay.hidden = true;
-    syncSessionUI();
-    setFavorites(result.favorites);
-    updateView();
+    finishLogin(result.favorites, result.username);
   }
   function initGoogleSignIn(){
     if (!window.google || !google.accounts || !google.accounts.id) { setTimeout(initGoogleSignIn, 300); return; }
@@ -867,14 +921,45 @@
       el.loginError.hidden = false;
       return;
     }
-    el.loginOverlay.hidden = true;
-    syncSessionUI();
     // The account's server-side favorites become the new local list --
     // whatever was starred anonymously in this browser before logging in
     // is not merged in, to avoid surprising someone who logs into an
     // existing account with a different favorites history.
-    setFavorites(result.favorites);
-    updateView();
+    finishLogin(result.favorites, result.username);
+  });
+
+  // ---- Username step (shown once, after first login with none set) ----
+  const USERNAME_RE = /^[a-zA-Z0-9._]{6,20}$/;
+  const NAME_WORDS = ["Turbo", "Pixel", "Rapid", "Nova", "Shadow", "Blaze", "Cosmic", "Retro", "Wild", "Lucky"];
+  function validateUsername(){
+    const value = el.usernameInput.value.trim();
+    const lengthOk = value.length >= 6 && value.length <= 20;
+    const charsOk = value.length === 0 || /^[a-zA-Z0-9._]+$/.test(value);
+    document.getElementById("ruleLength").dataset.ok = String(lengthOk);
+    document.getElementById("ruleChars").dataset.ok = String(charsOk);
+    const valid = USERNAME_RE.test(value);
+    el.usernameContinue.disabled = !valid;
+    return valid;
+  }
+  el.usernameInput.addEventListener("input", validateUsername);
+  el.usernameShuffle.addEventListener("click", () => {
+    const word = NAME_WORDS[Math.floor(Math.random() * NAME_WORDS.length)];
+    el.usernameInput.value = word + Math.floor(1000 + Math.random() * 9000);
+    validateUsername();
+  });
+  el.usernameForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!validateUsername()) return;
+    el.usernameContinue.disabled = true;
+    const result = await saveUsername(el.usernameInput.value.trim());
+    el.usernameContinue.disabled = false;
+    if (!result.ok){
+      el.usernameError.textContent = result.error;
+      el.usernameError.hidden = false;
+      return;
+    }
+    syncSessionUI();
+    el.loginOverlay.hidden = true;
   });
 
   el.userMenuBtn.addEventListener("click", () => {

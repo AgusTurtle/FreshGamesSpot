@@ -745,6 +745,88 @@ img{ max-width:100%; display:block; }
   text-align:center;
   margin: 0 0 12px;
 }
+.login-subtitle{
+  font-size: 1.05rem;
+  font-weight:800;
+  text-align:center;
+  margin: 0 0 4px;
+}
+#usernameForm{ display:flex; flex-direction:column; gap:10px; }
+.username-brand{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  margin-bottom:6px;
+  color: var(--text);
+  font-family:"Chakra Petch", sans-serif;
+  font-size:1.15rem;
+  font-weight:800;
+  animation: usernameBrandIn .5s cubic-bezier(.22,1,.36,1) backwards;
+}
+.username-brand svg{
+  color: var(--accent);
+  animation: usernameBrandSpin .6s cubic-bezier(.34,1.56,.64,1) .1s backwards;
+}
+.username-brand strong{ color: var(--accent); font-weight:800; }
+@keyframes usernameBrandIn{
+  from{ opacity:0; transform: translateY(-8px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+@keyframes usernameBrandSpin{
+  from{ opacity:0; transform: scale(.4) rotate(-25deg); }
+  to{ opacity:1; transform: scale(1) rotate(0); }
+}
+@media (prefers-reduced-motion: reduce){
+  .username-brand, .username-brand svg{ animation: none; }
+}
+.username-input-wrap{ position:relative; }
+.username-input{ padding-right:46px; }
+.username-shuffle{
+  position:absolute;
+  top:50%; right:6px;
+  transform:translateY(-50%);
+  width:32px; height:32px;
+  border-radius:8px;
+  border:none;
+  background: var(--bg-elev);
+  color: var(--text-dim);
+  display:flex; align-items:center; justify-content:center;
+}
+.username-shuffle:hover{ color: var(--accent); }
+.username-rules{
+  list-style:none;
+  margin:0; padding:0;
+  display:flex; flex-direction:column; gap:6px;
+}
+.username-rules li{
+  display:flex; align-items:center; gap:8px;
+  font-size: 0.82rem;
+  font-weight:600;
+  color: #ff6b6b;
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: rgba(255,107,107,0.08);
+}
+.username-rules li[data-ok="true"]{
+  color: #3ecf6e;
+  background: rgba(62,207,110,0.1);
+}
+.rule-icon{
+  width:14px; height:14px;
+  border-radius:50%;
+  flex-shrink:0;
+  position:relative;
+}
+.rule-icon::before, .rule-icon::after{
+  content:"";
+  position:absolute;
+  background: currentColor;
+}
+li[data-ok="false"] .rule-icon::before{ width:2px; height:10px; top:2px; left:6px; transform:rotate(45deg); }
+li[data-ok="false"] .rule-icon::after{ width:2px; height:10px; top:2px; left:6px; transform:rotate(-45deg); }
+li[data-ok="true"] .rule-icon::before{ width:8px; height:2px; top:8px; left:2px; transform:rotate(45deg); }
+li[data-ok="true"] .rule-icon::after{ width:4px; height:2px; top:6px; left:8px; transform:rotate(-45deg); }
 .login-btn{
   display:flex;
   align-items:center;
@@ -798,6 +880,10 @@ img{ max-width:100%; display:block; }
 .login-continue:hover{ background: var(--accent-dark); }
 #loginProviders{ display:flex; flex-direction:column; gap:12px; }
 #loginForm{ display:flex; flex-direction:column; gap:10px; }
+/* An ID selector setting display beats the UA stylesheet's [hidden]
+   rule (far lower specificity) -- without this, toggling the hidden
+   attribute on these three login-modal steps silently does nothing. */
+#loginProviders[hidden], #loginForm[hidden], #usernameForm[hidden]{ display:none; }
 .login-error{
   color: #ff6b6b;
   font-size: 0.82rem;

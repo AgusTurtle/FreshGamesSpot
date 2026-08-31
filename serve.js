@@ -461,7 +461,7 @@ http.createServer((req, res) => {
         const acct = checkAuth(email, undefined, oauthToken);
         if (!acct){ res.writeHead(401); res.end(); return; }
         res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
-        res.end(JSON.stringify({ favorites: acct.favorites }));
+        res.end(JSON.stringify({ favorites: acct.favorites, username: acct.username || null }));
         return;
       }
       if (typeof passwordHash !== "string" || passwordHash.length !== 64){
@@ -478,7 +478,27 @@ http.createServer((req, res) => {
         saveAccounts();
       }
       res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
-      res.end(JSON.stringify({ favorites: accounts[email].favorites }));
+      res.end(JSON.stringify({ favorites: accounts[email].favorites, username: accounts[email].username || null }));
+    });
+    return;
+  }
+
+  if (urlPath === "/api/account/username" && req.method === "POST"){
+    readJsonBody(req, 2048, (err, body) => {
+      if (err){ res.writeHead(400); res.end(); return; }
+      const { email, passwordHash, oauthToken, username } = body || {};
+      if (typeof email !== "string" || typeof username !== "string"){
+        res.writeHead(400); res.end(); return;
+      }
+      const clean = username.trim();
+      // Same 6-20 chars, letters/numbers/./_ rule the client checks live --
+      // re-checked here since the client's validation is just UX, not security.
+      if (!/^[a-zA-Z0-9._]{6,20}$/.test(clean)){ res.writeHead(400); res.end(); return; }
+      if (!checkAuth(email, passwordHash, oauthToken)){ res.writeHead(401); res.end(); return; }
+      accounts[email].username = clean;
+      saveAccounts();
+      res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
+      res.end(JSON.stringify({ ok: true, username: clean }));
     });
     return;
   }
@@ -499,7 +519,7 @@ http.createServer((req, res) => {
       accounts[email].oauthToken = oauthToken;
       saveAccounts();
       res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
-      res.end(JSON.stringify({ email, oauthToken, favorites: accounts[email].favorites }));
+      res.end(JSON.stringify({ email, oauthToken, favorites: accounts[email].favorites, username: accounts[email].username || null }));
     });
     return;
   }
