@@ -156,6 +156,7 @@
   function clearSession(){
     localStorage.removeItem(SESSION_KEY);
   }
+  // (deploy marker: volume-persistence re-check)
   // Same email+password form both registers (first time the server sees
   // that email) and logs in (email already on file) -- one flow instead
   // of a separate signup screen, matching what the login modal's single
