@@ -816,10 +816,12 @@
   }
   el.loginNavBtn.addEventListener("click", openLoginModal);
 
-  // Google Identity Services needs its own real button to actually render
-  // (that's what triggers the sign-in popup) -- it's rendered off-screen
-  // and our styled loginGoogleBtn just forwards its click there, so the
-  // UI stays consistent with the Discord/Steam buttons alongside it.
+  // Google Identity Services' real button has to receive the actual click
+  // for the sign-in popup to be allowed -- forwarding a synthetic
+  // .click() to it from our own button isn't a trusted user gesture and
+  // gets popup-blocked. So Google's real button renders invisibly right
+  // on top of our styled one (see #googleBtnContainer in index.html) and
+  // just eats the real click; loginGoogleBtn itself has no click handler.
   const GOOGLE_CLIENT_ID = "120779948196-6o78huetsa3rjposubl20nuu36qsbv4d.apps.googleusercontent.com";
   async function handleGoogleCredentialResponse(response){
     const result = await loginWithGoogleCredential(response.credential);
@@ -836,13 +838,12 @@
   function initGoogleSignIn(){
     if (!window.google || !google.accounts || !google.accounts.id) { setTimeout(initGoogleSignIn, 300); return; }
     google.accounts.id.initialize({ client_id: GOOGLE_CLIENT_ID, callback: handleGoogleCredentialResponse });
-    google.accounts.id.renderButton(document.getElementById("googleBtnContainer"), { type: "standard" });
+    google.accounts.id.renderButton(document.getElementById("googleBtnContainer"), {
+      type: "standard",
+      width: el.loginGoogleBtn.offsetWidth || 360,
+    });
   }
   initGoogleSignIn();
-  el.loginGoogleBtn.addEventListener("click", () => {
-    const realBtn = document.querySelector("#googleBtnContainer div[role=button]");
-    if (realBtn) realBtn.click();
-  });
   el.loginClose.addEventListener("click", () => {
     el.loginOverlay.hidden = true;
   });

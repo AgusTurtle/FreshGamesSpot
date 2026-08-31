@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&family=Chakra+Petch:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=67">
+<link rel="stylesheet" href="assets/style.css?v=68">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3231209923135744"
      crossorigin="anonymous"></script>
 <script type="application/ld+json">
@@ -199,15 +199,25 @@
         </svg>
         Continuar con Discord
       </button>
-      <button type="button" id="loginGoogleBtn" class="login-btn login-google">
-        <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
-          <path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.91c1.7-1.57 2.69-3.88 2.69-6.62Z"/>
-          <path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.91-2.26c-.81.54-1.84.86-3.05.86-2.34 0-4.32-1.58-5.03-3.71H.96v2.33A9 9 0 0 0 9 18Z"/>
-          <path fill="#FBBC05" d="M3.97 10.71a5.4 5.4 0 0 1 0-3.42V4.96H.96a9 9 0 0 0 0 8.08l3.01-2.33Z"/>
-          <path fill="#EA4335" d="M9 3.58c1.32 0 2.51.45 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0A9 9 0 0 0 .96 4.96l3.01 2.33C4.68 5.16 6.66 3.58 9 3.58Z"/>
-        </svg>
-        Acceder con Google
-      </button>
+      <div id="loginGoogleWrap" style="position:relative;">
+        <button type="button" id="loginGoogleBtn" class="login-btn login-google">
+          <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
+            <path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.91c1.7-1.57 2.69-3.88 2.69-6.62Z"/>
+            <path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.91-2.26c-.81.54-1.84.86-3.05.86-2.34 0-4.32-1.58-5.03-3.71H.96v2.33A9 9 0 0 0 9 18Z"/>
+            <path fill="#FBBC05" d="M3.97 10.71a5.4 5.4 0 0 1 0-3.42V4.96H.96a9 9 0 0 0 0 8.08l3.01-2.33Z"/>
+            <path fill="#EA4335" d="M9 3.58c1.32 0 2.51.45 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0A9 9 0 0 0 .96 4.96l3.01 2.33C4.68 5.16 6.66 3.58 9 3.58Z"/>
+          </svg>
+          Acceder con Google
+        </button>
+        <!--
+          Google's own button has to actually receive the real click for
+          the sign-in popup to be allowed -- a JS-forwarded .click() on it
+          isn't a trusted user gesture and gets popup-blocked. So this
+          renders on top of our styled button, invisible, sized to cover
+          it exactly, and just eats the real click itself.
+        -->
+        <div id="googleBtnContainer" style="position:absolute; inset:0; opacity:0; overflow:hidden;"></div>
+      </div>
       <button type="button" id="loginSteamBtn" class="login-btn login-steam" hidden>
         <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" fill="#fff">
           <path d="M9 0a9 9 0 0 0-8.98 8.5l4.83 2c.41-.28.9-.44 1.44-.44l.06-.01L8.5 6.8v-.05a3.28 3.28 0 1 1 3.28 3.28h-.08l-3.2 2.29.01.08a2.46 2.46 0 1 1-4.82.66l-3.46-1.43A9 9 0 1 0 9 0Zm-3.5 13.7-.94-.39a1.85 1.85 0 0 0 3.42-.06 1.85 1.85 0 0 0-2.4-2.4l.97.4a1.36 1.36 0 1 1-1.05 2.45ZM14 6.75a2.19 2.19 0 1 0-4.37 0 2.19 2.19 0 0 0 4.37 0Zm-3.83 0a1.64 1.64 0 1 1 3.28 0 1.64 1.64 0 0 1-3.28 0Z"/>
@@ -216,13 +226,6 @@
       </button>
       <div class="login-divider"><span>o</span></div>
     </div>
-    <!--
-      Google's own button has to actually render (it's what triggers their
-      real sign-in flow) to work reliably -- kept off-screen and our
-      styled loginGoogleBtn forwards its click to this one instead of
-      duplicating Google's button UI.
-    -->
-    <div id="googleBtnContainer" style="position:absolute; opacity:0; pointer-events:none; top:-9999px;"></div>
     <form id="loginForm" novalidate>
       <input id="loginEmail" type="email" class="login-email" placeholder="Introduzca su dirección de correo electrónico" autocomplete="email" required>
       <input id="loginPassword" type="password" class="login-email" placeholder="Contraseña" autocomplete="current-password" required minlength="4">
@@ -234,6 +237,6 @@
 </div>
 
 <script src="https://accounts.google.com/gsi/client" async defer></script>
-<script src="assets/app.js?v=67"></script>
+<script src="assets/app.js?v=68"></script>
 </body>
 </html>
