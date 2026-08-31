@@ -136,6 +136,8 @@
     userAvatar: document.getElementById("userAvatar"),
     userEmailLabel: document.getElementById("userEmailLabel"),
     logoutBtn: document.getElementById("logoutBtn"),
+    changeAvatarBtn: document.getElementById("changeAvatarBtn"),
+    avatarFileInput: document.getElementById("avatarFileInput"),
   };
 
   /* ---------- account helpers ----------
@@ -170,6 +172,12 @@
     session.username = username;
     setSession(session);
   }
+  function setSessionAvatar(avatar){
+    const session = getSession();
+    if (!session) return;
+    session.avatar = avatar;
+    setSession(session);
+  }
   function clearSession(){
     localStorage.removeItem(SESSION_KEY);
   }
@@ -196,7 +204,7 @@
     }
     if (!res.ok) return { ok:false, error:"Algo salió mal. Probá de nuevo." };
     const data = await res.json();
-    setSession({ email, passwordHash, username: data.username || null });
+    setSession({ email, passwordHash, username: data.username || null, avatar: data.avatar || null });
     return { ok:true, favorites: data.favorites || [], username: data.username || null };
   }
   // Google Identity Services hands us a signed ID token ("credential") --
@@ -221,7 +229,7 @@
       return { ok:false, error: data.error || "No se pudo iniciar sesión con Google." };
     }
     const data = await res.json();
-    setSession({ email: data.email, oauthToken: data.oauthToken, username: data.username || null });
+    setSession({ email: data.email, oauthToken: data.oauthToken, username: data.username || null, avatar: data.avatar || null });
     return { ok:true, favorites: data.favorites || [], username: data.username || null };
   }
   async function saveUsername(username){
@@ -241,6 +249,47 @@
     const data = await res.json();
     setSessionUsername(data.username);
     return { ok:true, username: data.username };
+  }
+  // avatar is a data: URI (already downscaled to a small square client-
+  // side, see pickAndResizeAvatar) or null to reset to the default site
+  // icon. Stored straight in accounts.json -- no image host in this
+  // stack to upload to.
+  async function saveAvatar(avatar){
+    const session = getSession();
+    if (!session) return { ok:false, error:"Sesión perdida, volvé a iniciar sesión." };
+    let res;
+    try {
+      res = await fetch("/api/account/avatar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: session.email, passwordHash: session.passwordHash, oauthToken: session.oauthToken, avatar }),
+      });
+    } catch (e){
+      return { ok:false, error:"No se pudo conectar con el servidor. Probá de nuevo." };
+    }
+    if (!res.ok) return { ok:false, error:"No se pudo guardar la foto." };
+    setSessionAvatar(avatar);
+    return { ok:true };
+  }
+  // Downscales to a small square JPEG before it ever leaves the browser --
+  // keeps the upload small and accounts.json from growing unbounded (the
+  // server also caps the request body size as a hard backstop).
+  function pickAndResizeAvatar(file){
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      const reader = new FileReader();
+      reader.onerror = () => reject(new Error("read failed"));
+      reader.onload = () => { img.onerror = () => reject(new Error("decode failed")); img.onload = () => {
+        const SIZE = 160;
+        const canvas = document.createElement("canvas");
+        canvas.width = SIZE; canvas.height = SIZE;
+        const ctx = canvas.getContext("2d");
+        const side = Math.min(img.width, img.height);
+        ctx.drawImage(img, (img.width - side) / 2, (img.height - side) / 2, side, side, 0, 0, SIZE, SIZE);
+        resolve(canvas.toDataURL("image/jpeg", 0.85));
+      }; img.src = reader.result; };
+      reader.readAsDataURL(file);
+    });
   }
   // Fire-and-forget push of the current favorites list to the account,
   // called after every toggle while logged in. Best-effort: a failed
@@ -808,6 +857,7 @@
 
   el.favToggleNav.addEventListener("click", renderFavoritesView);
 
+  const DEFAULT_AVATAR_HTML = `<svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-logo"/></svg>`;
   function syncSessionUI(){
     const session = getSession();
     const loggedIn = !!session;
@@ -816,7 +866,9 @@
     if (loggedIn){
       const label = session.username || session.email;
       el.userEmailLabel.textContent = label;
-      el.userAvatar.textContent = label.slice(0, 1);
+      el.userAvatar.innerHTML = session.avatar
+        ? `<img src="${session.avatar}" alt="">`
+        : DEFAULT_AVATAR_HTML;
     }
   }
   syncSessionUI();
@@ -838,6 +890,11 @@
     if (!res.ok){ clearSession(); syncSessionUI(); return; }
     const data = await res.json();
     setFavorites(data.favorites || []);
+    // Also pick up a username/avatar set from another device since this
+    // session was last saved here.
+    setSessionUsername(data.username || null);
+    setSessionAvatar(data.avatar || null);
+    syncSessionUI();
     updateView();
   })();
 
@@ -972,6 +1029,21 @@
     clearSession();
     el.userMenuDropdown.hidden = true;
     syncSessionUI();
+  });
+
+  el.changeAvatarBtn.addEventListener("click", () => {
+    el.userMenuDropdown.hidden = true;
+    el.avatarFileInput.click();
+  });
+  el.avatarFileInput.addEventListener("change", async () => {
+    const file = el.avatarFileInput.files[0];
+    el.avatarFileInput.value = "";
+    if (!file) return;
+    let dataUri;
+    try { dataUri = await pickAndResizeAvatar(file); }
+    catch (e){ return; }
+    const result = await saveAvatar(dataUri);
+    if (result.ok) syncSessionUI();
   });
 
   el.playerBack.addEventListener("click", closeGame);

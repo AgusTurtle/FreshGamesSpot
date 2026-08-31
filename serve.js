@@ -461,7 +461,7 @@ http.createServer((req, res) => {
         const acct = checkAuth(email, undefined, oauthToken);
         if (!acct){ res.writeHead(401); res.end(); return; }
         res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
-        res.end(JSON.stringify({ favorites: acct.favorites, username: acct.username || null }));
+        res.end(JSON.stringify({ favorites: acct.favorites, username: acct.username || null, avatar: acct.avatar || null }));
         return;
       }
       if (typeof passwordHash !== "string" || passwordHash.length !== 64){
@@ -478,7 +478,7 @@ http.createServer((req, res) => {
         saveAccounts();
       }
       res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
-      res.end(JSON.stringify({ favorites: accounts[email].favorites, username: accounts[email].username || null }));
+      res.end(JSON.stringify({ favorites: accounts[email].favorites, username: accounts[email].username || null, avatar: accounts[email].avatar || null }));
     });
     return;
   }
@@ -503,6 +503,28 @@ http.createServer((req, res) => {
     return;
   }
 
+  if (urlPath === "/api/account/avatar" && req.method === "POST"){
+    // Custom avatars are stored as data: URIs straight in accounts.json --
+    // no image host/CDN in this stack to upload to, and the client
+    // already downscales to a small square canvas before sending, so a
+    // data URI stays well under this limit. avatar: null resets to the
+    // default site-icon avatar.
+    readJsonBody(req, 400000, (err, body) => {
+      if (err){ res.writeHead(400); res.end(); return; }
+      const { email, passwordHash, oauthToken, avatar } = body || {};
+      if (typeof email !== "string"){ res.writeHead(400); res.end(); return; }
+      if (avatar !== null && (typeof avatar !== "string" || !/^data:image\/(png|jpeg|webp);base64,/.test(avatar))){
+        res.writeHead(400); res.end(); return;
+      }
+      if (!checkAuth(email, passwordHash, oauthToken)){ res.writeHead(401); res.end(); return; }
+      accounts[email].avatar = avatar;
+      saveAccounts();
+      res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
+      res.end(JSON.stringify({ ok: true }));
+    });
+    return;
+  }
+
   if (urlPath === "/api/account/google" && req.method === "POST"){
     readJsonBody(req, 4096, async (err, body) => {
       if (err){ res.writeHead(400); res.end(); return; }
@@ -519,7 +541,7 @@ http.createServer((req, res) => {
       accounts[email].oauthToken = oauthToken;
       saveAccounts();
       res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
-      res.end(JSON.stringify({ email, oauthToken, favorites: accounts[email].favorites, username: accounts[email].username || null }));
+      res.end(JSON.stringify({ email, oauthToken, favorites: accounts[email].favorites, username: accounts[email].username || null, avatar: accounts[email].avatar || null }));
     });
     return;
   }

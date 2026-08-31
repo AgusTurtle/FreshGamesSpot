@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&family=Chakra+Petch:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=69">
+<link rel="stylesheet" href="assets/style.css?v=70">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3231209923135744"
      crossorigin="anonymous"></script>
 <script type="application/ld+json">
@@ -102,13 +102,17 @@
       <button id="loginNavBtn" class="nav-login-btn">Iniciar sesión</button>
       <div id="userMenu" class="user-menu" hidden>
         <button id="userMenuBtn" class="user-menu-btn">
-          <span id="userAvatar" class="user-avatar"></span>
+          <span id="userAvatar" class="user-avatar">
+            <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-logo"/></svg>
+          </span>
           <span id="userEmailLabel" class="user-email-label"></span>
         </button>
         <div id="userMenuDropdown" class="user-menu-dropdown" hidden>
+          <button id="changeAvatarBtn" type="button">Cambiar foto de perfil</button>
           <button id="logoutBtn" type="button">Cerrar sesión</button>
         </div>
       </div>
+      <input id="avatarFileInput" type="file" accept="image/*" hidden>
     </div>
     <nav class="cat-nav" id="catNav" aria-label="Categories">
       <!-- filled by JS -->
@@ -258,6 +262,6 @@
 </div>
 
 <script src="https://accounts.google.com/gsi/client" async defer></script>
-<script src="assets/app.js?v=69"></script>
+<script src="assets/app.js?v=70"></script>
 </body>
 </html>

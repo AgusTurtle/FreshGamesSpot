@@ -267,13 +267,18 @@ img{ max-width:100%; display:block; }
 .user-avatar{
   width:26px; height:26px;
   border-radius:50%;
-  background: var(--accent);
-  color:#fff;
+  background: var(--bg-elev);
+  color: var(--accent);
   display:flex; align-items:center; justify-content:center;
   font-size:0.75rem;
   font-weight:800;
   text-transform:uppercase;
   flex-shrink:0;
+  overflow:hidden;
+}
+.user-avatar img{
+  width:100%; height:100%;
+  object-fit:cover;
 }
 .user-email-label{
   max-width:140px;
