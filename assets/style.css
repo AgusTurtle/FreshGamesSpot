@@ -758,12 +758,12 @@ img{ max-width:100%; display:block; }
   border: 1px solid transparent;
   cursor:pointer;
 }
+.login-discord{ background:#5865F2; color:#fff; }
+.login-discord:hover{ background:#4752c4; }
 .login-google{ background:#fff; color:#1f1f1f; }
 .login-google:hover{ background:#f2f2f2; }
-.login-facebook{ background:#1877F2; color:#fff; }
-.login-facebook:hover{ background:#1565d8; }
-.login-apple{ background:#fff; color:#1f1f1f; }
-.login-apple:hover{ background:#f2f2f2; }
+.login-steam{ background:#171a21; color:#fff; border-color: #2a3f5a; }
+.login-steam:hover{ background:#000; }
 .login-divider{
   display:flex;
   align-items:center;
