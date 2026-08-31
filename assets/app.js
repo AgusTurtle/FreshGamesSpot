@@ -114,6 +114,11 @@
     playerFav: document.getElementById("playerFav"),
     playerLiveCount: document.getElementById("playerLiveCount"),
     playerLiveCountText: document.getElementById("playerLiveCountText"),
+    loginNavBtn: document.getElementById("loginNavBtn"),
+    loginOverlay: document.getElementById("loginOverlay"),
+    loginClose: document.getElementById("loginClose"),
+    loginEmail: document.getElementById("loginEmail"),
+    loginContinue: document.getElementById("loginContinue"),
   };
 
   /* ---------- storage helpers ---------- */
@@ -665,6 +670,19 @@
   });
 
   el.favToggleNav.addEventListener("click", renderFavoritesView);
+
+  el.loginNavBtn.addEventListener("click", () => {
+    el.loginOverlay.hidden = false;
+  });
+  el.loginClose.addEventListener("click", () => {
+    el.loginOverlay.hidden = true;
+  });
+  el.loginOverlay.addEventListener("click", (e) => {
+    if (e.target === el.loginOverlay) el.loginOverlay.hidden = true;
+  });
+  el.loginEmail.addEventListener("input", () => {
+    el.loginContinue.disabled = el.loginEmail.value.trim().length === 0;
+  });
 
   el.playerBack.addEventListener("click", closeGame);
   el.playerClose.addEventListener("click", closeGame);

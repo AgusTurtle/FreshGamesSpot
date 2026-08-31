@@ -239,6 +239,18 @@ img{ max-width:100%; display:block; }
   margin-left:auto;
 }
 .nav-fav-btn:hover{ border-color: var(--accent); color: var(--accent-dark); }
+
+.nav-login-btn{
+  background: var(--accent);
+  border: none;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight:700;
+  flex-shrink:0;
+}
+.nav-login-btn:hover{ background: var(--accent-dark); }
 .nav-fav-btn .star{ color: var(--star); fill: currentColor; }
 .fav-label{ display:inline; }
 
@@ -635,6 +647,102 @@ img{ max-width:100%; display:block; }
 .player-overlay[hidden]{
   display:none;
 }
+
+/* ---------- Login modal ---------- */
+.login-overlay{
+  position: fixed;
+  inset:0;
+  z-index: 200;
+  background: rgba(5,6,13,0.72);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 20px;
+}
+.login-overlay[hidden]{ display:none; }
+.login-card{
+  position:relative;
+  width:100%;
+  max-width: 420px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 44px 28px 28px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+}
+.login-close{
+  position:absolute;
+  top:14px; right:14px;
+  width:32px; height:32px;
+  border-radius:50%;
+  border:none;
+  background: transparent;
+  color: var(--text-dim);
+  display:flex; align-items:center; justify-content:center;
+}
+.login-close:hover{ background: var(--bg-elev); color: var(--text); }
+.login-title{
+  font-size: 1.3rem;
+  font-weight:800;
+  text-align:center;
+  margin: 0 0 12px;
+}
+.login-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  width:100%;
+  padding: 13px 18px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight:700;
+  border: 1px solid transparent;
+  cursor:pointer;
+}
+.login-google{ background:#fff; color:#1f1f1f; }
+.login-google:hover{ background:#f2f2f2; }
+.login-facebook{ background:#1877F2; color:#fff; }
+.login-facebook:hover{ background:#1565d8; }
+.login-apple{ background:#fff; color:#1f1f1f; }
+.login-apple:hover{ background:#f2f2f2; }
+.login-divider{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color: var(--text-dim);
+  font-size:0.85rem;
+  margin: 6px 0;
+}
+.login-divider::before, .login-divider::after{
+  content:"";
+  flex:1;
+  height:1px;
+  background: var(--border);
+}
+.login-email{
+  width:100%;
+  padding: 13px 16px;
+  border-radius: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+.login-email::placeholder{ color: var(--text-dim); }
+.login-email:focus{ outline:none; border-color: var(--accent); }
+.login-continue{
+  background: var(--bg-elev);
+  color: var(--text-dim);
+  margin-top:4px;
+}
+.login-continue:disabled{ cursor:not-allowed; }
+.login-continue:not(:disabled){ background: var(--accent); color:#fff; }
+.login-continue:not(:disabled):hover{ background: var(--accent-dark); }
 .player-bar{
   display:flex;
   align-items:center;
