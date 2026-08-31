@@ -732,6 +732,14 @@ img{ max-width:100%; display:block; }
   box-shadow: 0 24px 60px rgba(0,0,0,0.5);
   padding-bottom: 28px;
 }
+.profile-card::before{
+  content:"";
+  position:absolute;
+  top:0; left:0; right:0;
+  height:3px;
+  background: linear-gradient(90deg, #38d9ff, #a78bfa, #22c55e, #ff8a3d);
+  z-index:1;
+}
 .profile-close{
   position:absolute;
   top:14px; right:14px;
@@ -739,11 +747,21 @@ img{ max-width:100%; display:block; }
   background: rgba(5,6,13,0.55);
 }
 .profile-banner{
-  height: 140px;
+  position:relative;
+  height: 150px;
   background:
-    radial-gradient(circle at 20% 20%, rgba(47,125,255,0.45), transparent 55%),
-    radial-gradient(circle at 85% 75%, rgba(47,125,255,0.25), transparent 55%),
-    var(--bg-elev);
+    radial-gradient(circle at 12% 15%, rgba(56,217,255,0.4), transparent 50%),
+    radial-gradient(circle at 50% -10%, rgba(167,139,250,0.35), transparent 55%),
+    radial-gradient(circle at 88% 85%, rgba(34,197,94,0.28), transparent 55%),
+    linear-gradient(160deg, #16305c, #0c1830 75%);
+  overflow:hidden;
+}
+.profile-banner::after{
+  content:"";
+  position:absolute;
+  inset:auto 0 0 0;
+  height:64px;
+  background: linear-gradient(to bottom, transparent, var(--bg-card));
 }
 .profile-header{
   display:grid;
@@ -764,6 +782,13 @@ img{ max-width:100%; display:block; }
   display:flex; align-items:center; justify-content:center;
   flex-shrink:0;
   overflow:hidden;
+  cursor:pointer;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.45), 0 0 0 3px rgba(56,217,255,0.25);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.profile-avatar:hover{
+  transform: scale(1.04);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.5), 0 0 0 3px rgba(56,217,255,0.45);
 }
 .profile-avatar svg{ width:40px; height:40px; }
 .profile-avatar img{ width:100%; height:100%; object-fit:cover; }
@@ -773,9 +798,14 @@ img{ max-width:100%; display:block; }
   grid-row:1; grid-column:2;
   align-self:center;
   justify-self:start;
-  font-size:1.4rem;
+  font-size:1.55rem;
   font-weight:800;
   margin:0;
+  color:#fff;
+  background: linear-gradient(90deg, #ffffff, #bcd8ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .profile-identity .profile-edit-link{ grid-row:3; grid-column:2; align-self:end; justify-self:start; }
 .profile-edit-link{
@@ -791,8 +821,14 @@ img{ max-width:100%; display:block; }
   font-weight:700;
   text-decoration:none;
   white-space:nowrap;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, color .15s ease;
 }
-.profile-edit-link:hover{ border-color: var(--accent); color: var(--text); }
+.profile-edit-link:hover{
+  border-color: var(--accent);
+  color: var(--text);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+}
 .profile-remove-avatar-link{ color: #ff6b6b; border-color: rgba(255,107,107,0.35); }
 .profile-remove-avatar-link:hover{ border-color: #ff6b6b; color: #ff6b6b; }
 .profile-remove-avatar-link[hidden]{ display:none; }
@@ -830,13 +866,29 @@ img{ max-width:100%; display:block; }
   padding: 14px;
   border-radius: 12px;
   background: var(--bg-elev);
+  border: 1px solid transparent;
   color: var(--accent);
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+.profile-stat:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.35);
+  border-color: currentColor;
 }
 /* A splash of color per stat instead of one flat tone, same spirit as
    the category nav pills' per-category icon colors. */
 .profile-stat:nth-child(1){ color: #38d9ff; }
 .profile-stat:nth-child(2){ color: #22c55e; }
 .profile-stat:nth-child(3){ color: #ff8a3d; }
+.profile-stat svg{
+  flex-shrink:0;
+  box-sizing:content-box;
+  padding:8px;
+  border-radius:11px;
+}
+.profile-stat:nth-child(1) svg{ background: rgba(56,217,255,0.14); }
+.profile-stat:nth-child(2) svg{ background: rgba(34,197,94,0.14); }
+.profile-stat:nth-child(3) svg{ background: rgba(255,138,61,0.14); }
 .profile-stat div{ display:flex; flex-direction:column; gap:2px; }
 .profile-stat-label{ color: var(--text-dim); font-size:0.78rem; font-weight:600; }
 .profile-stat strong{ color: var(--text); font-size:1.1rem; font-weight:800; }
