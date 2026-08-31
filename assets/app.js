@@ -136,7 +136,6 @@
     userAvatar: document.getElementById("userAvatar"),
     userEmailLabel: document.getElementById("userEmailLabel"),
     logoutBtn: document.getElementById("logoutBtn"),
-    changeAvatarBtn: document.getElementById("changeAvatarBtn"),
     avatarFileInput: document.getElementById("avatarFileInput"),
     viewProfileBtn: document.getElementById("viewProfileBtn"),
     profileOverlay: document.getElementById("profileOverlay"),
@@ -1048,10 +1047,6 @@
     syncSessionUI();
   });
 
-  el.changeAvatarBtn.addEventListener("click", () => {
-    el.userMenuDropdown.hidden = true;
-    el.avatarFileInput.click();
-  });
   el.avatarFileInput.addEventListener("change", async () => {
     const file = el.avatarFileInput.files[0];
     el.avatarFileInput.value = "";
