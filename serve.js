@@ -388,18 +388,6 @@ http.createServer((req, res) => {
     return;
   }
 
-  if (urlPath === "/api/debug/volume" && req.method === "GET"){
-    res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
-    res.end(JSON.stringify({
-      RAILWAY_VOLUME_MOUNT_PATH: process.env.RAILWAY_VOLUME_MOUNT_PATH || null,
-      DATA_DIR,
-      dataDirExists: fs.existsSync(DATA_DIR),
-      accountsFileExists: fs.existsSync(ACCOUNTS_PATH),
-      votesFileExists: fs.existsSync(VOTES_PATH),
-    }));
-    return;
-  }
-
   if (urlPath === "/api/votes" && req.method === "GET"){
     res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
     res.end(JSON.stringify(votes));
