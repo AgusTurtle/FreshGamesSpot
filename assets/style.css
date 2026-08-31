@@ -837,6 +837,11 @@ img{ max-width:100%; display:block; }
   background: var(--bg-elev);
   color: var(--accent);
 }
+/* A splash of color per stat instead of one flat tone, same spirit as
+   the category nav pills' per-category icon colors. */
+.profile-stat:nth-child(1){ color: #38d9ff; }
+.profile-stat:nth-child(2){ color: #22c55e; }
+.profile-stat:nth-child(3){ color: #ff8a3d; }
 .profile-stat div{ display:flex; flex-direction:column; gap:2px; }
 .profile-stat-label{ color: var(--text-dim); font-size:0.78rem; font-weight:600; }
 .profile-stat strong{ color: var(--text); font-size:1.1rem; font-weight:800; }
