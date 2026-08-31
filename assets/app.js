@@ -138,6 +138,21 @@
     logoutBtn: document.getElementById("logoutBtn"),
     changeAvatarBtn: document.getElementById("changeAvatarBtn"),
     avatarFileInput: document.getElementById("avatarFileInput"),
+    viewProfileBtn: document.getElementById("viewProfileBtn"),
+    profileOverlay: document.getElementById("profileOverlay"),
+    profileClose: document.getElementById("profileClose"),
+    profileAvatarBtn: document.getElementById("profileAvatarBtn"),
+    profileUsername: document.getElementById("profileUsername"),
+    profileEditUsernameBtn: document.getElementById("profileEditUsernameBtn"),
+    profileUsernameForm: document.getElementById("profileUsernameForm"),
+    profileUsernameInput: document.getElementById("profileUsernameInput"),
+    profileUsernameCancel: document.getElementById("profileUsernameCancel"),
+    profileDays: document.getElementById("profileDays"),
+    profileFavCount: document.getElementById("profileFavCount"),
+    profileStreak: document.getElementById("profileStreak"),
+    profileBestStreak: document.getElementById("profileBestStreak"),
+    profileFavGrid: document.getElementById("profileFavGrid"),
+    profileFavEmpty: document.getElementById("profileFavEmpty"),
   };
 
   /* ---------- account helpers ----------
@@ -1043,7 +1058,93 @@
     try { dataUri = await pickAndResizeAvatar(file); }
     catch (e){ return; }
     const result = await saveAvatar(dataUri);
-    if (result.ok) syncSessionUI();
+    if (result.ok){
+      syncSessionUI();
+      renderProfileAvatar();
+    }
+  });
+
+  /* ---------- profile page ---------- */
+  function renderProfileAvatar(){
+    const session = getSession();
+    el.profileAvatarBtn.innerHTML = session && session.avatar
+      ? `<img src="${session.avatar}" alt="">`
+      : DEFAULT_AVATAR_HTML.replace('width="16" height="16"', 'width="40" height="40"');
+  }
+  function daysSince(ts){
+    if (!ts) return 0;
+    return Math.max(0, Math.floor((Date.now() - ts) / 86400000));
+  }
+  function plural(n, one, many){ return n === 1 ? `1 ${one}` : `${n} ${many}`; }
+  async function openProfile(){
+    el.userMenuDropdown.hidden = true;
+    const session = getSession();
+    if (!session) return;
+    // Re-auth pulls fresh stats (streak advances server-side at most once
+    // per day, and could differ from what this session cached on login).
+    let res;
+    try {
+      res = await fetch("/api/account/auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: session.email, passwordHash: session.passwordHash, oauthToken: session.oauthToken }),
+      });
+    } catch (e){ return; }
+    if (!res.ok) return;
+    const data = await res.json();
+    setSession({ ...session, username: data.username, avatar: data.avatar });
+    syncSessionUI();
+
+    el.profileUsername.textContent = data.username || session.email;
+    renderProfileAvatar();
+    el.profileDays.textContent = plural(daysSince(data.createdAt), "día", "días");
+    el.profileFavCount.textContent = String(data.favorites.length);
+    el.profileStreak.textContent = plural(data.streak || 1, "día", "días");
+    el.profileBestStreak.textContent = plural(data.bestStreak || 1, "día", "días");
+
+    el.profileFavGrid.innerHTML = "";
+    const favGames = data.favorites.map(findGame).filter(Boolean);
+    el.profileFavEmpty.hidden = favGames.length > 0;
+    favGames.forEach(g => el.profileFavGrid.appendChild(makeCard(g)));
+
+    el.profileUsernameForm.hidden = true;
+    el.profileOverlay.hidden = false;
+  }
+  el.viewProfileBtn.addEventListener("click", openProfile);
+  el.profileClose.addEventListener("click", () => { el.profileOverlay.hidden = true; });
+  el.profileOverlay.addEventListener("click", (e) => {
+    if (e.target === el.profileOverlay) el.profileOverlay.hidden = true;
+  });
+  el.profileAvatarBtn.addEventListener("click", () => el.avatarFileInput.click());
+
+  function validateProfileUsername(){
+    const value = el.profileUsernameInput.value.trim();
+    const lengthOk = value.length >= 6 && value.length <= 20;
+    const charsOk = value.length === 0 || /^[a-zA-Z0-9._]+$/.test(value);
+    el.profileUsernameForm.querySelector("#profileRuleLength").dataset.ok = String(lengthOk);
+    el.profileUsernameForm.querySelector("#profileRuleChars").dataset.ok = String(charsOk);
+    const valid = /^[a-zA-Z0-9._]{6,20}$/.test(value);
+    el.profileUsernameForm.querySelector('button[type="submit"]').disabled = !valid;
+    return valid;
+  }
+  el.profileUsernameInput.addEventListener("input", validateProfileUsername);
+  el.profileEditUsernameBtn.addEventListener("click", () => {
+    el.profileUsernameInput.value = el.profileUsername.textContent;
+    validateProfileUsername();
+    el.profileUsernameForm.hidden = false;
+    el.profileUsernameInput.focus();
+  });
+  el.profileUsernameCancel.addEventListener("click", () => {
+    el.profileUsernameForm.hidden = true;
+  });
+  el.profileUsernameForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!validateProfileUsername()) return;
+    const result = await saveUsername(el.profileUsernameInput.value.trim());
+    if (!result.ok) return;
+    el.profileUsername.textContent = result.username;
+    syncSessionUI();
+    el.profileUsernameForm.hidden = true;
   });
 
   el.playerBack.addEventListener("click", closeGame);

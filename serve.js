@@ -85,6 +85,39 @@ function checkAuth(email, passwordHash, oauthToken){
   return false;
 }
 
+// Calendar-day visit streak (UTC) -- called once per successful auth
+// (register, login, session-resume, Google) so it advances at most once
+// per real day regardless of how many requests that day makes. Same day
+// as last visit: untouched. Exactly the next day: streak continues.
+// Any bigger gap (or first-ever visit): streak resets to 1.
+function todayUTC(){
+  return new Date().toISOString().slice(0, 10);
+}
+function touchStreak(acct){
+  const today = todayUTC();
+  if (acct.lastVisitDate === today) return;
+  if (acct.lastVisitDate){
+    const prev = new Date(acct.lastVisitDate + "T00:00:00Z");
+    const diffDays = Math.round((new Date(today + "T00:00:00Z") - prev) / 86400000);
+    acct.streak = diffDays === 1 ? (acct.streak || 0) + 1 : 1;
+  } else {
+    acct.streak = 1;
+  }
+  acct.lastVisitDate = today;
+  acct.bestStreak = Math.max(acct.bestStreak || 0, acct.streak);
+}
+
+function accountPayload(acct, extra){
+  return Object.assign({
+    username: acct.username || null,
+    avatar: acct.avatar || null,
+    favorites: acct.favorites,
+    createdAt: acct.createdAt || null,
+    streak: acct.streak || 1,
+    bestStreak: acct.bestStreak || 1,
+  }, extra || {});
+}
+
 function httpsGetJson(url){
   return new Promise((resolve, reject) => {
     https.get(url, (res) => {
@@ -460,8 +493,10 @@ http.createServer((req, res) => {
       if (typeof oauthToken === "string"){
         const acct = checkAuth(email, undefined, oauthToken);
         if (!acct){ res.writeHead(401); res.end(); return; }
+        touchStreak(acct);
+        saveAccounts();
         res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
-        res.end(JSON.stringify({ favorites: acct.favorites, username: acct.username || null, avatar: acct.avatar || null }));
+        res.end(JSON.stringify(accountPayload(acct)));
         return;
       }
       if (typeof passwordHash !== "string" || passwordHash.length !== 64){
@@ -474,11 +509,12 @@ http.createServer((req, res) => {
         return;
       }
       if (existing === null){
-        accounts[email] = { passwordHash, favorites: [] };
-        saveAccounts();
+        accounts[email] = { passwordHash, favorites: [], createdAt: Date.now() };
       }
+      touchStreak(accounts[email]);
+      saveAccounts();
       res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
-      res.end(JSON.stringify({ favorites: accounts[email].favorites, username: accounts[email].username || null, avatar: accounts[email].avatar || null }));
+      res.end(JSON.stringify(accountPayload(accounts[email])));
     });
     return;
   }
@@ -537,11 +573,12 @@ http.createServer((req, res) => {
         return;
       }
       const oauthToken = crypto.randomBytes(24).toString("hex");
-      if (!accounts[email]) accounts[email] = { favorites: [] };
+      if (!accounts[email]) accounts[email] = { favorites: [], createdAt: Date.now() };
       accounts[email].oauthToken = oauthToken;
+      touchStreak(accounts[email]);
       saveAccounts();
       res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
-      res.end(JSON.stringify({ email, oauthToken, favorites: accounts[email].favorites, username: accounts[email].username || null, avatar: accounts[email].avatar || null }));
+      res.end(JSON.stringify(accountPayload(accounts[email], { email, oauthToken })));
     });
     return;
   }

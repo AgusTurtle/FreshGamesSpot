@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&family=Chakra+Petch:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=70">
+<link rel="stylesheet" href="assets/style.css?v=71">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3231209923135744"
      crossorigin="anonymous"></script>
 <script type="application/ld+json">
@@ -108,6 +108,7 @@
           <span id="userEmailLabel" class="user-email-label"></span>
         </button>
         <div id="userMenuDropdown" class="user-menu-dropdown" hidden>
+          <button id="viewProfileBtn" type="button">Ver mi perfil</button>
           <button id="changeAvatarBtn" type="button">Cambiar foto de perfil</button>
           <button id="logoutBtn" type="button">Cerrar sesión</button>
         </div>
@@ -179,6 +180,57 @@
   <div class="player-info">
     <p id="playerDescription"></p>
     <div id="playerTags" class="player-tags"></div>
+  </div>
+</div>
+
+<div id="profileOverlay" class="profile-overlay" role="dialog" aria-modal="true" aria-labelledby="profileUsername" hidden>
+  <div class="profile-card">
+    <button id="profileClose" class="login-close profile-close" aria-label="Cerrar">
+      <svg class="icon" width="20" height="20" aria-hidden="true"><use href="#i-close"/></svg>
+    </button>
+    <div class="profile-banner"></div>
+    <div class="profile-header">
+      <button id="profileAvatarBtn" class="profile-avatar" aria-label="Cambiar foto de perfil" type="button"></button>
+      <div class="profile-identity">
+        <h2 id="profileUsername" class="profile-username"></h2>
+        <button id="profileEditUsernameBtn" class="profile-edit-link" type="button">Editar nombre</button>
+      </div>
+    </div>
+
+    <form id="profileUsernameForm" class="profile-username-form" hidden novalidate>
+      <input id="profileUsernameInput" type="text" class="login-email" maxlength="20">
+      <ul class="username-rules">
+        <li id="profileRuleLength" data-ok="false"><span class="rule-icon"></span>De 6 a 20 caracteres</li>
+        <li id="profileRuleChars" data-ok="false"><span class="rule-icon"></span>Sólo letras, números, "." y "_"</li>
+      </ul>
+      <div class="profile-username-form-actions">
+        <button type="submit" class="login-btn login-continue" disabled>Guardar</button>
+        <button type="button" id="profileUsernameCancel" class="login-btn profile-cancel-btn">Cancelar</button>
+      </div>
+    </form>
+
+    <div class="profile-stats">
+      <div class="profile-stat">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        <div><span class="profile-stat-label">Miembro por</span><strong id="profileDays"></strong></div>
+      </div>
+      <div class="profile-stat">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></svg>
+        <div><span class="profile-stat-label">Juegos que te gustaron</span><strong id="profileFavCount"></strong></div>
+      </div>
+      <div class="profile-stat">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+        <div>
+          <span class="profile-stat-label">Racha</span>
+          <strong id="profileStreak"></strong>
+          <span class="profile-stat-sub">Más alta: <span id="profileBestStreak"></span></span>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="profile-section-title">Juegos favoritos</h3>
+    <div id="profileFavGrid" class="game-grid profile-fav-grid"></div>
+    <p id="profileFavEmpty" class="profile-empty" hidden>Todavía no marcaste ningún juego como favorito.</p>
   </div>
 </div>
 
@@ -262,6 +314,6 @@
 </div>
 
 <script src="https://accounts.google.com/gsi/client" async defer></script>
-<script src="assets/app.js?v=70"></script>
+<script src="assets/app.js?v=71"></script>
 </body>
 </html>
