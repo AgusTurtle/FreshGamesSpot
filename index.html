@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&family=Chakra+Petch:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=66">
+<link rel="stylesheet" href="assets/style.css?v=67">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3231209923135744"
      crossorigin="anonymous"></script>
 <script type="application/ld+json">
@@ -185,19 +185,21 @@
     </button>
     <h2 id="loginTitle" class="login-title">Conectarse o registrarse</h2>
     <!--
-      Discord/Google/Steam sign-in each need a client ID registered by the
-      site owner in that provider's own developer console -- nothing we
-      can stand up ourselves. Hidden (not deleted) so they're a one-line
-      unhide once those credentials exist; see loginProviders in app.js.
+      Discord/Steam still need a client ID registered by the site owner in
+      that provider's own developer console -- hidden (not deleted) so
+      they're a one-line unhide once those credentials exist. Google is
+      live: see GOOGLE_CLIENT_ID in app.js and /api/account/google in
+      serve.js (verifies the ID token server-side via Google's tokeninfo
+      endpoint before ever creating/logging into an account).
     -->
-    <div id="loginProviders" hidden>
-      <button type="button" class="login-btn login-discord">
+    <div id="loginProviders">
+      <button type="button" id="loginDiscordBtn" class="login-btn login-discord" hidden>
         <svg width="20" height="16" viewBox="0 0 20 16" aria-hidden="true" fill="#fff">
           <path d="M16.93 1.33A16.5 16.5 0 0 0 12.8 0c-.18.33-.39.77-.53 1.12a15.3 15.3 0 0 0-4.54 0C7.58.77 7.36.33 7.18 0c-1.4.24-2.75.65-4.02 1.33C.55 4.9-.35 8.38.1 11.82c1.8 1.34 3.55 2.15 5.27 2.68.42-.58.8-1.2 1.13-1.85-.62-.24-1.21-.53-1.77-.87.15-.11.29-.23.43-.34a11.8 11.8 0 0 0 9.68 0c.14.12.28.23.43.34-.56.34-1.16.63-1.77.87.33.65.71 1.27 1.13 1.85 1.72-.53 3.48-1.34 5.27-2.68.53-4.02-.5-7.47-2.9-10.49ZM6.68 9.71c-.98 0-1.78-.9-1.78-2.02s.78-2.02 1.78-2.02c1 0 1.8.91 1.78 2.02 0 1.11-.79 2.02-1.78 2.02Zm6.65 0c-.98 0-1.78-.9-1.78-2.02s.78-2.02 1.78-2.02c1 0 1.8.91 1.78 2.02 0 1.11-.78 2.02-1.78 2.02Z"/>
         </svg>
         Continuar con Discord
       </button>
-      <button type="button" class="login-btn login-google">
+      <button type="button" id="loginGoogleBtn" class="login-btn login-google">
         <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
           <path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.91c1.7-1.57 2.69-3.88 2.69-6.62Z"/>
           <path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.91-2.26c-.81.54-1.84.86-3.05.86-2.34 0-4.32-1.58-5.03-3.71H.96v2.33A9 9 0 0 0 9 18Z"/>
@@ -206,7 +208,7 @@
         </svg>
         Acceder con Google
       </button>
-      <button type="button" class="login-btn login-steam">
+      <button type="button" id="loginSteamBtn" class="login-btn login-steam" hidden>
         <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" fill="#fff">
           <path d="M9 0a9 9 0 0 0-8.98 8.5l4.83 2c.41-.28.9-.44 1.44-.44l.06-.01L8.5 6.8v-.05a3.28 3.28 0 1 1 3.28 3.28h-.08l-3.2 2.29.01.08a2.46 2.46 0 1 1-4.82.66l-3.46-1.43A9 9 0 1 0 9 0Zm-3.5 13.7-.94-.39a1.85 1.85 0 0 0 3.42-.06 1.85 1.85 0 0 0-2.4-2.4l.97.4a1.36 1.36 0 1 1-1.05 2.45ZM14 6.75a2.19 2.19 0 1 0-4.37 0 2.19 2.19 0 0 0 4.37 0Zm-3.83 0a1.64 1.64 0 1 1 3.28 0 1.64 1.64 0 0 1-3.28 0Z"/>
         </svg>
@@ -214,6 +216,13 @@
       </button>
       <div class="login-divider"><span>o</span></div>
     </div>
+    <!--
+      Google's own button has to actually render (it's what triggers their
+      real sign-in flow) to work reliably -- kept off-screen and our
+      styled loginGoogleBtn forwards its click to this one instead of
+      duplicating Google's button UI.
+    -->
+    <div id="googleBtnContainer" style="position:absolute; opacity:0; pointer-events:none; top:-9999px;"></div>
     <form id="loginForm" novalidate>
       <input id="loginEmail" type="email" class="login-email" placeholder="Introduzca su dirección de correo electrónico" autocomplete="email" required>
       <input id="loginPassword" type="password" class="login-email" placeholder="Contraseña" autocomplete="current-password" required minlength="4">
@@ -224,6 +233,7 @@
   </div>
 </div>
 
-<script src="assets/app.js?v=66"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="assets/app.js?v=67"></script>
 </body>
 </html>

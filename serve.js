@@ -2,6 +2,7 @@ const http = require("http");
 const https = require("https");
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 
 const root = __dirname;
 const port = process.env.PORT || 8080;
@@ -72,10 +73,45 @@ function saveAccounts(){
   try { fs.writeFileSync(ACCOUNTS_PATH, JSON.stringify(accounts)); }
   catch (e){ console.error("Could not persist accounts:", e.message); }
 }
-function checkAuth(email, passwordHash){
+// Password accounts and OAuth accounts (Google, later maybe Discord/Steam)
+// share the same accounts.json entry shape, just with only one of
+// passwordHash/oauthToken ever populated -- checkAuth accepts whichever
+// credential the client actually has for that account.
+function checkAuth(email, passwordHash, oauthToken){
   const acct = accounts[email];
   if (!acct) return null;
-  return acct.passwordHash === passwordHash ? acct : false;
+  if (passwordHash && acct.passwordHash) return acct.passwordHash === passwordHash ? acct : false;
+  if (oauthToken && acct.oauthToken) return acct.oauthToken === oauthToken ? acct : false;
+  return false;
+}
+
+function httpsGetJson(url){
+  return new Promise((resolve, reject) => {
+    https.get(url, (res) => {
+      let data = "";
+      res.on("data", (c) => { data += c; });
+      res.on("end", () => {
+        try { resolve({ status: res.statusCode, body: JSON.parse(data) }); }
+        catch (e){ reject(e); }
+      });
+    }).on("error", reject);
+  });
+}
+
+// Google's ID token (the "credential" the client gets back from Google
+// Identity Services) is a signed JWT -- rather than verifying the
+// signature ourselves, we hand it to Google's own tokeninfo endpoint and
+// let them do it; a valid response with our own client ID in `aud` and
+// `email_verified: "true"` is as trustworthy as checking the signature
+// locally, without needing a JWT library.
+const GOOGLE_CLIENT_ID = "120779948196-6o78huetsa3rjposubl20nuu36qsbv4d.apps.googleusercontent.com";
+async function verifyGoogleCredential(credential){
+  let res;
+  try { res = await httpsGetJson("https://oauth2.googleapis.com/tokeninfo?id_token=" + encodeURIComponent(credential)); }
+  catch (e){ return null; }
+  const body = res.body || {};
+  if (res.status !== 200 || body.aud !== GOOGLE_CLIENT_ID || body.email_verified !== "true" || !body.email) return null;
+  return body.email;
 }
 
 // ---------- Live player presence (in-memory only, resets on restart --
@@ -413,8 +449,22 @@ http.createServer((req, res) => {
   if (urlPath === "/api/account/auth" && req.method === "POST"){
     readJsonBody(req, 2048, (err, body) => {
       if (err){ res.writeHead(400); res.end(); return; }
-      const { email, passwordHash } = body || {};
-      if (typeof email !== "string" || !email.includes("@") || typeof passwordHash !== "string" || passwordHash.length !== 64){
+      const { email, passwordHash, oauthToken } = body || {};
+      if (typeof email !== "string" || !email.includes("@")){
+        res.writeHead(400); res.end(); return;
+      }
+      // oauthToken re-auth (resuming a Google session on page load) never
+      // auto-creates -- only the verified /api/account/google flow may
+      // create an oauth-linked account, or anyone could invent a token
+      // and claim someone else's email.
+      if (typeof oauthToken === "string"){
+        const acct = checkAuth(email, undefined, oauthToken);
+        if (!acct){ res.writeHead(401); res.end(); return; }
+        res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
+        res.end(JSON.stringify({ favorites: acct.favorites }));
+        return;
+      }
+      if (typeof passwordHash !== "string" || passwordHash.length !== 64){
         res.writeHead(400); res.end(); return;
       }
       const existing = checkAuth(email, passwordHash);
@@ -433,14 +483,35 @@ http.createServer((req, res) => {
     return;
   }
 
+  if (urlPath === "/api/account/google" && req.method === "POST"){
+    readJsonBody(req, 4096, async (err, body) => {
+      if (err){ res.writeHead(400); res.end(); return; }
+      const { credential } = body || {};
+      if (typeof credential !== "string"){ res.writeHead(400); res.end(); return; }
+      const email = await verifyGoogleCredential(credential);
+      if (!email){
+        res.writeHead(401, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
+        res.end(JSON.stringify({ error: "No se pudo verificar la cuenta de Google." }));
+        return;
+      }
+      const oauthToken = crypto.randomBytes(24).toString("hex");
+      if (!accounts[email]) accounts[email] = { favorites: [] };
+      accounts[email].oauthToken = oauthToken;
+      saveAccounts();
+      res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
+      res.end(JSON.stringify({ email, oauthToken, favorites: accounts[email].favorites }));
+    });
+    return;
+  }
+
   if (urlPath === "/api/account/favorites" && req.method === "POST"){
     readJsonBody(req, 8192, (err, body) => {
       if (err){ res.writeHead(400); res.end(); return; }
-      const { email, passwordHash, favorites } = body || {};
-      if (typeof email !== "string" || typeof passwordHash !== "string" || !Array.isArray(favorites)){
+      const { email, passwordHash, oauthToken, favorites } = body || {};
+      if (typeof email !== "string" || !Array.isArray(favorites)){
         res.writeHead(400); res.end(); return;
       }
-      if (!checkAuth(email, passwordHash)){
+      if (!checkAuth(email, passwordHash, oauthToken)){
         res.writeHead(401); res.end(); return;
       }
       accounts[email].favorites = favorites.filter(f => typeof f === "string").slice(0, 500);

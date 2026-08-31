@@ -116,6 +116,7 @@
     playerLiveCount: document.getElementById("playerLiveCount"),
     playerLiveCountText: document.getElementById("playerLiveCountText"),
     loginNavBtn: document.getElementById("loginNavBtn"),
+    loginGoogleBtn: document.getElementById("loginGoogleBtn"),
     loginOverlay: document.getElementById("loginOverlay"),
     loginClose: document.getElementById("loginClose"),
     loginForm: document.getElementById("loginForm"),
@@ -150,13 +151,14 @@
     try { return JSON.parse(localStorage.getItem(SESSION_KEY)); }
     catch(e){ return null; }
   }
-  function setSession(email, passwordHash){
-    localStorage.setItem(SESSION_KEY, JSON.stringify({ email, passwordHash }));
+  // session is { email, passwordHash } for email+password accounts, or
+  // { email, oauthToken } for Google (and later Discord/Steam) accounts.
+  function setSession(session){
+    localStorage.setItem(SESSION_KEY, JSON.stringify(session));
   }
   function clearSession(){
     localStorage.removeItem(SESSION_KEY);
   }
-  // (deploy marker: volume-persistence final check)
   // Same email+password form both registers (first time the server sees
   // that email) and logs in (email already on file) -- one flow instead
   // of a separate signup screen, matching what the login modal's single
@@ -180,7 +182,32 @@
     }
     if (!res.ok) return { ok:false, error:"Algo salió mal. Probá de nuevo." };
     const data = await res.json();
-    setSession(email, passwordHash);
+    setSession({ email, passwordHash });
+    return { ok:true, favorites: data.favorites || [] };
+  }
+  // Google Identity Services hands us a signed ID token ("credential") --
+  // the server verifies it against Google directly (see
+  // verifyGoogleCredential in serve.js) and, only once that checks out,
+  // creates/logs into the account and mints an opaque session token tied
+  // to it (nothing Google-specific leaks into how the rest of the app
+  // treats the session).
+  async function loginWithGoogleCredential(credential){
+    let res;
+    try {
+      res = await fetch("/api/account/google", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ credential }),
+      });
+    } catch (e){
+      return { ok:false, error:"No se pudo conectar con el servidor. Probá de nuevo." };
+    }
+    if (!res.ok){
+      const data = await res.json().catch(() => ({}));
+      return { ok:false, error: data.error || "No se pudo iniciar sesión con Google." };
+    }
+    const data = await res.json();
+    setSession({ email: data.email, oauthToken: data.oauthToken });
     return { ok:true, favorites: data.favorites || [] };
   }
   // Fire-and-forget push of the current favorites list to the account,
@@ -194,7 +221,7 @@
     fetch("/api/account/favorites", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: session.email, passwordHash: session.passwordHash, favorites: getFavorites() }),
+      body: JSON.stringify({ email: session.email, passwordHash: session.passwordHash, oauthToken: session.oauthToken, favorites: getFavorites() }),
     }).catch(() => {});
   }
 
@@ -772,7 +799,7 @@
       res = await fetch("/api/account/auth", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: session.email, passwordHash: session.passwordHash }),
+        body: JSON.stringify({ email: session.email, passwordHash: session.passwordHash, oauthToken: session.oauthToken }),
       });
     } catch (e){ return; }
     if (!res.ok){ clearSession(); syncSessionUI(); return; }
@@ -788,6 +815,34 @@
     el.loginEmail.focus();
   }
   el.loginNavBtn.addEventListener("click", openLoginModal);
+
+  // Google Identity Services needs its own real button to actually render
+  // (that's what triggers the sign-in popup) -- it's rendered off-screen
+  // and our styled loginGoogleBtn just forwards its click there, so the
+  // UI stays consistent with the Discord/Steam buttons alongside it.
+  const GOOGLE_CLIENT_ID = "120779948196-6o78huetsa3rjposubl20nuu36qsbv4d.apps.googleusercontent.com";
+  async function handleGoogleCredentialResponse(response){
+    const result = await loginWithGoogleCredential(response.credential);
+    if (!result.ok){
+      el.loginError.textContent = result.error;
+      el.loginError.hidden = false;
+      return;
+    }
+    el.loginOverlay.hidden = true;
+    syncSessionUI();
+    setFavorites(result.favorites);
+    updateView();
+  }
+  function initGoogleSignIn(){
+    if (!window.google || !google.accounts || !google.accounts.id) { setTimeout(initGoogleSignIn, 300); return; }
+    google.accounts.id.initialize({ client_id: GOOGLE_CLIENT_ID, callback: handleGoogleCredentialResponse });
+    google.accounts.id.renderButton(document.getElementById("googleBtnContainer"), { type: "standard" });
+  }
+  initGoogleSignIn();
+  el.loginGoogleBtn.addEventListener("click", () => {
+    const realBtn = document.querySelector("#googleBtnContainer div[role=button]");
+    if (realBtn) realBtn.click();
+  });
   el.loginClose.addEventListener("click", () => {
     el.loginOverlay.hidden = true;
   });
