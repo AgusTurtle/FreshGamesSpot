@@ -324,9 +324,23 @@
     "directEmbed": true,
     "category": "Sports",
     "tags": "CarBall.io, Car Soccer, Sports, Multiplayer",
-    "thumb": "https://imgs.crazygames.com/carball-io_16x9/20240418110827/carball-io_16x9-cover?metadata=none&quality=100&width=512&height=512&fit=crop",
+    "thumb": "https://imgs.crazygames.com/carball-io_1x1/20240418110827/carball-io_1x1-cover?format=auto&quality=100&metadata=none&width=512",
     "width": "960",
     "height": "600",
     "popularity": 0
+  },
+  {
+    "id": "ext-block-blast",
+    "title": "Block Blast",
+    "description": "The addictive block-fitting puzzle. Drag blocks onto the grid to fill and clear full rows and columns.",
+    "instructions": "Drag each block piece onto the grid. Fill a full row or column to clear it.",
+    "url": "https://blockblast-2.io/game/block-blast/",
+    "directEmbed": true,
+    "category": "Puzzle",
+    "tags": "Block Blast, Puzzle, Block Puzzle, Popular",
+    "thumb": "https://blockblast-2.io/data/image/game/block-blast/block-blast.png",
+    "width": "960",
+    "height": "600",
+    "popularity": 3
   }
 ]
