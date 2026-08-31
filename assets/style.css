@@ -522,6 +522,29 @@ img{ max-width:100%; display:block; }
 .fav-star:hover{ color: var(--star); }
 /* Filled star reads as "saved", outline as "not saved" — state without color alone. */
 .fav-star.active{ color: var(--star); }
+
+.thumb-watermark{
+  position:absolute;
+  right:6px; bottom:6px;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  gap:4px;
+  padding:3px 7px;
+  border-radius:6px;
+  background:rgba(17,19,25,0.4);
+  color:#fff;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:0.2px;
+  opacity:0.7;
+  pointer-events:none;
+  user-select:none;
+  white-space:nowrap;
+}
+.thumb-watermark svg{ opacity:0.9; flex-shrink:0; }
+.thumb-watermark strong{ color:var(--accent); font-weight:800; }
+.game-grid.collage .thumb-watermark{ right:4px; bottom:4px; padding:2px 6px; font-size:9px; }
 .fav-star.active .icon{ fill: currentColor; }
 .fav-star.pop{ animation: favPop .4s cubic-bezier(.34,1.56,.64,1); }
 @keyframes favPop{

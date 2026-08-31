@@ -281,6 +281,12 @@
     };
     thumbWrap.appendChild(img);
 
+    const thumbWatermark = document.createElement("div");
+    thumbWatermark.className = "thumb-watermark";
+    thumbWatermark.setAttribute("aria-hidden", "true");
+    thumbWatermark.innerHTML = `<svg class="icon" width="12" height="12" aria-hidden="true"><use href="#i-logo"/></svg><span>FreshGames<strong>Pot</strong></span>`;
+    thumbWrap.appendChild(thumbWatermark);
+
     const playBadge = document.createElement("div");
     playBadge.className = "play-badge";
     playBadge.innerHTML = `<span>${iconSvg("play")}</span>`;
