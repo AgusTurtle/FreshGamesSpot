@@ -314,5 +314,19 @@
     "width": "960",
     "height": "600",
     "popularity": 3
+  },
+  {
+    "id": "ext-carball-io",
+    "title": "CarBall.io",
+    "description": "Rocket League-style car soccer. Drive, boost, and ram the ball into the opponent's goal in fast 3v3 matches.",
+    "instructions": "Arrow keys/WASD to drive, Space to boost/jump. Ram the ball into the opponent's goal.",
+    "url": "https://st.8games.net/10/igra-carball-io/",
+    "directEmbed": true,
+    "category": "Sports",
+    "tags": "CarBall.io, Car Soccer, Sports, Multiplayer",
+    "thumb": "https://imgs.crazygames.com/carball-io_16x9/20240418110827/carball-io_16x9-cover?metadata=none&quality=100&width=512&height=512&fit=crop",
+    "width": "960",
+    "height": "600",
+    "popularity": 0
   }
 ]
