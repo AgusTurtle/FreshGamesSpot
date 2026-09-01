@@ -1072,7 +1072,15 @@
   }
   function daysSince(ts){
     if (!ts) return 0;
-    return Math.max(0, Math.floor((Date.now() - ts) / 86400000));
+    // Calendar-day difference (UTC), matching how the streak counts days,
+    // so "Miembro por" and "Racha" never contradict each other (e.g. a
+    // 24h-elapsed count could show "0 días" while the streak already
+    // ticked to 2 just by crossing midnight).
+    const created = new Date(ts);
+    const createdDay = Date.UTC(created.getUTCFullYear(), created.getUTCMonth(), created.getUTCDate());
+    const now = new Date();
+    const todayDay = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+    return Math.max(0, Math.round((todayDay - createdDay) / 86400000));
   }
   function plural(n, one, many){ return n === 1 ? `1 ${one}` : `${n} ${many}`; }
   async function openProfile(){
