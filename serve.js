@@ -107,7 +107,35 @@ function touchStreak(acct){
   acct.bestStreak = Math.max(acct.bestStreak || 0, acct.streak);
 }
 
+// Missions: one-time achievements that award points. Completing one is
+// permanent -- acct.completedMissions (a list of ids) is only ever added
+// to, so e.g. unstarring games back below a threshold never takes points
+// away. check() reads whatever the account already tracks; nothing here
+// needs its own separate counter beyond playedGames/totalPlays (bumped by
+// /api/account/play, called once per game session start).
+const MISSIONS = [
+  { id: "first_play", label: "Jugá tu primer juego", points: 10, check: (a) => (a.totalPlays || 0) >= 1 },
+  { id: "play_5_games", label: "Jugá 5 juegos distintos", points: 25, check: (a) => (a.playedGames || []).length >= 5 },
+  { id: "play_15_games", label: "Jugá 15 juegos distintos", points: 50, check: (a) => (a.playedGames || []).length >= 15 },
+  { id: "play_20_total", label: "Jugá 20 veces en total", points: 40, check: (a) => (a.totalPlays || 0) >= 20 },
+  { id: "fav_3", label: "Marcá 3 juegos como favoritos", points: 15, check: (a) => (a.favorites || []).length >= 3 },
+  { id: "fav_10", label: "Marcá 10 juegos como favoritos", points: 30, check: (a) => (a.favorites || []).length >= 10 },
+  { id: "streak_3", label: "Conseguí una racha de 3 días", points: 20, check: (a) => (a.bestStreak || 0) >= 3 },
+  { id: "streak_7", label: "Conseguí una racha de 7 días", points: 50, check: (a) => (a.bestStreak || 0) >= 7 },
+];
+function recomputeMissions(acct){
+  if (!acct.completedMissions) acct.completedMissions = [];
+  for (const m of MISSIONS){
+    if (!acct.completedMissions.includes(m.id) && m.check(acct)){
+      acct.completedMissions.push(m.id);
+      acct.points = (acct.points || 0) + m.points;
+    }
+  }
+}
+
 function accountPayload(acct, extra){
+  recomputeMissions(acct);
+  const completed = new Set(acct.completedMissions || []);
   return Object.assign({
     username: acct.username || null,
     avatar: acct.avatar || null,
@@ -115,6 +143,10 @@ function accountPayload(acct, extra){
     createdAt: acct.createdAt || null,
     streak: acct.streak || 1,
     bestStreak: acct.bestStreak || 1,
+    points: acct.points || 0,
+    missions: MISSIONS.map((m) => ({
+      id: m.id, label: m.label, points: m.points, done: completed.has(m.id),
+    })),
   }, extra || {});
 }
 
@@ -592,6 +624,7 @@ http.createServer((req, res) => {
         const acct = checkAuth(email, undefined, oauthToken);
         if (!acct){ res.writeHead(401); res.end(); return; }
         touchStreak(acct);
+        recomputeMissions(acct);
         saveAccounts();
         res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
         res.end(JSON.stringify(accountPayload(acct)));
@@ -610,6 +643,7 @@ http.createServer((req, res) => {
         accounts[email] = { passwordHash, favorites: [], createdAt: Date.now() };
       }
       touchStreak(accounts[email]);
+      recomputeMissions(accounts[email]);
       saveAccounts();
       res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
       res.end(JSON.stringify(accountPayload(accounts[email])));
@@ -674,6 +708,7 @@ http.createServer((req, res) => {
       if (!accounts[email]) accounts[email] = { favorites: [], createdAt: Date.now() };
       accounts[email].oauthToken = oauthToken;
       touchStreak(accounts[email]);
+      recomputeMissions(accounts[email]);
       saveAccounts();
       res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
       res.end(JSON.stringify(accountPayload(accounts[email], { email, oauthToken })));
@@ -748,9 +783,35 @@ http.createServer((req, res) => {
         res.writeHead(401); res.end(); return;
       }
       accounts[email].favorites = favorites.filter(f => typeof f === "string").slice(0, 500);
+      recomputeMissions(accounts[email]);
       saveAccounts();
       res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
       res.end(JSON.stringify({ ok: true }));
+    });
+    return;
+  }
+
+  // Called once when a logged-in player actually opens a game (not on
+  // every heartbeat) -- feeds the play-count/distinct-games missions
+  // above. Silently ignored for anonymous play, same as favorites.
+  if (urlPath === "/api/account/play" && req.method === "POST"){
+    readJsonBody(req, 2048, (err, body) => {
+      if (err){ res.writeHead(400); res.end(); return; }
+      const { email, passwordHash, oauthToken, gameId } = body || {};
+      if (typeof email !== "string" || typeof gameId !== "string"){
+        res.writeHead(400); res.end(); return;
+      }
+      if (!checkAuth(email, passwordHash, oauthToken)){
+        res.writeHead(401); res.end(); return;
+      }
+      const acct = accounts[email];
+      if (!acct.playedGames) acct.playedGames = [];
+      if (!acct.playedGames.includes(gameId)) acct.playedGames.push(gameId);
+      acct.totalPlays = (acct.totalPlays || 0) + 1;
+      recomputeMissions(acct);
+      saveAccounts();
+      res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
+      res.end(JSON.stringify(accountPayload(acct)));
     });
     return;
   }
@@ -792,22 +853,31 @@ http.createServer((req, res) => {
     return;
   }
 
-  // Public ranking, sorted by bestStreak (ties broken by the current
-  // streak). Only ever exposes username, avatar and streak numbers --
-  // never an email, and accounts that never set a username (so have
-  // nothing safe/identifying to show) are excluded rather than leaking
-  // their address.
+  // Public ranking -- ?by=points sorts by mission points (ties broken by
+  // bestStreak); anything else (the default) sorts by bestStreak (ties
+  // broken by the current streak). Only ever exposes username, avatar and
+  // the relevant numbers -- never an email, and accounts that never set a
+  // username (so have nothing safe/identifying to show) are excluded
+  // rather than leaking their address.
   if (urlPath === "/api/leaderboard" && req.method === "GET"){
+    const by = new URLSearchParams(search).get("by") === "points" ? "points" : "streak";
     const rows = Object.values(accounts)
       .filter((acct) => acct.username)
-      .map((acct) => ({
-        username: acct.username,
-        avatar: acct.avatar || null,
-        streak: acct.streak || 1,
-        bestStreak: acct.bestStreak || 1,
-      }))
-      .sort((a, b) => (b.bestStreak - a.bestStreak) || (b.streak - a.streak))
+      .map((acct) => {
+        recomputeMissions(acct);
+        return {
+          username: acct.username,
+          avatar: acct.avatar || null,
+          streak: acct.streak || 1,
+          bestStreak: acct.bestStreak || 1,
+          points: acct.points || 0,
+        };
+      })
+      .sort(by === "points"
+        ? (a, b) => (b.points - a.points) || (b.bestStreak - a.bestStreak)
+        : (a, b) => (b.bestStreak - a.bestStreak) || (b.streak - a.streak))
       .slice(0, 20);
+    saveAccounts();
     res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
     res.end(JSON.stringify(rows));
     return;

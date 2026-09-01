@@ -109,6 +109,8 @@
     leaderboardList: document.getElementById("leaderboardList"),
     leaderboardEmpty: document.getElementById("leaderboardEmpty"),
     leaderboardYouRow: document.getElementById("leaderboardYouRow"),
+    leaderboardTabStreak: document.getElementById("leaderboardTabStreak"),
+    leaderboardTabPoints: document.getElementById("leaderboardTabPoints"),
     overlay: document.getElementById("playerOverlay"),
     playerFrame: document.getElementById("playerFrame"),
     playerTitle: document.getElementById("playerTitle"),
@@ -159,6 +161,8 @@
     profileFavCount: document.getElementById("profileFavCount"),
     profileStreak: document.getElementById("profileStreak"),
     profileBestStreak: document.getElementById("profileBestStreak"),
+    profilePoints: document.getElementById("profilePoints"),
+    profileMissions: document.getElementById("profileMissions"),
     profileFavGrid: document.getElementById("profileFavGrid"),
     profileFavEmpty: document.getElementById("profileFavEmpty"),
   };
@@ -840,6 +844,20 @@
 
     currentOpenGameId = id;
     startHeartbeat(id);
+    trackPlay(id);
+  }
+
+  // Feeds the play-count/distinct-games missions server-side -- fire and
+  // forget, same spirit as the heartbeat (not something a broken request
+  // should ever block the game loading over). No-op when logged out.
+  function trackPlay(gameId){
+    const session = getSession();
+    if (!session) return;
+    fetch("/api/account/play", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: session.email, passwordHash: session.passwordHash, oauthToken: session.oauthToken, gameId }),
+    }).catch(() => {});
   }
 
   function syncPlayerFav(active){
@@ -1149,6 +1167,19 @@
     el.profileFavCount.textContent = String(data.favorites.length);
     el.profileStreak.textContent = plural(data.streak || 1, "día", "días");
     el.profileBestStreak.textContent = plural(data.bestStreak || 1, "día", "días");
+    el.profilePoints.textContent = String(data.points || 0);
+
+    el.profileMissions.innerHTML = "";
+    (data.missions || []).forEach((m) => {
+      const row = document.createElement("div");
+      row.className = "mission-row" + (m.done ? " done" : "");
+      row.innerHTML = `
+        <span class="mission-check">${m.done ? "✓" : ""}</span>
+        <span class="mission-label">${m.label}</span>
+        <span class="mission-points">+${m.points}</span>
+      `;
+      el.profileMissions.appendChild(row);
+    });
 
     el.profileFavGrid.innerHTML = "";
     const favGames = data.favorites.map(findGame).filter(Boolean);
@@ -1166,16 +1197,35 @@
     if (e.target === el.profileOverlay) el.profileOverlay.hidden = true;
   });
 
-  // ---- Leaderboard (public, ranked by streak) ----
+  // ---- Leaderboard (public, ranked by streak or by mission points) ----
   const MEDALS = ["🥇", "🥈", "🥉"];
-  async function openLeaderboard(){
+  const LEADERBOARD_TABS = {
+    streak: {
+      title: "Ranking de racha",
+      sub: "Los jugadores con más días seguidos entrando a FreshGamesPot.",
+      valueOf: (row) => row.bestStreak,
+      rowIcon: () => iconSvg("flame"),
+    },
+    points: {
+      title: "Ranking de puntos",
+      sub: "Los jugadores que más misiones completaron jugando en FreshGamesPot.",
+      valueOf: (row) => row.points,
+      rowIcon: () => iconSvg("zap"),
+    },
+  };
+  let leaderboardBy = "streak";
+  async function loadLeaderboard(){
     el.leaderboardList.innerHTML = "";
     el.leaderboardEmpty.hidden = true;
     el.leaderboardYouRow.hidden = true;
-    el.leaderboardOverlay.hidden = false;
+    const tab = LEADERBOARD_TABS[leaderboardBy];
+    document.getElementById("leaderboardTitle").textContent = tab.title;
+    document.getElementById("leaderboardSub").textContent = tab.sub;
+    el.leaderboardTabStreak.classList.toggle("active", leaderboardBy === "streak");
+    el.leaderboardTabPoints.classList.toggle("active", leaderboardBy === "points");
     let rows = [];
     try {
-      const res = await fetch("/api/leaderboard");
+      const res = await fetch("/api/leaderboard?by=" + leaderboardBy);
       if (res.ok) rows = await res.json();
     } catch (e){}
     if (!rows.length){
@@ -1198,7 +1248,7 @@
         <span class="leaderboard-rank">${rankHtml}</span>
         <span class="leaderboard-avatar">${avatarHtml}</span>
         <span class="leaderboard-name">${row.username}</span>
-        <span class="leaderboard-streak">${iconSvg("flame")}${row.bestStreak}</span>
+        <span class="leaderboard-streak">${tab.rowIcon()}${tab.valueOf(row)}</span>
       `;
       el.leaderboardList.appendChild(item);
     });
@@ -1206,10 +1256,19 @@
     // useful to see where you stand relative to the cutoff.
     if (session && session.username && youRank === -1){
       el.leaderboardYouRow.hidden = false;
-      el.leaderboardYouRow.textContent = "Todavía no entrás en el top 20 -- seguí sumando racha.";
+      el.leaderboardYouRow.textContent = leaderboardBy === "points"
+        ? "Todavía no entrás en el top 20 -- seguí completando misiones."
+        : "Todavía no entrás en el top 20 -- seguí sumando racha.";
     }
   }
+  function openLeaderboard(){
+    leaderboardBy = "streak";
+    el.leaderboardOverlay.hidden = false;
+    loadLeaderboard();
+  }
   el.leaderboardNavBtn.addEventListener("click", openLeaderboard);
+  el.leaderboardTabStreak.addEventListener("click", () => { leaderboardBy = "streak"; loadLeaderboard(); });
+  el.leaderboardTabPoints.addEventListener("click", () => { leaderboardBy = "points"; loadLeaderboard(); });
   el.leaderboardClose.addEventListener("click", () => { el.leaderboardOverlay.hidden = true; });
   el.leaderboardOverlay.addEventListener("click", (e) => {
     if (e.target === el.leaderboardOverlay) el.leaderboardOverlay.hidden = true;
