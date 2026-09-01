@@ -44,6 +44,21 @@
     "gameContainer",
     "Build/Ping Pong Chaos V1.0.json"
   );
+
+  // The game itself only "readies up" (both the menus past the title
+  // screen and starting a match) on a W/E keydown, not a click -- fine
+  // for the real 2player.com site where that's expected, but every other
+  // game on ours is click-to-play, so people click the on-screen prompts
+  // and nothing happens. Forward every click as a synthetic W keydown+up
+  // so clicking still works the way it does everywhere else; a real W/E
+  // press still works too, this is additive.
+  document.addEventListener("click", function(){
+    ["keydown", "keyup"].forEach(function(type){
+      document.dispatchEvent(new KeyboardEvent(type, {
+        key: "w", code: "KeyW", keyCode: 87, which: 87, bubbles: true,
+      }));
+    });
+  });
 </script>
 </body>
 </html>
