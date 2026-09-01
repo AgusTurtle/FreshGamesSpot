@@ -742,17 +742,10 @@ img{ max-width:100%; display:block; }
   position:relative;
   height: 150px;
   background:
-    radial-gradient(circle at 15% 20%, rgba(47,125,255,0.35), transparent 55%),
-    radial-gradient(circle at 85% 75%, rgba(47,125,255,0.18), transparent 55%),
-    var(--sidebar-bg);
+    radial-gradient(circle at 15% 20%, rgba(47,125,255,0.28), transparent 55%),
+    radial-gradient(circle at 85% 75%, rgba(47,125,255,0.14), transparent 55%),
+    var(--bg-card);
   overflow:hidden;
-}
-.profile-banner::after{
-  content:"";
-  position:absolute;
-  inset:auto 0 0 0;
-  height:64px;
-  background: linear-gradient(to bottom, transparent, var(--bg-card));
 }
 .profile-header{
   display:grid;
@@ -891,6 +884,16 @@ img{ max-width:100%; display:block; }
   font-weight:800;
 }
 .profile-fav-grid{ padding: 0 28px; }
+/* Keep favorite cards looking like normal cards here -- no hover
+   border/accent-bar highlight, just the plain card look. */
+.profile-fav-grid .game-card:hover,
+.profile-fav-grid .game-card:focus-visible{
+  transform:none;
+  box-shadow: var(--card-shadow);
+  border-color: var(--border);
+}
+.profile-fav-grid .game-card:hover::before,
+.profile-fav-grid .game-card:focus-visible::before{ opacity:0; }
 .profile-empty{
   margin: 0 28px;
   color: var(--text-dim);
