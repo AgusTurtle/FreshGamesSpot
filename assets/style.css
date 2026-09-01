@@ -1047,6 +1047,11 @@ li[data-ok="true"] .rule-icon::after{ width:4px; height:2px; top:6px; left:8px; 
   border: 1px solid transparent;
   cursor:pointer;
 }
+/* Author-origin display:flex above beats the browser's own [hidden]
+   rule regardless of specificity -- same recurring bug as the login/
+   username/profile toggles elsewhere on this page. Steam is hidden
+   pending credentials; this makes that actually hide it. */
+.login-btn[hidden]{ display:none; }
 .login-discord{ background:#5865F2; color:#fff; }
 .login-discord:hover{ background:#4752c4; }
 .login-google{ background:#fff; color:#1f1f1f; }

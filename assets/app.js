@@ -960,6 +960,12 @@
     if (username){
       el.loginOverlay.hidden = true;
     } else {
+      // Discord's flow lands here from a full page reload (the modal was
+      // never opened this pageload, unlike the password/Google paths that
+      // always call finishLogin from inside an already-open modal) -- has
+      // to explicitly open it, or the username step renders correctly but
+      // stays invisible behind loginOverlay's own [hidden].
+      el.loginOverlay.hidden = false;
       el.loginProviders.hidden = true;
       el.loginForm.hidden = true;
       el.usernameForm.hidden = false;
