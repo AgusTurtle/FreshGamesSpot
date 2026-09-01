@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&family=Chakra+Petch:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=85">
+<link rel="stylesheet" href="assets/style.css?v=86">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3231209923135744"
      crossorigin="anonymous"></script>
 <script type="application/ld+json">
@@ -247,15 +247,19 @@
     </button>
     <h2 id="loginTitle" class="login-title">Conectarse o registrarse</h2>
     <!--
-      Discord/Steam still need a client ID registered by the site owner in
-      that provider's own developer console -- hidden (not deleted) so
-      they're a one-line unhide once those credentials exist. Google is
-      live: see GOOGLE_CLIENT_ID in app.js and /api/account/google in
-      serve.js (verifies the ID token server-side via Google's tokeninfo
-      endpoint before ever creating/logging into an account).
+      Steam still needs a client ID registered by the site owner in its own
+      developer console -- hidden (not deleted) so it's a one-line unhide
+      once those credentials exist. Google and Discord are live:
+      - Google: GOOGLE_CLIENT_ID in app.js + /api/account/google in serve.js
+        (verifies the ID token server-side via Google's tokeninfo endpoint).
+      - Discord: DISCORD_CLIENT_ID/SECRET in serve.js, exposed only through
+        /api/auth/discord/start and /api/auth/discord/callback (classic
+        redirect-based OAuth2 authorization-code flow, since Discord has
+        no JS one-tap SDK -- loginDiscordBtn in app.js just navigates to
+        /api/auth/discord/start).
     -->
     <div id="loginProviders">
-      <button type="button" id="loginDiscordBtn" class="login-btn login-discord" hidden>
+      <button type="button" id="loginDiscordBtn" class="login-btn login-discord">
         <svg width="20" height="16" viewBox="0 0 20 16" aria-hidden="true" fill="#fff">
           <path d="M16.93 1.33A16.5 16.5 0 0 0 12.8 0c-.18.33-.39.77-.53 1.12a15.3 15.3 0 0 0-4.54 0C7.58.77 7.36.33 7.18 0c-1.4.24-2.75.65-4.02 1.33C.55 4.9-.35 8.38.1 11.82c1.8 1.34 3.55 2.15 5.27 2.68.42-.58.8-1.2 1.13-1.85-.62-.24-1.21-.53-1.77-.87.15-.11.29-.23.43-.34a11.8 11.8 0 0 0 9.68 0c.14.12.28.23.43.34-.56.34-1.16.63-1.77.87.33.65.71 1.27 1.13 1.85 1.72-.53 3.48-1.34 5.27-2.68.53-4.02-.5-7.47-2.9-10.49ZM6.68 9.71c-.98 0-1.78-.9-1.78-2.02s.78-2.02 1.78-2.02c1 0 1.8.91 1.78 2.02 0 1.11-.79 2.02-1.78 2.02Zm6.65 0c-.98 0-1.78-.9-1.78-2.02s.78-2.02 1.78-2.02c1 0 1.8.91 1.78 2.02 0 1.11-.78 2.02-1.78 2.02Z"/>
         </svg>
@@ -320,6 +324,6 @@
 </div>
 
 <script src="https://accounts.google.com/gsi/client" async defer></script>
-<script src="assets/app.js?v=85"></script>
+<script src="assets/app.js?v=86"></script>
 </body>
 </html>

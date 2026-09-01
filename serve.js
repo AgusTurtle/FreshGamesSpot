@@ -147,6 +147,104 @@ async function verifyGoogleCredential(credential){
   return body.email;
 }
 
+// Discord doesn't have a client-side one-tap SDK like Google's -- it's a
+// classic redirect-based OAuth2 authorization-code flow: our button sends
+// the browser to Discord's /authorize page, Discord redirects back to our
+// own /api/auth/discord/callback with a `code`, and the server (the only
+// place that ever sees DISCORD_CLIENT_SECRET) exchanges that code for an
+// access token and then fetches the user's identity with it.
+// Unlike GOOGLE_CLIENT_ID above (safe to ship in client-side code -- it
+// identifies the app, not a secret), DISCORD_CLIENT_SECRET can mint tokens
+// on the app's behalf, and this repo is public. Both live only as Railway
+// environment variables, never committed -- see README/deploy notes.
+const DISCORD_CLIENT_ID = process.env.DISCORD_CLIENT_ID || "";
+const DISCORD_CLIENT_SECRET = process.env.DISCORD_CLIENT_SECRET || "";
+const DISCORD_REDIRECT_URI = "https://freshgamespot.net/api/auth/discord/callback";
+
+// Short-lived `state` values, checked on callback so a link to our own
+// callback URL can't be replayed to log a victim into an attacker-chosen
+// Discord account (a CSRF on the login itself).
+const discordStates = new Map(); // state -> expiry ms
+function makeDiscordState(){
+  const state = crypto.randomBytes(16).toString("hex");
+  discordStates.set(state, Date.now() + 5 * 60 * 1000);
+  return state;
+}
+function consumeDiscordState(state){
+  const exp = discordStates.get(state);
+  if (state) discordStates.delete(state);
+  return typeof state === "string" && !!exp && exp > Date.now();
+}
+
+function httpsPostForm(urlStr, formObj){
+  return new Promise((resolve, reject) => {
+    const body = new URLSearchParams(formObj).toString();
+    const u = new URL(urlStr);
+    const req = https.request({
+      hostname: u.hostname,
+      path: u.pathname + u.search,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Length": Buffer.byteLength(body),
+      },
+    }, (res) => {
+      let data = "";
+      res.on("data", (c) => { data += c; });
+      res.on("end", () => {
+        try { resolve({ status: res.statusCode, body: JSON.parse(data) }); }
+        catch (e){ reject(e); }
+      });
+    });
+    req.on("error", reject);
+    req.write(body);
+    req.end();
+  });
+}
+
+function httpsGetJsonAuth(urlStr, token){
+  return new Promise((resolve, reject) => {
+    const u = new URL(urlStr);
+    https.get({
+      hostname: u.hostname,
+      path: u.pathname + u.search,
+      headers: { Authorization: "Bearer " + token },
+    }, (res) => {
+      let data = "";
+      res.on("data", (c) => { data += c; });
+      res.on("end", () => {
+        try { resolve({ status: res.statusCode, body: JSON.parse(data) }); }
+        catch (e){ reject(e); }
+      });
+    }).on("error", reject);
+  });
+}
+
+// Exchanges the callback `code` for the user's email, the same way
+// verifyGoogleCredential resolves a Google credential to an email.
+// Returns null on any failure (bad code, no verified email, network error).
+async function resolveDiscordCode(code){
+  let tokenRes;
+  try {
+    tokenRes = await httpsPostForm("https://discord.com/api/oauth2/token", {
+      client_id: DISCORD_CLIENT_ID,
+      client_secret: DISCORD_CLIENT_SECRET,
+      grant_type: "authorization_code",
+      code,
+      redirect_uri: DISCORD_REDIRECT_URI,
+    });
+  } catch (e){ return null; }
+  const accessToken = tokenRes.body && tokenRes.body.access_token;
+  if (tokenRes.status !== 200 || !accessToken) return null;
+
+  let userRes;
+  try { userRes = await httpsGetJsonAuth("https://discord.com/api/users/@me", accessToken); }
+  catch (e){ return null; }
+  const user = userRes.body || {};
+  if (userRes.status !== 200 || !user.email || !user.verified) return null;
+  return user.email;
+}
+
 // ---------- Live player presence (in-memory only, resets on restart --
 // this is genuinely live/transient data, so it doesn't need a volume) ----------
 const PRESENCE_TTL_MS = 25000;
@@ -580,6 +678,62 @@ http.createServer((req, res) => {
       res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
       res.end(JSON.stringify(accountPayload(accounts[email], { email, oauthToken })));
     });
+    return;
+  }
+
+  // Step 1 of the Discord OAuth2 redirect flow: send the browser to
+  // Discord's own consent screen. This is a plain link (GET, no CSP/CORS
+  // issue like a popup would have), not a fetch() call from app.js.
+  if (urlPath === "/api/auth/discord/start" && req.method === "GET"){
+    if (!DISCORD_CLIENT_ID || !DISCORD_CLIENT_SECRET){
+      res.writeHead(302, { Location: "/?discordError=1" });
+      res.end();
+      return;
+    }
+    const state = makeDiscordState();
+    const params = new URLSearchParams({
+      client_id: DISCORD_CLIENT_ID,
+      redirect_uri: DISCORD_REDIRECT_URI,
+      response_type: "code",
+      scope: "identify email",
+      state,
+    });
+    res.writeHead(302, { Location: "https://discord.com/api/oauth2/authorize?" + params.toString() });
+    res.end();
+    return;
+  }
+
+  // Step 2: Discord redirects the browser back here with a `code`. We
+  // exchange it server-side (the only place holding the client secret),
+  // then hand the resulting oauthToken back to the page via a query
+  // param -- app.js picks it up on load, stores the session, and cleans
+  // the URL. Same end state as the Google flow, just reached by a
+  // redirect round-trip instead of a JS callback.
+  if (urlPath === "/api/auth/discord/callback" && req.method === "GET"){
+    (async () => {
+      const q = new URLSearchParams(search);
+      const code = q.get("code");
+      const state = q.get("state");
+      if (!code || !consumeDiscordState(state)){
+        res.writeHead(302, { Location: "/?discordError=1" });
+        res.end();
+        return;
+      }
+      const email = await resolveDiscordCode(code);
+      if (!email){
+        res.writeHead(302, { Location: "/?discordError=1" });
+        res.end();
+        return;
+      }
+      const oauthToken = crypto.randomBytes(24).toString("hex");
+      if (!accounts[email]) accounts[email] = { favorites: [], createdAt: Date.now() };
+      accounts[email].oauthToken = oauthToken;
+      touchStreak(accounts[email]);
+      saveAccounts();
+      const redirectParams = new URLSearchParams({ discordToken: oauthToken, discordEmail: email });
+      res.writeHead(302, { Location: "/?" + redirectParams.toString() });
+      res.end();
+    })();
     return;
   }
 

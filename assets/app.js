@@ -116,6 +116,7 @@
     playerLiveCount: document.getElementById("playerLiveCount"),
     playerLiveCountText: document.getElementById("playerLiveCountText"),
     loginNavBtn: document.getElementById("loginNavBtn"),
+    loginDiscordBtn: document.getElementById("loginDiscordBtn"),
     loginGoogleBtn: document.getElementById("loginGoogleBtn"),
     loginOverlay: document.getElementById("loginOverlay"),
     loginClose: document.getElementById("loginClose"),
@@ -892,7 +893,27 @@
   // knew the right password -- it doesn't carry today's favorites if the
   // account was used on another device meanwhile. Re-auth silently on
   // load (same endpoint login uses) to pull the server's current list.
+  //
+  // Discord's redirect-based OAuth2 flow lands back here as a full page
+  // load with ?discordToken=&discordEmail= (or ?discordError=1) tacked
+  // onto the URL -- pick that up first and fold it into the same
+  // session-resume fetch below, then finish the login like any other
+  // provider would.
   (async () => {
+    const params = new URLSearchParams(location.search);
+    const discordToken = params.get("discordToken");
+    const discordEmail = params.get("discordEmail");
+    const discordError = params.get("discordError");
+    if (discordToken && discordEmail){
+      setSession({ email: discordEmail, oauthToken: discordToken });
+      history.replaceState(null, "", location.pathname + location.hash);
+    } else if (discordError){
+      history.replaceState(null, "", location.pathname + location.hash);
+      openLoginModal();
+      el.loginError.textContent = "No se pudo iniciar sesión con Discord. Probá de nuevo.";
+      el.loginError.hidden = false;
+    }
+
     const session = getSession();
     if (!session) return;
     let res;
@@ -912,6 +933,9 @@
     setSessionAvatar(data.avatar || null);
     syncSessionUI();
     updateView();
+    if (discordToken && discordEmail){
+      finishLogin(data.favorites || [], data.username || null);
+    }
   })();
 
   function openLoginModal(){
@@ -971,6 +995,11 @@
     });
   }
   initGoogleSignIn();
+  // Plain redirect -- Discord's OAuth2 flow has no JS SDK, the browser
+  // just needs to land on Discord's own consent screen next.
+  el.loginDiscordBtn.addEventListener("click", () => {
+    location.href = "/api/auth/discord/start";
+  });
   el.loginClose.addEventListener("click", () => {
     el.loginOverlay.hidden = true;
   });
