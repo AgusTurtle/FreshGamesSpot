@@ -1112,7 +1112,9 @@
     el.profileFavGrid.innerHTML = "";
     const favGames = data.favorites.map(findGame).filter(Boolean);
     el.profileFavEmpty.hidden = favGames.length > 0;
-    favGames.forEach(g => el.profileFavGrid.appendChild(makeCard(g)));
+    // Small thumbnail-only cards, same as the home collage -- no
+    // title/category/votes footer needed in this compact list.
+    favGames.forEach(g => el.profileFavGrid.appendChild(makeCard(g, { collage: true })));
 
     el.profileUsernameForm.hidden = true;
     el.profileOverlay.hidden = false;
