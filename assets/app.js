@@ -1289,15 +1289,17 @@
     if (!missions){
       try {
         const res = await fetch("/api/missions");
-        if (res.ok) missions = (await res.json()).map((m) => Object.assign({ done: false }, m));
+        if (res.ok) missions = await res.json();
       } catch (e){}
     }
     (missions || []).forEach((m) => {
       const row = document.createElement("div");
       row.className = "mission-row" + (m.done ? " done" : "");
+      const progressText = m.target > 1 ? `<span class="mission-progress">${m.progress}/${m.target}</span>` : "";
       row.innerHTML = `
         <span class="mission-check">${m.done ? "✓" : ""}</span>
         <span class="mission-label">${m.label}</span>
+        ${progressText}
         <span class="mission-points">+${m.points}</span>
       `;
       // Not done yet and points at a specific game -- clicking the row

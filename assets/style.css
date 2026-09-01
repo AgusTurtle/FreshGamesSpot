@@ -940,6 +940,12 @@ img{ max-width:100%; display:block; }
   color: var(--text);
 }
 .mission-row.done .mission-label{ color: var(--text-dim); text-decoration: line-through; }
+.mission-progress{
+  flex-shrink:0;
+  font-size:0.78rem;
+  font-weight:700;
+  color: var(--text-dim);
+}
 .mission-points{
   flex-shrink:0;
   font-size:0.78rem;

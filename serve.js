@@ -111,26 +111,49 @@ function touchStreak(acct){
 // permanent -- acct.completedMissions (a list of ids) is only ever added
 // to, so e.g. unstarring games back below a threshold never takes points
 // away. check() reads whatever the account already tracks; nothing here
-// needs its own separate counter beyond playedGames/totalPlays (bumped by
+// needs its own separate counter beyond gamePlays (bumped by
 // /api/account/play, called once per game session start).
-// Per-game missions. Can't see inside a game's own canvas (these are
-// third-party iframes with no shared postMessage protocol), so "reach
-// 300 points in X" isn't something the server can ever verify -- the
-// closest honest equivalent is play-count, tracked per gameId via
-// acct.gamePlays (bumped by /api/account/play, called once per game
-// session start).
-const MISSIONS = [
-  { id: "play_crossy_1", gameId: "ext-crossy-road", label: "Jugá a Crossy Road", points: 10, check: (a) => ((a.gamePlays || {})["ext-crossy-road"] || 0) >= 1 },
-  { id: "play_crossy_5", gameId: "ext-crossy-road", label: "Jugá 5 veces a Crossy Road", points: 25, check: (a) => ((a.gamePlays || {})["ext-crossy-road"] || 0) >= 5 },
-  { id: "play_shellshockers_1", gameId: "ext-shellshockers", label: "Jugá a Shell Shockers", points: 10, check: (a) => ((a.gamePlays || {})["ext-shellshockers"] || 0) >= 1 },
-  { id: "play_shellshockers_10", gameId: "ext-shellshockers", label: "Jugá 10 veces a Shell Shockers", points: 35, check: (a) => ((a.gamePlays || {})["ext-shellshockers"] || 0) >= 10 },
-  { id: "play_8ballpool_1", gameId: "ext-8-ball-pool", label: "Jugá a 8 Ball Pool", points: 10, check: (a) => ((a.gamePlays || {})["ext-8-ball-pool"] || 0) >= 1 },
-  { id: "play_rooftop_5", gameId: "gd-rooftop-snipers", label: "Jugá 5 veces a Rooftop Snipers", points: 25, check: (a) => ((a.gamePlays || {})["gd-rooftop-snipers"] || 0) >= 5 },
-  { id: "play_bloxd_1", gameId: "ext-bloxd-io", label: "Jugá a Bloxd.io", points: 10, check: (a) => ((a.gamePlays || {})["ext-bloxd-io"] || 0) >= 1 },
-  { id: "play_suika_5", gameId: "ext-suika-game", label: "Jugá 5 veces a Suika Game", points: 25, check: (a) => ((a.gamePlays || {})["ext-suika-game"] || 0) >= 5 },
-  { id: "play_krunker_1", gameId: "ext-krunker", label: "Jugá a Krunker.io", points: 10, check: (a) => ((a.gamePlays || {})["ext-krunker"] || 0) >= 1 },
-  { id: "play_bonk_10", gameId: "ext-bonk", label: "Jugá 10 veces a Bonk.io", points: 35, check: (a) => ((a.gamePlays || {})["ext-bonk"] || 0) >= 10 },
+//
+// Can't see inside a game's own canvas (these are third-party iframes
+// with no shared postMessage protocol), so "reach 300 points in X" isn't
+// something the server can ever verify -- the closest honest equivalent
+// is play-count. Rather than a fixed list that runs out, each game gets
+// an escalating ladder of tiers (MISSION_TIERS); accountPayload only
+// ever surfaces the next not-yet-done tier per game, so completing one
+// immediately reveals a harder one for the same game instead of the
+// list going stale.
+const MISSION_GAMES = [
+  { gameId: "ext-crossy-road", title: "Crossy Road" },
+  { gameId: "ext-shellshockers", title: "Shell Shockers" },
+  { gameId: "ext-8-ball-pool", title: "8 Ball Pool" },
+  { gameId: "gd-rooftop-snipers", title: "Rooftop Snipers" },
+  { gameId: "ext-bloxd-io", title: "Bloxd.io" },
+  { gameId: "ext-suika-game", title: "Suika Game" },
+  { gameId: "ext-krunker", title: "Krunker.io" },
+  { gameId: "ext-bonk", title: "Bonk.io" },
 ];
+const MISSION_TIERS = [
+  { count: 1, points: 10 },
+  { count: 5, points: 25 },
+  { count: 15, points: 40 },
+  { count: 30, points: 65 },
+  { count: 60, points: 100 },
+  { count: 100, points: 150 },
+  { count: 200, points: 250 },
+];
+const MISSIONS = [];
+for (const g of MISSION_GAMES){
+  MISSION_TIERS.forEach((tier) => {
+    MISSIONS.push({
+      id: `play_${g.gameId}_${tier.count}`,
+      gameId: g.gameId,
+      count: tier.count,
+      points: tier.points,
+      label: tier.count === 1 ? `Jugá a ${g.title}` : `Jugá ${tier.count} veces a ${g.title}`,
+      check: (a) => ((a.gamePlays || {})[g.gameId] || 0) >= tier.count,
+    });
+  });
+}
 function recomputeMissions(acct){
   if (!acct.completedMissions) acct.completedMissions = [];
   for (const m of MISSIONS){
@@ -140,10 +163,31 @@ function recomputeMissions(acct){
     }
   }
 }
+// The one row per game that's actually worth showing right now: the
+// next tier not yet completed, or (once every tier is cleared) the last
+// one, marked done. `acct` may be null for a logged-out visitor -- same
+// shape, just nothing completed and zero plays.
+function currentMissionRows(acct){
+  const completed = new Set((acct && acct.completedMissions) || []);
+  return MISSION_GAMES.map((g) => {
+    const tiers = MISSIONS.filter((m) => m.gameId === g.gameId);
+    const next = tiers.find((m) => !completed.has(m.id));
+    const current = next || tiers[tiers.length - 1];
+    const plays = (acct && acct.gamePlays && acct.gamePlays[g.gameId]) || 0;
+    return {
+      id: current.id,
+      gameId: g.gameId,
+      label: current.label,
+      points: current.points,
+      done: completed.has(current.id),
+      progress: Math.min(plays, current.count),
+      target: current.count,
+    };
+  });
+}
 
 function accountPayload(acct, extra){
   recomputeMissions(acct);
-  const completed = new Set(acct.completedMissions || []);
   return Object.assign({
     username: acct.username || null,
     avatar: acct.avatar || null,
@@ -152,9 +196,7 @@ function accountPayload(acct, extra){
     streak: acct.streak || 1,
     bestStreak: acct.bestStreak || 1,
     points: acct.points || 0,
-    missions: MISSIONS.map((m) => ({
-      id: m.id, gameId: m.gameId, label: m.label, points: m.points, done: completed.has(m.id),
-    })),
+    missions: currentMissionRows(acct),
   }, extra || {});
 }
 
@@ -893,12 +935,12 @@ http.createServer((req, res) => {
     return;
   }
 
-  // The static mission list (no per-account done/points) -- lets the
-  // Misiones overlay show what's available to a logged-out visitor too,
-  // instead of only working once they're signed in.
+  // The tier-1 row for every game (no account, so nothing's completed
+  // yet) -- lets the Misiones overlay show what's available to a
+  // logged-out visitor too, instead of only working once signed in.
   if (urlPath === "/api/missions" && req.method === "GET"){
     res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
-    res.end(JSON.stringify(MISSIONS.map((m) => ({ id: m.id, gameId: m.gameId, label: m.label, points: m.points }))));
+    res.end(JSON.stringify(currentMissionRows(null)));
     return;
   }
 
