@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&family=Chakra+Petch:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=89">
+<link rel="stylesheet" href="assets/style.css?v=90">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3231209923135744"
      crossorigin="anonymous"></script>
 <script type="application/ld+json">
@@ -98,6 +98,9 @@
       </div>
       <button id="favToggleNav" class="nav-fav-btn">
         <svg class="icon star" width="24" height="24" aria-hidden="true"><use href="#i-star"/></svg><span class="fav-label">Favoritos</span>
+      </button>
+      <button id="missionsNavBtn" class="nav-fav-btn" type="button">
+        <svg class="icon" width="24" height="24" aria-hidden="true"><use href="#i-zap"/></svg><span class="fav-label">Misiones</span>
       </button>
       <button id="leaderboardNavBtn" class="nav-fav-btn" type="button">
         <svg class="icon" width="24" height="24" aria-hidden="true"><use href="#i-trophy"/></svg><span class="fav-label">Ranking</span>
@@ -241,9 +244,6 @@
       </div>
     </div>
 
-    <h3 class="profile-section-title">Misiones</h3>
-    <div id="profileMissions" class="mission-list"></div>
-
     <h3 class="profile-section-title">Juegos favoritos</h3>
     <div id="profileFavGrid" class="game-grid collage profile-fav-grid"></div>
     <p id="profileFavEmpty" class="profile-empty" hidden>Todavía no marcaste ningún juego como favorito.</p>
@@ -272,6 +272,26 @@
     <div id="leaderboardList" class="leaderboard-list"></div>
     <p id="leaderboardEmpty" class="profile-empty" hidden>Todavía no hay nadie en el ranking.</p>
     <p id="leaderboardYouRow" class="leaderboard-you" hidden></p>
+  </div>
+</div>
+
+<!-- Per-game missions (play-count based -- there's no way to read a
+     score out of a third-party game's own iframe, see MISSIONS in
+     serve.js). Public list; needs a session to show progress/points. -->
+<div id="missionsOverlay" class="profile-overlay" role="dialog" aria-modal="true" aria-labelledby="missionsTitle" hidden>
+  <div class="profile-card leaderboard-card">
+    <button id="missionsClose" class="login-close profile-close" aria-label="Cerrar">
+      <svg class="icon" width="20" height="20" aria-hidden="true"><use href="#i-close"/></svg>
+    </button>
+    <div class="leaderboard-head">
+      <svg class="icon" width="26" height="26" aria-hidden="true"><use href="#i-zap"/></svg>
+      <div>
+        <h2 id="missionsTitle" class="leaderboard-title">Misiones</h2>
+        <p class="leaderboard-sub">Jugá juegos puntuales para ganar puntos y subir en el ranking.</p>
+      </div>
+    </div>
+    <div id="missionsLoginNote" class="leaderboard-you" hidden>Iniciá sesión para que tu progreso se guarde.</div>
+    <div id="missionsList" class="mission-list"></div>
   </div>
 </div>
 
@@ -359,6 +379,6 @@
 </div>
 
 <script src="https://accounts.google.com/gsi/client" async defer></script>
-<script src="assets/app.js?v=89"></script>
+<script src="assets/app.js?v=90"></script>
 </body>
 </html>

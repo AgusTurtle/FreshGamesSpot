@@ -113,15 +113,23 @@ function touchStreak(acct){
 // away. check() reads whatever the account already tracks; nothing here
 // needs its own separate counter beyond playedGames/totalPlays (bumped by
 // /api/account/play, called once per game session start).
+// Per-game missions. Can't see inside a game's own canvas (these are
+// third-party iframes with no shared postMessage protocol), so "reach
+// 300 points in X" isn't something the server can ever verify -- the
+// closest honest equivalent is play-count, tracked per gameId via
+// acct.gamePlays (bumped by /api/account/play, called once per game
+// session start).
 const MISSIONS = [
-  { id: "first_play", label: "Jugá tu primer juego", points: 10, check: (a) => (a.totalPlays || 0) >= 1 },
-  { id: "play_5_games", label: "Jugá 5 juegos distintos", points: 25, check: (a) => (a.playedGames || []).length >= 5 },
-  { id: "play_15_games", label: "Jugá 15 juegos distintos", points: 50, check: (a) => (a.playedGames || []).length >= 15 },
-  { id: "play_20_total", label: "Jugá 20 veces en total", points: 40, check: (a) => (a.totalPlays || 0) >= 20 },
-  { id: "fav_3", label: "Marcá 3 juegos como favoritos", points: 15, check: (a) => (a.favorites || []).length >= 3 },
-  { id: "fav_10", label: "Marcá 10 juegos como favoritos", points: 30, check: (a) => (a.favorites || []).length >= 10 },
-  { id: "streak_3", label: "Conseguí una racha de 3 días", points: 20, check: (a) => (a.bestStreak || 0) >= 3 },
-  { id: "streak_7", label: "Conseguí una racha de 7 días", points: 50, check: (a) => (a.bestStreak || 0) >= 7 },
+  { id: "play_crossy_1", gameId: "ext-crossy-road", label: "Jugá a Crossy Road", points: 10, check: (a) => ((a.gamePlays || {})["ext-crossy-road"] || 0) >= 1 },
+  { id: "play_crossy_5", gameId: "ext-crossy-road", label: "Jugá 5 veces a Crossy Road", points: 25, check: (a) => ((a.gamePlays || {})["ext-crossy-road"] || 0) >= 5 },
+  { id: "play_shellshockers_1", gameId: "ext-shellshockers", label: "Jugá a Shell Shockers", points: 10, check: (a) => ((a.gamePlays || {})["ext-shellshockers"] || 0) >= 1 },
+  { id: "play_shellshockers_10", gameId: "ext-shellshockers", label: "Jugá 10 veces a Shell Shockers", points: 35, check: (a) => ((a.gamePlays || {})["ext-shellshockers"] || 0) >= 10 },
+  { id: "play_8ballpool_1", gameId: "ext-8-ball-pool", label: "Jugá a 8 Ball Pool", points: 10, check: (a) => ((a.gamePlays || {})["ext-8-ball-pool"] || 0) >= 1 },
+  { id: "play_rooftop_5", gameId: "gd-rooftop-snipers", label: "Jugá 5 veces a Rooftop Snipers", points: 25, check: (a) => ((a.gamePlays || {})["gd-rooftop-snipers"] || 0) >= 5 },
+  { id: "play_bloxd_1", gameId: "ext-bloxd-io", label: "Jugá a Bloxd.io", points: 10, check: (a) => ((a.gamePlays || {})["ext-bloxd-io"] || 0) >= 1 },
+  { id: "play_suika_5", gameId: "ext-suika-game", label: "Jugá 5 veces a Suika Game", points: 25, check: (a) => ((a.gamePlays || {})["ext-suika-game"] || 0) >= 5 },
+  { id: "play_krunker_1", gameId: "ext-krunker", label: "Jugá a Krunker.io", points: 10, check: (a) => ((a.gamePlays || {})["ext-krunker"] || 0) >= 1 },
+  { id: "play_bonk_10", gameId: "ext-bonk", label: "Jugá 10 veces a Bonk.io", points: 35, check: (a) => ((a.gamePlays || {})["ext-bonk"] || 0) >= 10 },
 ];
 function recomputeMissions(acct){
   if (!acct.completedMissions) acct.completedMissions = [];
@@ -145,7 +153,7 @@ function accountPayload(acct, extra){
     bestStreak: acct.bestStreak || 1,
     points: acct.points || 0,
     missions: MISSIONS.map((m) => ({
-      id: m.id, label: m.label, points: m.points, done: completed.has(m.id),
+      id: m.id, gameId: m.gameId, label: m.label, points: m.points, done: completed.has(m.id),
     })),
   }, extra || {});
 }
@@ -808,6 +816,8 @@ http.createServer((req, res) => {
       if (!acct.playedGames) acct.playedGames = [];
       if (!acct.playedGames.includes(gameId)) acct.playedGames.push(gameId);
       acct.totalPlays = (acct.totalPlays || 0) + 1;
+      if (!acct.gamePlays) acct.gamePlays = {};
+      acct.gamePlays[gameId] = (acct.gamePlays[gameId] || 0) + 1;
       recomputeMissions(acct);
       saveAccounts();
       res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
@@ -880,6 +890,15 @@ http.createServer((req, res) => {
     saveAccounts();
     res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
     res.end(JSON.stringify(rows));
+    return;
+  }
+
+  // The static mission list (no per-account done/points) -- lets the
+  // Misiones overlay show what's available to a logged-out visitor too,
+  // instead of only working once they're signed in.
+  if (urlPath === "/api/missions" && req.method === "GET"){
+    res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
+    res.end(JSON.stringify(MISSIONS.map((m) => ({ id: m.id, gameId: m.gameId, label: m.label, points: m.points }))));
     return;
   }
 

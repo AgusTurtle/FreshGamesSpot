@@ -109,6 +109,11 @@
     leaderboardList: document.getElementById("leaderboardList"),
     leaderboardEmpty: document.getElementById("leaderboardEmpty"),
     leaderboardYouRow: document.getElementById("leaderboardYouRow"),
+    missionsNavBtn: document.getElementById("missionsNavBtn"),
+    missionsOverlay: document.getElementById("missionsOverlay"),
+    missionsClose: document.getElementById("missionsClose"),
+    missionsList: document.getElementById("missionsList"),
+    missionsLoginNote: document.getElementById("missionsLoginNote"),
     leaderboardTabStreak: document.getElementById("leaderboardTabStreak"),
     leaderboardTabPoints: document.getElementById("leaderboardTabPoints"),
     overlay: document.getElementById("playerOverlay"),
@@ -162,7 +167,6 @@
     profileStreak: document.getElementById("profileStreak"),
     profileBestStreak: document.getElementById("profileBestStreak"),
     profilePoints: document.getElementById("profilePoints"),
-    profileMissions: document.getElementById("profileMissions"),
     profileFavGrid: document.getElementById("profileFavGrid"),
     profileFavEmpty: document.getElementById("profileFavEmpty"),
   };
@@ -1169,18 +1173,6 @@
     el.profileBestStreak.textContent = plural(data.bestStreak || 1, "día", "días");
     el.profilePoints.textContent = String(data.points || 0);
 
-    el.profileMissions.innerHTML = "";
-    (data.missions || []).forEach((m) => {
-      const row = document.createElement("div");
-      row.className = "mission-row" + (m.done ? " done" : "");
-      row.innerHTML = `
-        <span class="mission-check">${m.done ? "✓" : ""}</span>
-        <span class="mission-label">${m.label}</span>
-        <span class="mission-points">+${m.points}</span>
-      `;
-      el.profileMissions.appendChild(row);
-    });
-
     el.profileFavGrid.innerHTML = "";
     const favGames = data.favorites.map(findGame).filter(Boolean);
     el.profileFavEmpty.hidden = favGames.length > 0;
@@ -1272,6 +1264,63 @@
   el.leaderboardClose.addEventListener("click", () => { el.leaderboardOverlay.hidden = true; });
   el.leaderboardOverlay.addEventListener("click", (e) => {
     if (e.target === el.leaderboardOverlay) el.leaderboardOverlay.hidden = true;
+  });
+
+  // ---- Missions (per-game, play-count based -- see MISSIONS in serve.js
+  // for why this can't be a real in-game score) ----
+  async function loadMissions(){
+    el.missionsList.innerHTML = "";
+    const session = getSession();
+    el.missionsLoginNote.hidden = !!session;
+    let missions = null;
+    if (session){
+      try {
+        const res = await fetch("/api/account/auth", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: session.email, passwordHash: session.passwordHash, oauthToken: session.oauthToken }),
+        });
+        if (res.ok){
+          const data = await res.json();
+          missions = data.missions || [];
+        }
+      } catch (e){}
+    }
+    if (!missions){
+      try {
+        const res = await fetch("/api/missions");
+        if (res.ok) missions = (await res.json()).map((m) => Object.assign({ done: false }, m));
+      } catch (e){}
+    }
+    (missions || []).forEach((m) => {
+      const row = document.createElement("div");
+      row.className = "mission-row" + (m.done ? " done" : "");
+      row.innerHTML = `
+        <span class="mission-check">${m.done ? "✓" : ""}</span>
+        <span class="mission-label">${m.label}</span>
+        <span class="mission-points">+${m.points}</span>
+      `;
+      // Not done yet and points at a specific game -- clicking the row
+      // jumps straight to that game instead of making people hunt for it.
+      const game = m.gameId ? findGame(m.gameId) : null;
+      if (game && !m.done){
+        row.classList.add("clickable");
+        row.addEventListener("click", () => {
+          el.missionsOverlay.hidden = true;
+          openGame(game.id);
+        });
+      }
+      el.missionsList.appendChild(row);
+    });
+  }
+  function openMissions(){
+    el.missionsOverlay.hidden = false;
+    loadMissions();
+  }
+  el.missionsNavBtn.addEventListener("click", openMissions);
+  el.missionsClose.addEventListener("click", () => { el.missionsOverlay.hidden = true; });
+  el.missionsOverlay.addEventListener("click", (e) => {
+    if (e.target === el.missionsOverlay) el.missionsOverlay.hidden = true;
   });
 
   el.profileAvatarBtn.addEventListener("click", () => el.avatarFileInput.click());
