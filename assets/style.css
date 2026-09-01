@@ -723,6 +723,7 @@ img{ max-width:100%; display:block; }
 .profile-overlay[hidden]{ display:none; }
 .profile-card{
   position:relative;
+  isolation:isolate;
   width:100%;
   max-width: 760px;
   background: var(--bg-card);
@@ -732,32 +733,41 @@ img{ max-width:100%; display:block; }
   box-shadow: 0 24px 60px rgba(0,0,0,0.5);
   padding-bottom: 28px;
 }
+/* Soft glow that fades to nothing before it reaches any content -- unlike
+   a banner strip with a hard edge, this can never leave a visible seam
+   no matter what sits on top of it. */
+.profile-card::before{
+  content:"";
+  position:absolute;
+  top:0; left:0; right:0;
+  height:220px;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(47,125,255,0.22), transparent 60%),
+    radial-gradient(circle at 90% 8%, rgba(56,217,255,0.12), transparent 55%);
+  z-index:0;
+  pointer-events:none;
+}
 .profile-close{
   position:absolute;
   top:14px; right:14px;
   z-index:2;
   background: rgba(5,6,13,0.55);
 }
-.profile-banner{
-  position:relative;
-  height: 150px;
-  background:
-    radial-gradient(circle at 15% 20%, rgba(47,125,255,0.28), transparent 55%),
-    radial-gradient(circle at 85% 75%, rgba(47,125,255,0.14), transparent 55%),
-    var(--bg-card);
-  overflow:hidden;
-}
 .profile-header{
-  display:grid;
-  grid-template-columns: auto 1fr;
-  grid-template-rows: 92px 6px 32px;
-  column-gap:16px;
-  padding: 0 28px;
-  margin-top:-46px;
+  position:relative;
+  z-index:1;
+  display:flex;
+  align-items:center;
+  gap:20px;
+  padding: 36px 28px 4px;
 }
-.profile-avatar-col{ display:contents; }
+.profile-avatar-col{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+}
 .profile-avatar{
-  grid-row:1; grid-column:1;
   width:92px; height:92px;
   border-radius:18px;
   border:4px solid var(--bg-card);
@@ -776,12 +786,21 @@ img{ max-width:100%; display:block; }
 }
 .profile-avatar svg{ width:40px; height:40px; }
 .profile-avatar img{ width:100%; height:100%; object-fit:cover; }
-.profile-avatar-col .profile-edit-link{ grid-row:3; grid-column:1; align-self:end; justify-self:start; }
-.profile-identity{ display:contents; }
+.profile-avatar-actions{ display:flex; flex-direction:column; align-items:center; gap:6px; }
+.profile-identity{
+  flex:1;
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.profile-username-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
 .profile-username{
-  grid-row:1; grid-column:2;
-  align-self:center;
-  justify-self:start;
   font-size:1.55rem;
   font-weight:800;
   margin:0;
@@ -791,7 +810,6 @@ img{ max-width:100%; display:block; }
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.profile-identity .profile-edit-link{ grid-row:3; grid-column:2; align-self:end; justify-self:start; }
 .profile-edit-link{
   display:inline-flex;
   align-items:center;
@@ -816,7 +834,6 @@ img{ max-width:100%; display:block; }
 .profile-remove-avatar-link{ color: #ff6b6b; border-color: rgba(255,107,107,0.35); }
 .profile-remove-avatar-link:hover{ border-color: #ff6b6b; color: #ff6b6b; }
 .profile-remove-avatar-link[hidden]{ display:none; }
-.profile-edit-link:hover{ color: var(--accent); }
 
 .profile-username-form{
   margin: 14px 28px 0;
