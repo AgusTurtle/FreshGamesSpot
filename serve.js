@@ -813,6 +813,25 @@ http.createServer((req, res) => {
     return;
   }
 
+  // TEMPORARY, one-off: purge this session's dev/test accounts (their
+  // emails all end in @test.com or @freshgamespot.net -- our own domain,
+  // which no real user would ever register with) so they don't clutter
+  // the leaderboard just shipped above. Remove this route after running
+  // it once.
+  if (urlPath === "/api/debug/purge-test-accounts" && req.method === "POST"){
+    const removed = [];
+    for (const email of Object.keys(accounts)){
+      if (/@(test\.com|freshgamespot\.net)$/i.test(email)){
+        removed.push(email);
+        delete accounts[email];
+      }
+    }
+    saveAccounts();
+    res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
+    res.end(JSON.stringify({ removed }));
+    return;
+  }
+
   let filePath = urlPath;
   if (filePath === "/") filePath = "/index.html";
   const full = path.join(root, filePath);
