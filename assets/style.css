@@ -224,6 +224,13 @@ img{ max-width:100%; display:block; }
 /* display:flex above would otherwise defeat the [hidden] attribute. */
 .clear-search[hidden]{ display:none; }
 
+.topbar-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-left:auto;
+  flex-shrink:0;
+}
 .nav-fav-btn{
   display:flex;
   align-items:center;
@@ -236,7 +243,6 @@ img{ max-width:100%; display:block; }
   font-size: 0.9rem;
   font-weight:600;
   flex-shrink:0;
-  margin-left:auto;
 }
 .nav-fav-btn:hover{ border-color: var(--accent); color: var(--accent-dark); }
 
@@ -1406,8 +1412,25 @@ li[data-ok="true"] .rule-icon::after{ width:4px; height:2px; top:6px; left:8px; 
 }
 
 /* ---------- Responsive ---------- */
+/* Phones don't get a squeezed copy of the desktop bar -- the row wraps
+   into three: logo+account up top, then the search full-width, then
+   Favoritos/Misiones/Ranking as an evenly-spaced icon-only strip. Each
+   piece gets flex-basis:100% to force its own line regardless of exact
+   pixel widths, ordered explicitly since the wrapper divs aren't
+   adjacent siblings in the markup. */
 @media (max-width: 640px){
-  .topbar-row{ gap:10px; padding: 0 12px; }
+  .topbar-row{
+    flex-wrap: wrap;
+    height: auto;
+    gap: 10px;
+    padding: 10px 12px;
+  }
+  .logo{ order:1; }
+  .nav-login-btn, .user-menu{ order:2; margin-left:auto; }
+  .search-wrap{ order:3; flex-basis:100%; max-width:none; }
+  .topbar-actions{ order:4; flex-basis:100%; margin-left:0; justify-content:space-between; }
+  .topbar-actions .nav-fav-btn{ flex:1; justify-content:center; padding:9px 6px; }
+  .user-email-label{ max-width:80px; }
   .cat-nav{ padding: 4px 12px 14px; }
   .fav-label{ display:none; }
   #mainContent{ padding: 16px 12px 50px; }
