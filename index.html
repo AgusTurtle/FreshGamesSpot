@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&family=Chakra+Petch:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=87">
+<link rel="stylesheet" href="assets/style.css?v=88">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3231209923135744"
      crossorigin="anonymous"></script>
 <script type="application/ld+json">
@@ -98,6 +98,9 @@
       </div>
       <button id="favToggleNav" class="nav-fav-btn">
         <svg class="icon star" width="24" height="24" aria-hidden="true"><use href="#i-star"/></svg><span class="fav-label">Favoritos</span>
+      </button>
+      <button id="leaderboardNavBtn" class="nav-fav-btn" type="button">
+        <svg class="icon" width="24" height="24" aria-hidden="true"><use href="#i-trophy"/></svg><span class="fav-label">Ranking</span>
       </button>
       <button id="loginNavBtn" class="nav-login-btn">Iniciar sesión</button>
       <div id="userMenu" class="user-menu" hidden>
@@ -240,6 +243,27 @@
   </div>
 </div>
 
+<!-- Public leaderboard, ranked by streak (consecutive days played) --
+     only username/avatar/streak, never email: see /api/leaderboard in
+     serve.js and accountPayload's public-facing subset. -->
+<div id="leaderboardOverlay" class="profile-overlay" role="dialog" aria-modal="true" aria-labelledby="leaderboardTitle" hidden>
+  <div class="profile-card leaderboard-card">
+    <button id="leaderboardClose" class="login-close profile-close" aria-label="Cerrar">
+      <svg class="icon" width="20" height="20" aria-hidden="true"><use href="#i-close"/></svg>
+    </button>
+    <div class="leaderboard-head">
+      <svg class="icon" width="26" height="26" aria-hidden="true"><use href="#i-trophy"/></svg>
+      <div>
+        <h2 id="leaderboardTitle" class="leaderboard-title">Ranking de racha</h2>
+        <p class="leaderboard-sub">Los jugadores con más días seguidos entrando a FreshGamesPot.</p>
+      </div>
+    </div>
+    <div id="leaderboardList" class="leaderboard-list"></div>
+    <p id="leaderboardEmpty" class="profile-empty" hidden>Todavía no hay nadie en el ranking.</p>
+    <p id="leaderboardYouRow" class="leaderboard-you" hidden></p>
+  </div>
+</div>
+
 <div id="loginOverlay" class="login-overlay" role="dialog" aria-modal="true" aria-labelledby="loginTitle" hidden>
   <div class="login-card">
     <button id="loginClose" class="login-close" aria-label="Cerrar">
@@ -324,6 +348,6 @@
 </div>
 
 <script src="https://accounts.google.com/gsi/client" async defer></script>
-<script src="assets/app.js?v=87"></script>
+<script src="assets/app.js?v=88"></script>
 </body>
 </html>

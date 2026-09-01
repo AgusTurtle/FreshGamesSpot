@@ -103,6 +103,12 @@
     emptyState: document.getElementById("emptyState"),
     scrollSentinel: document.getElementById("scrollSentinel"),
     favToggleNav: document.getElementById("favToggleNav"),
+    leaderboardNavBtn: document.getElementById("leaderboardNavBtn"),
+    leaderboardOverlay: document.getElementById("leaderboardOverlay"),
+    leaderboardClose: document.getElementById("leaderboardClose"),
+    leaderboardList: document.getElementById("leaderboardList"),
+    leaderboardEmpty: document.getElementById("leaderboardEmpty"),
+    leaderboardYouRow: document.getElementById("leaderboardYouRow"),
     overlay: document.getElementById("playerOverlay"),
     playerFrame: document.getElementById("playerFrame"),
     playerTitle: document.getElementById("playerTitle"),
@@ -1159,6 +1165,56 @@
   el.profileOverlay.addEventListener("click", (e) => {
     if (e.target === el.profileOverlay) el.profileOverlay.hidden = true;
   });
+
+  // ---- Leaderboard (public, ranked by streak) ----
+  const MEDALS = ["🥇", "🥈", "🥉"];
+  async function openLeaderboard(){
+    el.leaderboardList.innerHTML = "";
+    el.leaderboardEmpty.hidden = true;
+    el.leaderboardYouRow.hidden = true;
+    el.leaderboardOverlay.hidden = false;
+    let rows = [];
+    try {
+      const res = await fetch("/api/leaderboard");
+      if (res.ok) rows = await res.json();
+    } catch (e){}
+    if (!rows.length){
+      el.leaderboardEmpty.hidden = false;
+      return;
+    }
+    const session = getSession();
+    const youRank = session && session.username
+      ? rows.findIndex(r => r.username === session.username)
+      : -1;
+    rows.forEach((row, i) => {
+      const item = document.createElement("div");
+      item.className = "leaderboard-row";
+      if (i === youRank) item.classList.add("is-you");
+      const rankHtml = MEDALS[i] || `<span class="leaderboard-rank-num">${i + 1}</span>`;
+      const avatarHtml = row.avatar
+        ? `<img src="${row.avatar}" alt="">`
+        : DEFAULT_AVATAR_HTML.replace('width="16" height="16"', 'width="20" height="20"');
+      item.innerHTML = `
+        <span class="leaderboard-rank">${rankHtml}</span>
+        <span class="leaderboard-avatar">${avatarHtml}</span>
+        <span class="leaderboard-name">${row.username}</span>
+        <span class="leaderboard-streak">${iconSvg("flame")}${row.bestStreak}</span>
+      `;
+      el.leaderboardList.appendChild(item);
+    });
+    // Logged in with a username, but not in the top 20 shown -- still
+    // useful to see where you stand relative to the cutoff.
+    if (session && session.username && youRank === -1){
+      el.leaderboardYouRow.hidden = false;
+      el.leaderboardYouRow.textContent = "Todavía no entrás en el top 20 -- seguí sumando racha.";
+    }
+  }
+  el.leaderboardNavBtn.addEventListener("click", openLeaderboard);
+  el.leaderboardClose.addEventListener("click", () => { el.leaderboardOverlay.hidden = true; });
+  el.leaderboardOverlay.addEventListener("click", (e) => {
+    if (e.target === el.leaderboardOverlay) el.leaderboardOverlay.hidden = true;
+  });
+
   el.profileAvatarBtn.addEventListener("click", () => el.avatarFileInput.click());
   el.profileChangeAvatarLink.addEventListener("click", () => el.avatarFileInput.click());
   el.profileRemoveAvatarLink.addEventListener("click", async () => {

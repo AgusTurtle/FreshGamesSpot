@@ -792,6 +792,27 @@ http.createServer((req, res) => {
     return;
   }
 
+  // Public ranking, sorted by bestStreak (ties broken by the current
+  // streak). Only ever exposes username, avatar and streak numbers --
+  // never an email, and accounts that never set a username (so have
+  // nothing safe/identifying to show) are excluded rather than leaking
+  // their address.
+  if (urlPath === "/api/leaderboard" && req.method === "GET"){
+    const rows = Object.values(accounts)
+      .filter((acct) => acct.username)
+      .map((acct) => ({
+        username: acct.username,
+        avatar: acct.avatar || null,
+        streak: acct.streak || 1,
+        bestStreak: acct.bestStreak || 1,
+      }))
+      .sort((a, b) => (b.bestStreak - a.bestStreak) || (b.streak - a.streak))
+      .slice(0, 20);
+    res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
+    res.end(JSON.stringify(rows));
+    return;
+  }
+
   let filePath = urlPath;
   if (filePath === "/") filePath = "/index.html";
   const full = path.join(root, filePath);
