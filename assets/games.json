@@ -274,6 +274,20 @@
     "popularity": 0
   },
   {
+    "id": "ext-ping-pong-chaos",
+    "title": "Ping Pong Chaos",
+    "description": "A chaotic take on table tennis. Fast rallies, wild physics, quick matches vs CPU or a friend.",
+    "instructions": "Move the mouse or use the arrow keys to move your paddle. Hit the ball back to score.",
+    "url": "https://freshgamespot.net/assets/ping-pong-chaos.html",
+    "assetBase": "https://www.2player.com/games/ping-pong-chaos/",
+    "category": "Sports",
+    "tags": "Ping Pong, Table Tennis, Sports, 2 Player",
+    "thumb": "https://is1-ssl.mzstatic.com/image/thumb/Purple118/v4/09/d8/72/09d872a2-d9f6-a21a-4972-3ba6bab9a052/pr_source.png/512x512bb.jpg",
+    "width": "960",
+    "height": "600",
+    "popularity": 0
+  },
+  {
     "id": "ext-gulper-io",
     "title": "Gulper.io",
     "description": "A multiplayer snake-style .io game. Grow by swallowing smaller fish and avoid getting gulped by bigger ones.",
