@@ -374,10 +374,6 @@ const GAME_ALLOWED_HOSTS = [
   // title) -- without it allow-listed the nested frame was silently
   // CSP-blocked, leaving a blank page.
   "https://*.4399.com",
-  // Ping Pong Chaos: same fixed-960x600 old-UnityLoader-API issue as
-  // Getaway Shootout, self-hosted wrapper loads their UnityLoader.js
-  // script directly (see assets/ping-pong-chaos.html).
-  "https://www.2player.com",
 ].join(" ");
 
 const CDN_HOSTS = [
