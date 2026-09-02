@@ -1409,12 +1409,21 @@
     fetch("/api/votes").then(r => r.ok ? r.json() : {}).catch(() => ({})),
   ])
     .then(([data, votes]) => {
-      // Shuffle on every load so the grid isn't the same order every visit.
-      GAMES = data.slice();
-      for (let i = GAMES.length - 1; i > 0; i--){
-        const j = Math.floor(Math.random() * (i + 1));
-        [GAMES[i], GAMES[j]] = [GAMES[j], GAMES[i]];
+      // Shuffle on every load so the grid isn't the same order every visit
+      // -- but the hand-picked/popular titles (popularity > 0) always
+      // shuffle within their own group at the very front, never mixed
+      // in among the rest, so Home always leads with the good stuff.
+      function shuffled(arr){
+        const a = arr.slice();
+        for (let i = a.length - 1; i > 0; i--){
+          const j = Math.floor(Math.random() * (i + 1));
+          [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
       }
+      const popular = data.filter(g => g.popularity > 0);
+      const rest = data.filter(g => !(g.popularity > 0));
+      GAMES = shuffled(popular).concat(shuffled(rest));
       filtered = GAMES;
       SERVER_VOTES = votes || {};
       buildCategories();
