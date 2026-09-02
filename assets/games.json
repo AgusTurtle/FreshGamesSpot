@@ -328,18 +328,5 @@
     "width": "960",
     "height": "600",
     "popularity": 3
-  },
-  {
-    "id": "ext-2048",
-    "title": "2048",
-    "description": "The addictive sliding tile puzzle. Combine matching numbers to reach the 2048 tile before the board fills up.",
-    "instructions": "Use the arrow keys (or swipe) to slide all tiles. Matching tiles merge into one with double the value.",
-    "url": "https://gabrielecirulli.github.io/2048/",
-    "category": "Puzzles",
-    "tags": "2048, Puzzle, Numbers, Sliding Tile, Open Source",
-    "thumb": "https://gabrielecirulli.github.io/2048/meta/apple-touch-icon.png",
-    "width": "600",
-    "height": "600",
-    "popularity": 0
   }
 ]
