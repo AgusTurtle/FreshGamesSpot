@@ -562,11 +562,6 @@
       info.appendChild(title);
       info.appendChild(cat);
       card.appendChild(info);
-
-      // Votes + live player count: only on the big/well-known games
-      // (popularity > 0) -- adds noise on the ~1987 bulk-imported ones
-      // nobody's actually voted on yet.
-      if (game.popularity > 0) card.appendChild(makeVoteRow(game.id));
     }
 
     card.addEventListener("click", () => openGame(game.id));
