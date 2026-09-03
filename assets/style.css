@@ -700,6 +700,9 @@ img{ max-width:100%; display:block; }
   color: var(--text-dim);
   font-size: 0.85rem;
 }
+.footer-links{ margin-top:8px; }
+.footer-links a{ color: var(--text-dim); }
+.footer-links a:hover{ color: var(--text); }
 
 /* ---------- Player overlay ---------- */
 .player-overlay{
