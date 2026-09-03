@@ -449,6 +449,37 @@ function findGame(id){
   return games.find(g => g.id === id);
 }
 
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, (c) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+  }[c]));
+}
+
+// Server-rendered per-game page: same index.html/app.js SPA, but with the
+// <title>/description/canonical/OG tags swapped to that specific game so
+// each game gets its own indexable, shareable URL instead of everything
+// living behind an unindexable #juego/<id> hash. app.js reads the path on
+// load and auto-opens the player for it (see the DOMContentLoaded block).
+function renderGamePage(game){
+  const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
+  const url = "https://freshgamespot.net/juego/" + encodeURIComponent(game.id);
+  const title = game.title + " — Jugar gratis online | FreshGamesPot";
+  const desc = (game.description && game.description.trim())
+    ? game.description.trim().slice(0, 300)
+    : ("Jugá " + game.title + " gratis online, directo en el navegador, sin descargas ni registro.");
+  const image = game.thumb || "https://freshgamespot.net/assets/og-image.png";
+  const t = escapeHtml(title), d = escapeHtml(desc), u = escapeHtml(url), img = escapeHtml(image);
+  return html
+    .replace(/<title>[^<]*<\/title>/, `<title>${t}</title>`)
+    .replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${d}">`)
+    .replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${u}">`)
+    .replace(/<meta property="og:url" content="[^"]*">/, `<meta property="og:url" content="${u}">`)
+    .replace(/<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${t}">`)
+    .replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${d}">`)
+    .replace(/<meta property="og:image" content="[^"]*">/, `<meta property="og:image" content="${img}">`)
+    .replace(/<meta name="twitter:image" content="[^"]*">/, `<meta name="twitter:image" content="${img}">`);
+}
+
 // The site only ever has one game open in the player at a time, so this
 // is a reliable fallback for orphaned asset requests that arrive with no
 // way to identify which game they belong to (see proxyAsset()).
@@ -937,6 +968,30 @@ http.createServer((req, res) => {
   if (urlPath === "/api/missions" && req.method === "GET"){
     res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
     res.end(JSON.stringify(currentMissionRows(null)));
+    return;
+  }
+
+  const gamePageMatch = urlPath.match(/^\/juego\/([^/]+)\/?$/);
+  if (gamePageMatch && req.method === "GET"){
+    const game = findGame(decodeURIComponent(gamePageMatch[1]));
+    if (game){
+      res.writeHead(200, { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-cache" });
+      res.end(renderGamePage(game));
+      return;
+    }
+    // Unknown id: fall through to the static handler below, which 404s.
+  }
+
+  if (urlPath === "/sitemap.xml" && req.method === "GET"){
+    let games;
+    try { games = loadGames(); } catch (e){ games = []; }
+    const urls = ["https://freshgamespot.net/"]
+      .concat(games.map(g => "https://freshgamespot.net/juego/" + encodeURIComponent(g.id)));
+    const body = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+      urls.map(u => `  <url>\n    <loc>${escapeHtml(u)}</loc>\n    <changefreq>${u.endsWith("/") ? "daily" : "weekly"}</changefreq>\n    <priority>${u.endsWith("/") ? "1.0" : "0.6"}</priority>\n  </url>`).join("\n") +
+      `\n</urlset>\n`;
+    res.writeHead(200, { "Content-Type": "application/xml; charset=utf-8", "Cache-Control": "public, max-age=3600" });
+    res.end(body);
     return;
   }
 

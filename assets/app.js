@@ -563,7 +563,10 @@
       info.appendChild(cat);
       card.appendChild(info);
 
-      card.appendChild(makeVoteRow(game.id));
+      // Votes + live player count: only on the big/well-known games
+      // (popularity > 0) -- adds noise on the ~1987 bulk-imported ones
+      // nobody's actually voted on yet.
+      if (game.popularity > 0) card.appendChild(makeVoteRow(game.id));
     }
 
     card.addEventListener("click", () => openGame(game.id));
@@ -843,7 +846,13 @@
     lastFocusedEl = document.activeElement;
     el.overlay.hidden = false;
     document.body.style.overflow = "hidden";
-    location.hash = "juego/" + id;
+    // Real path (not just a hash) so the URL is shareable/indexable --
+    // the server renders /juego/<id> with that game's own title/OG tags
+    // (see renderGamePage in serve.js), and this tab is already showing
+    // it, so just swap the address bar without a reload.
+    if (!location.pathname.startsWith("/juego/" + id)){
+      history.pushState({ gameId: id }, "", "/juego/" + encodeURIComponent(id));
+    }
     el.playerBack.focus();
 
     currentOpenGameId = id;
@@ -878,11 +887,28 @@
     stopHeartbeat();
     currentOpenGameId = null;
     if (location.hash.startsWith("#juego/")) history.replaceState(null, "", "#/");
+    if (location.pathname.startsWith("/juego/")) history.pushState(null, "", "/");
     if (wasOpen && lastFocusedEl && document.contains(lastFocusedEl)){
       lastFocusedEl.focus();
     }
     lastFocusedEl = null;
   }
+
+  // Back/forward after openGame()'s pushState -- close the overlay when
+  // the user navigates away from /juego/<id> via browser back, or open
+  // the right game when they land back on one via forward.
+  window.addEventListener("popstate", () => {
+    const m = location.pathname.match(/^\/juego\/([^/]+)\/?$/);
+    if (m && findGame(decodeURIComponent(m[1]))){
+      if (currentOpenGameId !== decodeURIComponent(m[1])) openGame(decodeURIComponent(m[1]));
+    } else if (!el.overlay.hidden){
+      el.overlay.hidden = true;
+      el.playerFrame.src = "about:blank";
+      document.body.style.overflow = "";
+      stopHeartbeat();
+      currentOpenGameId = null;
+    }
+  });
 
   /* ---------- events ---------- */
   el.searchInput.addEventListener("input", (e) => {
@@ -1439,6 +1465,16 @@
       updateView();
       refreshLiveBadges();
       liveCountsTimer = setInterval(refreshLiveBadges, LIVE_POLL_MS);
+
+      // Landed straight on a game's own URL (shared link, search result,
+      // or the legacy #juego/<id> hash from before real paths existed) --
+      // open the player immediately instead of just showing the grid.
+      const deepMatch = location.pathname.match(/^\/juego\/([^/]+)\/?$/)
+        || location.hash.match(/^#juego\/(.+)$/);
+      if (deepMatch){
+        const id = decodeURIComponent(deepMatch[1]);
+        if (findGame(id)) openGame(id);
+      }
     })
     .catch(err => {
       el.grid.innerHTML = "";
