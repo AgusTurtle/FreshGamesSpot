@@ -13,6 +13,20 @@
     "popularity": 6
   },
   {
+    "id": "ext-eagle-ride",
+    "title": "Eagle Ride",
+    "description": "Ride on the back of an eagle in this 3D survival flying game. You don't control your speed or height, only your steering -- weave between trees rushing at you and see how long you can survive.",
+    "instructions": "Left and right arrow keys to steer. Space to restart after a crash.",
+    "url": "https://eagleride.web.app/",
+    "directEmbed": true,
+    "category": "Action",
+    "tags": "Eagle Ride, Flying, Survival, 3D, Action",
+    "thumb": "https://eagleride.web.app/icon.webp",
+    "width": "960",
+    "height": "600",
+    "popularity": 0
+  },
+  {
     "id": "gm-stickman-hook",
     "title": "Stickman Hook",
     "description": "Stickman Hook is a simple, original and challenging swinging game. Swing your stickman through each level using ropes and momentum.",
