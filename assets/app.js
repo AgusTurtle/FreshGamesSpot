@@ -546,23 +546,8 @@
     thumbWrap.appendChild(favBtn);
 
     card.appendChild(thumbWrap);
-
-    // The dense home collage (poki.com/es style) shows thumbnails only --
-    // title/category/votes only make sense once you're browsing a specific
-    // category or search results, where there's room and a reason to compare.
-    if (!collage){
-      const info = document.createElement("div");
-      info.className = "game-info";
-      const title = document.createElement("p");
-      title.className = "game-title";
-      title.textContent = game.title;
-      const cat = document.createElement("p");
-      cat.className = "game-cat";
-      cat.textContent = game.category;
-      info.appendChild(title);
-      info.appendChild(cat);
-      card.appendChild(info);
-    }
+    // Thumbnail-only everywhere now (no title/category text block) --
+    // matches the Home collage look in every view.
 
     card.addEventListener("click", () => openGame(game.id));
     card.addEventListener("keydown", (e) => {
