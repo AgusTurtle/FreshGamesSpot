@@ -39,8 +39,7 @@
     "thumb": "https://image.winudf.com/v2/image1/Y29tLnlvZG8xLmNyb3NzeXJvYWRfaWNvbl8xNzgxNzU5MTg2XzAxNA/icon.png?w=512&fakeurl=1",
     "width": "960",
     "height": "600",
-    "popularity": 5,
-    "square": true
+    "popularity": 5
   },
   {
     "id": "ext-krunker",
@@ -54,8 +53,7 @@
     "thumb": "assets/thumb-krunker2.png",
     "width": "960",
     "height": "600",
-    "popularity": 3,
-    "square": true
+    "popularity": 3
   },
   {
     "id": "ext-suika-game",
@@ -69,8 +67,7 @@
     "thumb": "https://suikagame.com/images/apple-touch-icon.png",
     "width": "960",
     "height": "600",
-    "popularity": 3,
-    "square": true
+    "popularity": 3
   },
   {
     "id": "ext-venge",
@@ -84,8 +81,7 @@
     "thumb": "https://cdn-1.webcatalog.io/catalog/poki-venge-io/poki-venge-io-icon-filled-256.png?v=1714780117868",
     "width": "960",
     "height": "600",
-    "popularity": 3,
-    "square": true
+    "popularity": 3
   },
   {
     "id": "tpg-getaway-shootout",
@@ -98,8 +94,7 @@
     "thumb": "https://image.winudf.com/v2/image1/Y29tLk5ld0VpY2hHYW1lcy5HZXRhd2F5U2hvb3RvdXRfaWNvbl8xNjc1MTI2NDYxXzA0NA/icon.png?w=512&fakeurl=1",
     "width": "960",
     "height": "600",
-    "popularity": 1,
-    "square": true
+    "popularity": 1
   },
   {
     "id": "ext-block-blast",
@@ -113,8 +108,7 @@
     "thumb": "https://image.winudf.com/v2/image1/Y29tLmJsb2NrLmp1Z2dsZV9pY29uXzE3ODE2MjM2MzZfMDM0/icon.png?w=512&fakeurl=1",
     "width": "960",
     "height": "600",
-    "popularity": 3,
-    "square": true
+    "popularity": 3
   },
   {
     "id": "ext-bonk",
@@ -142,8 +136,7 @@
     "thumb": "https://imgs.crazygames.com/carball-io_1x1/20240418110827/carball-io_1x1-cover?format=auto&quality=100&metadata=none&width=512",
     "width": "960",
     "height": "600",
-    "popularity": 1,
-    "square": true
+    "popularity": 1
   },
   {
     "id": "ext-bloxd-io",
@@ -157,8 +150,7 @@
     "thumb": "https://bloxd.io/apple-touch-icon.png?v=2",
     "width": "960",
     "height": "600",
-    "popularity": 5,
-    "square": true
+    "popularity": 5
   },
   {
     "id": "ext-8-ball-pool",
@@ -172,8 +164,7 @@
     "thumb": "https://23azostore.github.io/s8/8-ball-pool/8-ball-billiards-classic.png",
     "width": "960",
     "height": "600",
-    "popularity": 1,
-    "square": true
+    "popularity": 1
   },
   {
     "id": "tpg-temple-of-boom",
@@ -186,8 +177,7 @@
     "thumb": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=512,height=512,fit=cover,f=png/d710fe8830d731072485a582881605ea/temple-of-boom-logo.png",
     "width": "960",
     "height": "600",
-    "popularity": 1,
-    "square": true
+    "popularity": 1
   },
   {
     "id": "ext-eagle-ride",
@@ -201,8 +191,7 @@
     "thumb": "https://eagleride.web.app/icon.webp",
     "width": "960",
     "height": "600",
-    "popularity": 1,
-    "square": true
+    "popularity": 1
   },
   {
     "id": "gm-stickman-hook",
@@ -228,8 +217,7 @@
     "thumb": "https://img.gamedistribution.com/c3a70ae98547407a92ebedca8b79fdfa-512x512.jpeg",
     "width": "960",
     "height": "600",
-    "popularity": 6,
-    "square": true
+    "popularity": 6
   },
   {
     "id": "gm-race-rocket-arena-car-extreme",
@@ -256,8 +244,7 @@
     "thumb": "https://play-lh.googleusercontent.com/U-kB1tWL4lm3ia8UYMejSPTc5EsOkhva_5SkK7_LwkwHMY0cRlc8VKwwhmuF7C72y2cF1S4EBluoUmK8yM09c9o",
     "width": "960",
     "height": "600",
-    "popularity": 2,
-    "square": true
+    "popularity": 2
   },
   {
     "id": "ext-paperio",
@@ -271,8 +258,7 @@
     "thumb": "https://cdn.aptoide.com/imgs/d/9/a/d9aae8cf2181cea343f2e3128db26008_icon.png",
     "width": "960",
     "height": "600",
-    "popularity": 1,
-    "square": true
+    "popularity": 1
   },
   {
     "id": "ext-veck-io",
@@ -286,8 +272,7 @@
     "thumb": "https://veck.io/favicon/android-chrome-512x512.png",
     "width": "960",
     "height": "600",
-    "popularity": 1,
-    "square": true
+    "popularity": 1
   },
   {
     "id": "os-trex-runner",
@@ -300,8 +285,7 @@
     "thumb": "https://image.winudf.com/v2/image1/Y29tLmRlZXJzbGFiLmRpbm9UUkVYX2ljb25fMTc4NDMxNDI0MV8wNTc/icon.png?w=512&fakeurl=1",
     "width": "800",
     "height": "400",
-    "popularity": 1,
-    "square": true
+    "popularity": 1
   },
   {
     "id": "ext-table-tennis-world-tour",
@@ -329,8 +313,7 @@
     "thumb": "https://gulper.io/images/icon170.png",
     "width": "960",
     "height": "600",
-    "popularity": 3,
-    "square": true
+    "popularity": 3
   },
   {
     "id": "ext-rocketgoal-io",
@@ -344,8 +327,7 @@
     "thumb": "https://rocketgoal.io/og-image.png",
     "width": "960",
     "height": "600",
-    "popularity": 3,
-    "square": true
+    "popularity": 3
   },
   {
     "id": "ext-space-waves",
@@ -359,8 +341,7 @@
     "thumb": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR-NFqoiIw0wed62--Pu6z1v0kruH-CfOauWqTXB8zPQUF4EqhgmD-v1G_&s=10",
     "width": "960",
     "height": "600",
-    "popularity": 1,
-    "square": true
+    "popularity": 1
   },
   {
     "id": "gm-goalkings",
@@ -386,8 +367,7 @@
     "thumb": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=512,height=512,fit=cover,f=png/ea575cd4-dfc3-4892-9bfd-25a406061b3e/12-minibattles-logo.png",
     "width": "800",
     "height": "600",
-    "popularity": 1,
-    "square": true
+    "popularity": 1
   },
   {
     "id": "gm-obby-tower",

@@ -471,11 +471,7 @@
     // tile-wide (2x1) packs perfectly with grid-auto-flow:dense -- no gaps.
     // tile-big (2x2) can leave unfillable holes depending on placement
     // order, so it's not used here.
-    // Only the popular games are candidates, and only if their thumbnail
-    // is actually square -- a rectangular thumb stretched/cropped into a
-    // wide 2-column cell looks distorted, so those stay regular-sized
-    // even if popular (see check-thumb-aspect.js / the "square" flag).
-    if ((game.popularity || 0) > 0 && game.square) return "tile-wide";
+    if ((game.popularity || 0) >= 4) return "tile-wide";
     return "";
   }
 
