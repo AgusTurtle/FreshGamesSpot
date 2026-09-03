@@ -388,11 +388,12 @@ img{ max-width:100%; display:block; }
 
 /* ---------- Home "collage" grid (dense wall-of-covers, Ubisoft-library style) ---------- */
 .game-grid.collage{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  grid-auto-flow: dense;
   gap: 10px;
 }
 .game-grid.collage > .game-card{
-  flex: 1 1 170px;
-  max-width: 240px;
   height: 170px;
 }
 .game-grid.collage .game-card{
@@ -1435,6 +1436,8 @@ li[data-ok="true"] .rule-icon::after{ width:4px; height:2px; top:6px; left:8px; 
   .fav-label{ display:none; }
   #mainContent{ padding: 16px 12px 50px; }
   .game-grid{ grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap:12px; }
+  .game-grid.collage{ grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap:8px; }
+  .game-grid.collage > .game-card{ height: 120px; }
   .player-info{ max-height: 30vh; }
   .hero{ padding: 26px 20px; border-radius: 16px; }
   .hero-sub{ font-size: 0.9rem; }
