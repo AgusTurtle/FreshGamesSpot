@@ -1423,7 +1423,7 @@
       }
       const popular = data.filter(g => g.popularity > 0);
       const rest = data.filter(g => !(g.popularity > 0));
-      GAMES = shuffled(popular).concat(shuffled(rest));
+      GAMES = popular.concat(shuffled(rest));
       filtered = GAMES;
       SERVER_VOTES = votes || {};
       buildCategories();
