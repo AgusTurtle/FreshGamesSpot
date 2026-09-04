@@ -1,21 +1,21 @@
 :root{
-  --sidebar-bg: #04223f;
-  --sidebar-text: #9db3c7;
+  --sidebar-bg: #05060d;
+  --sidebar-text: #8b93b8;
   --sidebar-text-active: #ffffff;
-  --sidebar-hover: #123a5c;
-  --bg: #04223f;
-  --bg-card: #123a5c;
-  --bg-elev: #234f74;
-  --border: #345d80;
+  --sidebar-hover: #161a2e;
+  --bg: #090b14;
+  --bg-card: #151a2c;
+  --bg-elev: #1e2440;
+  --border: #2d3459;
   --text: #f0f1f5;
-  --text-dim: #9db3c7;
-  --accent: #4a6c8d;
-  --accent-dark: #345d80;
-  --accent-2: #4a6c8d;
-  --accent-3: #4a6c8d;
-  --accent-grad: #4a6c8d;
+  --text-dim: #8b90ad;
+  --accent: #2f7dff;
+  --accent-dark: #1c63e0;
+  --accent-2: #2f7dff;
+  --accent-3: #9b3dff;
+  --accent-grad: linear-gradient(90deg, #2f7dff, #9b3dff);
   --star: #ffb020;
-  --pop: #4a6c8d;
+  --pop: #2f7dff;
   --radius: 10px;
   --topbar-h: 66px;
   --icon-sm: 14px;
@@ -157,7 +157,7 @@ img{ max-width:100%; display:block; }
 .cat-pill.active{
   background: var(--accent-grad);
   color: #04101f;
-  box-shadow: 0 4px 14px rgba(74,108,141,0.4);
+  box-shadow: 0 4px 14px rgba(47,125,255,0.4);
 }
 .cat-pill.active .cat-pill-icon{ color: #04101f; }
 .cat-pill-icon{
@@ -204,7 +204,7 @@ img{ max-width:100%; display:block; }
   outline:none;
   transition: border-color .15s, box-shadow .15s;
 }
-#searchInput:focus{ border-color: var(--accent); box-shadow: 0 0 0 3px rgba(74,108,141,0.2); }
+#searchInput:focus{ border-color: var(--accent); box-shadow: 0 0 0 3px rgba(47,125,255,0.2); }
 #searchInput::placeholder{ color: var(--text-dim); }
 .clear-search{
   position:absolute;
@@ -463,11 +463,11 @@ img{ max-width:100%; display:block; }
 .game-card:hover{
   transform: translateY(-6px) scale(1.035);
   box-shadow: var(--card-shadow-hover);
-  border-color: rgba(74,108,141,0.4);
+  border-color: rgba(47,125,255,0.4);
 }
 .game-card:hover::before{ opacity:1; }
 .game-card:focus-visible{
-  border-color: rgba(74,108,141,0.4);
+  border-color: rgba(47,125,255,0.4);
 }
 .game-card:focus-visible::before{ opacity:1; }
 .game-card:focus-visible .play-badge{
@@ -517,7 +517,7 @@ img{ max-width:100%; display:block; }
   letter-spacing: 0.03em;
   padding: 3px 8px;
   border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(74,108,141,0.45);
+  box-shadow: 0 2px 6px rgba(47,125,255,0.45);
 }
 .ribbon-badge .icon{
   width: var(--icon-sm);
@@ -572,7 +572,7 @@ img{ max-width:100%; display:block; }
   background: var(--accent-grad);
   display:flex; align-items:center; justify-content:center;
   color:#fff;
-  box-shadow: 0 6px 16px rgba(74,108,141,0.55);
+  box-shadow: 0 6px 16px rgba(47,125,255,0.55);
   transform: scale(.6);
   transition: transform .25s cubic-bezier(.34,1.56,.64,1);
 }
@@ -751,7 +751,7 @@ img{ max-width:100%; display:block; }
   top:0; left:0; right:0;
   height:220px;
   background:
-    radial-gradient(circle at 18% 0%, rgba(74,108,141,0.22), transparent 60%),
+    radial-gradient(circle at 18% 0%, rgba(47,125,255,0.22), transparent 60%),
     radial-gradient(circle at 90% 8%, rgba(56,217,255,0.12), transparent 55%);
   z-index:0;
   pointer-events:none;
@@ -1028,7 +1028,7 @@ img{ max-width:100%; display:block; }
 }
 .leaderboard-row + .leaderboard-row{ border-top: 1px solid var(--border); }
 .leaderboard-row.is-you{
-  background: rgba(74,108,141,0.14);
+  background: rgba(47,125,255,0.14);
   box-shadow: inset 3px 0 0 var(--accent);
 }
 .leaderboard-rank{
