@@ -33,7 +33,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&family=Chakra+Petch:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=103">
+<link rel="stylesheet" href="assets/style.css?v=104">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3231209923135744"
      crossorigin="anonymous"></script>
 <script type="application/ld+json">
@@ -100,23 +100,26 @@
       </a>
       <div class="search-wrap">
         <svg class="icon search-icon" width="24" height="24" aria-hidden="true"><use href="#i-search"/></svg>
-        <input id="searchInput" type="search" placeholder="Buscar un juego…" aria-label="Buscar un juego" autocomplete="off">
-        <button id="clearSearch" class="clear-search" aria-label="Borrar búsqueda" hidden>
+        <input id="searchInput" type="search" placeholder="Buscar un juego…" aria-label="Buscar un juego" data-i18n-placeholder="search_placeholder" data-i18n-aria-label="search_placeholder" autocomplete="off">
+        <button id="clearSearch" class="clear-search" aria-label="Borrar búsqueda" data-i18n-aria-label="clear_search" hidden>
           <svg class="icon" width="24" height="24" aria-hidden="true"><use href="#i-close"/></svg>
         </button>
       </div>
       <div class="topbar-actions">
         <button id="favToggleNav" class="nav-fav-btn">
-          <svg class="icon star" width="24" height="24" aria-hidden="true"><use href="#i-star"/></svg><span class="fav-label">Favoritos</span>
+          <svg class="icon star" width="24" height="24" aria-hidden="true"><use href="#i-star"/></svg><span class="fav-label" data-i18n="nav_favorites">Favoritos</span>
         </button>
         <button id="missionsNavBtn" class="nav-fav-btn" type="button">
-          <svg class="icon" width="24" height="24" aria-hidden="true"><use href="#i-zap"/></svg><span class="fav-label">Misiones</span>
+          <svg class="icon" width="24" height="24" aria-hidden="true"><use href="#i-zap"/></svg><span class="fav-label" data-i18n="nav_missions">Misiones</span>
         </button>
         <button id="leaderboardNavBtn" class="nav-fav-btn" type="button">
-          <svg class="icon" width="24" height="24" aria-hidden="true"><use href="#i-trophy"/></svg><span class="fav-label">Ranking</span>
+          <svg class="icon" width="24" height="24" aria-hidden="true"><use href="#i-trophy"/></svg><span class="fav-label" data-i18n="nav_ranking">Ranking</span>
+        </button>
+        <button id="langToggleBtn" class="nav-fav-btn" type="button" aria-label="Switch language">
+          <span id="langToggleLabel">EN</span>
         </button>
       </div>
-      <button id="loginNavBtn" class="nav-login-btn">Iniciar sesión</button>
+      <button id="loginNavBtn" class="nav-login-btn" data-i18n="login_button">Iniciar sesión</button>
       <div id="userMenu" class="user-menu" hidden>
         <button id="userMenuBtn" class="user-menu-btn">
           <span id="userAvatar" class="user-avatar">
@@ -125,8 +128,8 @@
           <span id="userEmailLabel" class="user-email-label"></span>
         </button>
         <div id="userMenuDropdown" class="user-menu-dropdown" hidden>
-          <button id="viewProfileBtn" type="button">Ver mi perfil</button>
-          <button id="logoutBtn" type="button">Cerrar sesión</button>
+          <button id="viewProfileBtn" type="button" data-i18n="view_profile">Ver mi perfil</button>
+          <button id="logoutBtn" type="button" data-i18n="logout">Cerrar sesión</button>
         </div>
       </div>
       <input id="avatarFileInput" type="file" accept="image/*" hidden>
@@ -140,18 +143,18 @@
     <main id="mainContent">
 
       <section class="hero" aria-labelledby="heroTitle">
-        <h1 id="heroTitle" class="hero-title">Jugá ya en <span>FreshGames<em>Pot</em></span></h1>
-        <p class="hero-sub">Miles de juegos HTML5 directo en tu navegador, sin anuncios molestos.</p>
+        <h1 id="heroTitle" class="hero-title"><span data-i18n="hero_prefix">Jugá ya en</span> <span>FreshGames<em>Pot</em></span></h1>
+        <p class="hero-sub" data-i18n="hero_sub">Miles de juegos HTML5 directo en tu navegador, sin anuncios molestos.</p>
       </section>
 
       <section id="gridSection" class="grid-section" aria-labelledby="sectionTitle">
         <div class="grid-header">
-          <h2 id="sectionTitle">Todos los juegos</h2>
+          <h2 id="sectionTitle" data-i18n="all_games">Todos los juegos</h2>
           <span id="resultCount" class="result-count" role="status" aria-atomic="true"></span>
         </div>
         <div id="gameGrid" class="game-grid"></div>
         <div id="emptyState" class="empty-state" hidden>
-          <p>No encontramos juegos con ese nombre.</p>
+          <p data-i18n="no_results">No encontramos juegos con ese nombre.</p>
         </div>
         <div id="scrollSentinel" aria-hidden="true"></div>
       </section>
@@ -159,8 +162,8 @@
     </main>
 
     <footer class="site-footer">
-      <p>FreshGamesPot — juegos HTML5 gratuitos para jugar directo desde el navegador, sin instalar nada.</p>
-      <p class="footer-links"><a href="/privacy.html">Privacidad</a> · <a href="/terms.html">Términos de uso</a></p>
+      <p data-i18n="footer_tagline">FreshGamesPot — juegos HTML5 gratuitos para jugar directo desde el navegador, sin instalar nada.</p>
+      <p class="footer-links"><a href="/privacy.html" data-i18n="footer_privacy">Privacidad</a> · <a href="/terms.html" data-i18n="footer_terms">Términos de uso</a></p>
     </footer>
   </div>
 </div>
@@ -169,24 +172,24 @@
 <div id="playerOverlay" class="player-overlay" role="dialog" aria-modal="true" aria-labelledby="playerTitle" hidden>
   <div class="player-bar">
     <button id="playerBack" class="player-btn player-back">
-      <svg class="icon" width="24" height="24" aria-hidden="true"><use href="#i-back"/></svg>Volver
+      <svg class="icon" width="24" height="24" aria-hidden="true"><use href="#i-back"/></svg><span data-i18n="back">Volver</span>
     </button>
     <h2 id="playerTitle" class="player-title"></h2>
     <span id="playerLiveCount" class="live-badge" hidden><span class="live-dot" aria-hidden="true"></span><span id="playerLiveCountText"></span></span>
     <div class="player-actions">
-      <button id="playerFav" class="player-btn player-fav" aria-label="Agregar a favoritos" aria-pressed="false">
+      <button id="playerFav" class="player-btn player-fav" aria-label="Agregar a favoritos" data-i18n-aria-label="add_favorite" aria-pressed="false">
         <svg class="icon" width="24" height="24" aria-hidden="true"><use href="#i-star"/></svg>
       </button>
-      <button id="playerFullscreen" class="player-btn" aria-label="Pantalla completa">
+      <button id="playerFullscreen" class="player-btn" aria-label="Pantalla completa" data-i18n-aria-label="fullscreen">
         <svg class="icon" width="24" height="24" aria-hidden="true"><use href="#i-fullscreen"/></svg>
       </button>
-      <button id="playerClose" class="player-btn player-close" aria-label="Cerrar juego">
+      <button id="playerClose" class="player-btn player-close" aria-label="Cerrar juego" data-i18n-aria-label="close_game">
         <svg class="icon" width="24" height="24" aria-hidden="true"><use href="#i-close"/></svg>
       </button>
     </div>
   </div>
   <div class="player-frame-wrap">
-    <div id="playerLoading" class="player-loading" role="status">Cargando juego…</div>
+    <div id="playerLoading" class="player-loading" role="status" data-i18n="loading_game">Cargando juego…</div>
     <iframe id="playerFrame" class="player-frame" allow="fullscreen; gamepad; autoplay" allowfullscreen
       sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-pointer-lock allow-orientation-lock allow-presentation"></iframe>
     <div class="player-watermark" aria-hidden="true">
@@ -202,21 +205,21 @@
 
 <div id="profileOverlay" class="profile-overlay" role="dialog" aria-modal="true" aria-labelledby="profileUsername" hidden>
   <div class="profile-card">
-    <button id="profileClose" class="login-close profile-close" aria-label="Cerrar">
+    <button id="profileClose" class="login-close profile-close" aria-label="Cerrar" data-i18n-aria-label="close">
       <svg class="icon" width="20" height="20" aria-hidden="true"><use href="#i-close"/></svg>
     </button>
     <div class="profile-header">
       <div class="profile-avatar-col">
-        <button id="profileAvatarBtn" class="profile-avatar" aria-label="Cambiar foto de perfil" type="button"></button>
+        <button id="profileAvatarBtn" class="profile-avatar" aria-label="Cambiar foto de perfil" data-i18n-aria-label="change_avatar_link" type="button"></button>
         <div class="profile-avatar-actions">
-          <button id="profileChangeAvatarLink" class="profile-edit-link" type="button">Cambiar foto de perfil</button>
-          <button id="profileRemoveAvatarLink" class="profile-edit-link profile-remove-avatar-link" type="button" hidden>Quitar foto de perfil</button>
+          <button id="profileChangeAvatarLink" class="profile-edit-link" type="button" data-i18n="change_avatar_link">Cambiar foto de perfil</button>
+          <button id="profileRemoveAvatarLink" class="profile-edit-link profile-remove-avatar-link" type="button" data-i18n="remove_avatar_link" hidden>Quitar foto de perfil</button>
         </div>
       </div>
       <div class="profile-identity">
         <div class="profile-username-row">
           <h2 id="profileUsername" class="profile-username"></h2>
-          <button id="profileEditUsernameBtn" class="profile-edit-link" type="button">Editar nombre</button>
+          <button id="profileEditUsernameBtn" class="profile-edit-link" type="button" data-i18n="edit_username">Editar nombre</button>
         </div>
       </div>
     </div>
@@ -224,41 +227,41 @@
     <form id="profileUsernameForm" class="profile-username-form" hidden novalidate>
       <input id="profileUsernameInput" type="text" class="login-email" maxlength="20">
       <ul class="username-rules">
-        <li id="profileRuleLength" data-ok="false"><span class="rule-icon"></span>De 6 a 20 caracteres</li>
-        <li id="profileRuleChars" data-ok="false"><span class="rule-icon"></span>Sólo letras, números, "." y "_"</li>
+        <li id="profileRuleLength" data-ok="false"><span class="rule-icon"></span><span data-i18n="rule_length">De 6 a 20 caracteres</span></li>
+        <li id="profileRuleChars" data-ok="false"><span class="rule-icon"></span><span data-i18n="rule_chars">Sólo letras, números, "." y "_"</span></li>
       </ul>
       <div class="profile-username-form-actions">
-        <button type="submit" class="login-btn login-continue" disabled>Guardar</button>
-        <button type="button" id="profileUsernameCancel" class="login-btn profile-cancel-btn">Cancelar</button>
+        <button type="submit" class="login-btn login-continue" data-i18n="save" disabled>Guardar</button>
+        <button type="button" id="profileUsernameCancel" class="login-btn profile-cancel-btn" data-i18n="cancel">Cancelar</button>
       </div>
     </form>
 
     <div class="profile-stats">
       <div class="profile-stat">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-        <div><span class="profile-stat-label">Miembro por</span><strong id="profileDays"></strong></div>
+        <div><span class="profile-stat-label" data-i18n="member_since">Miembro por</span><strong id="profileDays"></strong></div>
       </div>
       <div class="profile-stat">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></svg>
-        <div><span class="profile-stat-label">Juegos que te gustaron</span><strong id="profileFavCount"></strong></div>
+        <div><span class="profile-stat-label" data-i18n="games_liked">Juegos que te gustaron</span><strong id="profileFavCount"></strong></div>
       </div>
       <div class="profile-stat">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
         <div>
-          <span class="profile-stat-label">Racha</span>
+          <span class="profile-stat-label" data-i18n="streak">Racha</span>
           <strong id="profileStreak"></strong>
-          <span class="profile-stat-sub">Más alta: <span id="profileBestStreak"></span></span>
+          <span class="profile-stat-sub"><span data-i18n="best_streak_prefix">Más alta:</span> <span id="profileBestStreak"></span></span>
         </div>
       </div>
       <div class="profile-stat">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 01-.472-.667z"/></svg>
-        <div><span class="profile-stat-label">Puntos</span><strong id="profilePoints"></strong></div>
+        <div><span class="profile-stat-label" data-i18n="points">Puntos</span><strong id="profilePoints"></strong></div>
       </div>
     </div>
 
-    <h3 class="profile-section-title">Juegos favoritos</h3>
+    <h3 class="profile-section-title" data-i18n="favorite_games">Juegos favoritos</h3>
     <div id="profileFavGrid" class="game-grid collage profile-fav-grid"></div>
-    <p id="profileFavEmpty" class="profile-empty" hidden>Todavía no marcaste ningún juego como favorito.</p>
+    <p id="profileFavEmpty" class="profile-empty" data-i18n="no_favorites_yet" hidden>Todavía no marcaste ningún juego como favorito.</p>
   </div>
 </div>
 
@@ -267,7 +270,7 @@
      serve.js and accountPayload's public-facing subset. -->
 <div id="leaderboardOverlay" class="profile-overlay" role="dialog" aria-modal="true" aria-labelledby="leaderboardTitle" hidden>
   <div class="profile-card leaderboard-card">
-    <button id="leaderboardClose" class="login-close profile-close" aria-label="Cerrar">
+    <button id="leaderboardClose" class="login-close profile-close" aria-label="Cerrar" data-i18n-aria-label="close">
       <svg class="icon" width="20" height="20" aria-hidden="true"><use href="#i-close"/></svg>
     </button>
     <div class="leaderboard-head">
@@ -278,11 +281,11 @@
       </div>
     </div>
     <div class="leaderboard-tabs" role="tablist">
-      <button type="button" id="leaderboardTabStreak" class="leaderboard-tab active" data-by="streak">Racha</button>
-      <button type="button" id="leaderboardTabPoints" class="leaderboard-tab" data-by="points">Puntos</button>
+      <button type="button" id="leaderboardTabStreak" class="leaderboard-tab active" data-by="streak" data-i18n="streak">Racha</button>
+      <button type="button" id="leaderboardTabPoints" class="leaderboard-tab" data-by="points" data-i18n="points">Puntos</button>
     </div>
     <div id="leaderboardList" class="leaderboard-list"></div>
-    <p id="leaderboardEmpty" class="profile-empty" hidden>Todavía no hay nadie en el ranking.</p>
+    <p id="leaderboardEmpty" class="profile-empty" data-i18n="no_ranking_yet" hidden>Todavía no hay nadie en el ranking.</p>
     <p id="leaderboardYouRow" class="leaderboard-you" hidden></p>
   </div>
 </div>
@@ -292,27 +295,27 @@
      serve.js). Public list; needs a session to show progress/points. -->
 <div id="missionsOverlay" class="profile-overlay" role="dialog" aria-modal="true" aria-labelledby="missionsTitle" hidden>
   <div class="profile-card leaderboard-card">
-    <button id="missionsClose" class="login-close profile-close" aria-label="Cerrar">
+    <button id="missionsClose" class="login-close profile-close" aria-label="Cerrar" data-i18n-aria-label="close">
       <svg class="icon" width="20" height="20" aria-hidden="true"><use href="#i-close"/></svg>
     </button>
     <div class="leaderboard-head">
       <svg class="icon" width="26" height="26" aria-hidden="true"><use href="#i-zap"/></svg>
       <div>
-        <h2 id="missionsTitle" class="leaderboard-title">Misiones</h2>
-        <p class="leaderboard-sub">Jugá juegos puntuales para ganar puntos y subir en el ranking.</p>
+        <h2 id="missionsTitle" class="leaderboard-title" data-i18n="nav_missions">Misiones</h2>
+        <p class="leaderboard-sub" data-i18n="missions_sub">Jugá juegos puntuales para ganar puntos y subir en el ranking.</p>
       </div>
     </div>
-    <div id="missionsLoginNote" class="leaderboard-you" hidden>Iniciá sesión para que tu progreso se guarde.</div>
+    <div id="missionsLoginNote" class="leaderboard-you" data-i18n="missions_login_note" hidden>Iniciá sesión para que tu progreso se guarde.</div>
     <div id="missionsList" class="mission-list"></div>
   </div>
 </div>
 
 <div id="loginOverlay" class="login-overlay" role="dialog" aria-modal="true" aria-labelledby="loginTitle" hidden>
   <div class="login-card">
-    <button id="loginClose" class="login-close" aria-label="Cerrar">
+    <button id="loginClose" class="login-close" aria-label="Cerrar" data-i18n-aria-label="close">
       <svg class="icon" width="20" height="20" aria-hidden="true"><use href="#i-close"/></svg>
     </button>
-    <h2 id="loginTitle" class="login-title">Conectarse o registrarse</h2>
+    <h2 id="loginTitle" class="login-title" data-i18n="login_title">Conectarse o registrarse</h2>
     <!--
       Steam still needs a client ID registered by the site owner in its own
       developer console -- hidden (not deleted) so it's a one-line unhide
@@ -330,7 +333,7 @@
         <svg width="20" height="16" viewBox="0 0 20 16" aria-hidden="true" fill="#fff">
           <path d="M16.93 1.33A16.5 16.5 0 0 0 12.8 0c-.18.33-.39.77-.53 1.12a15.3 15.3 0 0 0-4.54 0C7.58.77 7.36.33 7.18 0c-1.4.24-2.75.65-4.02 1.33C.55 4.9-.35 8.38.1 11.82c1.8 1.34 3.55 2.15 5.27 2.68.42-.58.8-1.2 1.13-1.85-.62-.24-1.21-.53-1.77-.87.15-.11.29-.23.43-.34a11.8 11.8 0 0 0 9.68 0c.14.12.28.23.43.34-.56.34-1.16.63-1.77.87.33.65.71 1.27 1.13 1.85 1.72-.53 3.48-1.34 5.27-2.68.53-4.02-.5-7.47-2.9-10.49ZM6.68 9.71c-.98 0-1.78-.9-1.78-2.02s.78-2.02 1.78-2.02c1 0 1.8.91 1.78 2.02 0 1.11-.79 2.02-1.78 2.02Zm6.65 0c-.98 0-1.78-.9-1.78-2.02s.78-2.02 1.78-2.02c1 0 1.8.91 1.78 2.02 0 1.11-.78 2.02-1.78 2.02Z"/>
         </svg>
-        Continuar con Discord
+        <span data-i18n="continue_discord">Continuar con Discord</span>
       </button>
       <div id="loginGoogleWrap" style="position:relative;">
         <button type="button" id="loginGoogleBtn" class="login-btn login-google">
@@ -340,7 +343,7 @@
             <path fill="#FBBC05" d="M3.97 10.71a5.4 5.4 0 0 1 0-3.42V4.96H.96a9 9 0 0 0 0 8.08l3.01-2.33Z"/>
             <path fill="#EA4335" d="M9 3.58c1.32 0 2.51.45 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0A9 9 0 0 0 .96 4.96l3.01 2.33C4.68 5.16 6.66 3.58 9 3.58Z"/>
           </svg>
-          Acceder con Google
+          <span data-i18n="continue_google">Acceder con Google</span>
         </button>
         <!--
           Google's own button has to actually receive the real click for
@@ -355,42 +358,42 @@
         <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" fill="#fff">
           <path d="M9 0a9 9 0 0 0-8.98 8.5l4.83 2c.41-.28.9-.44 1.44-.44l.06-.01L8.5 6.8v-.05a3.28 3.28 0 1 1 3.28 3.28h-.08l-3.2 2.29.01.08a2.46 2.46 0 1 1-4.82.66l-3.46-1.43A9 9 0 1 0 9 0Zm-3.5 13.7-.94-.39a1.85 1.85 0 0 0 3.42-.06 1.85 1.85 0 0 0-2.4-2.4l.97.4a1.36 1.36 0 1 1-1.05 2.45ZM14 6.75a2.19 2.19 0 1 0-4.37 0 2.19 2.19 0 0 0 4.37 0Zm-3.83 0a1.64 1.64 0 1 1 3.28 0 1.64 1.64 0 0 1-3.28 0Z"/>
         </svg>
-        Continuar con Steam
+        <span data-i18n="continue_steam">Continuar con Steam</span>
       </button>
       <div class="login-divider"><span>o</span></div>
     </div>
     <form id="loginForm" novalidate>
-      <input id="loginEmail" type="email" class="login-email" placeholder="Introduzca su dirección de correo electrónico" autocomplete="email" required>
-      <input id="loginPassword" type="password" class="login-email" placeholder="Contraseña" autocomplete="current-password" required minlength="4">
+      <input id="loginEmail" type="email" class="login-email" placeholder="Introduzca su dirección de correo electrónico" data-i18n-placeholder="email_placeholder" autocomplete="email" required>
+      <input id="loginPassword" type="password" class="login-email" placeholder="Contraseña" data-i18n-placeholder="password_placeholder" autocomplete="current-password" required minlength="4">
       <p id="loginError" class="login-error" hidden></p>
-      <button id="loginContinue" type="submit" class="login-btn login-continue">Continuar</button>
+      <button id="loginContinue" type="submit" class="login-btn login-continue" data-i18n="continue">Continuar</button>
     </form>
-    <p class="login-note">Tu cuenta y favoritos se guardan en el servidor y te siguen a cualquier dispositivo.</p>
+    <p class="login-note" data-i18n="login_note">Tu cuenta y favoritos se guardan en el servidor y te siguen a cualquier dispositivo.</p>
 
     <form id="usernameForm" novalidate hidden>
       <div class="username-brand">
         <svg class="icon" width="26" height="26" aria-hidden="true"><use href="#i-logo"/></svg>
         <span>FreshGames<strong>Pot</strong></span>
       </div>
-      <h3 class="login-subtitle">Establecé tu nombre de usuario</h3>
+      <h3 class="login-subtitle" data-i18n="set_username">Establecé tu nombre de usuario</h3>
       <div class="username-input-wrap">
-        <input id="usernameInput" type="text" class="login-email username-input" placeholder="Tu nombre de usuario" autocomplete="nickname" maxlength="20">
-        <button type="button" id="usernameShuffle" class="username-shuffle" aria-label="Sugerir un nombre al azar">
+        <input id="usernameInput" type="text" class="login-email username-input" placeholder="Tu nombre de usuario" data-i18n-placeholder="username_placeholder" autocomplete="nickname" maxlength="20">
+        <button type="button" id="usernameShuffle" class="username-shuffle" aria-label="Sugerir un nombre al azar" data-i18n-aria-label="shuffle_username">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 4 3 3-3 3"/><path d="M2 7h13a4 4 0 0 1 4 4v1"/><path d="m18 20 3-3-3-3"/><path d="M2 17h13a4 4 0 0 0 4-4v-1"/></svg>
         </button>
       </div>
       <ul class="username-rules">
-        <li id="ruleLength" data-ok="false"><span class="rule-icon"></span>De 6 a 20 caracteres</li>
-        <li id="ruleChars" data-ok="false"><span class="rule-icon"></span>Sólo letras, números, "." y "_"</li>
+        <li id="ruleLength" data-ok="false"><span class="rule-icon"></span><span data-i18n="rule_length">De 6 a 20 caracteres</span></li>
+        <li id="ruleChars" data-ok="false"><span class="rule-icon"></span><span data-i18n="rule_chars">Sólo letras, números, "." y "_"</span></li>
       </ul>
       <p id="usernameError" class="login-error" hidden></p>
-      <button id="usernameContinue" type="submit" class="login-btn login-continue" disabled>Continuar</button>
-      <p class="login-note">No uses nombres ofensivos o que suplanten a otra persona — las cuentas con nombres inapropiados se banean sin aviso.</p>
+      <button id="usernameContinue" type="submit" class="login-btn login-continue" data-i18n="continue" disabled>Continuar</button>
+      <p class="login-note" data-i18n="username_note">No uses nombres ofensivos o que suplanten a otra persona — las cuentas con nombres inapropiados se banean sin aviso.</p>
     </form>
   </div>
 </div>
 
 <script src="https://accounts.google.com/gsi/client" async defer></script>
-<script src="assets/app.js?v=103"></script>
+<script src="assets/app.js?v=104"></script>
 </body>
 </html>

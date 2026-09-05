@@ -9,6 +9,192 @@
   const POPULAR_CAT = "Populares";
   const HEARTBEAT_MS = 12000;
   const LIVE_POLL_MS = 15000;
+  const LANG_KEY = "omg_lang";
+
+  // ---------- i18n ----------
+  // Spanish is the source of truth (it's what's in the HTML already);
+  // English is the only other language, picked by browser locale on first
+  // visit and overridable with the topbar toggle, persisted in localStorage.
+  const I18N = {
+    es: {
+      search_placeholder: "Buscar un juego",
+      clear_search: "Borrar búsqueda",
+      nav_favorites: "Favoritos",
+      nav_missions: "Misiones",
+      nav_ranking: "Ranking",
+      login_button: "Iniciar sesión",
+      view_profile: "Ver mi perfil",
+      logout: "Cerrar sesión",
+      hero_prefix: "Jugá ya en",
+      hero_sub: "Miles de juegos HTML5 directo en tu navegador, sin anuncios molestos.",
+      all_games: "Todos los juegos",
+      my_favorites: "Mis favoritos",
+      no_results: "No encontramos juegos con ese nombre.",
+      load_error: "No se pudieron cargar los juegos. Revisá tu conexión e intentá de nuevo.",
+      loading_games: "Cargando juegos…",
+      footer_tagline: "FreshGamesPot — juegos HTML5 gratuitos para jugar directo desde el navegador, sin instalar nada.",
+      footer_privacy: "Privacidad",
+      footer_terms: "Términos de uso",
+      back: "Volver",
+      add_favorite: "Agregar a favoritos",
+      remove_favorite: "Quitar de favoritos",
+      add_fav_of: (title) => `Agregar ${title} a favoritos`,
+      remove_fav_of: (title) => `Quitar ${title} de favoritos`,
+      fullscreen: "Pantalla completa",
+      close_game: "Cerrar juego",
+      loading_game: "Cargando juego…",
+      close: "Cerrar",
+      change_avatar_link: "Cambiar foto de perfil",
+      remove_avatar_link: "Quitar foto de perfil",
+      edit_username: "Editar nombre",
+      rule_length: "De 6 a 20 caracteres",
+      rule_chars: 'Sólo letras, números, "." y "_"',
+      save: "Guardar",
+      cancel: "Cancelar",
+      member_since: "Miembro por",
+      games_liked: "Juegos que te gustaron",
+      streak: "Racha",
+      best_streak_prefix: "Más alta:",
+      points: "Puntos",
+      favorite_games: "Juegos favoritos",
+      no_favorites_yet: "Todavía no marcaste ningún juego como favorito.",
+      no_ranking_yet: "Todavía no hay nadie en el ranking.",
+      missions_sub: "Jugá juegos puntuales para ganar puntos y subir en el ranking.",
+      missions_login_note: "Iniciá sesión para que tu progreso se guarde.",
+      login_title: "Conectarse o registrarse",
+      continue_discord: "Continuar con Discord",
+      continue_google: "Acceder con Google",
+      continue_steam: "Continuar con Steam",
+      email_placeholder: "Introduzca su dirección de correo electrónico",
+      password_placeholder: "Contraseña",
+      continue: "Continuar",
+      login_note: "Tu cuenta y favoritos se guardan en el servidor y te siguen a cualquier dispositivo.",
+      set_username: "Establecé tu nombre de usuario",
+      username_placeholder: "Tu nombre de usuario",
+      shuffle_username: "Sugerir un nombre al azar",
+      username_note: "No uses nombres ofensivos o que suplanten a otra persona — las cuentas con nombres inapropiados se banean sin aviso.",
+      login_error_discord: "No se pudo iniciar sesión con Discord. Probá de nuevo.",
+      login_error_google: "No se pudo iniciar sesión con Google.",
+      login_error_generic: "Ingresá un email y una contraseña de al menos 4 caracteres.",
+      session_lost: "Sesión perdida, volvé a iniciar sesión.",
+      network_error: "No se pudo conectar con el servidor. Probá de nuevo.",
+      invalid_username: "Ese nombre no es válido (mínimo 2 caracteres).",
+      ranking_streak_title: "Ranking de racha",
+      ranking_streak_sub: "Los jugadores con más días seguidos entrando a FreshGamesPot.",
+      ranking_points_title: "Ranking de puntos",
+      ranking_points_sub: "Los jugadores que más misiones completaron jugando en FreshGamesPot.",
+      not_in_top20_points: "Todavía no entrás en el top 20 -- seguí completando misiones.",
+      not_in_top20_streak: "Todavía no entrás en el top 20 -- seguí sumando racha.",
+      day: "día",
+      days: "días",
+      mission_play: (title) => `Jugá a ${title}`,
+      mission_play_n: (title, n) => `Jugá ${n} veces a ${title}`,
+      games_count: (n) => `${n} juego${n === 1 ? "" : "s"}`,
+    },
+    en: {
+      search_placeholder: "Search a game",
+      clear_search: "Clear search",
+      nav_favorites: "Favorites",
+      nav_missions: "Missions",
+      nav_ranking: "Ranking",
+      login_button: "Log in",
+      view_profile: "View my profile",
+      logout: "Log out",
+      hero_prefix: "Play now on",
+      hero_sub: "Thousands of HTML5 games straight in your browser, no annoying ads.",
+      all_games: "All games",
+      my_favorites: "My favorites",
+      no_results: "We couldn't find any games with that name.",
+      load_error: "Couldn't load the games. Check your connection and try again.",
+      loading_games: "Loading games…",
+      footer_tagline: "FreshGamesPot — free HTML5 games to play straight from your browser, no install needed.",
+      footer_privacy: "Privacy",
+      footer_terms: "Terms of use",
+      back: "Back",
+      add_favorite: "Add to favorites",
+      remove_favorite: "Remove from favorites",
+      add_fav_of: (title) => `Add ${title} to favorites`,
+      remove_fav_of: (title) => `Remove ${title} from favorites`,
+      fullscreen: "Fullscreen",
+      close_game: "Close game",
+      loading_game: "Loading game…",
+      close: "Close",
+      change_avatar_link: "Change profile picture",
+      remove_avatar_link: "Remove profile picture",
+      edit_username: "Edit name",
+      rule_length: "6 to 20 characters",
+      rule_chars: 'Only letters, numbers, "." and "_"',
+      save: "Save",
+      cancel: "Cancel",
+      member_since: "Member for",
+      games_liked: "Games you liked",
+      streak: "Streak",
+      best_streak_prefix: "Best:",
+      points: "Points",
+      favorite_games: "Favorite games",
+      no_favorites_yet: "You haven't favorited any games yet.",
+      no_ranking_yet: "Nobody's on the ranking yet.",
+      missions_sub: "Play specific games to earn points and climb the ranking.",
+      missions_login_note: "Log in so your progress gets saved.",
+      login_title: "Log in or sign up",
+      continue_discord: "Continue with Discord",
+      continue_google: "Sign in with Google",
+      continue_steam: "Continue with Steam",
+      email_placeholder: "Enter your email address",
+      password_placeholder: "Password",
+      continue: "Continue",
+      login_note: "Your account and favorites are saved on the server and follow you to any device.",
+      set_username: "Set your username",
+      username_placeholder: "Your username",
+      shuffle_username: "Suggest a random name",
+      username_note: "Don't use offensive names or impersonate someone else — accounts with inappropriate names get banned without notice.",
+      login_error_discord: "Couldn't log in with Discord. Try again.",
+      login_error_google: "Couldn't log in with Google.",
+      login_error_generic: "Enter an email and a password of at least 4 characters.",
+      session_lost: "Session lost, log in again.",
+      network_error: "Couldn't connect to the server. Try again.",
+      invalid_username: "That name isn't valid (minimum 2 characters).",
+      ranking_streak_title: "Streak ranking",
+      ranking_streak_sub: "The players with the most consecutive days on FreshGamesPot.",
+      ranking_points_title: "Points ranking",
+      ranking_points_sub: "The players who completed the most missions on FreshGamesPot.",
+      not_in_top20_points: "You're not in the top 20 yet -- keep completing missions.",
+      not_in_top20_streak: "You're not in the top 20 yet -- keep building your streak.",
+      day: "day",
+      days: "days",
+      mission_play: (title) => `Play ${title}`,
+      mission_play_n: (title, n) => `Play ${title} ${n} times`,
+      games_count: (n) => `${n} game${n === 1 ? "" : "s"}`,
+    },
+  };
+
+  function detectLang(){
+    const saved = localStorage.getItem(LANG_KEY);
+    if (saved === "es" || saved === "en") return saved;
+    const nav = (navigator.language || navigator.userLanguage || "en").toLowerCase();
+    return nav.startsWith("es") ? "es" : "en";
+  }
+  let currentLang = detectLang();
+
+  function t(key, ...args){
+    const entry = (I18N[currentLang] && I18N[currentLang][key]) ?? I18N.es[key];
+    return typeof entry === "function" ? entry(...args) : entry;
+  }
+
+  function applyStaticI18n(){
+    document.documentElement.lang = currentLang;
+    document.querySelectorAll("[data-i18n]").forEach((node) => {
+      node.textContent = t(node.dataset.i18n);
+    });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach((node) => {
+      node.placeholder = t(node.dataset.i18nPlaceholder);
+    });
+    document.querySelectorAll("[data-i18n-aria-label]").forEach((node) => {
+      node.setAttribute("aria-label", t(node.dataset.i18nAriaLabel));
+    });
+    const toggleLabel = document.getElementById("langToggleLabel");
+    if (toggleLabel) toggleLabel.textContent = currentLang === "es" ? "EN" : "ES";
+  }
 
   // Identifies this browser across visits so the server can let someone
   // change or remove their own like/dislike instead of just piling up
@@ -128,6 +314,7 @@
     playerFav: document.getElementById("playerFav"),
     playerLiveCount: document.getElementById("playerLiveCount"),
     playerLiveCountText: document.getElementById("playerLiveCountText"),
+    langToggleBtn: document.getElementById("langToggleBtn"),
     loginNavBtn: document.getElementById("loginNavBtn"),
     loginDiscordBtn: document.getElementById("loginDiscordBtn"),
     loginGoogleBtn: document.getElementById("loginGoogleBtn"),
@@ -170,6 +357,18 @@
     profileFavGrid: document.getElementById("profileFavGrid"),
     profileFavEmpty: document.getElementById("profileFavEmpty"),
   };
+
+  applyStaticI18n();
+  if (el.langToggleBtn){
+    el.langToggleBtn.addEventListener("click", () => {
+      currentLang = currentLang === "es" ? "en" : "es";
+      localStorage.setItem(LANG_KEY, currentLang);
+      applyStaticI18n();
+      selectCategory(activeCategory);
+      if (!el.leaderboardOverlay.hidden) loadLeaderboard();
+      if (!el.missionsOverlay.hidden) loadMissions();
+    });
+  }
 
   /* ---------- account helpers ----------
      Real server-side accounts (see /api/account/* in serve.js), persisted
@@ -227,7 +426,7 @@
         body: JSON.stringify({ email, passwordHash }),
       });
     } catch (e){
-      return { ok:false, error:"No se pudo conectar con el servidor. Probá de nuevo." };
+      return { ok:false, error:t("network_error") };
     }
     if (res.status === 401){
       const data = await res.json().catch(() => ({}));
@@ -253,11 +452,11 @@
         body: JSON.stringify({ credential }),
       });
     } catch (e){
-      return { ok:false, error:"No se pudo conectar con el servidor. Probá de nuevo." };
+      return { ok:false, error:t("network_error") };
     }
     if (!res.ok){
       const data = await res.json().catch(() => ({}));
-      return { ok:false, error: data.error || "No se pudo iniciar sesión con Google." };
+      return { ok:false, error: data.error || t("login_error_google") };
     }
     const data = await res.json();
     setSession({ email: data.email, oauthToken: data.oauthToken, username: data.username || null, avatar: data.avatar || null });
@@ -265,7 +464,7 @@
   }
   async function saveUsername(username){
     const session = getSession();
-    if (!session) return { ok:false, error:"Sesión perdida, volvé a iniciar sesión." };
+    if (!session) return { ok:false, error:t("session_lost") };
     let res;
     try {
       res = await fetch("/api/account/username", {
@@ -274,9 +473,9 @@
         body: JSON.stringify({ email: session.email, passwordHash: session.passwordHash, oauthToken: session.oauthToken, username }),
       });
     } catch (e){
-      return { ok:false, error:"No se pudo conectar con el servidor. Probá de nuevo." };
+      return { ok:false, error:t("network_error") };
     }
-    if (!res.ok) return { ok:false, error:"Ese nombre no es válido (mínimo 2 caracteres)." };
+    if (!res.ok) return { ok:false, error:t("invalid_username") };
     const data = await res.json();
     setSessionUsername(data.username);
     return { ok:true, username: data.username };
@@ -287,7 +486,7 @@
   // stack to upload to.
   async function saveAvatar(avatar){
     const session = getSession();
-    if (!session) return { ok:false, error:"Sesión perdida, volvé a iniciar sesión." };
+    if (!session) return { ok:false, error:t("session_lost") };
     let res;
     try {
       res = await fetch("/api/account/avatar", {
@@ -296,7 +495,7 @@
         body: JSON.stringify({ email: session.email, passwordHash: session.passwordHash, oauthToken: session.oauthToken, avatar }),
       });
     } catch (e){
-      return { ok:false, error:"No se pudo conectar con el servidor. Probá de nuevo." };
+      return { ok:false, error:t("network_error") };
     }
     if (!res.ok) return { ok:false, error:"No se pudo guardar la foto." };
     setSessionAvatar(avatar);
@@ -432,7 +631,7 @@
     document.querySelectorAll(".cat-pill").forEach(p => {
       p.classList.toggle("active", p.dataset.cat === name);
     });
-    el.sectionTitle.textContent = name === "Todos" ? "Todos los juegos" : name === POPULAR_CAT ? "Popular" : name;
+    el.sectionTitle.textContent = name === "Todos" ? t("all_games") : name === POPULAR_CAT ? "Popular" : name;
     updateView();
     window.scrollTo({top:0, behavior:"smooth"});
   }
@@ -528,8 +727,8 @@
     const syncFavBtn = (active) => {
       favBtn.setAttribute("aria-pressed", String(active));
       favBtn.setAttribute("aria-label", active
-        ? `Quitar ${game.title} de favoritos`
-        : `Agregar ${game.title} a favoritos`);
+        ? t("remove_fav_of", game.title)
+        : t("add_fav_of", game.title));
     };
     syncFavBtn(isFavorite(game.id));
     favBtn.addEventListener("click", (e) => {
@@ -696,7 +895,7 @@
   function renderSkeleton(count){
     el.grid.innerHTML = "";
     el.emptyState.hidden = true;
-    el.resultCount.textContent = "Cargando juegos…";
+    el.resultCount.textContent = t("loading_games");
     // Matches the collage layout since the app always boots into home view
     // -- a uniform-card skeleton would otherwise visibly jump into the
     // mixed-size mosaic the instant games.json resolves.
@@ -730,7 +929,7 @@
     slice.forEach(g => frag.appendChild(makeCard(g, { collage })));
     el.grid.appendChild(frag);
 
-    el.resultCount.textContent = `${filtered.length} juego${filtered.length===1?"":"s"}`;
+    el.resultCount.textContent = t("games_count", filtered.length);
   }
 
   // Infinite scroll: appends just the next page instead of re-rendering
@@ -767,7 +966,7 @@
     el.searchInput.value = "";
     el.clearSearch.hidden = true;
     document.querySelectorAll(".cat-pill").forEach(p => p.classList.remove("active"));
-    el.sectionTitle.textContent = "Mis favoritos";
+    el.sectionTitle.textContent = t("my_favorites");
     visibleCount = PAGE_SIZE;
     const favIds = getFavorites();
     filtered = favIds.map(findGame).filter(Boolean).reverse();
@@ -856,7 +1055,7 @@
   function syncPlayerFav(active){
     el.playerFav.classList.toggle("active", active);
     el.playerFav.setAttribute("aria-pressed", String(active));
-    el.playerFav.setAttribute("aria-label", active ? "Quitar de favoritos" : "Agregar a favoritos");
+    el.playerFav.setAttribute("aria-label", active ? t("remove_favorite") : t("add_favorite"));
   }
 
   function closeGame(){
@@ -944,7 +1143,7 @@
     } else if (discordError){
       history.replaceState(null, "", location.pathname + location.hash);
       openLoginModal();
-      el.loginError.textContent = "No se pudo iniciar sesión con Discord. Probá de nuevo.";
+      el.loginError.textContent = t("login_error_discord");
       el.loginError.hidden = false;
     }
 
@@ -1051,7 +1250,7 @@
     const email = el.loginEmail.value.trim();
     const password = el.loginPassword.value;
     if (!email || password.length < 4){
-      el.loginError.textContent = "Ingresá un email y una contraseña de al menos 4 caracteres.";
+      el.loginError.textContent = t("login_error_generic");
       el.loginError.hidden = false;
       return;
     }
@@ -1151,7 +1350,7 @@
     const todayDay = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
     return Math.max(0, Math.round((todayDay - createdDay) / 86400000));
   }
-  function plural(n, one, many){ return n === 1 ? `1 ${one}` : `${n} ${many}`; }
+  function plural(n, one, many){ return n === 1 ? `1 ${t(one)}` : `${n} ${t(many)}`; }
   async function openProfile(){
     el.userMenuDropdown.hidden = true;
     const session = getSession();
@@ -1173,10 +1372,10 @@
 
     el.profileUsername.textContent = data.username || session.email;
     renderProfileAvatar();
-    el.profileDays.textContent = plural(daysSince(data.createdAt), "día", "días");
+    el.profileDays.textContent = plural(daysSince(data.createdAt), "day", "days");
     el.profileFavCount.textContent = String(data.favorites.length);
-    el.profileStreak.textContent = plural(data.streak || 1, "día", "días");
-    el.profileBestStreak.textContent = plural(data.bestStreak || 1, "día", "días");
+    el.profileStreak.textContent = plural(data.streak || 1, "day", "days");
+    el.profileBestStreak.textContent = plural(data.bestStreak || 1, "day", "days");
     el.profilePoints.textContent = String(data.points || 0);
 
     el.profileFavGrid.innerHTML = "";
@@ -1199,14 +1398,14 @@
   const MEDALS = ["🥇", "🥈", "🥉"];
   const LEADERBOARD_TABS = {
     streak: {
-      title: "Ranking de racha",
-      sub: "Los jugadores con más días seguidos entrando a FreshGamesPot.",
+      titleKey: "ranking_streak_title",
+      subKey: "ranking_streak_sub",
       valueOf: (row) => row.bestStreak,
       rowIcon: () => iconSvg("flame"),
     },
     points: {
-      title: "Ranking de puntos",
-      sub: "Los jugadores que más misiones completaron jugando en FreshGamesPot.",
+      titleKey: "ranking_points_title",
+      subKey: "ranking_points_sub",
       valueOf: (row) => row.points,
       rowIcon: () => iconSvg("zap"),
     },
@@ -1217,8 +1416,8 @@
     el.leaderboardEmpty.hidden = true;
     el.leaderboardYouRow.hidden = true;
     const tab = LEADERBOARD_TABS[leaderboardBy];
-    document.getElementById("leaderboardTitle").textContent = tab.title;
-    document.getElementById("leaderboardSub").textContent = tab.sub;
+    document.getElementById("leaderboardTitle").textContent = t(tab.titleKey);
+    document.getElementById("leaderboardSub").textContent = t(tab.subKey);
     el.leaderboardTabStreak.classList.toggle("active", leaderboardBy === "streak");
     el.leaderboardTabPoints.classList.toggle("active", leaderboardBy === "points");
     let rows = [];
@@ -1255,8 +1454,8 @@
     if (session && session.username && youRank === -1){
       el.leaderboardYouRow.hidden = false;
       el.leaderboardYouRow.textContent = leaderboardBy === "points"
-        ? "Todavía no entrás en el top 20 -- seguí completando misiones."
-        : "Todavía no entrás en el top 20 -- seguí sumando racha.";
+        ? t("not_in_top20_points")
+        : t("not_in_top20_streak");
     }
   }
   function openLeaderboard(){
@@ -1302,15 +1501,21 @@
       const row = document.createElement("div");
       row.className = "mission-row" + (m.done ? " done" : "");
       const progressText = m.target > 1 ? `<span class="mission-progress">${m.progress}/${m.target}</span>` : "";
+      // Rebuilt client-side from gameId+target instead of using the
+      // server's m.label so it follows the current language -- the
+      // server only ever generates the Spanish phrasing.
+      const game = m.gameId ? findGame(m.gameId) : null;
+      const label = game
+        ? (m.target > 1 ? t("mission_play_n", game.title, m.target) : t("mission_play", game.title))
+        : m.label;
       row.innerHTML = `
         <span class="mission-check">${m.done ? "✓" : ""}</span>
-        <span class="mission-label">${m.label}</span>
+        <span class="mission-label">${label}</span>
         ${progressText}
         <span class="mission-points">+${m.points}</span>
       `;
       // Not done yet and points at a specific game -- clicking the row
       // jumps straight to that game instead of making people hunt for it.
-      const game = m.gameId ? findGame(m.gameId) : null;
       if (game && !m.done){
         row.classList.add("clickable");
         row.addEventListener("click", () => {
@@ -1386,8 +1591,8 @@
       star.classList.toggle("active", active);
       star.setAttribute("aria-pressed", String(active));
       star.setAttribute("aria-label", active
-        ? `Quitar ${title} de favoritos`
-        : `Agregar ${title} a favoritos`);
+        ? t("remove_fav_of", title)
+        : t("add_fav_of", title));
     }
   });
 
@@ -1460,8 +1665,7 @@
       el.grid.innerHTML = "";
       el.resultCount.textContent = "";
       el.emptyState.hidden = false;
-      el.emptyState.querySelector("p").textContent =
-        "No se pudieron cargar los juegos. Revisá tu conexión e intentá de nuevo.";
+      el.emptyState.querySelector("p").textContent = t("load_error");
       console.error(err);
     });
 
