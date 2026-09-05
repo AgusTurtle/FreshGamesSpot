@@ -318,6 +318,8 @@ img{ max-width:100%; display:block; }
 }
 .user-menu-dropdown button:hover{ background: var(--bg-elev); }
 .nav-fav-btn .star{ color: var(--star); fill: currentColor; }
+#missionsNavBtn .icon{ color: #ff4444; }
+#leaderboardNavBtn .icon{ color: #ffcc33; }
 .fav-label{ display:inline; }
 
 /* ---------- Hero ---------- */
