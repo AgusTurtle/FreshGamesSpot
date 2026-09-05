@@ -46,6 +46,16 @@ body{
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
+  /* Feels more like an app and less like a document -- without this,
+     hovering/dragging over any heading or label shows a text-select
+     cursor and lets you highlight it, which reads as "you can type
+     here" even though nothing but the real form fields are editable. */
+  -webkit-user-select: none;
+  user-select: none;
+}
+input, textarea, [contenteditable]{
+  -webkit-user-select: text;
+  user-select: text;
 }
 a{ color:inherit; text-decoration:none; }
 button{ font-family: inherit; cursor:pointer; }
