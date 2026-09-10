@@ -1415,6 +1415,7 @@ li[data-ok="true"] .rule-icon::after{ width:4px; height:2px; top:6px; left:8px; 
   color: var(--text-dim);
   font-size: 0.88rem;
   line-height:1.5;
+  white-space: pre-line;
 }
 .player-tags{ display:flex; flex-wrap:wrap; gap:6px; }
 .player-tags span{

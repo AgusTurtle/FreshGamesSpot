@@ -26,13 +26,14 @@
       view_profile: "Ver mi perfil",
       logout: "Cerrar sesión",
       hero_prefix: "Jugá ya en",
-      hero_sub: "Miles de juegos HTML5 directo en tu navegador, sin anuncios molestos.",
+      hero_sub: "Más de 2000 juegos HTML5 para jugar directo en el navegador, sin instalar nada ni esperar un anuncio antes de arrancar. Los que ves primero en Populares los elegimos y probamos nosotros a mano.",
       all_games: "Todos los juegos",
       my_favorites: "Mis favoritos",
       no_results: "No encontramos juegos con ese nombre.",
       load_error: "No se pudieron cargar los juegos. Revisá tu conexión e intentá de nuevo.",
       loading_games: "Cargando juegos…",
       footer_tagline: "FreshGamesPot — juegos HTML5 gratuitos para jugar directo desde el navegador, sin instalar nada.",
+      footer_about: "Acerca de",
       footer_privacy: "Privacidad",
       footer_terms: "Términos de uso",
       back: "Volver",
@@ -101,13 +102,14 @@
       view_profile: "View my profile",
       logout: "Log out",
       hero_prefix: "Play now on",
-      hero_sub: "Thousands of HTML5 games straight in your browser, no annoying ads.",
+      hero_sub: "Over 2000 HTML5 games to play straight in your browser, no install and no ad to sit through before you start. The ones you see first under Popular are hand-picked and actually tested by us.",
       all_games: "All games",
       my_favorites: "My favorites",
       no_results: "We couldn't find any games with that name.",
       load_error: "Couldn't load the games. Check your connection and try again.",
       loading_games: "Loading games…",
       footer_tagline: "FreshGamesPot — free HTML5 games to play straight from your browser, no install needed.",
+      footer_about: "About",
       footer_privacy: "Privacy",
       footer_terms: "Terms of use",
       back: "Back",
@@ -1003,7 +1005,12 @@
     if (!game) return;
 
     el.playerTitle.textContent = game.title;
-    el.playerDescription.textContent = game.description || "";
+    // game.note is original commentary written for FreshGamesPot itself
+    // (only set on the hand-picked popular games) -- shown ahead of the
+    // syndicated feed description instead of replacing it.
+    el.playerDescription.textContent = game.note
+      ? (game.note + (game.description ? "\n\n" + game.description : ""))
+      : (game.description || "");
     el.playerTags.innerHTML = "";
     (game.tags || "").split(",").map(t => t.trim()).filter(Boolean).slice(0,8).forEach(t => {
       const span = document.createElement("span");
@@ -1616,7 +1623,7 @@
   getVisitorId();
 
   Promise.all([
-    fetch("assets/games.json").then(r => r.json()),
+    fetch("/assets/games.json").then(r => r.json()),
     fetch("/api/votes").then(r => r.ok ? r.json() : {}).catch(() => ({})),
   ])
     .then(([data, votes]) => {

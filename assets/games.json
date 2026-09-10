@@ -11,7 +11,8 @@
     "thumb": "https://zapgames.io/data/image/game/shell-shockers.jpg",
     "width": "960",
     "height": "600",
-    "popularity": 3
+    "popularity": 3,
+    "note": "La gracia de Shell Shockers es lo absurdo de la premisa (sos un huevo con arma) chocando contra lo serio que se pone la puntería una vez que entendés los mapas. Es de los shooters de navegador que más gente sigue jugando años después de salir."
   },
   {
     "id": "ext-friday-night-funkin",
@@ -25,7 +26,8 @@
     "thumb": "https://ih1.redbubble.net/image.2439143187.9144/flat,750x,075,f-pad,750x1000,f8f8f8.jpg",
     "width": "960",
     "height": "600",
-    "popularity": 5
+    "popularity": 5,
+    "note": "Empezó como un juego de una game jam y terminó siendo uno de los fenómenos indie más grandes de los últimos años, sobre todo por la cantidad de mods que hizo la comunidad. Acá tenés la versión original, sin instalar nada."
   },
   {
     "id": "ext-crossy-road",
@@ -39,7 +41,8 @@
     "thumb": "https://image.winudf.com/v2/image1/Y29tLnlvZG8xLmNyb3NzeXJvYWRfaWNvbl8xNzgxNzU5MTg2XzAxNA/icon.png?w=512&fakeurl=1",
     "width": "960",
     "height": "600",
-    "popularity": 5
+    "popularity": 5,
+    "note": "El clásico \"cruzá la calle sin que te atropellen\" con estética de vóxel. Simple de entender en 5 segundos, difícil de soltar después del primer récord personal."
   },
   {
     "id": "ext-krunker",
@@ -53,7 +56,8 @@
     "thumb": "assets/thumb-krunker2.png",
     "width": "960",
     "height": "600",
-    "popularity": 3
+    "popularity": 3,
+    "note": "Impresiona lo bien que se siente apuntar en Krunker para ser un juego que pesa tan poco y corre en cualquier notebook. Tiene una escena competitiva real detrás, no es solo un shooter casual."
   },
   {
     "id": "ext-suika-game",
@@ -67,7 +71,8 @@
     "thumb": "https://suikagame.com/images/apple-touch-icon.png",
     "width": "960",
     "height": "600",
-    "popularity": 3
+    "popularity": 3,
+    "note": "El juego de fusionar frutas que se volvió viral en streams de Japón antes de explotar en todos lados. Parece simple hasta que te agarrás las 20 de la noche tratando de bajar el marcador."
   },
   {
     "id": "ext-venge",
@@ -81,7 +86,8 @@
     "thumb": "https://cdn-1.webcatalog.io/catalog/poki-venge-io/poki-venge-io-icon-filled-256.png?v=1714780117868",
     "width": "960",
     "height": "600",
-    "popularity": 3
+    "popularity": 3,
+    "note": "Un shooter táctico que se siente mucho más serio de lo que esperás de algo que corre en una pestaña del navegador — mapas chicos, rondas rápidas, apuntá bien o perdé rápido."
   },
   {
     "id": "tpg-getaway-shootout",
@@ -94,7 +100,8 @@
     "thumb": "https://image.winudf.com/v2/image1/Y29tLk5ld0VpY2hHYW1lcy5HZXRhd2F5U2hvb3RvdXRfaWNvbl8xNjc1MTI2NDYxXzA0NA/icon.png?w=512&fakeurl=1",
     "width": "960",
     "height": "600",
-    "popularity": 1
+    "popularity": 1,
+    "note": "Caos total con muñecos de trapo: tenés que llegar a la camioneta de escape antes que el resto, a los empujones. Mejor todavía con un amigo al lado en la misma compu."
   },
   {
     "id": "ext-block-blast",
@@ -108,7 +115,8 @@
     "thumb": "https://image.winudf.com/v2/image1/Y29tLmJsb2NrLmp1Z2dsZV9pY29uXzE3ODE2MjM2MzZfMDM0/icon.png?w=512&fakeurl=1",
     "width": "960",
     "height": "600",
-    "popularity": 3
+    "popularity": 3,
+    "note": "El típico encastre de bloques que jurás vas a jugar \"cinco minutos\". Rompe líneas, sube el puntaje, repetí."
   },
   {
     "id": "ext-bonk",
@@ -122,7 +130,8 @@
     "thumb": "assets/thumb-bonk2.png",
     "width": "960",
     "height": "600",
-    "popularity": 3
+    "popularity": 3,
+    "note": "Bolitas físicas chocando entre sí hasta que quede una sola en el mapa. Se ve tonto al principio, pero la comunidad de mapas creados por usuarios le dio mucha vida atrás."
   },
   {
     "id": "ext-carball-io",
@@ -136,7 +145,8 @@
     "thumb": "https://imgs.crazygames.com/carball-io_1x1/20240418110827/carball-io_1x1-cover?format=auto&quality=100&metadata=none&width=512",
     "width": "960",
     "height": "600",
-    "popularity": 1
+    "popularity": 1,
+    "note": "Como Rocket League pero en el navegador y sin instalar nada: autos jugando al fútbol, física exagerada, goles de otro planeta."
   },
   {
     "id": "ext-bloxd-io",
@@ -150,7 +160,8 @@
     "thumb": "https://bloxd.io/apple-touch-icon.png?v=2",
     "width": "960",
     "height": "600",
-    "popularity": 5
+    "popularity": 5,
+    "note": "Un sandbox multijugador estilo bloques con varios modos de minijuegos adentro — para los que les gusta Minecraft pero quieren algo que abra al instante."
   },
   {
     "id": "ext-8-ball-pool",
@@ -164,7 +175,8 @@
     "thumb": "https://23azostore.github.io/s8/8-ball-pool/8-ball-billiards-classic.png",
     "width": "960",
     "height": "600",
-    "popularity": 1
+    "popularity": 1,
+    "note": "El billar de toda la vida, directo al grano: elegís el ángulo, la potencia, y a embocar. Ideal para una partida rápida."
   },
   {
     "id": "tpg-temple-of-boom",
@@ -177,7 +189,8 @@
     "thumb": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=512,height=512,fit=cover,f=png/d710fe8830d731072485a582881605ea/temple-of-boom-logo.png",
     "width": "960",
     "height": "600",
-    "popularity": 1
+    "popularity": 1,
+    "note": "Arquería en arenas que se van destruyendo a medida que jugás. Cada partida termina viéndose distinta a como empezó."
   },
   {
     "id": "ext-eagle-ride",
@@ -191,7 +204,8 @@
     "thumb": "https://eagleride.web.app/icon.webp",
     "width": "960",
     "height": "600",
-    "popularity": 1
+    "popularity": 1,
+    "note": "Volás como un águila esquivando obstáculos, con controles simples pero que exigen reflejos si querés llegar lejos."
   },
   {
     "id": "gm-stickman-hook",
@@ -204,7 +218,8 @@
     "thumb": "https://img.gamemonetize.com/s9lk2v2gr5fmjg8wmy913dqx6wswmwwe/512x384.jpg",
     "width": "800",
     "height": "600",
-    "popularity": 6
+    "popularity": 6,
+    "note": "Balancearte con una soga de plataforma en plataforma tiene ese punto justo de físicas que lo hace adictivo — un mal cálculo y volvés a empezar."
   },
   {
     "id": "gd-rooftop-snipers",
@@ -217,7 +232,8 @@
     "thumb": "https://img.gamedistribution.com/c3a70ae98547407a92ebedca8b79fdfa-512x512.jpeg",
     "width": "960",
     "height": "600",
-    "popularity": 6
+    "popularity": 6,
+    "note": "Duelo de francotiradores muñecos de trapo en las alturas: un tiro certero y ganaste, uno de menos y volaste del techo. Clásico para jugar contra un amigo."
   },
   {
     "id": "gm-race-rocket-arena-car-extreme",
@@ -230,7 +246,8 @@
     "thumb": "https://img.gamemonetize.com/76oe5vr125yw3oc362159k0wyny5gthh/512x384.jpg",
     "width": "800",
     "height": "500",
-    "popularity": 1
+    "popularity": 1,
+    "note": "Carreras de combate en un mundo post-apocalíptico con autos armados hasta los dientes. Menos simulador de manejo, más arena de destrucción sobre ruedas."
   },
   {
     "id": "ext-starve",
@@ -244,7 +261,8 @@
     "thumb": "https://play-lh.googleusercontent.com/U-kB1tWL4lm3ia8UYMejSPTc5EsOkhva_5SkK7_LwkwHMY0cRlc8VKwwhmuF7C72y2cF1S4EBluoUmK8yM09c9o",
     "width": "960",
     "height": "600",
-    "popularity": 2
+    "popularity": 2,
+    "note": "Supervivencia y crafteo contra otros jugadores en tiempo real: juntá recursos rápido porque el resto del server también los está buscando."
   },
   {
     "id": "ext-paperio",
@@ -258,7 +276,8 @@
     "thumb": "https://cdn.aptoide.com/imgs/d/9/a/d9aae8cf2181cea343f2e3128db26008_icon.png",
     "width": "960",
     "height": "600",
-    "popularity": 1
+    "popularity": 1,
+    "note": "La evolución del clásico juego de la serpiente: en vez de crecer, vas marcando territorio y tratando de no dejar que nadie corte tu cola en el camino."
   },
   {
     "id": "ext-veck-io",
@@ -272,7 +291,8 @@
     "thumb": "https://veck.io/favicon/android-chrome-512x512.png",
     "width": "960",
     "height": "600",
-    "popularity": 1
+    "popularity": 1,
+    "note": "Shooter io rápido, de partidas cortas, pensado para entrar, tirar unos tiros y salir sin comprometerte a nada más largo."
   },
   {
     "id": "os-trex-runner",
@@ -285,7 +305,8 @@
     "thumb": "https://image.winudf.com/v2/image1/Y29tLmRlZXJzbGFiLmRpbm9UUkVYX2ljb25fMTc4NDMxNDI0MV8wNTc/icon.png?w=512&fakeurl=1",
     "width": "800",
     "height": "400",
-    "popularity": 1
+    "popularity": 1,
+    "note": "El dinosaurio que aparece cuando se corta el internet en Chrome, pero acá lo tenés siempre disponible, sin necesidad de perder la conexión primero."
   },
   {
     "id": "ext-table-tennis-world-tour",
@@ -299,7 +320,8 @@
     "thumb": "https://imgs.crazygames.com/table-tennis-world-tour_16x9/20230908041108/table-tennis-world-tour_16x9-cover?metadata=none&quality=100&width=512&height=512&fit=crop",
     "width": "960",
     "height": "600",
-    "popularity": 1
+    "popularity": 1,
+    "note": "Ping pong directo, sin vueltas — buenos reflejos y control de ángulo es todo lo que necesitás."
   },
   {
     "id": "ext-gulper-io",
@@ -313,7 +335,8 @@
     "thumb": "https://gulper.io/images/icon170.png",
     "width": "960",
     "height": "600",
-    "popularity": 3
+    "popularity": 3,
+    "note": "El clásico \"pez grande se come al chico\" en formato io: crecé comiendo a los más chicos y cuidate de los que ya son más grandes que vos."
   },
   {
     "id": "ext-rocketgoal-io",
@@ -327,7 +350,8 @@
     "thumb": "https://rocketgoal.io/og-image.png",
     "width": "960",
     "height": "600",
-    "popularity": 3
+    "popularity": 3,
+    "note": "Fútbol con jugadores propulsados a cohete — la física exagerada hace que hasta un gol de media cancha se sienta posible."
   },
   {
     "id": "ext-space-waves",
@@ -341,7 +365,8 @@
     "thumb": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR-NFqoiIw0wed62--Pu6z1v0kruH-CfOauWqTXB8zPQUF4EqhgmD-v1G_&s=10",
     "width": "960",
     "height": "600",
-    "popularity": 1
+    "popularity": 1,
+    "note": "Reflejos puros: esquivar obstáculos a toda velocidad en un escenario espacial que no te da respiro para pensar mucho."
   },
   {
     "id": "gm-goalkings",
@@ -354,7 +379,8 @@
     "thumb": "https://img.gamemonetize.com/b75o1vrdc9fva4jt1fve2wm53apou5w5/512x384.jpg",
     "width": "1920",
     "height": "1080",
-    "popularity": 1
+    "popularity": 1,
+    "note": "Definiciones por penales, uno tras otro — elegís la esquina, la potencia, y a ver si el arquero adivina."
   },
   {
     "id": "gm-12-minibattles",
@@ -367,7 +393,8 @@
     "thumb": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=512,height=512,fit=cover,f=png/ea575cd4-dfc3-4892-9bfd-25a406061b3e/12-minibattles-logo.png",
     "width": "800",
     "height": "600",
-    "popularity": 1
+    "popularity": 1,
+    "note": "Una colección de 36 minijuegos caóticos de un botón, pensados para jugar de a dos en la misma pantalla. Ideal para matar el tiempo con alguien al lado."
   },
   {
     "id": "gm-obby-tower",
@@ -380,7 +407,8 @@
     "thumb": "https://img.gamemonetize.com/qbqipowlrjrxfk0323kjkeofbtqjmhfs/512x384.jpg",
     "width": "800",
     "height": "600",
-    "popularity": 1
+    "popularity": 1,
+    "note": "Subir una torre gigante saltando entre plataformas, con monedas para comprar mejores alas y llegar cada vez más alto. Estilo \"obby\" clásico."
   },
   {
     "id": "gm-defense-plants",
@@ -393,7 +421,8 @@
     "thumb": "https://img.gamemonetize.com/0agd1k6alvxb8440szkwzc58v9rdq7d0/512x384.jpg",
     "width": "800",
     "height": "600",
-    "popularity": 1
+    "popularity": 1,
+    "note": "Defensa de torres con plantas contra oleadas de enemigos — el género de siempre, bien resuelto para jugar sin instalar nada."
   },
   {
     "id": "gm-survival-war",
@@ -406,7 +435,8 @@
     "thumb": "https://img.gamemonetize.com/ao11opghebpcwf3bl9uqvn2ifu2gevgh/512x384.jpg",
     "width": "1920",
     "height": "1080",
-    "popularity": 1
+    "popularity": 1,
+    "note": "Disparos y supervivencia contra oleadas cada vez más difíciles. Directo al combate, sin vueltas de crafteo largo."
   },
   {
     "id": "gm-your-idle-farm",
@@ -419,7 +449,8 @@
     "thumb": "https://img.gamemonetize.com/zh02b5hgabm9nwa4pn8qsn8rcprkh78e/512x384.jpg",
     "width": "1024",
     "height": "700",
-    "popularity": 1
+    "popularity": 1,
+    "note": "Un clicker de granja para dejar progresando de fondo mientras hacés otra cosa, y volver a cosechar lo que se acumuló."
   },
   {
     "id": "gm-kids-kitchen-cozy-cooking",
@@ -432,7 +463,8 @@
     "thumb": "https://img.gamemonetize.com/d4ynqqhfdqkac3rypbfc6r2w717vukll/512x384.jpg",
     "width": "1920",
     "height": "1080",
-    "popularity": 1
+    "popularity": 1,
+    "note": "Cocina simulada pensada para los más chicos — recetas simples, colores vivos, sin presión de tiempo agresiva."
   },
   {
     "id": "gm-tank-craft-merge",
@@ -445,7 +477,8 @@
     "thumb": "https://img.gamemonetize.com/pzqucy6ew2i5jep1a9gyp9oynxwg5e3f/512x384.jpg",
     "width": "1080",
     "height": "1920",
-    "popularity": 1
+    "popularity": 1,
+    "note": "Fusioná tanques para conseguir versiones más fuertes, en el estilo \"merge\" que engancha por la progresión constante."
   },
   {
     "id": "gm-lucy-makeup-and-dress-up",
@@ -458,7 +491,8 @@
     "thumb": "https://img.gamemonetize.com/82ru0ek7lctcm6ebryq922b0eqg2f0yj/512x384.jpg",
     "width": "1280",
     "height": "720",
-    "popularity": 1
+    "popularity": 1,
+    "note": "Maquillaje y vestuario para armar el look que quieras — un clásico del género para los fans de la moda virtual."
   },
   {
     "id": "gm-chicken-yeet",
@@ -471,7 +505,8 @@
     "thumb": "https://img.gamemonetize.com/etpyydtxan6rb7tdbe7rszeh58aep18g/512x384.jpg",
     "width": "800",
     "height": "600",
-    "popularity": 1
+    "popularity": 1,
+    "note": "Lanzá una gallina lo más lejos posible y juntá monedas en el camino — hypercasual directo, fácil de entender, difícil de dejar de intentar superar tu marca."
   },
   {
     "id": "gm-jigsaw-pusha-pusha",

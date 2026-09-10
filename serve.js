@@ -1,5 +1,11 @@
 const http = require("http");
 const https = require("https");
+// A game can pull dozens of small assets from the same upstream host in a
+// row (Construct3/Unity exports especially) -- without a keep-alive agent,
+// every single one of those opens a brand new TCP+TLS connection to that
+// host instead of reusing one, which is pure added latency on top of an
+// already-proxied request. Shared across every upstream fetch below.
+const keepAliveAgent = new https.Agent({ keepAlive: true, maxSockets: 64 });
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
@@ -466,7 +472,13 @@ function renderGamePage(game){
   const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
   const url = "https://freshgamespot.net/juego/" + encodeURIComponent(game.id);
   const title = game.title + " — Jugar gratis online | FreshGamesPot";
-  const desc = (game.description && game.description.trim())
+  // game.note (only set on the hand-picked popular games) is original
+  // commentary written for this site -- prefer it over game.description,
+  // which is the same syndicated blurb every other portal mirroring the
+  // GameMonetize/GameDistribution feed also shows verbatim.
+  const desc = (game.note && game.note.trim())
+    ? game.note.trim().slice(0, 300)
+    : (game.description && game.description.trim())
     ? game.description.trim().slice(0, 300)
     : ("Jugá " + game.title + " gratis online, directo en el navegador, sin descargas ni registro.");
   const image = game.thumb || "https://freshgamespot.net/assets/og-image.png";
@@ -498,10 +510,10 @@ function proxyGame(id, res){
   }
   lastPlayedId = id;
 
-  https.get(game.url, (upstream) => {
+  https.get(game.url, { agent: keepAliveAgent }, (upstream) => {
     if (upstream.statusCode >= 300 && upstream.statusCode < 400 && upstream.headers.location){
       // follow one redirect (some game URLs redirect to a trailing-slash path)
-      https.get(upstream.headers.location, (r2) => pipeGameHtml(r2, game, res)).on("error", () => {
+      https.get(upstream.headers.location, { agent: keepAliveAgent }, (r2) => pipeGameHtml(r2, game, res)).on("error", () => {
         res.writeHead(502); res.end("Upstream redirect failed");
       });
       return;
@@ -570,7 +582,7 @@ function fetchAndPipe(url, res, redirectCount, range){
   const parsedUrl = new URL(url);
   const headers = {};
   if (range) headers.Range = range;
-  https.get(parsedUrl, { headers }, (upstream) => {
+  https.get(parsedUrl, { headers, agent: keepAliveAgent }, (upstream) => {
     if (upstream.statusCode >= 300 && upstream.statusCode < 400 && upstream.headers.location && redirectCount < 5){
       const next = new URL(upstream.headers.location, url).href;
       upstream.resume();
@@ -586,7 +598,14 @@ function fetchAndPipe(url, res, redirectCount, range){
     // Cloudflare/browsers cache them under the plain asset URL (no Vary on
     // Range) is exactly how a 200-vs-206 mismatch like this one happens
     // again later, serving a stale/wrong slice to a different range ask.
-    outHeaders["Cache-Control"] = "no-store";
+    // A plain full-file response has no such hazard, and this used to
+    // force one on those too, which meant every script/image/sound for
+    // every game got re-downloaded from scratch on every single game
+    // open (no browser or CDN caching at all) -- real dead weight on load
+    // time for a catalog this size. Cache those normally instead.
+    outHeaders["Cache-Control"] = (upstream.statusCode === 206 || range)
+      ? "no-store"
+      : "public, max-age=604800";
     // Unity WebGL builds (seen in GameDistribution-sourced games) serve
     // their data/wasm files gzip-encoded and rely on the browser to
     // decompress via this header -- without forwarding it the piped bytes
