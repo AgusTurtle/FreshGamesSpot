@@ -91,6 +91,26 @@
       mission_play: (title) => `Jugá a ${title}`,
       mission_play_n: (title, n) => `Jugá ${n} veces a ${title}`,
       games_count: (n) => `${n} juego${n === 1 ? "" : "s"}`,
+      cat_intro_Puzzle: "Encastres, mecánicas de combinar, y niveles pensados para hacerte pensar dos veces antes de mover la ficha. Desde clásicos de toda la vida hasta variantes que le agregan una vuelta de tuerca a la fórmula.",
+      cat_intro_Puzzles: "La otra mitad de la familia de puzzles del catálogo — menos partidas rápidas de reflejos, más rompecabezas que se resuelven pensando.",
+      cat_intro_Hypercasual: "Reglas que entendés en tres segundos y partidas que duran uno o dos minutos. Ideal para esos ratos muertos donde no querés comprometerte a nada largo.",
+      cat_intro_Arcade: "El espíritu de los fichines de toda la vida: puntaje, reflejos, y ganas de superar tu propio récord en la siguiente vuelta.",
+      cat_intro_Adventure: "Juegos con un poco más de mundo para explorar y objetivos que van más allá de un solo nivel — para cuando tenés unos minutos más para meterte de lleno.",
+      cat_intro_Racing: "Autos, motos y algún que otro vehículo imposible, todos con un solo objetivo: llegar primero. Circuitos cortos, revancha inmediata.",
+      cat_intro_Shooting: "Puntería y reflejos por encima de todo. Desde duelos uno contra uno hasta caos de varios jugadores en el mismo mapa.",
+      cat_intro_Sports: "Fútbol, básquet, pool, ping pong y demás — versiones rápidas de deportes reales para jugar una partida sin buscar una cancha de verdad.",
+      cat_intro_Action: "Combate, explosiones y situaciones que se ponen tensas rápido. Para cuando querés algo con más adrenalina que estrategia.",
+      cat_intro_Clicker: "Juegos de progresión donde cada click (o cada segundo que pasa) te acerca un poco más a la siguiente mejora. Fáciles de dejar de fondo y volver más tarde.",
+      cat_intro_Girls: "Moda, maquillaje, decoración y simulación pensados para ese estilo de juego más creativo y personalizable.",
+      cat_intro_Multiplayer: "Se juega mejor (o peor) con otras personas reales del otro lado de la pantalla — acá están los juegos donde la gracia está en competir contra alguien más, no contra la máquina.",
+      cat_intro_Stickman: "El clásico muñeco de palitos como protagonista, generalmente metido en peleas, saltos imposibles o situaciones absurdas.",
+      cat_intro_Boys: "Acción, vehículos y desafíos pensados con ese público en mente — el clásico rótulo de \"juegos para chicos\" del género.",
+      cat_intro_Soccer: "Todo lo que tiene que ver con la pelota redonda: penales, arcos, y la ilusión de meter un golazo sin salir de tu silla.",
+      cat_intro_3D: "Juegos con profundidad real de cámara y escenarios en tres dimensiones, no solo sprites planos moviéndose de lado a lado.",
+      cat_intro_Cooking: "Simuladores de cocina y restaurante para los que disfrutan armar un plato (virtual) contra el reloj.",
+      cat_intro_IO: "El formato \".io\": partidas cortas, muchos jugadores reales al mismo tiempo, y esa mecánica simple de crecer/sobrevivir que los hizo populares.",
+      cat_intro_2Player: "Pensados específicamente para jugar de a dos en el mismo teclado, compitiendo o cooperando codo a codo.",
+      cat_intro_Music: "Ritmo, notas que caen, y la satisfacción de acertar el tempo exacto.",
     },
     en: {
       search_placeholder: "Search a game",
@@ -167,6 +187,26 @@
       mission_play: (title) => `Play ${title}`,
       mission_play_n: (title, n) => `Play ${title} ${n} times`,
       games_count: (n) => `${n} game${n === 1 ? "" : "s"}`,
+      cat_intro_Puzzle: "Fitting pieces, matching mechanics, and levels built to make you think twice before your next move. From old-school classics to variations that put a new spin on the formula.",
+      cat_intro_Puzzles: "The other half of the catalog's puzzle family — fewer quick reflex rounds, more brain-teasers you solve by thinking it through.",
+      cat_intro_Hypercasual: "Rules you understand in three seconds and runs that last a minute or two. Perfect for those in-between moments where you don't want to commit to anything long.",
+      cat_intro_Arcade: "The spirit of the old arcade cabinets: score, reflexes, and the itch to beat your own record on the next run.",
+      cat_intro_Adventure: "Games with a bit more world to explore and goals that go beyond a single level -- for when you've got a few extra minutes to really sink into one.",
+      cat_intro_Racing: "Cars, bikes, and the occasional impossible vehicle, all with one goal: get there first. Short tracks, instant rematch.",
+      cat_intro_Shooting: "Aim and reflexes above everything else. From one-on-one duels to multiplayer chaos on the same map.",
+      cat_intro_Sports: "Soccer, basketball, pool, ping pong and more -- quick versions of real sports for a match without needing an actual court.",
+      cat_intro_Action: "Combat, explosions, and situations that turn tense fast. For when you want adrenaline over strategy.",
+      cat_intro_Clicker: "Progression games where every click (or every second that passes) gets you a little closer to the next upgrade. Easy to leave running and come back to later.",
+      cat_intro_Girls: "Fashion, makeup, decorating and simulation, built around that more creative, customizable style of play.",
+      cat_intro_Multiplayer: "Better (or worse) with real people on the other side of the screen -- these are the games where the fun is competing against someone else, not the computer.",
+      cat_intro_Stickman: "The classic stick figure as the star, usually caught up in fights, impossible jumps, or absurd situations.",
+      cat_intro_Boys: "Action, vehicles, and challenges built with that audience in mind -- the classic \"games for boys\" label of the genre.",
+      cat_intro_Soccer: "Everything about the round ball: penalty kicks, goals, and the illusion of scoring a screamer without leaving your chair.",
+      cat_intro_3D: "Games with real camera depth and three-dimensional scenes, not just flat sprites sliding side to side.",
+      cat_intro_Cooking: "Cooking and restaurant sims for people who enjoy plating a (virtual) dish against the clock.",
+      cat_intro_IO: "The \".io\" format: quick matches, lots of real players at once, and that simple grow-or-survive mechanic that made them popular.",
+      cat_intro_2Player: "Built specifically for two people on the same keyboard, competing or teaming up side by side.",
+      cat_intro_Music: "Rhythm, falling notes, and the satisfaction of nailing the exact beat.",
     },
   };
 
@@ -289,6 +329,7 @@
     sectionTitle: document.getElementById("sectionTitle"),
     resultCount: document.getElementById("resultCount"),
     emptyState: document.getElementById("emptyState"),
+    categoryIntro: document.getElementById("categoryIntro"),
     scrollSentinel: document.getElementById("scrollSentinel"),
     favToggleNav: document.getElementById("favToggleNav"),
     leaderboardNavBtn: document.getElementById("leaderboardNavBtn"),
@@ -634,6 +675,14 @@
       p.classList.toggle("active", p.dataset.cat === name);
     });
     el.sectionTitle.textContent = name === "Todos" ? t("all_games") : name === POPULAR_CAT ? "Popular" : name;
+    // Original per-category blurb (not on Home/Popular, which already
+    // have their own intro copy) -- see cat_intro_* in I18N. Google flags
+    // catalogs like this one as "low value content" when every page is
+    // just embedded games with no original text of our own around them.
+    const introKey = "cat_intro_" + name.replace(/[^a-zA-Z0-9]/g, "");
+    const intro = name !== "Todos" && name !== POPULAR_CAT ? t(introKey) : null;
+    el.categoryIntro.textContent = intro || "";
+    el.categoryIntro.hidden = !intro;
     updateView();
     window.scrollTo({top:0, behavior:"smooth"});
   }

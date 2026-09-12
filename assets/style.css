@@ -380,6 +380,13 @@ img{ max-width:100%; display:block; }
   font-weight:400;
   letter-spacing: 0.01em;
 }
+.category-intro{
+  margin: -8px 0 18px;
+  max-width: 760px;
+  color: var(--text-dim);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
 .result-count{
   color: var(--text-dim);
   font-size: 0.9rem;
