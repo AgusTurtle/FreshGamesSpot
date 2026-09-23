@@ -111,7 +111,7 @@
       cat_intro_IO: "El formato \".io\": partidas cortas, muchos jugadores reales al mismo tiempo, y esa mecánica simple de crecer/sobrevivir que los hizo populares.",
       cat_intro_2Player: "Pensados específicamente para jugar de a dos en el mismo teclado, compitiendo o cooperando codo a codo.",
       cat_intro_Music: "Ritmo, notas que caen, y la satisfacción de acertar el tempo exacto.",
-      related_games: "Te puede gustar",
+      related_games: "Más juegos",
     },
     en: {
       search_placeholder: "Search a game",
@@ -208,7 +208,7 @@
       cat_intro_IO: "The \".io\" format: quick matches, lots of real players at once, and that simple grow-or-survive mechanic that made them popular.",
       cat_intro_2Player: "Built specifically for two people on the same keyboard, competing or teaming up side by side.",
       cat_intro_Music: "Rhythm, falling notes, and the satisfaction of nailing the exact beat.",
-      related_games: "You might like",
+      related_games: "More games",
     },
   };
 
@@ -1109,9 +1109,10 @@
     return a;
   }
 
-  // Same-category picks first (popular ones prioritized within that),
-  // padded out with other popular games if the category is too small --
-  // gives people a next game to click into instead of leaving after one.
+  // Same-category picks first (popular ones prioritized within that), then
+  // padded out with the rest of the whole catalog (shuffled) so the row
+  // never runs dry -- gives people a next game to click into instead of
+  // leaving after one, and a way to keep browsing beyond just this category.
   function pickRelatedGames(game, count){
     const pool = GAMES.filter(g => g.id !== game.id);
     const sameCat = pool.filter(g => g.category === game.category);
@@ -1120,14 +1121,14 @@
     const picks = [...sameCatPopular, ...sameCatRest];
     if (picks.length < count){
       const usedIds = new Set(picks.map(g => g.id));
-      const fillerPopular = shuffled(pool.filter(g => g.popularity > 0 && !usedIds.has(g.id)));
-      picks.push(...fillerPopular);
+      const rest = shuffled(pool.filter(g => !usedIds.has(g.id)));
+      picks.push(...rest);
     }
     return picks.slice(0, count);
   }
 
   function renderRelatedGames(game){
-    const picks = pickRelatedGames(game, 10);
+    const picks = pickRelatedGames(game, 40);
     el.relatedGrid.innerHTML = "";
     el.relatedSection.hidden = picks.length === 0;
     picks.forEach(g => {
