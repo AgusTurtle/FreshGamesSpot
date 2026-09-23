@@ -111,6 +111,7 @@
       cat_intro_IO: "El formato \".io\": partidas cortas, muchos jugadores reales al mismo tiempo, y esa mecánica simple de crecer/sobrevivir que los hizo populares.",
       cat_intro_2Player: "Pensados específicamente para jugar de a dos en el mismo teclado, compitiendo o cooperando codo a codo.",
       cat_intro_Music: "Ritmo, notas que caen, y la satisfacción de acertar el tempo exacto.",
+      related_games: "Te puede gustar",
     },
     en: {
       search_placeholder: "Search a game",
@@ -207,6 +208,7 @@
       cat_intro_IO: "The \".io\" format: quick matches, lots of real players at once, and that simple grow-or-survive mechanic that made them popular.",
       cat_intro_2Player: "Built specifically for two people on the same keyboard, competing or teaming up side by side.",
       cat_intro_Music: "Rhythm, falling notes, and the satisfaction of nailing the exact beat.",
+      related_games: "You might like",
     },
   };
 
@@ -351,6 +353,8 @@
     playerDescription: document.getElementById("playerDescription"),
     playerTags: document.getElementById("playerTags"),
     playerLoading: document.getElementById("playerLoading"),
+    relatedSection: document.getElementById("relatedSection"),
+    relatedGrid: document.getElementById("relatedGrid"),
     playerBack: document.getElementById("playerBack"),
     playerClose: document.getElementById("playerClose"),
     playerFullscreen: document.getElementById("playerFullscreen"),
@@ -1069,6 +1073,7 @@
 
     syncPlayerFav(isFavorite(id));
     el.playerFav.dataset.id = id;
+    renderRelatedGames(game);
 
     el.playerLoading.style.display = "flex";
     // Full third-party platforms (their own login, ads, dozens of asset
@@ -1093,6 +1098,48 @@
     currentOpenGameId = id;
     startHeartbeat(id);
     trackPlay(id);
+  }
+
+  function shuffled(arr){
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  // Same-category picks first (popular ones prioritized within that),
+  // padded out with other popular games if the category is too small --
+  // gives people a next game to click into instead of leaving after one.
+  function pickRelatedGames(game, count){
+    const pool = GAMES.filter(g => g.id !== game.id);
+    const sameCat = pool.filter(g => g.category === game.category);
+    const sameCatPopular = shuffled(sameCat.filter(g => g.popularity > 0));
+    const sameCatRest = shuffled(sameCat.filter(g => !(g.popularity > 0)));
+    const picks = [...sameCatPopular, ...sameCatRest];
+    if (picks.length < count){
+      const usedIds = new Set(picks.map(g => g.id));
+      const fillerPopular = shuffled(pool.filter(g => g.popularity > 0 && !usedIds.has(g.id)));
+      picks.push(...fillerPopular);
+    }
+    return picks.slice(0, count);
+  }
+
+  function renderRelatedGames(game){
+    const picks = pickRelatedGames(game, 10);
+    el.relatedGrid.innerHTML = "";
+    el.relatedSection.hidden = picks.length === 0;
+    picks.forEach(g => {
+      const card = document.createElement("div");
+      card.className = "related-card";
+      card.innerHTML = `
+        <div class="related-thumb"><img src="${g.thumb}" alt="" loading="lazy"></div>
+        <div class="related-name">${g.title}</div>
+      `;
+      card.addEventListener("click", () => openGame(g.id));
+      el.relatedGrid.appendChild(card);
+    });
   }
 
   // Feeds the play-count/distinct-games missions server-side -- fire and
@@ -1680,14 +1727,7 @@
       // -- but the hand-picked/popular titles (popularity > 0) always
       // shuffle within their own group at the very front, never mixed
       // in among the rest, so Home always leads with the good stuff.
-      function shuffled(arr){
-        const a = arr.slice();
-        for (let i = a.length - 1; i > 0; i--){
-          const j = Math.floor(Math.random() * (i + 1));
-          [a[i], a[j]] = [a[j], a[i]];
-        }
-        return a;
-      }
+      // (shuffled() itself now lives up top, shared with renderRelatedGames)
       const popular = data.filter(g => g.popularity > 0);
       const rest = data.filter(g => !(g.popularity > 0));
       GAMES = popular.concat(shuffled(rest));

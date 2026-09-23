@@ -1434,6 +1434,43 @@ li[data-ok="true"] .rule-icon::after{ width:4px; height:2px; top:6px; left:8px; 
   color: var(--text-dim);
 }
 
+.related-section{ margin-top:16px; }
+.related-title{
+  font-size: 0.85rem;
+  font-weight:700;
+  color: var(--text);
+  margin: 0 0 10px;
+}
+.related-grid{
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  padding-bottom:4px;
+  scrollbar-width: thin;
+}
+.related-card{
+  flex-shrink:0;
+  width:96px;
+  cursor:pointer;
+}
+.related-card .related-thumb{
+  width:96px; height:96px;
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  background: var(--bg-card);
+}
+.related-card .related-thumb img{ width:100%; height:100%; object-fit:cover; }
+.related-card:hover .related-thumb{ border-color: var(--accent); }
+.related-card .related-name{
+  margin-top:6px;
+  font-size:0.72rem;
+  color: var(--text-dim);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
 /* ---------- Responsive ---------- */
 /* Phones don't get a squeezed copy of the desktop bar -- the row wraps
    into three: logo+account up top, then the search full-width, then
