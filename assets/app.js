@@ -731,8 +731,11 @@
 
   function makeCard(game, opts){
     const collage = !!(opts && opts.collage);
+    const animate = !!(opts && opts.animate);
     const card = document.createElement("div");
-    card.className = "game-card" + (collage ? " " + [tileSizeClass(game)].filter(Boolean).join(" ") : "");
+    card.className = "game-card"
+      + (collage ? " " + [tileSizeClass(game)].filter(Boolean).join(" ") : "")
+      + (animate ? " card-enter" : "");
     card.dataset.id = game.id;
     card.setAttribute("role", "button");
     card.tabIndex = 0;
@@ -967,6 +970,7 @@
     el.grid.appendChild(frag);
   }
 
+  let hasRenderedOnce = false;
   function render(){
     el.grid.innerHTML = "";
 
@@ -978,10 +982,12 @@
     el.emptyState.hidden = true;
 
     const collage = isHomeView();
+    const animate = !hasRenderedOnce;
+    hasRenderedOnce = true;
     el.grid.classList.toggle("collage", collage);
     const slice = filtered.slice(0, visibleCount);
     const frag = document.createDocumentFragment();
-    slice.forEach(g => frag.appendChild(makeCard(g, { collage })));
+    slice.forEach(g => frag.appendChild(makeCard(g, { collage, animate })));
     el.grid.appendChild(frag);
 
     el.resultCount.textContent = t("games_count", filtered.length);
@@ -997,7 +1003,7 @@
     visibleCount = Math.min(visibleCount + PAGE_SIZE, filtered.length);
     const slice = filtered.slice(prevCount, visibleCount);
     const frag = document.createDocumentFragment();
-    slice.forEach(g => frag.appendChild(makeCard(g, { collage })));
+    slice.forEach(g => frag.appendChild(makeCard(g, { collage, animate: true })));
     el.grid.appendChild(frag);
   }
 
@@ -1194,13 +1200,23 @@
   });
 
   /* ---------- events ---------- */
+  // Debounced so a full grid rebuild doesn't fire on every single
+  // keystroke -- typing fast used to re-filter 2022 games and repaint
+  // the grid several times a second, which is what actually felt janky,
+  // not the app being slow in general.
+  let searchDebounceTimer = null;
   el.searchInput.addEventListener("input", (e) => {
-    searchTerm = e.target.value.trim();
-    showingFavorites = false;
-    el.clearSearch.hidden = searchTerm.length === 0;
-    updateView();
+    const value = e.target.value;
+    el.clearSearch.hidden = value.trim().length === 0;
+    clearTimeout(searchDebounceTimer);
+    searchDebounceTimer = setTimeout(() => {
+      searchTerm = value.trim();
+      showingFavorites = false;
+      updateView();
+    }, 180);
   });
   el.clearSearch.addEventListener("click", () => {
+    clearTimeout(searchDebounceTimer);
     el.searchInput.value = "";
     searchTerm = "";
     showingFavorites = false;

@@ -446,6 +446,13 @@ img{ max-width:100%; display:block; }
   position: relative;
   content-visibility: auto;
   contain-intrinsic-size: 150px 210px;
+}
+/* Only genuinely new cards (first load, infinite-scroll appends) get the
+   entrance animation -- re-renders from typing a search or switching
+   category rebuild the whole grid, and replaying a .5s fade/scale on
+   every single keystroke is what made the site feel janky instead of
+   fluid, not the actual DOM work involved. */
+.game-card.card-enter{
   animation: cardIn .5s cubic-bezier(.22,1,.36,1) backwards;
 }
 @keyframes cardIn{
@@ -453,7 +460,7 @@ img{ max-width:100%; display:block; }
   to{ opacity:1; transform: translateY(0) scale(1); }
 }
 @media (prefers-reduced-motion: reduce){
-  .game-card{ animation: none; }
+  .game-card.card-enter{ animation: none; }
 }
 /* Stagger the first couple rows so the grid cascades in instead of
    popping all at once -- rows past this just render immediately. */
