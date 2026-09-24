@@ -953,27 +953,6 @@ http.createServer((req, res) => {
     return;
   }
 
-  // TEMP: one-off moderation endpoint to clear an offensive username off
-  // the public leaderboard -- removed again right after use, same as the
-  // earlier /api/debug/purge-test-accounts.
-  if (urlPath === "/api/debug/clear-username" && req.method === "POST"){
-    readJsonBody(req, 2048, (err, body) => {
-      if (err){ res.writeHead(400); res.end(); return; }
-      const target = (body && body.username || "").trim();
-      let cleared = [];
-      for (const email of Object.keys(accounts)){
-        if (accounts[email].username === target){
-          accounts[email].username = null;
-          cleared.push(email);
-        }
-      }
-      saveAccounts();
-      res.writeHead(200, { "Content-Type": "application/json; charset=utf-8" });
-      res.end(JSON.stringify({ cleared }));
-    });
-    return;
-  }
-
   // Public ranking -- ?by=points sorts by mission points (ties broken by
   // bestStreak); anything else (the default) sorts by bestStreak (ties
   // broken by the current streak). Only ever exposes username, avatar and
